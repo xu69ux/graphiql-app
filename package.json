@@ -51,7 +51,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
+      "pre-push": "npm run test",
+      "commit-msg": "npx --no-install commitlint --edit $1"
     }
   },
   "lint-staged": {
