@@ -7,7 +7,7 @@ import {
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './AuthForm.css';
+import '@styles/AuthForm.css';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
