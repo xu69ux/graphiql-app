@@ -1,5 +1,11 @@
 import { Route } from 'react-router-dom';
-import { WelcomePage, SignupPage, LoginPage, GraphiQLPage, NotFoundPage } from '@pages';
+import {
+  WelcomePage,
+  SignupPage,
+  LoginPage,
+  GraphiQLPage,
+  NotFoundPage,
+} from '@pages';
 
 export const routes = [
   <Route key='/' path='/' element={<WelcomePage />} />,
