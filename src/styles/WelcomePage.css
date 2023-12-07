@@ -1,0 +1,99 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--dark);
+  color: var(--light);
+  height: 100vh;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-auth {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.welcome-link {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.welcome-link:hover {
+  color: var(--green);
+}
+
+span {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 0.5rem;
+}
+
+@keyframes colorChange {
+  0% {
+    color: var(--light);
+  }
+  33% {
+    color: var(--green);
+  }
+  66% {
+    color: var(--light);
+  }
+  100% {
+    color: var(--light);
+  }
+}
+
+.login-icon,
+.signup-icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: colorChange 1s infinite;
+}
+
+.signup-icon {
+  rotate: 180deg;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+.typing-effect {
+  border-right: 0.15em solid orange;
+  white-space: nowrap;
+  overflow: hidden;
+  animation:
+    typing 4s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
