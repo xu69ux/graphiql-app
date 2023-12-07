@@ -8,13 +8,40 @@
   padding: 1rem;
 }
 
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .logo {
+  position: relative;
   height: 2rem;
   width: fit-content;
   margin-right: 1rem;
   font-weight: bold;
   font-size: large;
   color: var(--light);
+  transition: all 0.2s ease-in-out;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0.3rem;
+  left: 0;
+  background-color: orange;
+  transition: width 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo:hover::after {
+  width: 100%;
 }
 
 .btn.logout {
@@ -30,5 +57,16 @@
 
 .btn.logout:hover {
   background-color: var(--blue);
+  color: var(--light);
+}
+
+.lang-icon {
+  height: 100%;
+  width: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.lang-icon:hover {
+  transform: scale(1.2) rotate(180deg);
   color: var(--light);
 }

@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { IoEarthOutline } from 'react-icons/io5';
+
 import '@styles/Header.css';
 
 export const Header = () => {
@@ -8,12 +11,15 @@ export const Header = () => {
 
   return (
     <header className='header'>
-      <div className='logo'>GraphQL IDE</div>
+      <Link to='/' className='welcome-link'>
+        <div className='logo'>GraphQL IDE</div>
+      </Link>
       <nav>
         <div className='user'>
           <span>
             hello, <b>{username}</b>!
           </span>
+          <IoEarthOutline className='lang-icon' />
           <button className='btn logout' onClick={logOut}>
             Log out
           </button>
