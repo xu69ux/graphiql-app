@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  background: linear-gradient(90deg, var(--dark), var(--blue), var(--green));
+  padding: 1rem;
+}
+
+.logo {
+  height: 2rem;
+  width: fit-content;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: large;
+  color: var(--light);
+}
+
+.btn.logout {
+  background-color: var(--dark);
+  border: 1px solid var(--green);
+  color: var(--green);
+  border-radius: 0.5rem;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn.logout:hover {
+  background-color: var(--blue);
+  color: var(--light);
+}

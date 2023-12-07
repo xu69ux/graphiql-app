@@ -1,3 +1,5 @@
+import '@styles/Header.css';
+
 export const Header = () => {
   const username = 'user';
   const logOut = () => {
@@ -6,8 +8,8 @@ export const Header = () => {
 
   return (
     <header className='header'>
-      <nav className='navigator'>
-        <div className='logo'>GraphQL IDE</div>
+      <div className='logo'>GraphQL IDE</div>
+      <nav>
         <div className='user'>
           <span>
             hello, <b>{username}</b>!
