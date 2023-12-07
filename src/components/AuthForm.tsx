@@ -1,6 +1,13 @@
+import { auth } from '../firebase';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import '@styles/AuthForm.css';
+import './AuthForm.css';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
@@ -10,7 +17,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  console.log(username, email, password);
+  const navigate = useNavigate();
 
   const usernameTooltipRef = useRef<HTMLDivElement>(null);
   const emailTooltipRef = useRef<HTMLDivElement>(null);
@@ -31,7 +38,32 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
   }, []);
 
-  const handleAuth = async () => {};
+  const handleAuth = async () => {
+    try {
+      let userCredential;
+      if (mode === 'register') {
+        userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        if (userCredential.user) {
+          await updateProfile(userCredential.user, {
+            displayName: username,
+          });
+        }
+      } else {
+        userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+      }
+      navigate('/ide');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderRegister = () => {
     return (
