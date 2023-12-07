@@ -59,7 +59,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           password,
         );
       }
-      navigate('/ide');
+      navigate('/graphiql');
     } catch (error) {
       console.log(error);
     }
