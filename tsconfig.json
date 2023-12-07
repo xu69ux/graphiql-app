@@ -18,7 +18,9 @@
     "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
-      "@pages": ["src/pages"]
+      "@pages": ["src/pages/*"],
+      "@components": ["src/components/*"],
+      "@styles": ["src/styles/*"]
     }
   },
   "include": ["src"],

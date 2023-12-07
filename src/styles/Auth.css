@@ -1,0 +1,26 @@
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark);
+  color: var(--light);
+  height: 100vh;
+  width: 100vw;
+}
+
+.auth-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.signup-link,
+.login-link {
+  border-bottom: 1px solid var(--green);
+}
+
+.signup-link:hover,
+.login-link:hover {
+  color: var(--green);
+  border-bottom: 1px solid var(--light);
+}

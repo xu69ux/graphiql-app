@@ -5,7 +5,7 @@ import {
   LoginPage,
   GraphiQLPage,
   NotFoundPage,
-} from '@pages';
+} from './pages';
 
 export const routes = [
   <Route key='/' path='/' element={<WelcomePage />} />,
