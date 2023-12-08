@@ -19,6 +19,10 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const logoutHandle = () => {
+    navigate('/');
+  };
+
   const headerStyle: React.CSSProperties = {
     background:
       scrollPosition > 100
@@ -29,8 +33,10 @@ export const Header = () => {
 
   return (
     <header style={headerStyle} className='header'>
-      <div onClick={() => navigate('/')} className='welcome-link'>
-        <div className='logo'>GraphiQL IDE</div>
+      <div className='welcome-link'>
+        <div className='logo' onClick={() => navigate('/')}>
+          GraphiQL IDE
+        </div>
         <div
           className='lang-menu'
           onClick={() => toggleDropdown(!isDropdownOpen)}
@@ -68,6 +74,9 @@ export const Header = () => {
           <span>
             hello, <b>{username}</b>!
           </span>
+          <button className='btn logout' onClick={logoutHandle}>
+            log out
+          </button>
         </div>
       </nav>
     </header>
