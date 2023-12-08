@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--blue);
+  background: linear-gradient(90deg, var(--dark), var(--blue), var(--dark));
+  background-color: var(--dark);
   color: var(--light);
   height: 5rem;
   padding: 1.5rem;
