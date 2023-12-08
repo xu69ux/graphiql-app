@@ -1,21 +1,34 @@
-import { auth } from '../firebase';
 import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+} from '../firebase';
+// import { updateProfile } from 'firebase/auth';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SCHEMA } from '../utils/validation/shema';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Maybe } from 'yup';
 
 import '@styles/AuthForm.css';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
 }
+interface IFormInput {
+  username?: Maybe<string>;
+  email: string;
+  password: string;
+}
 export const AuthForm = ({ mode }: AuthFormProps) => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(SCHEMA),
+    mode: 'onChange',
+  });
 
   const navigate = useNavigate();
 
@@ -38,122 +51,123 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
   }, []);
 
-  const handleAuth = async () => {
-    try {
-      let userCredential;
-      if (mode === 'register') {
-        userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-        if (userCredential.user) {
-          await updateProfile(userCredential.user, {
-            displayName: username,
-          });
-        }
-      } else {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password,
-        );
-      }
-      navigate('/graphiql');
-    } catch (error) {
-      console.log(error);
+  const onSubmit: SubmitHandler<IFormInput> = ({
+    username,
+    email,
+    password,
+  }) => {
+    if (mode === 'register') {
+      registerWithEmailAndPassword(username || '', email, password);
+      // const user = auth.currentUser;
+      // if (user) {
+      //   updateProfile(user, { displayName: username });
+      // }
+    } else {
+      console.log(email, password);
+      logInWithEmailAndPassword(email, password);
     }
+    navigate('/graphiql');
   };
 
   const renderRegister = () => {
     return (
-      <div className='register'>
-        <div className='input-wrapper'>
-          <input
-            type='text'
-            placeholder='username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <div
-            className='strip left'
-            style={{ width: `${usernameTooltipWidth + 20}px` }}
-          ></div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='register'>
+          <div className='input-wrapper'>
+            <input
+              type='text'
+              placeholder='username'
+              {...register('username')}
+            />
+            <div className='error'>
+              {errors.username && <p>{errors.username.message}</p>}
+            </div>
+            <div
+              className='strip left'
+              style={{ width: `${usernameTooltipWidth + 20}px` }}
+            ></div>
 
-          <div className='tooltip username' ref={usernameTooltipRef}>
-            please use any username
+            <div className='tooltip username' ref={usernameTooltipRef}>
+              please use any username
+            </div>
           </div>
-        </div>
-        <div className='input-wrapper'>
-          <input
-            type='text'
-            placeholder='email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div
-            className='strip right'
-            style={{ width: `${emailTooltipWidth + 20}px` }}
-          ></div>
-          <div className='tooltip email' ref={emailTooltipRef}>
-            please use any real or fake email
+          <div className='input-wrapper'>
+            <input type='text' placeholder='email' {...register('email')} />
+            <div className='error'>
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div
+              className='strip right'
+              style={{ width: `${emailTooltipWidth + 20}px` }}
+            ></div>
+            <div className='tooltip email' ref={emailTooltipRef}>
+              please use any real or fake email
+            </div>
           </div>
-        </div>
-        <div className='input-wrapper'>
-          <input
-            type='password'
-            placeholder='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div
-            className='strip left'
-            style={{ width: `${passwordTooltipWidth + 20}px` }}
-          ></div>
-          <div className='tooltip password' ref={passwordTooltipRef}>
-            must be at least 8 characters
+          <div className='input-wrapper'>
+            <input
+              type='password'
+              placeholder='password'
+              {...register('password')}
+            />
+            <div className='error'>
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
+            <div
+              className='strip left'
+              style={{ width: `${passwordTooltipWidth + 20}px` }}
+            ></div>
+            <div className='tooltip password' ref={passwordTooltipRef}>
+              must be at least 8 characters
+            </div>
           </div>
+          <button className='btn reg' type='submit' disabled={isSubmitting}>
+            Sign up
+          </button>
         </div>
-
-        <button className='btn reg' onClick={handleAuth}>
-          Sign up
-        </button>
-      </div>
+      </form>
     );
   };
 
   const renderLogin = () => {
     return (
-      <div className='login'>
-        <div className='input-wrapper'>
-          <input
-            type='text'
-            placeholder='email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div
-            className='strip right'
-            style={{ width: `${emailTooltipWidth + 20}px` }}
-          ></div>
-          <div ref={emailTooltipRef} className='tooltip email'>
-            please enter the email provided during registration
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='login'>
+          <div className='input-wrapper'>
+            <input type='text' placeholder='email' {...register('email')} />
+            <div className='error'>
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div
+              className='strip right'
+              style={{ width: `${emailTooltipWidth + 20}px` }}
+            ></div>
+            <div ref={emailTooltipRef} className='tooltip email'>
+              please enter the email provided during registration
+            </div>
           </div>
-        </div>
-        <div className='input-wrapper'>
-          <input
-            type='password'
-            placeholder='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div
-            className='strip left'
-            style={{ width: `${passwordTooltipWidth + 20}px` }}
-          ></div>
-          <div ref={passwordTooltipRef} className='tooltip password'>
-            please enter the password provided during registration
+          <div className='input-wrapper'>
+            <input
+              type='password'
+              placeholder='password'
+              {...register('password')}
+            />
+            <div className='error'>
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
+            <div
+              className='strip left'
+              style={{ width: `${passwordTooltipWidth + 20}px` }}
+            ></div>
+            <div ref={passwordTooltipRef} className='tooltip password'>
+              please enter the password provided during registration
+            </div>
           </div>
+          <button className='btn log' type='submit' disabled={isSubmitting}>
+            Log in
+          </button>
         </div>
-        <button className='btn log' onClick={handleAuth}>
-          Log in
-        </button>
-      </div>
+      </form>
     );
   };
 
