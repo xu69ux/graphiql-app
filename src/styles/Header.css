@@ -1,4 +1,6 @@
 .header {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,6 +24,7 @@
   font-weight: bold;
   font-size: large;
   color: var(--light);
+  cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
@@ -60,13 +63,73 @@
   color: var(--light);
 }
 
+.welcome-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .lang-icon {
-  height: 100%;
-  width: 1.5rem;
+  color: var(--light);
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
   transition: all 0.2s ease-in-out;
 }
 
 .lang-icon:hover {
   transform: scale(1.2) rotate(180deg);
+}
+
+.lang-menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.lang-dropdown {
+  display: flex;
+  flex-direction: row;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+}
+
+.lang-menu:hover .lang-dropdown,
+.lang-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lang-dropdown a {
   color: var(--light);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: block;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.lang-dropdown a.selected {
+  color: var(--green);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
