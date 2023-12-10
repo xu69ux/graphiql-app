@@ -25,6 +25,13 @@ export const GraphiQLPage = () => {
     setActiveTab(newTab.id);
   };
 
+  const removeTab = (id) => {
+    setTabs((prevTabs) => prevTabs.filter((tab) => tab.id !== id));
+    if (id === activeTab && tabs.length > 1) {
+      setActiveTab(tabs[0].id);
+    }
+  };
+
   const handleCodeChange = (id, newCode) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) => (tab.id === id ? { ...tab, code: newCode } : tab)),
@@ -58,6 +65,7 @@ export const GraphiQLPage = () => {
                 id={tab.id}
                 isActive={tab.id === activeTab}
                 onTabClick={setActiveTab}
+                onCloseClick={removeTab}
               />
             ))}
           </div>
@@ -87,14 +95,22 @@ export const GraphiQLPage = () => {
   );
 };
 
-const Tab = ({ id, isActive, onTabClick }) => {
+const Tab = ({ id, isActive, onTabClick, onCloseClick }) => {
+  const handleTabClick = (event) => {
+    event.stopPropagation();
+    onTabClick(id);
+  };
+
+  const handleCloseClick = (event) => {
+    event.stopPropagation();
+    onCloseClick(id);
+  };
+
   return (
-    <div className='tab' onClick={() => onTabClick(id)}>
+    <div className='tab' onClick={handleTabClick}>
       <div className={isActive ? 'tab-title active' : 'tab-title'}>
         Tab {id}
-        <div className='tab-close'>
-          <IoIosClose />
-        </div>
+        <IoIosClose className='tab-close' onClick={handleCloseClick} />
       </div>
     </div>
   );
