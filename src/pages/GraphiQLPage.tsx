@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EditorWindow } from '../components';
 
+import { IoIosClose } from 'react-icons/io';
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
@@ -87,10 +88,14 @@ export const GraphiQLPage = () => {
 };
 
 const Tab = ({ id, isActive, onTabClick }) => {
-  console.log(id, isActive);
   return (
     <div className='tab' onClick={() => onTabClick(id)}>
-      <div className='tab-title'>Tab {id}</div>
+      <div className={isActive ? 'tab-title active' : 'tab-title'}>
+        Tab {id}
+        <div className='tab-close'>
+          <IoIosClose />
+        </div>
+      </div>
     </div>
   );
 };
