@@ -2,11 +2,19 @@ import { useRef, useEffect } from 'react';
 
 import '@styles/EditorWindow.css';
 
-export const EditorWindow = () => {
+export const EditorWindow = ({ code, onCodeChange }) => {
   const codeRef = useRef<HTMLTextAreaElement>(null);
   const lineNumbersRef = useRef<HTMLPreElement>(null);
 
+  useEffect(() => {
+    if (codeRef.current) {
+      codeRef.current.value = code;
+    }
+  }, [code]);
+
   const handleInput = (event) => {
+    const newCode = event.target.value;
+    onCodeChange(newCode);
     const lineCount = event.target.value.split('\n').length;
     const lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1).join(
       '\n',

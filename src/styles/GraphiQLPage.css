@@ -94,3 +94,27 @@
   color: var(--light);
   transform: scale(1.1);
 }
+
+.tab-container {
+  display: flex;
+  overflow-x: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.tab {
+  padding: 0.8rem;
+  cursor: pointer;
+}
+
+.tab-title {
+  margin-right: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.tab-names {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2rem;
+}
