@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 
 import '@styles/EditorWindow.css';
 
-export const EditorWindow = ({ code, onCodeChange }) => {
+export const EditorWindow = ({ code, lineNumbers, onCodeChange }) => {
   const codeRef = useRef<HTMLTextAreaElement>(null);
   const lineNumbersRef = useRef<HTMLPreElement>(null);
 
@@ -14,7 +14,8 @@ export const EditorWindow = ({ code, onCodeChange }) => {
 
   const handleInput = (event) => {
     const newCode = event.target.value;
-    onCodeChange(newCode);
+    const newLineNumbers = event.target.value.split('\n').length;
+    onCodeChange(newCode, newLineNumbers);
     const lineCount = event.target.value.split('\n').length;
     const lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1).join(
       '\n',
@@ -35,9 +36,12 @@ export const EditorWindow = ({ code, onCodeChange }) => {
       codeRef.current.focus();
     }
     if (lineNumbersRef.current) {
-      lineNumbersRef.current.innerText = '1';
+      lineNumbersRef.current.innerText = Array.from(
+        { length: lineNumbers },
+        (_, i) => i + 1,
+      ).join('\n');
     }
-  }, []);
+  }, [lineNumbers]);
 
   return (
     <div className='code-container'>

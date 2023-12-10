@@ -13,14 +13,14 @@ import {
 import '@styles/GraphiQLPage.css';
 
 export const GraphiQLPage = () => {
-  const [tabs, setTabs] = useState([{ id: 1, code: '' }]);
+  const [tabs, setTabs] = useState([{ id: 1, code: '', lineNumbers: 1 }]);
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
   const user = 'user';
 
   const addTab = () => {
     const nextId = tabs[tabs.length - 1].id + 1;
-    const newTab = { id: nextId, code: '' };
+    const newTab = { id: nextId, code: '', lineNumbers: 1 };
     setTabs((prevTabs) => [...prevTabs, newTab]);
     setActiveTab(newTab.id);
   };
@@ -32,9 +32,13 @@ export const GraphiQLPage = () => {
     }
   };
 
-  const handleCodeChange = (id, newCode) => {
+  const handleCodeChange = (id, newCode, newLineNumbers) => {
     setTabs((prevTabs) =>
-      prevTabs.map((tab) => (tab.id === id ? { ...tab, code: newCode } : tab)),
+      prevTabs.map((tab) =>
+        tab.id === id
+          ? { ...tab, code: newCode, lineNumbers: newLineNumbers }
+          : tab,
+      ),
     );
   };
 
@@ -64,6 +68,7 @@ export const GraphiQLPage = () => {
                 key={tab.id}
                 id={tab.id}
                 isActive={tab.id === activeTab}
+                setActiveTab={setActiveTab}
                 onTabClick={setActiveTab}
                 onCloseClick={removeTab}
               />
@@ -76,8 +81,9 @@ export const GraphiQLPage = () => {
                   <EditorWindow
                     key={tab.id}
                     code={tab.code}
-                    onCodeChange={(newCode) =>
-                      handleCodeChange(tab.id, newCode)
+                    lineNumbers={tab.lineNumbers}
+                    onCodeChange={(newCode, newLineNumbers) =>
+                      handleCodeChange(tab.id, newCode, newLineNumbers)
                     }
                   />
                 ),
@@ -95,15 +101,17 @@ export const GraphiQLPage = () => {
   );
 };
 
-const Tab = ({ id, isActive, onTabClick, onCloseClick }) => {
+const Tab = ({ id, isActive, onTabClick, onCloseClick, setActiveTab }) => {
   const handleTabClick = (event) => {
     event.stopPropagation();
     onTabClick(id);
   };
 
   const handleCloseClick = (event) => {
+    if (id === 1) return;
     event.stopPropagation();
     onCloseClick(id);
+    setActiveTab(id - 1);
   };
 
   return (
