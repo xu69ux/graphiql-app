@@ -1,59 +1,53 @@
-import { useRef, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 
 import '@styles/EditorWindow.css';
 
-export const EditorWindow = ({ code, lineNumbers, onCodeChange }) => {
-  const codeRef = useRef<HTMLTextAreaElement>(null);
-  const lineNumbersRef = useRef<HTMLPreElement>(null);
+interface IEditWindowProps {
+  code: string;
+  disabled?: boolean;
+  updateData?: (data: string) => void;
+}
 
-  useEffect(() => {
-    if (codeRef.current) {
-      codeRef.current.value = code;
-    }
-  }, [code]);
+export const EditorWindow: FC<IEditWindowProps> = ({
+  code,
+  updateData,
+  disabled = false,
+}) => {
+  const lines = useRef<HTMLPreElement>(null);
+  const textarea = useRef<HTMLTextAreaElement>(null);
 
-  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newCode = event.target.value;
-    const newLineNumbers = event.target.value.split('\n').length;
-    onCodeChange(newCode, newLineNumbers);
-    const lineCount = event.target.value.split('\n').length;
-    const lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1).join(
+  const recalcLines = (code: string) => {
+    const numLines = code.split('\n').length;
+    const newLines = Array.from({ length: numLines }, (_, i) => i + 1).join(
       '\n',
     );
-    if (lineNumbersRef.current) {
-      lineNumbersRef.current.innerText = lineNumbers;
-    }
+    lines.current!.innerText = newLines;
   };
 
-  const handleScroll = (event: React.UIEvent<HTMLTextAreaElement>) => {
-    if (lineNumbersRef.current) {
-      lineNumbersRef.current.scrollTop = event.currentTarget.scrollTop;
-    }
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    recalcLines(e.target.value);
   };
 
   useEffect(() => {
-    if (codeRef.current) {
-      codeRef.current.focus();
-    }
-    if (lineNumbersRef.current) {
-      lineNumbersRef.current.innerText = Array.from(
-        { length: lineNumbers },
-        (_, i) => i + 1,
-      ).join('\n');
-    }
-  }, [lineNumbers]);
-
-  console.log('render2');
+    recalcLines(code);
+  }, []);
 
   return (
     <div className='code-container'>
-      <pre ref={lineNumbersRef} className='line-numbers'></pre>
+      <pre className='line-numbers' ref={lines} />
       <textarea
-        ref={codeRef}
         className='code'
-        onInput={handleInput}
-        onScroll={handleScroll}
-      ></textarea>
+        ref={textarea}
+        onChange={handleChange}
+        defaultValue={code}
+        onBlur={(e) => {
+          e.stopPropagation();
+          if (updateData && e.target.value !== code) {
+            updateData(e.target.value);
+          }
+        }}
+        disabled={disabled}
+      />
     </div>
   );
 };
