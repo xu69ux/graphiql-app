@@ -22,6 +22,9 @@ interface IEditorTab {
 }
 
 export const GraphiQLPage = () => {
+  ////////////
+  const [arr, setArr] = useState([{ id: 1, code: '', name: `untitled 1` }]);
+  ////////////////
   const [tabs, setTabs] = useState<IEditorTab[]>([
     { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
   ]);
@@ -38,7 +41,15 @@ export const GraphiQLPage = () => {
       setName(userName);
     }
   };
-
+  ///////////////
+  const updateData = (data: string) => {
+    setArr((prevTabs) =>
+      prevTabs.map((tab) =>
+        tab.id === activeTab ? { ...tab, code: data } : tab,
+      ),
+    );
+  };
+  ///////////////
   const addTab = () => {
     const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
     const newTab: IEditorTab = {
@@ -99,6 +110,8 @@ export const GraphiQLPage = () => {
     if (textArea) textArea.focus();
   }, []);
 
+  console.log('name');
+
   return (
     <div className='container'>
       <div className='sidebar'>
@@ -148,8 +161,11 @@ export const GraphiQLPage = () => {
           </div>
         </div>
         <div className='viewer'>
-          {tabs.map(
-            (tab) => tab.id === activeTab && <EditWindow code={tab.code} />,
+          {arr.map(
+            (tab) =>
+              tab.id === activeTab && (
+                <EditWindow code={tab.code} updateData={updateData} />
+              ),
           )}
         </div>
       </div>

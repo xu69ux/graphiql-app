@@ -1,24 +1,40 @@
-import { useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef } from 'react';
 
-export const EditWindow = ({ code }: { code: string }) => {
-  const [lines, setLines] = useState(1);
+interface IEditWindowProps {
+  code: string;
+  updateData: (data: string) => void;
+}
 
-  const handleChange = (e) => {
-    let newLines = event.target.value.split('\n').length;
-    if (newLines !== lines) {
-      newLines = Array.from({ length: newLines }, (_, i) => i + 1).join('\n');
-      setLines(newLines);
-    }
+export const EditWindow: FC<IEditWindowProps> = ({ code, updateData }) => {
+  const linesComponent = useRef<HTMLPreElement>(null);
+
+  const recalcLines = (code: string) => {
+    const numLines = code.split('\n').length;
+    const newLines = Array.from({ length: numLines }, (_, i) => i + 1).join(
+      '\n',
+    );
+    linesComponent.current!.innerText = newLines;
   };
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    recalcLines(e.target.value);
+  };
+
+  useEffect(() => {
+    recalcLines(code);
+  }, []);
 
   console.log('render');
 
   return (
     <div className='code-container'>
-      <pre className='line-numbers'>{lines}</pre>
-      <textarea className='code' onChange={handleChange}>
-        {code}
-      </textarea>
+      <pre className='line-numbers' ref={linesComponent} />
+      <textarea
+        className='code'
+        onChange={handleChange}
+        defaultValue={code}
+        onBlur={(e) => updateData(e.target.value)}
+      />
     </div>
   );
 };
