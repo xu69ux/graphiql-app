@@ -16,12 +16,12 @@ export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([
     { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
   ]);
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState<number | null>(1);
   const navigate = useNavigate();
   const user = 'user';
 
   const addTab = () => {
-    const nextId = tabs[tabs.length - 1].id + 1;
+    const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
     const newTab = {
       id: nextId,
       code: '',
@@ -33,9 +33,13 @@ export const GraphiQLPage = () => {
   };
 
   const removeTab = (id) => {
-    setTabs((prevTabs) => prevTabs.filter((tab) => tab.id !== id));
-    if (id === activeTab && tabs.length > 1) {
-      setActiveTab(tabs[0].id);
+    const newTabs = tabs.filter((tab) => tab.id !== id);
+    setTabs(newTabs);
+
+    if (id === activeTab && newTabs.length > 0) {
+      setActiveTab(newTabs[0].id);
+    } else if (newTabs.length === 0) {
+      setActiveTab(null);
     }
   };
 
@@ -131,7 +135,6 @@ const Tab = ({
   };
 
   const handleCloseClick = (event) => {
-    if (id === 1) return;
     event.stopPropagation();
     onCloseClick(id);
     setActiveTab(id - 1);
