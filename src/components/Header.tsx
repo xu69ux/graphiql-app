@@ -24,11 +24,11 @@ export const Header = () => {
   if (!languageContext) {
     return null;
   }
+
   const { language, setLanguage } = languageContext;
 
   const greeting = translations?.[language]?.greeting;
-  console.log(greeting);
-  console.log('language:', language);
+  const logout = translations?.[language]?.logout;
 
   const logoutHandle = () => {
     navigate('/');
@@ -95,7 +95,7 @@ export const Header = () => {
             {greeting}, {username}!
           </span>
           <button className='btn logout' onClick={logoutHandle}>
-            log out
+            {logout}
           </button>
         </div>
       </nav>
