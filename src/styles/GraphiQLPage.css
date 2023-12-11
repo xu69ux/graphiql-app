@@ -159,6 +159,8 @@
   flex-direction: row;
   align-items: center;
   overflow: scroll;
+  max-height: 3.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .tab-close {
