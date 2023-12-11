@@ -1,3 +1,6 @@
+import { auth, logout } from '../firebase';
+import { fetchUserName } from '../services/api/fetchUserName';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { IoEarthOutline } from 'react-icons/io5';
@@ -8,18 +11,34 @@ import { Fade } from '../components';
 import '@styles/Header.css';
 
 export const Header = () => {
-  const username = 'user';
   const navigate = useNavigate();
+  const [username, setUserName] = useState('');
   const languageContext = useContext(LanguageContext);
+  const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
-  const [selectedLanguage, selectLanguage] = useState('english');
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const fetchData = async () => {
+    if (user) {
+      const userName = await fetchUserName(user);
+      setUserName(userName);
+    } else {
+      setUserName('');
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrollPosition(window.pageYOffset);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    fetchData();
+  }, [user, loading]);
 
   if (!languageContext) {
     return null;
@@ -28,9 +47,10 @@ export const Header = () => {
   const { language, setLanguage } = languageContext;
 
   const greeting = translations?.[language]?.greeting;
-  const logout = translations?.[language]?.logout;
+  const logoutButtonText = translations?.[language]?.logout;
 
   const logoutHandle = () => {
+    logout();
     navigate('/');
   };
 
@@ -58,30 +78,27 @@ export const Header = () => {
               <Link
                 to='#english'
                 onClick={() => {
-                  selectLanguage('english');
                   setLanguage('eng');
                 }}
-                className={selectedLanguage === 'english' ? 'selected' : ''}
+                className={language === 'eng' ? 'selected' : ''}
               >
                 eng
               </Link>
               <Link
                 to='#russian'
                 onClick={() => {
-                  selectLanguage('russian');
                   setLanguage('rus');
                 }}
-                className={selectedLanguage === 'russian' ? 'selected' : ''}
+                className={language === 'rus' ? 'selected' : ''}
               >
                 rus
               </Link>
               <Link
                 to='#ukrainian'
                 onClick={() => {
-                  selectLanguage('ukrainian');
                   setLanguage('ukr');
                 }}
-                className={selectedLanguage === 'ukrainian' ? 'selected' : ''}
+                className={language === 'ukr' ? 'selected' : ''}
               >
                 ukr
               </Link>
@@ -91,11 +108,13 @@ export const Header = () => {
       </div>
       <nav>
         <div className='user'>
-          <span>
-            {greeting}, {username}!
-          </span>
+          {username && (
+            <span>
+              {greeting}, {username}!
+            </span>
+          )}
           <button className='btn logout' onClick={logoutHandle}>
-            {logout}
+            {logoutButtonText}
           </button>
         </div>
       </nav>
