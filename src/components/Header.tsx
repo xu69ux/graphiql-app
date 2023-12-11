@@ -3,15 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { IoEarthOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { Fade } from '../components';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, logout } from '../firebase';
+import { fetchUserName } from '../services/api/fetchUserName';
 import '@styles/Header.css';
 
 export const Header = () => {
-  const username = 'user';
   const navigate = useNavigate();
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [selectedLanguage, selectLanguage] = useState('english');
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [name, setName] = useState('');
+  const [user, loading] = useAuthState(auth);
+  console.log(user);
+  const fetchData = async () => {
+    if (user) {
+      const userName = await fetchUserName(user);
+      setName(userName);
+    } else {
+      setName('');
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrollPosition(window.pageYOffset);
@@ -20,8 +32,16 @@ export const Header = () => {
   }, []);
 
   const logoutHandle = () => {
+    logout();
     navigate('/');
   };
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    fetchData();
+  }, [user, loading]);
 
   const headerStyle: React.CSSProperties = {
     background:
@@ -72,7 +92,7 @@ export const Header = () => {
       <nav>
         <div className='user'>
           <span>
-            hello, <b>{username}</b>!
+            hello, <b>{name}</b>!
           </span>
           <button className='btn logout' onClick={logoutHandle}>
             log out
