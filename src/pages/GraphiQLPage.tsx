@@ -40,14 +40,16 @@ export const GraphiQLPage = () => {
   };
 
   const removeTab = (id: number) => {
-    const newTabs = tabs.filter((tab) => tab.id !== id);
-    setTabs(newTabs);
+    setTabs((prevTabs) => {
+      const newTabs = prevTabs.filter((tab) => tab.id !== id);
 
-    if (id === activeTab && newTabs.length > 0) {
-      setActiveTab(newTabs[0].id);
-    } else if (newTabs.length === 0) {
-      setActiveTab(null);
-    }
+      if (id === activeTab) {
+        const newActiveTab = newTabs[newTabs.length - 1] || null;
+        setActiveTab(newActiveTab ? newActiveTab.id : null);
+      }
+
+      return newTabs;
+    });
   };
 
   const handleCodeChange = (
@@ -97,7 +99,6 @@ export const GraphiQLPage = () => {
                 id={tab.id}
                 name={tab.name}
                 isActive={tab.id === activeTab}
-                setActiveTab={setActiveTab}
                 onTabClick={setActiveTab}
                 onCloseClick={removeTab}
                 onNameChange={handleNameChange}

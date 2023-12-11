@@ -7,7 +7,6 @@ interface IEditorTabProps {
   isActive: boolean;
   onTabClick: (id: number) => void;
   onCloseClick: (id: number) => void;
-  setActiveTab: (id: number) => void;
   onNameChange: (id: number, name: string) => void;
 }
 
@@ -17,7 +16,6 @@ export const EditorTab: FC<IEditorTabProps> = ({
   isActive,
   onTabClick,
   onCloseClick,
-  setActiveTab,
   onNameChange,
 }) => {
   const handleTabClick = (event: MouseEvent) => {
@@ -28,7 +26,6 @@ export const EditorTab: FC<IEditorTabProps> = ({
   const handleCloseClick = (event: MouseEvent) => {
     event.stopPropagation();
     onCloseClick(id);
-    setActiveTab(id - 1);
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
