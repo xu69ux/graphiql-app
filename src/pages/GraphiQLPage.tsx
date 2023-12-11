@@ -113,7 +113,7 @@ export const GraphiQLPage = () => {
                     key={tab.id}
                     code={tab.code}
                     lineNumbers={tab.lineNumbers}
-                    onCodeChange={(newCode, newLineNumbers) =>
+                    onCodeChange={(newCode: string, newLineNumbers: number) =>
                       handleCodeChange(tab.id, newCode, newLineNumbers)
                     }
                   />
