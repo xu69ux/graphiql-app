@@ -12,7 +12,7 @@ export const EditorWindow = ({ code, lineNumbers, onCodeChange }) => {
     }
   }, [code]);
 
-  const handleInput = (event) => {
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newCode = event.target.value;
     const newLineNumbers = event.target.value.split('\n').length;
     onCodeChange(newCode, newLineNumbers);
@@ -25,9 +25,9 @@ export const EditorWindow = ({ code, lineNumbers, onCodeChange }) => {
     }
   };
 
-  const handleScroll = (event) => {
+  const handleScroll = (event: React.UIEvent<HTMLTextAreaElement>) => {
     if (lineNumbersRef.current) {
-      lineNumbersRef.current.scrollTop = event.target.scrollTop;
+      lineNumbersRef.current.scrollTop = event.currentTarget.scrollTop;
     }
   };
 
