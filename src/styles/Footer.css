@@ -1,0 +1,66 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--dark), var(--blue), var(--dark));
+  background-color: var(--dark);
+  color: var(--light);
+  height: 5rem;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.repo-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.repo-link:hover {
+  color: var(--green);
+}
+
+.course-logo {
+  height: 5rem;
+  margin-right: 0.5rem;
+}
+
+.course-link {
+  cursor: pointer;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 8rem;
+}
+
+.footer-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.xu-icon,
+.db-icon,
+.gekko-icon {
+  height: 100%;
+  width: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.xu-icon:hover,
+.db-icon:hover,
+.gekko-icon:hover {
+  color: var(--green);
+  transform: scale(1.2);
+}

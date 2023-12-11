@@ -24,7 +24,17 @@ export const GraphiQLPage = () => {
     }
   }, [user, loading, navigate]);
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '200rem',
+        fontSize: '20px',
+        color: '#fff',
+        background: '#333',
+      }}
+    >
       <h1>GraphiQL Page</h1>
       Logged in as
       <div>{name}</div>
