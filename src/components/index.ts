@@ -4,3 +4,4 @@ export { Footer } from './Footer';
 export { Fade } from './Fade';
 export { EditorWindow } from './EditorWindow';
 export { EditorTab } from './EditorTab';
+export { EditWindow } from './EditWindow';

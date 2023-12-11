@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { fetchUserName } from '../services/api/fetchUserName';
-import { EditorWindow, EditorTab } from '../components';
+import { EditorWindow, EditorTab, EditWindow } from '../components';
 
 import {
   IoSettingsSharp,
@@ -147,7 +147,11 @@ export const GraphiQLPage = () => {
             />
           </div>
         </div>
-        <div className='viewer'></div>
+        <div className='viewer'>
+          {tabs.map(
+            (tab) => tab.id === activeTab && <EditWindow code={tab.code} />,
+          )}
+        </div>
       </div>
     </div>
   );

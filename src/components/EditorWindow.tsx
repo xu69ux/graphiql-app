@@ -43,6 +43,8 @@ export const EditorWindow = ({ code, lineNumbers, onCodeChange }) => {
     }
   }, [lineNumbers]);
 
+  console.log('render2');
+
   return (
     <div className='code-container'>
       <pre ref={lineNumbersRef} className='line-numbers'></pre>
