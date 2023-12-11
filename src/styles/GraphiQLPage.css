@@ -104,7 +104,6 @@
 
 .tab {
   margin: 1.5rem 0 0.8rem 2rem;
-  padding: 0.8rem;
   cursor: pointer;
 }
 
@@ -132,6 +131,13 @@
   font-weight: 600;
 }
 
+.tab-title-input {
+  all: inherit;
+  border: none;
+  width: 7rem;
+  margin: 0;
+}
+
 .tab-title.active .tab-close {
   color: var(--dark);
 }
@@ -140,13 +146,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 3rem;
   overflow: scroll;
 }
 
 .tab-close {
   color: var(--light);
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-left: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

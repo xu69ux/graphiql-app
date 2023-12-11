@@ -13,14 +13,21 @@ import {
 import '@styles/GraphiQLPage.css';
 
 export const GraphiQLPage = () => {
-  const [tabs, setTabs] = useState([{ id: 1, code: '', lineNumbers: 1 }]);
+  const [tabs, setTabs] = useState([
+    { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
+  ]);
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
   const user = 'user';
 
   const addTab = () => {
     const nextId = tabs[tabs.length - 1].id + 1;
-    const newTab = { id: nextId, code: '', lineNumbers: 1 };
+    const newTab = {
+      id: nextId,
+      code: '',
+      lineNumbers: 1,
+      name: `untitled ${nextId}`,
+    };
     setTabs((prevTabs) => [...prevTabs, newTab]);
     setActiveTab(newTab.id);
   };
@@ -39,6 +46,12 @@ export const GraphiQLPage = () => {
           ? { ...tab, code: newCode, lineNumbers: newLineNumbers }
           : tab,
       ),
+    );
+  };
+
+  const handleNameChange = (id, newName) => {
+    setTabs((prevTabs) =>
+      prevTabs.map((tab) => (tab.id === id ? { ...tab, name: newName } : tab)),
     );
   };
 
@@ -67,10 +80,12 @@ export const GraphiQLPage = () => {
               <Tab
                 key={tab.id}
                 id={tab.id}
+                name={tab.name}
                 isActive={tab.id === activeTab}
                 setActiveTab={setActiveTab}
                 onTabClick={setActiveTab}
                 onCloseClick={removeTab}
+                onNameChange={handleNameChange}
               />
             ))}
           </div>
@@ -101,7 +116,15 @@ export const GraphiQLPage = () => {
   );
 };
 
-const Tab = ({ id, isActive, onTabClick, onCloseClick, setActiveTab }) => {
+const Tab = ({
+  id,
+  name,
+  isActive,
+  onTabClick,
+  onCloseClick,
+  setActiveTab,
+  onNameChange,
+}) => {
   const handleTabClick = (event) => {
     event.stopPropagation();
     onTabClick(id);
@@ -114,10 +137,18 @@ const Tab = ({ id, isActive, onTabClick, onCloseClick, setActiveTab }) => {
     setActiveTab(id - 1);
   };
 
+  const handleNameChange = (event) => {
+    onNameChange(id, event.target.value);
+  };
+
   return (
     <div className='tab' onClick={handleTabClick}>
       <div className={isActive ? 'tab-title active' : 'tab-title'}>
-        Tab {id}
+        <input
+          className='tab-title-input'
+          value={name}
+          onChange={handleNameChange}
+        />
         <IoIosClose className='tab-close' onClick={handleCloseClick} />
       </div>
     </div>
