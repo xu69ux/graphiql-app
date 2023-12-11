@@ -23,6 +23,7 @@ export const GraphiQLPage = () => {
     { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
   ]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
+  const [isFooterOpen, setIsFooterOpen] = useState(false);
   const navigate = useNavigate();
   const user = 'user';
 
@@ -118,10 +119,15 @@ export const GraphiQLPage = () => {
                 ),
             )}
           </div>
-          <div className='editor-footer'>
+          <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
             <div className='variables'>variables</div>
             <div className='headers'>headers</div>
-            <IoChevronUpOutline className='editor-footer-icon arrow' />
+            <IoChevronUpOutline
+              className={`editor-footer-icon arrow ${
+                isFooterOpen ? 'open' : ''
+              }`}
+              onClick={() => setIsFooterOpen(!isFooterOpen)}
+            />
           </div>
         </div>
         <div className='viewer'></div>

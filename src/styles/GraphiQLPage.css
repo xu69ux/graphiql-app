@@ -41,6 +41,10 @@
   color: var(--green);
 }
 
+.editor-footer.open {
+  height: 15rem;
+}
+
 .editor-footer-icon.arrow {
   color: var(--green);
   font-size: 1.5rem;
@@ -50,9 +54,12 @@
   transition: all 0.3s ease-in-out;
 }
 
+.editor-footer-icon.arrow.open {
+  transform: rotate(180deg);
+}
+
 .editor-footer-icon.arrow:hover {
   color: var(--light);
-  transform: scale(1.1);
 }
 
 .headers,
