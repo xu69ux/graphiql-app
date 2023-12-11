@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, logout } from '../firebase';
+import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { EditorWindow, EditorTab } from '../components';
@@ -28,6 +28,7 @@ export const GraphiQLPage = () => {
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
   const [name, setName] = useState('');
+  console.log(name);
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
@@ -148,7 +149,6 @@ export const GraphiQLPage = () => {
         </div>
         <div className='viewer'></div>
       </div>
-
     </div>
   );
 };
