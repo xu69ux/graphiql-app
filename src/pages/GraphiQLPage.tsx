@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EditorWindow } from '../components';
+import { EditorWindow, EditorTab } from '../components';
 
-import { IoIosClose } from 'react-icons/io';
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
@@ -12,8 +11,15 @@ import {
 
 import '@styles/GraphiQLPage.css';
 
+interface IEditorTab {
+  id: number;
+  code: string;
+  lineNumbers: number;
+  name: string;
+}
+
 export const GraphiQLPage = () => {
-  const [tabs, setTabs] = useState([
+  const [tabs, setTabs] = useState<IEditorTab[]>([
     { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
   ]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
@@ -22,7 +28,7 @@ export const GraphiQLPage = () => {
 
   const addTab = () => {
     const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
-    const newTab = {
+    const newTab: IEditorTab = {
       id: nextId,
       code: '',
       lineNumbers: 1,
@@ -32,7 +38,7 @@ export const GraphiQLPage = () => {
     setActiveTab(newTab.id);
   };
 
-  const removeTab = (id) => {
+  const removeTab = (id: number) => {
     const newTabs = tabs.filter((tab) => tab.id !== id);
     setTabs(newTabs);
 
@@ -43,7 +49,11 @@ export const GraphiQLPage = () => {
     }
   };
 
-  const handleCodeChange = (id, newCode, newLineNumbers) => {
+  const handleCodeChange = (
+    id: number,
+    newCode: string,
+    newLineNumbers: number,
+  ) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) =>
         tab.id === id
@@ -53,7 +63,7 @@ export const GraphiQLPage = () => {
     );
   };
 
-  const handleNameChange = (id, newName) => {
+  const handleNameChange = (id: number, newName: string) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) => (tab.id === id ? { ...tab, name: newName } : tab)),
     );
@@ -81,7 +91,7 @@ export const GraphiQLPage = () => {
         <div className='editor'>
           <div className='tab-names'>
             {tabs.map((tab) => (
-              <Tab
+              <EditorTab
                 key={tab.id}
                 id={tab.id}
                 name={tab.name}
@@ -115,44 +125,6 @@ export const GraphiQLPage = () => {
           </div>
         </div>
         <div className='viewer'></div>
-      </div>
-    </div>
-  );
-};
-
-const Tab = ({
-  id,
-  name,
-  isActive,
-  onTabClick,
-  onCloseClick,
-  setActiveTab,
-  onNameChange,
-}) => {
-  const handleTabClick = (event) => {
-    event.stopPropagation();
-    onTabClick(id);
-  };
-
-  const handleCloseClick = (event) => {
-    event.stopPropagation();
-    onCloseClick(id);
-    setActiveTab(id - 1);
-  };
-
-  const handleNameChange = (event) => {
-    onNameChange(id, event.target.value);
-  };
-
-  return (
-    <div className='tab' onClick={handleTabClick}>
-      <div className={isActive ? 'tab-title active' : 'tab-title'}>
-        <input
-          className='tab-title-input'
-          value={name}
-          onChange={handleNameChange}
-        />
-        <IoIosClose className='tab-close' onClick={handleCloseClick} />
       </div>
     </div>
   );
