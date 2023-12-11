@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { translations } from '../contexts/translations';
 import { Fade } from '../components';
 
 import '@styles/Header.css';
@@ -9,6 +10,7 @@ import '@styles/Header.css';
 export const Header = () => {
   const username = 'user';
   const navigate = useNavigate();
+  const languageContext = useContext(LanguageContext);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [selectedLanguage, selectLanguage] = useState('english');
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,6 +20,15 @@ export const Header = () => {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  if (!languageContext) {
+    return null;
+  }
+  const { language, setLanguage } = languageContext;
+
+  const greeting = translations?.[language]?.greeting;
+  console.log(greeting);
+  console.log('language:', language);
 
   const logoutHandle = () => {
     navigate('/');
@@ -46,21 +57,30 @@ export const Header = () => {
             <div className='lang-dropdown'>
               <Link
                 to='#english'
-                onClick={() => selectLanguage('english')}
+                onClick={() => {
+                  selectLanguage('english');
+                  setLanguage('eng');
+                }}
                 className={selectedLanguage === 'english' ? 'selected' : ''}
               >
                 eng
               </Link>
               <Link
                 to='#russian'
-                onClick={() => selectLanguage('russian')}
+                onClick={() => {
+                  selectLanguage('russian');
+                  setLanguage('rus');
+                }}
                 className={selectedLanguage === 'russian' ? 'selected' : ''}
               >
                 rus
               </Link>
               <Link
                 to='#ukrainian'
-                onClick={() => selectLanguage('ukrainian')}
+                onClick={() => {
+                  selectLanguage('ukrainian');
+                  setLanguage('ukr');
+                }}
                 className={selectedLanguage === 'ukrainian' ? 'selected' : ''}
               >
                 ukr
@@ -72,7 +92,7 @@ export const Header = () => {
       <nav>
         <div className='user'>
           <span>
-            hello, <b>{username}</b>!
+            {greeting}, {username}!
           </span>
           <button className='btn logout' onClick={logoutHandle}>
             log out
