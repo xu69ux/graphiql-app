@@ -3,14 +3,16 @@ import {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from '../firebase';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEMA } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { translations } from '../contexts/translations';
+import { LanguageContext } from '../contexts/LanguageContext';
 
 import '@styles/AuthForm.css';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
@@ -32,7 +34,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-
+  const languageContext = useContext(LanguageContext);
   const usernameTooltipRef = useRef<HTMLDivElement>(null);
   const emailTooltipRef = useRef<HTMLDivElement>(null);
   const passwordTooltipRef = useRef<HTMLDivElement>(null);
@@ -71,6 +73,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
   };
 
+  if (!languageContext) {
+    return null;
+  }
+
+  const { language } = languageContext;
+
   const renderRegister = () => {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -78,7 +86,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='text'
-              placeholder='username'
+              placeholder={translations?.[language]?.username}
               {...register('username')}
             />
             <div
@@ -94,7 +102,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             {errors.username && <p>{errors.username.message}</p>}
           </div>
           <div className='input-wrapper'>
-            <input type='text' placeholder='email' {...register('email')} />
+            <input
+              type='text'
+              placeholder={translations?.[language]?.email}
+              {...register('email')}
+            />
             <div
               className='strip right'
               style={{ width: `${emailTooltipWidth + 20}px` }}
@@ -109,7 +121,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
-              placeholder='password'
+              placeholder={translations?.[language]?.password}
               {...register('password')}
             />
             <div
@@ -124,7 +136,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <button className='btn reg' type='submit' disabled={isSubmitting}>
-            Sign up
+            {translations?.[language]?.signupTitle}
           </button>
         </div>
       </form>
@@ -136,7 +148,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='login'>
           <div className='input-wrapper'>
-            <input type='text' placeholder='email' {...register('email')} />
+            <input
+              type='text'
+              placeholder={translations?.[language]?.email}
+              {...register('email')}
+            />
             <div
               className='strip right'
               style={{ width: `${emailTooltipWidth + 20}px` }}
@@ -151,7 +167,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
-              placeholder='password'
+              placeholder={translations?.[language]?.password}
               {...register('password')}
             />
             <div
@@ -166,7 +182,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <button className='btn log' type='submit' disabled={isSubmitting}>
-            Log in
+            {translations?.[language]?.loginTitle}
           </button>
         </div>
       </form>
