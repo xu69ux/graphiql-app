@@ -2,15 +2,17 @@ import {
   auth,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
-} from '../firebase';
+} from '../utils/firebase';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SCHEMA } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import useShowMessage from '../utils/useShowMessage';
+import { msg } from '../utils/constants';
 
 import '@styles/AuthForm.css';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
@@ -32,7 +34,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-
+  const showMessage = useShowMessage();
   const usernameTooltipRef = useRef<HTMLDivElement>(null);
   const emailTooltipRef = useRef<HTMLDivElement>(null);
   const passwordTooltipRef = useRef<HTMLDivElement>(null);
@@ -59,15 +61,33 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     if (user) navigate('/graphiql');
   }, [user, loading]);
 
-  const onSubmit: SubmitHandler<IFormInput> = ({
+  const onSubmit: SubmitHandler<IFormInput> = async ({
     username,
     email,
     password,
   }) => {
     if (mode === 'register') {
-      registerWithEmailAndPassword(username || '', email, password);
+      const res: string | undefined = await registerWithEmailAndPassword(
+        username || '',
+        email,
+        password,
+      );
+      console.log(res);
+      if (res !== 'success') {
+        res === 'FirebaseError: Firebase: Error (auth/email-already-in-use).'
+          ? showMessage(msg.REG_ALREADY_EXIST)
+          : showMessage(msg.COMMON_ERROR);
+      }
     } else {
-      logInWithEmailAndPassword(email, password);
+      const res: string | undefined = await logInWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (res !== 'success') {
+        res === 'FirebaseError: Firebase: Error (auth/invalid-credential).'
+          ? showMessage(msg.LOGIN_USER_NOT_FOUND)
+          : showMessage(msg.COMMON_ERROR);
+      }
     }
   };
 
