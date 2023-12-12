@@ -7,7 +7,9 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, logout } from '../firebase';
+import { fetchUserName } from '../services/api/fetchUserName';
 import '@styles/Header.css';
 
 export const Header = () => {
@@ -48,6 +50,13 @@ export const Header = () => {
     logout();
     navigate('/');
   };
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    fetchData();
+  }, [user, loading]);
 
   const headerStyle: React.CSSProperties = {
     background:
@@ -105,6 +114,7 @@ export const Header = () => {
               {translations[language]?.greeting}, {username}!
             </span>
           )}
+
           <button className='btn logout' onClick={logoutHandle}>
             {translations[language]?.logout}
           </button>

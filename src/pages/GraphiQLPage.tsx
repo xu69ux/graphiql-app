@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { fetchUserName } from '../services/api/fetchUserName';
 import { EditorWindow, EditorTab } from '../components';
-
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
@@ -27,17 +22,6 @@ export const GraphiQLPage = () => {
   ]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
-  const [name, setName] = useState('');
-  console.log(name);
-  const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
-
-  const fetchData = async () => {
-    if (user) {
-      const userName = await fetchUserName(user);
-      setName(userName);
-    }
-  };
 
   const addTab = () => {
     const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
@@ -84,15 +68,15 @@ export const GraphiQLPage = () => {
     );
   };
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    fetchData();
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, loading, navigate]);
+  // useEffect(() => {
+  //   if (loading) {
+  //     return;
+  //   }
+  //   fetchData();
+  //   if (!user) {
+  //     navigate('/');
+  //   }
+  // }, [user, loading, navigate]);
 
   useEffect(() => {
     const textArea = document.getElementById('text-area');
