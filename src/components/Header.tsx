@@ -13,10 +13,14 @@ import '@styles/Header.css';
 export const Header = () => {
   const navigate = useNavigate();
   const [username, setUserName] = useState('');
-  const languageContext = useContext(LanguageContext);
   const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language, setLanguage } = languageContext;
 
   const fetchData = async () => {
     if (user) {
@@ -39,15 +43,6 @@ export const Header = () => {
     }
     fetchData();
   }, [user, loading]);
-
-  if (!languageContext) {
-    return null;
-  }
-
-  const { language, setLanguage } = languageContext;
-
-  const greeting = translations?.[language]?.greeting;
-  const logoutButtonText = translations?.[language]?.logout;
 
   const logoutHandle = () => {
     logout();
@@ -110,11 +105,11 @@ export const Header = () => {
         <div className='user'>
           {username && (
             <span>
-              {greeting}, {username}!
+              {translations[language]?.greeting}, {username}!
             </span>
           )}
           <button className='btn logout' onClick={logoutHandle}>
-            {logoutButtonText}
+            {translations[language]?.logout}
           </button>
         </div>
       </nav>

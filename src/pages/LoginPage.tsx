@@ -11,17 +11,15 @@ import '@styles/Auth.css';
 export const LoginPage = () => {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
-  const languageContext = useContext(LanguageContext);
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language } = languageContext;
 
   useEffect(() => {
     if (user) return navigate('/graphiql');
   }, [user]);
-
-  if (!languageContext) {
-    return null;
-  }
-
-  const { language } = languageContext;
 
   return (
     <div className='auth-container'>
