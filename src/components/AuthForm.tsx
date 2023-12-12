@@ -5,7 +5,7 @@ import {
 } from '../firebase';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SCHEMA } from '../utils/validation/shema';
+import { getSchema } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -23,24 +23,28 @@ interface IFormInput {
   password: string;
 }
 export const AuthForm = ({ mode }: AuthFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(SCHEMA),
-    mode: 'onChange',
-  });
-
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-  const languageContext = useContext(LanguageContext);
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language } = languageContext;
   const usernameTooltipRef = useRef<HTMLDivElement>(null);
   const emailTooltipRef = useRef<HTMLDivElement>(null);
   const passwordTooltipRef = useRef<HTMLDivElement>(null);
   const [usernameTooltipWidth, setUsernameTooltipWidth] = useState(0);
   const [emailTooltipWidth, setEmailTooltipWidth] = useState(0);
   const [passwordTooltipWidth, setPasswordTooltipWidth] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(getSchema(language)),
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     if (usernameTooltipRef.current) {
@@ -72,12 +76,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       logInWithEmailAndPassword(email, password);
     }
   };
-
-  if (!languageContext) {
-    return null;
-  }
-
-  const { language } = languageContext;
 
   const renderRegister = () => {
     return (
