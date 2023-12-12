@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthForm } from '../components';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase';
+import { auth } from '../utils/firebase';
 import { useEffect } from 'react';
 
 import '@styles/Auth.css';
