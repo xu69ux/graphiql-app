@@ -8,6 +8,8 @@ export const translations = {
     signupTitle: 'Sign up',
     welcome: 'to use this awesome application, log in with a fake email',
     or: 'or',
+    madeWith: 'made with',
+    by: 'by',
     email: 'email',
     password: 'password',
     username: 'username',
@@ -39,6 +41,8 @@ export const translations = {
     welcome:
       'чтобы использовать это офигенное приложение, войдите с помощью фейковой почты',
     or: 'или',
+    madeWith: 'сделано с',
+    by: '',
     email: 'почта',
     password: 'пароль',
     username: 'имя пользователя',
@@ -70,6 +74,8 @@ export const translations = {
     welcome:
       'щоб використовувати це офігенне додаток, увійдіть за допомогою фейкової пошти',
     or: 'або',
+    madeWith: 'зроблено з',
+    by: '',
     email: 'пошта',
     password: 'пароль',
     username: "ім'я користувача",
