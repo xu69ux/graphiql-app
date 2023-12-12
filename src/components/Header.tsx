@@ -2,7 +2,7 @@ import { auth, logout } from '../firebase';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IoEarthOutline } from 'react-icons/io5';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
@@ -70,33 +70,30 @@ export const Header = () => {
           <IoEarthOutline className='lang-icon' title='change language' />
           <Fade show={isDropdownOpen}>
             <div className='lang-dropdown'>
-              <Link
-                to='#english'
+              <button
                 onClick={() => {
                   setLanguage('eng');
                 }}
                 className={language === 'eng' ? 'selected' : ''}
               >
                 eng
-              </Link>
-              <Link
-                to='#russian'
+              </button>
+              <button
                 onClick={() => {
                   setLanguage('rus');
                 }}
                 className={language === 'rus' ? 'selected' : ''}
               >
                 rus
-              </Link>
-              <Link
-                to='#ukrainian'
+              </button>
+              <button
                 onClick={() => {
                   setLanguage('ukr');
                 }}
                 className={language === 'ukr' ? 'selected' : ''}
               >
                 ukr
-              </Link>
+              </button>
             </div>
           </Fade>
         </div>
