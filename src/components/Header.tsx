@@ -4,8 +4,11 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { Fade } from '../components';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logout } from '../firebase';
+import { auth, logout } from '../utils/firebase';
 import { fetchUserName } from '../services/api/fetchUserName';
+import useShowMessage from '../utils/useShowMessage';
+import { msg } from '../utils/constants';
+
 import '@styles/Header.css';
 
 export const Header = () => {
@@ -15,7 +18,7 @@ export const Header = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [name, setName] = useState('');
   const [user, loading] = useAuthState(auth);
-  console.log(user);
+  const showMessage = useShowMessage();
   const fetchData = async () => {
     if (user) {
       const userName = await fetchUserName(user);
@@ -34,6 +37,7 @@ export const Header = () => {
   const logoutHandle = () => {
     logout();
     navigate('/');
+    showMessage(msg.LOG_OUT_SUCCESS);
   };
 
   useEffect(() => {
