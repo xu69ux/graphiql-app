@@ -95,7 +95,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             ></div>
 
             <div className='tooltip username' ref={usernameTooltipRef}>
-              please use any username
+              {translations?.[language]?.tooltipUsername}
             </div>
           </div>
           <div className='error'>
@@ -112,7 +112,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${emailTooltipWidth + 20}px` }}
             ></div>
             <div className='tooltip email' ref={emailTooltipRef}>
-              please use any real or fake email
+              {translations?.[language]?.tooltipEmail}
             </div>
           </div>
           <div className='error'>
@@ -129,7 +129,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${passwordTooltipWidth + 20}px` }}
             ></div>
             <div className='tooltip password' ref={passwordTooltipRef}>
-              must be at least 8 characters
+              {translations?.[language]?.tooltipPassword}
             </div>
           </div>
           <div className='error'>
@@ -158,7 +158,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${emailTooltipWidth + 20}px` }}
             ></div>
             <div ref={emailTooltipRef} className='tooltip email'>
-              please enter the email provided during registration
+              {translations?.[language]?.tooltipEmailLogin}
             </div>
           </div>
           <div className='error'>
@@ -175,7 +175,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${passwordTooltipWidth + 20}px` }}
             ></div>
             <div ref={passwordTooltipRef} className='tooltip password'>
-              please enter the password provided during registration
+              {translations?.[language]?.tooltipPasswordLogin}
             </div>
           </div>
           <div className='error'>
