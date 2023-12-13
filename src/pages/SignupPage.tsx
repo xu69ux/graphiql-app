@@ -23,7 +23,7 @@ export const SignupPage = () => {
 
   return (
     <div className='auth-container'>
-      <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
+      <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
       <AuthForm mode='register' />
       <p className='no-account'>
         {translations?.[language]?.yesAccount}
