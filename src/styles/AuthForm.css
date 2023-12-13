@@ -59,3 +59,9 @@ input {
 .error p {
   text-align: center;
 }
+
+.password-indicator {
+  height: 0.15rem;
+  width: 60%;
+  margin-top: 0.5rem;
+}

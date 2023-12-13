@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { translations } from '../contexts/translations';
 import { LanguageContext } from '../contexts/LanguageContext';
+import { PasswordValidIndicator } from '../components';
 
 import '@styles/AuthForm.css';
 
@@ -33,6 +34,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -58,6 +60,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       logInWithEmailAndPassword(email, password);
     }
   };
+
+  const password = watch('password', '');
 
   const renderRegister = () => {
     return (
@@ -86,10 +90,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
+              value={password}
               placeholder={translations?.[language]?.password}
               {...register('password')}
             />
           </div>
+          <PasswordValidIndicator password={password} />
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
