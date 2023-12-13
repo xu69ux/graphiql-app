@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
@@ -7,11 +7,25 @@ import { IoChevronForward } from 'react-icons/io5';
 import '@styles/WelcomePage.css';
 
 export const WelcomePage = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},
   };
   const { language } = languageContext;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className='welcome-container'>
@@ -36,11 +50,19 @@ export const WelcomePage = () => {
           <IoChevronForward />
         </div>
       </div>
-      <div className='welcome-description'>
-        <p>{translations[language]?.welcomeDescription1}</p>
-        <p>{translations[language]?.welcomeDescription2}</p>
-        <p>{translations[language]?.welcomeDescription3}</p>
-        <p>{translations[language]?.welcomeDescription4}</p>
+      <div className={`welcome-description ${isScrolled ? '' : 'blur'}`}>
+        <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
+          {translations[language]?.welcomeDescription1}
+        </p>
+        <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
+          {translations[language]?.welcomeDescription2}
+        </p>
+        <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
+          {translations[language]?.welcomeDescription3}
+        </p>
+        <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
+          {translations[language]?.welcomeDescription4}
+        </p>
       </div>
     </div>
   );
