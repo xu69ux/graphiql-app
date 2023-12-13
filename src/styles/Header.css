@@ -8,6 +8,7 @@
   height: 4rem;
   background: linear-gradient(90deg, var(--dark), var(--blue), var(--green));
   padding: 1rem;
+  z-index: 1;
 }
 
 .user {
