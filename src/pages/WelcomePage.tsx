@@ -36,7 +36,9 @@ export const WelcomePage = () => {
 
   return (
     <div className='welcome-container'>
-      <h1 className='welcome-title'>GraphiQL IDE</h1>
+      <h1 className='welcome-title'>
+        Graphi<span>QL</span> IDE
+      </h1>
       <p className='typing-effect'>{translations[language]?.welcome}</p>
       <div className='welcome-auth'>
         <div className='login-icon'>

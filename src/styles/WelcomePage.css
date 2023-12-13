@@ -17,6 +17,13 @@
   margin-top: 17rem;
 }
 
+.welcome-title span {
+  color: var(--extra);
+  font-size: inherit;
+  font-weight: 600;
+  margin: 0;
+}
+
 .welcome-auth {
   display: flex;
   flex-direction: row;
@@ -80,7 +87,7 @@ span {
 }
 
 .typing-effect {
-  border-right: 0.15em solid orange;
+  border-right: 0.15em solid var(--extra);
   white-space: nowrap;
   overflow: hidden;
   animation:
@@ -95,7 +102,7 @@ span {
     border-color: transparent;
   }
   50% {
-    border-color: orange;
+    border-color: var(--extra);
   }
 }
 

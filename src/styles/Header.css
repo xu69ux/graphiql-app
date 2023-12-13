@@ -36,7 +36,7 @@
   height: 2px;
   bottom: 0.3rem;
   left: 0;
-  background-color: orange;
+  background-color: var(--extra);
   transition: width 0.3s ease-in-out;
 }
 
