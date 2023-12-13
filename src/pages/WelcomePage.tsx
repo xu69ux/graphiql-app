@@ -15,9 +15,16 @@ export const WelcomePage = () => {
   const { language } = languageContext;
 
   useEffect(() => {
+    let previousScrollY = window.scrollY;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 100);
+      if (currentScrollY > previousScrollY) {
+        setIsScrolled(currentScrollY > 100);
+      } else {
+        setIsScrolled(currentScrollY > 0);
+      }
+      previousScrollY = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
