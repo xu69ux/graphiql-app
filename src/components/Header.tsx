@@ -7,8 +7,8 @@ import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
 import { auth, logout } from '../utils/firebase';
-import useShowMessage from '../utils/useShowMessage';
-import useMsg from '../utils/useMsg';
+import useShowMessage from '../hooks/useShowMessage';
+import useMsg from '../hooks/useMsg';
 
 import '@styles/Header.css';
 

@@ -9,10 +9,10 @@ import { getSchema } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import useShowMessage from '../utils/useShowMessage';
+import useShowMessage from '../hooks/useShowMessage';
 import { translations } from '../contexts/translations';
 import { LanguageContext } from '../contexts/LanguageContext';
-import useMsg from '../utils/useMsg';
+import useMsg from '../hooks/useMsg';
 
 import '@styles/AuthForm.css';
 
@@ -74,26 +74,38 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     email,
     password,
   }) => {
-    if (mode === 'register') {
-      const res: string | undefined = await registerWithEmailAndPassword(
-        username || '',
-        email,
-        password,
-      );
-      if (res !== 'success') {
-        res === 'FirebaseError: Firebase: Error (auth/email-already-in-use).'
-          ? showMessage(msg.REG_ALREADY_EXIST)
-          : showMessage(msg.COMMON_ERROR);
+    try {
+      if (mode === 'register') {
+        const response: string | undefined = await registerWithEmailAndPassword(
+          username || '',
+          email,
+          password,
+        );
+        if (response !== 'success') {
+          throw new Error('auth/email-already-in-use');
+        }
+      } else {
+        const response: string | undefined = await logInWithEmailAndPassword(
+          email,
+          password,
+        );
+        if (response !== 'success') {
+          throw new Error('auth/invalid-credential');
+        }
       }
-    } else {
-      const res: string | undefined = await logInWithEmailAndPassword(
-        email,
-        password,
-      );
-      if (res !== 'success') {
-        res === 'FirebaseError: Firebase: Error (auth/invalid-credential).'
-          ? showMessage(msg.LOGIN_USER_NOT_FOUND)
-          : showMessage(msg.COMMON_ERROR);
+    } catch (error) {
+      if (error instanceof Error) {
+        switch (error.message) {
+          case 'auth/email-already-in-use':
+            showMessage(msg.REG_ALREADY_EXIST);
+            break;
+          case 'auth/invalid-credential':
+            showMessage(msg.LOGIN_USER_NOT_FOUND);
+            break;
+          default:
+            showMessage(msg.COMMON_ERROR);
+            break;
+        }
       }
     }
   };

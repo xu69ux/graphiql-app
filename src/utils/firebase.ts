@@ -27,7 +27,6 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     return 'success';
   } catch (err) {
     console.error(err);
-    return `${err}`;
   }
 };
 
@@ -48,7 +47,6 @@ const registerWithEmailAndPassword = async (
     return 'success';
   } catch (err) {
     console.error(err);
-    return `${err}`;
   }
 };
 
