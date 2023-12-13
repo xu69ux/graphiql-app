@@ -12,23 +12,27 @@ import '@styles/GraphiQLPage.css';
 interface IEditorTab {
   id: number;
   code: string;
-  lineNumbers: number;
   name: string;
 }
 
 export const GraphiQLPage = () => {
-  const [tabs, setTabs] = useState<IEditorTab[]>([
-    { id: 1, code: '', lineNumbers: 1, name: `untitled 1` },
-  ]);
+  const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+
+  const updateData = (data: string) => {
+    setTabs((prevTabs) =>
+      prevTabs.map((tab) =>
+        tab.id === activeTab ? { ...tab, code: data } : tab,
+      ),
+    );
+  };
 
   const addTab = () => {
     const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
     const newTab: IEditorTab = {
       id: nextId,
       code: '',
-      lineNumbers: 1,
       name: `untitled ${nextId}`,
     };
     setTabs((prevTabs) => [...prevTabs, newTab]);
@@ -48,40 +52,21 @@ export const GraphiQLPage = () => {
     });
   };
 
-  const handleCodeChange = (
-    id: number,
-    newCode: string,
-    newLineNumbers: number,
-  ) => {
-    setTabs((prevTabs) =>
-      prevTabs.map((tab) =>
-        tab.id === id
-          ? { ...tab, code: newCode, lineNumbers: newLineNumbers }
-          : tab,
-      ),
-    );
-  };
-
   const handleNameChange = (id: number, newName: string) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) => (tab.id === id ? { ...tab, name: newName } : tab)),
     );
   };
 
-  // useEffect(() => {
-  //   if (loading) {
-  //     return;
-  //   }
-  //   fetchData();
-  //   if (!user) {
-  //     navigate('/');
-  //   }
-  // }, [user, loading, navigate]);
-
-  useEffect(() => {
-    const textArea = document.getElementById('text-area');
-    if (textArea) textArea.focus();
-  }, []);
+//   useEffect(() => {
+//     if (loading) {
+//       return;
+//     }
+//     fetchData();
+//     if (!user) {
+//       navigate('/');
+//     }
+//   }, [user, loading]);
 
   return (
     <div className='container'>
@@ -112,10 +97,7 @@ export const GraphiQLPage = () => {
                   <EditorWindow
                     key={tab.id}
                     code={tab.code}
-                    lineNumbers={tab.lineNumbers}
-                    onCodeChange={(newCode: string, newLineNumbers: number) =>
-                      handleCodeChange(tab.id, newCode, newLineNumbers)
-                    }
+                    updateData={updateData}
                   />
                 ),
             )}

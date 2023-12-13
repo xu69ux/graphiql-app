@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthForm } from '../components';
 import { useEffect, useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase';
+import { auth } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 
