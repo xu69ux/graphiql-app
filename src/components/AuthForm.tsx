@@ -124,10 +124,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
+              value={password}
               placeholder={translations?.[language]?.password}
               {...register('password')}
             />
           </div>
+          <PasswordValidIndicator password={password} />
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
