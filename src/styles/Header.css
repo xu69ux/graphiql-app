@@ -103,16 +103,18 @@
   visibility: visible;
 }
 
-.lang-dropdown a {
+.lang-dropdown button {
   color: var(--light);
   font-size: 0.9rem;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
   display: block;
   margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
 
-.lang-dropdown a.selected {
+.lang-dropdown button.selected {
   color: var(--green);
 }
 
