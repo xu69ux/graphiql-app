@@ -1,17 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import { auth, logout } from '../firebase';
+import { fetchUserName } from '../services/api/fetchUserName';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { translations } from '../contexts/translations';
 import { Fade } from '../components';
-
 import '@styles/Header.css';
 
 export const Header = () => {
-  const username = 'user';
   const navigate = useNavigate();
+  const [username, setUserName] = useState('');
+  const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
-  const [selectedLanguage, selectLanguage] = useState('english');
   const [scrollPosition, setScrollPosition] = useState(0);
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language, setLanguage } = languageContext;
+
+  const fetchData = async () => {
+    if (user) {
+      const userName = await fetchUserName(user);
+      setUserName(userName);
+    } else {
+      setUserName('');
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrollPosition(window.pageYOffset);
@@ -19,9 +36,24 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    fetchData();
+  }, [user, loading]);
+
   const logoutHandle = () => {
+    logout();
     navigate('/');
   };
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    fetchData();
+  }, [user, loading]);
 
   const headerStyle: React.CSSProperties = {
     background:
@@ -44,38 +76,44 @@ export const Header = () => {
           <IoEarthOutline className='lang-icon' title='change language' />
           <Fade show={isDropdownOpen}>
             <div className='lang-dropdown'>
-              <Link
-                to='#english'
-                onClick={() => selectLanguage('english')}
-                className={selectedLanguage === 'english' ? 'selected' : ''}
+              <button
+                onClick={() => {
+                  setLanguage('eng');
+                }}
+                className={language === 'eng' ? 'selected' : ''}
               >
                 eng
-              </Link>
-              <Link
-                to='#russian'
-                onClick={() => selectLanguage('russian')}
-                className={selectedLanguage === 'russian' ? 'selected' : ''}
+              </button>
+              <button
+                onClick={() => {
+                  setLanguage('rus');
+                }}
+                className={language === 'rus' ? 'selected' : ''}
               >
                 rus
-              </Link>
-              <Link
-                to='#ukrainian'
-                onClick={() => selectLanguage('ukrainian')}
-                className={selectedLanguage === 'ukrainian' ? 'selected' : ''}
+              </button>
+              <button
+                onClick={() => {
+                  setLanguage('ukr');
+                }}
+                className={language === 'ukr' ? 'selected' : ''}
               >
                 ukr
-              </Link>
+              </button>
             </div>
           </Fade>
         </div>
       </div>
       <nav>
         <div className='user'>
-          <span>
-            hello, <b>{username}</b>!
-          </span>
+          {username && (
+            <span>
+              {translations[language]?.greeting}, {username}!
+            </span>
+          )}
+
           <button className='btn logout' onClick={logoutHandle}>
-            log out
+            {translations[language]?.logout}
           </button>
         </div>
       </nav>

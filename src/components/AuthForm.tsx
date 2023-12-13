@@ -3,14 +3,16 @@ import {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from '../firebase';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SCHEMA } from '../utils/validation/shema';
+import { getSchema } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { translations } from '../contexts/translations';
+import { LanguageContext } from '../contexts/LanguageContext';
 
 import '@styles/AuthForm.css';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
@@ -21,24 +23,28 @@ interface IFormInput {
   password: string;
 }
 export const AuthForm = ({ mode }: AuthFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(SCHEMA),
-    mode: 'onChange',
-  });
-
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language } = languageContext;
   const usernameTooltipRef = useRef<HTMLDivElement>(null);
   const emailTooltipRef = useRef<HTMLDivElement>(null);
   const passwordTooltipRef = useRef<HTMLDivElement>(null);
   const [usernameTooltipWidth, setUsernameTooltipWidth] = useState(0);
   const [emailTooltipWidth, setEmailTooltipWidth] = useState(0);
   const [passwordTooltipWidth, setPasswordTooltipWidth] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(getSchema(language)),
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     if (usernameTooltipRef.current) {
@@ -78,7 +84,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='text'
-              placeholder='username'
+              placeholder={translations?.[language]?.username}
               {...register('username')}
             />
             <div
@@ -87,20 +93,24 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             ></div>
 
             <div className='tooltip username' ref={usernameTooltipRef}>
-              please use any username
+              {translations?.[language]?.tooltipUsername}
             </div>
           </div>
           <div className='error'>
             {errors.username && <p>{errors.username.message}</p>}
           </div>
           <div className='input-wrapper'>
-            <input type='text' placeholder='email' {...register('email')} />
+            <input
+              type='text'
+              placeholder={translations?.[language]?.email}
+              {...register('email')}
+            />
             <div
               className='strip right'
               style={{ width: `${emailTooltipWidth + 20}px` }}
             ></div>
             <div className='tooltip email' ref={emailTooltipRef}>
-              please use any real or fake email
+              {translations?.[language]?.tooltipEmail}
             </div>
           </div>
           <div className='error'>
@@ -109,7 +119,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
-              placeholder='password'
+              placeholder={translations?.[language]?.password}
               {...register('password')}
             />
             <div
@@ -117,14 +127,14 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${passwordTooltipWidth + 20}px` }}
             ></div>
             <div className='tooltip password' ref={passwordTooltipRef}>
-              must be at least 8 characters
+              {translations?.[language]?.tooltipPassword}
             </div>
           </div>
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <button className='btn reg' type='submit' disabled={isSubmitting}>
-            Sign up
+            {translations?.[language]?.signupTitle}
           </button>
         </div>
       </form>
@@ -136,13 +146,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='login'>
           <div className='input-wrapper'>
-            <input type='text' placeholder='email' {...register('email')} />
+            <input
+              type='text'
+              placeholder={translations?.[language]?.email}
+              {...register('email')}
+            />
             <div
               className='strip right'
               style={{ width: `${emailTooltipWidth + 20}px` }}
             ></div>
             <div ref={emailTooltipRef} className='tooltip email'>
-              please enter the email provided during registration
+              {translations?.[language]?.tooltipEmailLogin}
             </div>
           </div>
           <div className='error'>
@@ -151,7 +165,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <div className='input-wrapper'>
             <input
               type='password'
-              placeholder='password'
+              placeholder={translations?.[language]?.password}
               {...register('password')}
             />
             <div
@@ -159,14 +173,14 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               style={{ width: `${passwordTooltipWidth + 20}px` }}
             ></div>
             <div ref={passwordTooltipRef} className='tooltip password'>
-              please enter the password provided during registration
+              {translations?.[language]?.tooltipPasswordLogin}
             </div>
           </div>
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <button className='btn log' type='submit' disabled={isSubmitting}>
-            Log in
+            {translations?.[language]?.loginTitle}
           </button>
         </div>
       </form>
