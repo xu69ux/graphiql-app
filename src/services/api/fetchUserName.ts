@@ -1,5 +1,5 @@
 import { query, collection, where, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db } from '../../utils/firebase';
 import { User } from 'firebase/auth';
 
 export const fetchUserName = async (

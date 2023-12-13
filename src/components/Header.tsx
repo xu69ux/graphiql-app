@@ -1,4 +1,3 @@
-import { auth, logout } from '../firebase';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect, useContext } from 'react';
@@ -7,6 +6,10 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
+import { auth, logout } from '../utils/firebase';
+import useShowMessage from '../hooks/useShowMessage';
+import useMsg from '../hooks/useMsg';
+
 import '@styles/Header.css';
 
 export const Header = () => {
@@ -15,6 +18,8 @@ export const Header = () => {
   const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const showMessage = useShowMessage();
+  const msg = useMsg();
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},
@@ -46,6 +51,7 @@ export const Header = () => {
   const logoutHandle = () => {
     logout();
     navigate('/');
+    showMessage(msg.LOG_OUT_SUCCESS);
   };
 
   useEffect(() => {
