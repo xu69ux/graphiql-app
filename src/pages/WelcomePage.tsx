@@ -36,6 +36,12 @@ export const WelcomePage = () => {
           <IoChevronForward />
         </div>
       </div>
+      <div className='welcome-description'>
+        <p>{translations[language]?.welcomeDescription1}</p>
+        <p>{translations[language]?.welcomeDescription2}</p>
+        <p>{translations[language]?.welcomeDescription3}</p>
+        <p>{translations[language]?.welcomeDescription4}</p>
+      </div>
     </div>
   );
 };

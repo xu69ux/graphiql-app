@@ -6,7 +6,7 @@
   text-align: center;
   background-color: var(--dark);
   color: var(--light);
-  height: 100vh;
+  min-height: 100vh;
   width: 80%;
   margin: 0 auto;
 }
@@ -14,6 +14,7 @@
 .welcome-title {
   font-size: 3rem;
   margin-bottom: 1rem;
+  margin-top: 17rem;
 }
 
 .welcome-auth {
@@ -96,4 +97,17 @@ span {
   50% {
     border-color: orange;
   }
+}
+
+.welcome-description {
+  font-size: 1.5rem;
+  margin-top: 13rem;
+  margin-bottom: 8rem;
+  height: min-content;
+}
+
+.welcome-description p {
+  color: var(--green);
+  text-align: left;
+  margin-bottom: 2rem;
 }
