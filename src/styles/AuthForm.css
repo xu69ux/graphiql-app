@@ -41,60 +41,10 @@ input {
   transition: all 0.2s ease-in-out;
 }
 
-.btn.login:hover,
-.btn.register:hover {
+.btn.log:hover,
+.btn.reg:hover {
   background-color: var(--green);
   color: var(--blue);
-}
-
-.tooltip {
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-  color: var(--light);
-  text-align: center;
-  position: absolute;
-  font-size: 0.8rem;
-  opacity: 0;
-  transition: opacity 6s ease-in-out;
-}
-
-.tooltip.email {
-  bottom: 47%;
-  left: 100%;
-  margin-left: 0.8rem;
-}
-
-.tooltip.password {
-  bottom: 47%;
-  right: 100%;
-  margin-right: 0.8rem;
-}
-
-.tooltip.username {
-  bottom: 47%;
-  right: 100%;
-  margin-right: 0.8rem;
-}
-
-.input-wrapper:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-
-.tooltip .strip {
-  width: 100%;
-  height: 1px;
-  background: var(--green);
-  position: absolute;
-  top: 95%;
-  opacity: 0;
-  transition: opacity 6s ease-in-out;
-}
-
-.input-wrapper:hover .tooltip,
-.input-wrapper:hover .tooltip .strip {
-  opacity: 1;
 }
 
 .error {
