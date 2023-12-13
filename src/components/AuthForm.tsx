@@ -31,14 +31,15 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     setLanguage: () => {},
   };
   const { language } = languageContext;
-
+  const schema = getSchema(language);
   const {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, touchedFields },
+    trigger,
   } = useForm({
-    resolver: yupResolver(getSchema(language)),
+    resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
@@ -48,6 +49,10 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
     if (user) navigate('/graphiql');
   }, [user, loading, navigate]);
+
+  useEffect(() => {
+    trigger();
+  }, [language, trigger]);
 
   const onSubmit: SubmitHandler<IFormInput> = ({
     username,
@@ -85,7 +90,10 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             />
           </div>
           <div className='error'>
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email &&
+              (touchedFields.email || errors.email.type !== 'required') && (
+                <p>{errors.email.message}</p>
+              )}
           </div>
           <div className='input-wrapper'>
             <input
@@ -97,7 +105,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           </div>
           <PasswordValidIndicator password={password} />
           <div className='error'>
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password &&
+              (touchedFields.password ||
+                errors.password.type !== 'required') && (
+                <p>{errors.password.message}</p>
+              )}
           </div>
           <button className='btn reg' type='submit' disabled={isSubmitting}>
             {translations?.[language]?.signupTitle}
@@ -119,7 +131,10 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             />
           </div>
           <div className='error'>
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email &&
+              (touchedFields.email || errors.email.type !== 'required') && (
+                <p>{errors.email.message}</p>
+              )}
           </div>
           <div className='input-wrapper'>
             <input
@@ -131,7 +146,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           </div>
           <PasswordValidIndicator password={password} />
           <div className='error'>
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password &&
+              (touchedFields.password ||
+                errors.password.type !== 'required') && (
+                <p>{errors.password.message}</p>
+              )}
           </div>
           <button className='btn log' type='submit' disabled={isSubmitting}>
             {translations?.[language]?.loginTitle}
