@@ -24,6 +24,7 @@ export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [variables, setVariables] = useState('');
   const [name, setName] = useState('');
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
@@ -85,6 +86,22 @@ export const GraphiQLPage = () => {
     }
   }, [user, loading]);
 
+  const clickHandler = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (variables === '' || activeTabTemp.code === '') {
+      return;
+    }
+    let res = activeTabTemp.code;
+    const variablesArray = Object.entries(JSON.parse(variables));
+    console.log('before:', res);
+    variablesArray?.forEach((item) => {
+      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
+    });
+    console.log('after:', res);
+  };
+
   return (
     <div className='container'>
       <div className='sidebar'>
@@ -120,7 +137,13 @@ export const GraphiQLPage = () => {
             )}
           </div>
           <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-            <div className='variables'>variables</div>
+            <div className='variables'>
+              <EditorWindow
+                code={variables}
+                updateData={(data: string) => setVariables(data)}
+              />
+            </div>
+            <button onClick={clickHandler} />
             <div className='headers'>headers</div>
             <IoChevronUpOutline
               className={`editor-footer-icon arrow ${
