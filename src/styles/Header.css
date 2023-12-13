@@ -48,7 +48,9 @@
   width: 100%;
 }
 
-.btn.logout {
+.btn-logout,
+.btn-login,
+.btn-signup {
   background-color: var(--dark);
   border: 1px solid var(--green);
   color: var(--green);
@@ -57,9 +59,12 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 1rem;
+  min-width: 6rem;
 }
 
-.btn.logout:hover {
+.btn-logout:hover,
+.btn-login:hover,
+.btn-signup:hover {
   background-color: var(--blue);
   color: var(--light);
 }
