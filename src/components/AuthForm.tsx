@@ -3,7 +3,7 @@ import {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from '../firebase';
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSchema } from '../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -30,12 +30,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     setLanguage: () => {},
   };
   const { language } = languageContext;
-  const usernameTooltipRef = useRef<HTMLDivElement>(null);
-  const emailTooltipRef = useRef<HTMLDivElement>(null);
-  const passwordTooltipRef = useRef<HTMLDivElement>(null);
-  const [usernameTooltipWidth, setUsernameTooltipWidth] = useState(0);
-  const [emailTooltipWidth, setEmailTooltipWidth] = useState(0);
-  const [passwordTooltipWidth, setPasswordTooltipWidth] = useState(0);
 
   const {
     register,
@@ -47,23 +41,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   });
 
   useEffect(() => {
-    if (usernameTooltipRef.current) {
-      setUsernameTooltipWidth(usernameTooltipRef.current.offsetWidth);
-    }
-    if (emailTooltipRef.current) {
-      setEmailTooltipWidth(emailTooltipRef.current.offsetWidth);
-    }
-    if (passwordTooltipRef.current) {
-      setPasswordTooltipWidth(passwordTooltipRef.current.offsetWidth);
-    }
-  }, []);
-
-  useEffect(() => {
     if (loading) {
       return;
     }
     if (user) navigate('/graphiql');
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   const onSubmit: SubmitHandler<IFormInput> = ({
     username,
@@ -87,14 +69,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               placeholder={translations?.[language]?.username}
               {...register('username')}
             />
-            <div
-              className='strip left'
-              style={{ width: `${usernameTooltipWidth + 20}px` }}
-            ></div>
-
-            <div className='tooltip username' ref={usernameTooltipRef}>
-              {translations?.[language]?.tooltipUsername}
-            </div>
           </div>
           <div className='error'>
             {errors.username && <p>{errors.username.message}</p>}
@@ -105,13 +79,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               placeholder={translations?.[language]?.email}
               {...register('email')}
             />
-            <div
-              className='strip right'
-              style={{ width: `${emailTooltipWidth + 20}px` }}
-            ></div>
-            <div className='tooltip email' ref={emailTooltipRef}>
-              {translations?.[language]?.tooltipEmail}
-            </div>
           </div>
           <div className='error'>
             {errors.email && <p>{errors.email.message}</p>}
@@ -122,13 +89,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               placeholder={translations?.[language]?.password}
               {...register('password')}
             />
-            <div
-              className='strip left'
-              style={{ width: `${passwordTooltipWidth + 20}px` }}
-            ></div>
-            <div className='tooltip password' ref={passwordTooltipRef}>
-              {translations?.[language]?.tooltipPassword}
-            </div>
           </div>
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}
@@ -151,13 +111,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               placeholder={translations?.[language]?.email}
               {...register('email')}
             />
-            <div
-              className='strip right'
-              style={{ width: `${emailTooltipWidth + 20}px` }}
-            ></div>
-            <div ref={emailTooltipRef} className='tooltip email'>
-              {translations?.[language]?.tooltipEmailLogin}
-            </div>
           </div>
           <div className='error'>
             {errors.email && <p>{errors.email.message}</p>}
@@ -168,13 +121,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               placeholder={translations?.[language]?.password}
               {...register('password')}
             />
-            <div
-              className='strip left'
-              style={{ width: `${passwordTooltipWidth + 20}px` }}
-            ></div>
-            <div ref={passwordTooltipRef} className='tooltip password'>
-              {translations?.[language]?.tooltipPasswordLogin}
-            </div>
           </div>
           <div className='error'>
             {errors.password && <p>{errors.password.message}</p>}

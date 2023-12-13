@@ -48,15 +48,15 @@ input {
 }
 
 .tooltip {
+  display: flex;
+  flex-direction: column;
   white-space: nowrap;
-  visibility: hidden;
   color: var(--light);
   text-align: center;
   position: absolute;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 1s;
   font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 6s ease-in-out;
 }
 
 .tooltip.email {
@@ -82,27 +82,19 @@ input {
   opacity: 1;
 }
 
-.strip {
-  visibility: hidden;
-  width: 0;
-  height: 2px;
+.tooltip .strip {
+  width: 100%;
+  height: 1px;
   background: var(--green);
   position: absolute;
-  transition: width 0.4s;
-  top: 50%;
+  top: 95%;
+  opacity: 0;
+  transition: opacity 6s ease-in-out;
 }
 
-.strip.right {
-  left: 100%;
-}
-
-.strip.left {
-  right: 100%;
-}
-
-.input-wrapper:hover .strip {
-  visibility: visible;
-  width: 100%;
+.input-wrapper:hover .tooltip,
+.input-wrapper:hover .tooltip .strip {
+  opacity: 1;
 }
 
 .error {
