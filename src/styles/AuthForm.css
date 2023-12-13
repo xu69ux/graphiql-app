@@ -48,9 +48,12 @@ input {
 }
 
 .error {
-  color: red;
-  height: 2rem;
+  color: var(--error);
+  font-size: 0.8rem;
+  height: 1rem;
   width: 37rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .error p {
