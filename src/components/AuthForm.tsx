@@ -10,9 +10,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import useShowMessage from '../utils/useShowMessage';
-import { msg } from '../utils/constants';
 import { translations } from '../contexts/translations';
 import { LanguageContext } from '../contexts/LanguageContext';
+import useMsg from '../utils/useMsg';
 
 import '@styles/AuthForm.css';
 
@@ -39,6 +39,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const [usernameTooltipWidth, setUsernameTooltipWidth] = useState(0);
   const [emailTooltipWidth, setEmailTooltipWidth] = useState(0);
   const [passwordTooltipWidth, setPasswordTooltipWidth] = useState(0);
+  const msg = useMsg();
 
   const {
     register,
@@ -79,7 +80,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         email,
         password,
       );
-      console.log(res);
       if (res !== 'success') {
         res === 'FirebaseError: Firebase: Error (auth/email-already-in-use).'
           ? showMessage(msg.REG_ALREADY_EXIST)

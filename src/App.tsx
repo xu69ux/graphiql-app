@@ -16,17 +16,17 @@ function App() {
           <Routes>{routes}</Routes>
           <Footer />
           <ToastContainer
-          position='top-center'
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover={false}
-          theme='light'
-        />
+            position='top-center'
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover={false}
+            theme='light'
+          />
         </Router>
       </LanguageProvider>
     </div>

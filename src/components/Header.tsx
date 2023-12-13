@@ -6,11 +6,9 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '../utils/firebase';
-import { fetchUserName } from '../services/api/fetchUserName';
 import useShowMessage from '../utils/useShowMessage';
-import { msg } from '../utils/constants';
+import useMsg from '../utils/useMsg';
 
 import '@styles/Header.css';
 
@@ -20,9 +18,8 @@ export const Header = () => {
   const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [name, setName] = useState('');
-  const [user, loading] = useAuthState(auth);
   const showMessage = useShowMessage();
+  const msg = useMsg();
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},

@@ -30,6 +30,11 @@ export const translations = {
     passwordInvalidCriteriaNumber: 'at least one number',
     passwordInvalidCriteriaSpecial: 'at least one special character',
     passwordInvalidCriteriaLength: 'at least 8 characters long',
+    commonErrorBody: 'Something went wrong. Please try again later.',
+    regAlreadyExistBody: 'An account with this email already exists.',
+    loginUserNotFoundBody:
+      'The user does not exist or the email/password is incorrect.',
+    logOutSuccesBody: 'Log out successful!',
   },
   rus: {
     greeting: 'привет',
@@ -63,6 +68,13 @@ export const translations = {
     passwordInvalidCriteriaNumber: 'хотя бы одну цифру',
     passwordInvalidCriteriaSpecial: 'хотя бы один спецсимвол',
     passwordInvalidCriteriaLength: 'хотя бы 8 символов',
+    commonErrorBody:
+      'Что-то пошло не так. Пожалуйста, повторите попытку позже.',
+    regAlreadyExistBody:
+      'Учетная запись с такой электронной почтой уже создана.',
+    loginUserNotFoundBody:
+      'Такого пользователя не существует или неверно указан адрес электронной почты/пароль.',
+    logOutSuccesBody: 'Выход из учетной записи успешный!',
   },
   ukr: {
     greeting: 'привіт',
@@ -96,5 +108,10 @@ export const translations = {
     passwordInvalidCriteriaNumber: 'хоча б одну цифру',
     passwordInvalidCriteriaSpecial: 'хоча б один спецсимвол',
     passwordInvalidCriteriaLength: 'хоча б 8 символів',
+    commonErrorBody: 'Щось пішло не так. Будь ласка, спробуйте пізніше.',
+    regAlreadyExistBody: 'Обліковий запис з цим email вже існує.',
+    loginUserNotFoundBody:
+      'Такого користувача не існує або email/пароль невірні.',
+    logOutSuccesBody: 'Успішний вихід з облікового запису!',
   },
 };
