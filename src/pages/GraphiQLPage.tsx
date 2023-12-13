@@ -10,6 +10,7 @@ import {
   IoFileTrayFullOutline,
   IoAddSharp,
   IoChevronUpOutline,
+  IoCaretForward,
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
@@ -25,6 +26,7 @@ export const GraphiQLPage = () => {
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
   const [variables, setVariables] = useState('');
+  const [viewer, setViewer] = useState('');
   const [name, setName] = useState('');
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
@@ -93,13 +95,12 @@ export const GraphiQLPage = () => {
     if (variables === '' || activeTabTemp.code === '') {
       return;
     }
-    let res = activeTabTemp.code;
+    let res = '';
     const variablesArray = Object.entries(JSON.parse(variables));
-    console.log('before:', res);
     variablesArray?.forEach((item) => {
       res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
     });
-    console.log('after:', res);
+    setViewer(res);
   };
 
   return (
@@ -138,12 +139,14 @@ export const GraphiQLPage = () => {
           </div>
           <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
             <div className='variables'>
-              <EditorWindow
-                code={variables}
-                updateData={(data: string) => setVariables(data)}
-              />
+              variables
+              {isFooterOpen && (
+                <EditorWindow
+                  code={variables}
+                  updateData={(data: string) => setVariables(data)}
+                />
+              )}
             </div>
-            <button onClick={clickHandler} />
             <div className='headers'>headers</div>
             <IoChevronUpOutline
               className={`editor-footer-icon arrow ${
@@ -153,7 +156,12 @@ export const GraphiQLPage = () => {
             />
           </div>
         </div>
-        <div className='viewer'></div>
+        <button onClick={clickHandler} className='run-button'>
+          <IoCaretForward className='run-button-icon' />
+        </button>
+        <div className='viewer'>
+          <EditorWindow code={viewer} />
+        </div>
       </div>
     </div>
   );
