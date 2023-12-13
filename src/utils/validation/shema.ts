@@ -1,34 +1,47 @@
 import * as yup from 'yup';
+import { translations } from '../../contexts/translations';
 
-export const SCHEMA = yup.object().shape({
-  username: yup.string().nullable(''),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup
-    .string()
-    .required('Password is required')
-    .test(
-      'password-strength',
-      'Password must meet the strength criteria',
-      (value) => {
-        if (!value) return true;
+export const getSchema = (language) => {
+  return yup.object().shape({
+    username: yup.string().nullable(''),
+    email: yup
+      .string()
+      .email(translations[language]?.emailInvalid)
+      .required(translations[language]?.emailRequired),
+    password: yup
+      .string()
+      .required(translations[language]?.passwordRequired)
+      .test(
+        'password-strength',
+        translations[language]?.passwordInvalid,
+        (value) => {
+          if (!value) return true;
 
-        const errors: string[] = [];
-        if (!/(?=.*[a-z])/.test(value))
-          errors.push('at least one lowercase letter');
-        if (!/(?=.*[A-Z])/.test(value))
-          errors.push('at least one uppercase letter');
-        if (!/(?=.*[0-9])/.test(value)) errors.push('at least one number');
-        if (!/(?=.*[!@#$%^&*])/.test(value))
-          errors.push('at least one special character');
-        if (value.length < 8) errors.push('at least 8 characters long');
-
-        return errors.length === 0
-          ? true
-          : new yup.ValidationError(
-              `Password must have: ${errors.join(', ')}`,
-              value,
-              'password',
+          const errors: string[] = [];
+          if (!/(?=.*[a-z])/.test(value))
+            errors.push(
+              translations[language]?.passwordInvalidCriteriaLowercase,
             );
-      },
-    ),
-});
+          if (!/(?=.*[A-Z])/.test(value))
+            errors.push(
+              translations[language]?.passwordInvalidCriteriaUppercase,
+            );
+          if (!/(?=.*[0-9])/.test(value))
+            errors.push(translations[language]?.passwordInvalidCriteriaNumber);
+          if (!/(?=.*[!@#$%^&*])/.test(value))
+            errors.push(translations[language]?.passwordInvalidCriteriaSpecial);
+          if (value.length < 8)
+            errors.push(translations[language]?.passwordInvalidCriteriaLength);
+
+          return errors.length === 0
+            ? true
+            : new yup.ValidationError(
+                `${translations[language]
+                  ?.passwordInvalidCriteria} ${errors.join(', ')}`,
+                value,
+                'password',
+              );
+        },
+      ),
+  });
+};
