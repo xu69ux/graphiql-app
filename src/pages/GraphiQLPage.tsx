@@ -112,7 +112,7 @@ export const GraphiQLPage = () => {
     <div className='container'>
       <div className='sidebar'>
         <IoFileTrayFullOutline
-          className='sidebar-icon docs'
+          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
           onClick={toggleDocumentation}
         />
         <IoSettingsSharp className='sidebar-icon settings' />

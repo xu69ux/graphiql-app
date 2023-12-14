@@ -34,6 +34,10 @@
   margin-bottom: 1rem;
 }
 
+.documentation-item-container {
+  margin-top: 4rem;
+}
+
 .documentation-item-name {
   font-size: 0.8rem;
   color: var(--extra);
@@ -49,5 +53,24 @@
 .documentation-container {
   text-align: left;
   width: 100%;
-  margin-top: 2rem;
+}
+
+.documentation-back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--light);
+}
+
+.documentation-back.icon {
+  rotate: 180deg;
+  color: inherit;
+}
+
+.documentation-back:hover {
+  color: orange;
 }

@@ -103,6 +103,10 @@
   transform: scale(1.1);
 }
 
+.sidebar-icon.docs.active {
+  color: var(--light);
+}
+
 .tab-container {
   display: flex;
   overflow-x: auto;
