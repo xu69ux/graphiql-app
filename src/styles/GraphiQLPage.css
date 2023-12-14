@@ -82,7 +82,7 @@
   align-items: center;
   background-color: var(--blue);
   height: 100%;
-  width: 5rem;
+  min-width: 5rem;
   padding: 1rem;
 }
 
@@ -211,7 +211,6 @@
 
 .run-button:hover:after {
   opacity: 1;
-  /* background: radial-gradient(var(--dark), var(--blue), var(--green)); */
 }
 
 .run-button-icon {
