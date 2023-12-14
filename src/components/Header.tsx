@@ -69,6 +69,39 @@ export const Header = () => {
     transition: 'background 2s',
   };
 
+  const renderUser = () => {
+    return (
+      <nav>
+        <div className='user'>
+          {username && (
+            <span>
+              {translations[language]?.greeting}, {username}!
+            </span>
+          )}
+
+          <button className='btn-logout' onClick={logoutHandle}>
+            {translations[language]?.logout}
+          </button>
+        </div>
+      </nav>
+    );
+  };
+
+  const renderNoUser = () => {
+    return (
+      <nav>
+        <div className='user'>
+          <button className='btn-login' onClick={() => navigate('/login')}>
+            {translations[language]?.login}
+          </button>
+          <button className='btn-signup' onClick={() => navigate('/signup')}>
+            {translations[language]?.signup}
+          </button>
+        </div>
+      </nav>
+    );
+  };
+
   return (
     <header style={headerStyle} className='header'>
       <div className='welcome-link'>
@@ -110,19 +143,7 @@ export const Header = () => {
           </Fade>
         </div>
       </div>
-      <nav>
-        <div className='user'>
-          {username && (
-            <span>
-              {translations[language]?.greeting}, {username}!
-            </span>
-          )}
-
-          <button className='btn logout' onClick={logoutHandle}>
-            {translations[language]?.logout}
-          </button>
-        </div>
-      </nav>
+      {user ? renderUser() : renderNoUser()}
     </header>
   );
 };
