@@ -41,6 +41,7 @@ export const GraphiQLPage = () => {
     }
   };
 
+
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
       prevTabs.map((tab) =>
@@ -78,16 +79,6 @@ export const GraphiQLPage = () => {
       prevTabs.map((tab) => (tab.id === id ? { ...tab, name: newName } : tab)),
     );
   };
-
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    fetchData();
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, loading]);
 
   const clickHandler = () => {
     const activeTabTemp: IEditorTab = tabs.find(

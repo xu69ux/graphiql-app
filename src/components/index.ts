@@ -5,3 +5,5 @@ export { Fade } from './Fade';
 export { EditorWindow } from './EditorWindow';
 export { EditorTab } from './EditorTab';
 export { Documentation } from './Documentation';
+export { PasswordValidIndicator } from './PasswordValidIndicator';
+
