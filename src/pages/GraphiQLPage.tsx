@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { fetchUserName } from '../services/api/fetchUserName';
-import { EditorWindow, EditorTab } from '../components';
+import { EditorWindow, EditorTab, Documentation } from '../components';
 
 import {
   IoSettingsSharp,
@@ -25,6 +25,7 @@ export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
   const [name, setName] = useState('');
@@ -103,13 +104,21 @@ export const GraphiQLPage = () => {
     setViewer(res);
   };
 
+  const toggleDocumentation = () => {
+    setIsDocumentationOpen(!isDocumentationOpen);
+  };
+
   return (
     <div className='container'>
       <div className='sidebar'>
-        <IoFileTrayFullOutline className='sidebar-icon docs' />
+        <IoFileTrayFullOutline
+          className='sidebar-icon docs'
+          onClick={toggleDocumentation}
+        />
         <IoSettingsSharp className='sidebar-icon settings' />
         <IoAddSharp className='sidebar-icon add' onClick={addTab} />
       </div>
+      <Documentation isDocumentationOpen={isDocumentationOpen} />
       <div className='container code'>
         <div className='editor'>
           <div className='tab-names'>
