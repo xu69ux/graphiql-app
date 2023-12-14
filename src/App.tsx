@@ -4,6 +4,8 @@ import { routes } from './routes';
 import { Footer, Header } from './components';
 import { ToastContainer } from 'react-toastify';
 import { LanguageProvider } from './contexts/LanguageProvider';
+import { ChildComponent } from './components/errorTest';
+import { FallBackUI } from './components/FallBackUI';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className='App'>
-      <ErrorBoundary fallback={<div>Something went wrong!</div>}>
+      <ErrorBoundary FallbackComponent={FallBackUI}>
         <LanguageProvider>
           <Router>
             <Header />
@@ -31,6 +33,7 @@ function App() {
             />
           </Router>
         </LanguageProvider>
+        <ChildComponent shouldThrow={true} />
       </ErrorBoundary>
     </div>
   );
