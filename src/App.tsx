@@ -4,7 +4,6 @@ import { routes } from './routes';
 import { Footer, Header } from './components';
 import { ToastContainer } from 'react-toastify';
 import { LanguageProvider } from './contexts/LanguageProvider';
-import { ChildComponent } from './components/errorTest';
 import { FallBackUI } from './components/FallBackUI';
 
 import './App.css';
@@ -33,7 +32,6 @@ function App() {
             />
           </Router>
         </LanguageProvider>
-        <ChildComponent shouldThrow={true} />
       </ErrorBoundary>
     </div>
   );
