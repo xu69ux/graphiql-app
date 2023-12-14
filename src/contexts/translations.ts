@@ -43,6 +43,10 @@ export const translations = {
     loginUserNotFoundBody:
       'The user does not exist or the email/password is incorrect.',
     logOutSuccesBody: 'Log out successful!',
+    notFoundTitle1: "oops, you've ended up somewhere you didn't mean to!",
+    notFoundTitle2: 'go back to the ',
+    notFoundTitle3: 'or check out a random meme:',
+    mainPage: 'main page ',
   },
   rus: {
     greeting: 'привет',
@@ -91,6 +95,10 @@ export const translations = {
     loginUserNotFoundBody:
       'Такого пользователя не существует или неверно указан адрес электронной почты/пароль.',
     logOutSuccesBody: 'Выход из учетной записи успешный!',
+    notFoundTitle1: 'упс, похоже, вы попали не туда!',
+    notFoundTitle2: 'вернитесь на ',
+    notFoundTitle3: 'или посмотрите случайный мем:',
+    mainPage: 'главную страницу ',
   },
   ukr: {
     greeting: 'привіт',
@@ -137,5 +145,9 @@ export const translations = {
     loginUserNotFoundBody:
       'Такого користувача не існує або email/пароль невірні.',
     logOutSuccesBody: 'Успішний вихід з облікового запису!',
+    notFoundTitle1: 'ой, здається, ви потрапили кудись не туди!',
+    notFoundTitle2: 'поверніться на ',
+    notFoundTitle3: 'або перегляньте випадковий мем:',
+    mainPage: 'головну сторінку ',
   },
 };
