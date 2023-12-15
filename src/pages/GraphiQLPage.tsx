@@ -104,9 +104,14 @@ export const GraphiQLPage = () => {
         <IoFileTrayFullOutline
           className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
           onClick={toggleDocumentation}
+          title='show documentation'
         />
-        <IoSettingsSharp className='sidebar-icon settings' />
-        <IoAddSharp className='sidebar-icon add' onClick={addTab} />
+        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+        <IoAddSharp
+          className='sidebar-icon add'
+          onClick={addTab}
+          title='add tab'
+        />
       </div>
       <Documentation isDocumentationOpen={isDocumentationOpen} />
       <div className='container code'>
