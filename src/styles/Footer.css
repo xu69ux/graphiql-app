@@ -43,7 +43,6 @@
   padding: 0.25rem;
   border-radius: 0.5rem;
   display: inline-flex;
-  align-items: center;
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
@@ -73,6 +72,7 @@
   content: attr(data-tooltip);
   margin-left: 0.5rem;
   animation: fadeIn 600ms linear forwards;
+  text-align: center;
 }
 
 @keyframes fadeIn {
