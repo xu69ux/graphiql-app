@@ -8,6 +8,9 @@ interface IEditWindowProps {
   updateData?: (data: string) => void;
 }
 
+const keywords = ['query'];
+const braces = ['{', '}'];
+
 export const EditorWindow: FC<IEditWindowProps> = ({
   code,
   updateData,
@@ -19,16 +22,17 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   const [highlightedCode, setHighlightedCode] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputCode(e.target.value);
-    recalcLines(e.target.value);
+    const newCode = e.target.value;
+    setInputCode(newCode);
+    recalcLines(newCode);
   };
 
   const recalcLines = (code: string) => {
     const numLines = code.split('\n').length;
-    const newLines = Array.from({ length: numLines }, (_, i) => i + 1).join(
-      '\n',
-    );
-    lines.current!.innerText = newLines;
+    lines.current!.innerText = Array.from(
+      { length: numLines },
+      (_, i) => i + 1,
+    ).join('\n');
   };
 
   useEffect(() => {
@@ -36,9 +40,6 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   }, [code]);
 
   useEffect(() => {
-    const keywords = ['query'];
-    const braces = ['{', '}'];
-
     const highlightedQuery = inputCode
       .split(/(\s+|\{|\})/)
       .map((word) => {
