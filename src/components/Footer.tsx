@@ -27,17 +27,38 @@ export const Footer = () => {
         , 2023
       </p>
       <div className='footer-icons'>
-        <a className='footer-icon' href='https://github.com/xu69ux'>
-          <PiGithubLogoFill className='xu-icon' />
-          xu
+        <a
+          href='https://github.com/xu69ux'
+          className='iconDiv'
+          data-tooltip='xu'
+          tabIndex={0}
+          target='_blank'
+        >
+          <div className='iconSVG'>
+            <PiGithubLogoFill />
+          </div>
         </a>
-        <a className='footer-icon' href='https://github.com/dbox7'>
-          <PiGithubLogoFill className='db-icon' />
-          dbox
+        <a
+          href='https://github.com/dbox7'
+          className='iconDiv'
+          data-tooltip='dbox7'
+          tabIndex={0}
+          target='_blank'
+        >
+          <div className='iconSVG'>
+            <PiGithubLogoFill />
+          </div>
         </a>
-        <a className='footer-icon' href='https://github.com/GEKKO-ops'>
-          <PiGithubLogoFill className='gekko-icon' />
-          gekko
+        <a
+          href='https://github.com/GEKKO-ops'
+          className='iconDiv'
+          data-tooltip='gekko'
+          tabIndex={0}
+          target='_blank'
+        >
+          <div className='iconSVG'>
+            <PiGithubLogoFill />
+          </div>
         </a>
       </div>
     </footer>

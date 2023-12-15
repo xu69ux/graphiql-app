@@ -1,3 +1,4 @@
+
 export const MEMES_URL = [
   'https://colinhacks.com/graphql_grave.jpg',
   'https://1.bp.blogspot.com/-OhRLnerbm0M/YZDsgdY6k2I/AAAAAAAARCg/kWejTW8xiuca4nwODjSvz2Dyt8Es-IiMACLcBGAsYHQ/s528/graphql-statuscode.png',
@@ -10,4 +11,28 @@ export const MEMES_URL = [
   'https://pbs.twimg.com/media/DgsXLk_X4AEKiJJ.jpg',
   'https://res.cloudinary.com/practicaldev/image/fetch/s--Mj-l1XJQ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/810rx3aflyr74a87hkgt.png',
   'https://www.meme-arsenal.com/memes/105a259367db6e03d4c5b0c50155ba17.jpg',
+
+export const GRAPHQLWORDS = [
+  { name: 'String', description: 'A data type representing textual data.' },
+  { name: 'Int', description: 'A data type representing integers.' },
+  { name: 'FilmsConnection', description: 'Connection to a list of films.' },
+  {
+    name: 'PageInfo',
+    description: 'Information about pagination in a connection.',
+  },
+  {
+    name: 'Boolean',
+    description: 'A data type representing true or false values.',
+  },
+  {
+    name: 'FilmsEdge',
+    description: 'An edge in a connection to a list of films.',
+  },
+  { name: 'Film', description: 'Represents a single film.' },
+  { name: 'Node', description: 'An interface for objects with an ID.' },
+  { name: 'ID', description: 'A data type representing a unique identifier.' },
+  {
+    name: 'FilmSpeciesConnection',
+    description: 'Connection to a list of species in a film.',
+  },
 ];

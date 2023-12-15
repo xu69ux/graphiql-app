@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
-import { EditorWindow, EditorTab } from '../components';
+import { useState } from 'react';
+import { EditorWindow, EditorTab, Documentation } from '../components';
+
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
   IoAddSharp,
   IoChevronUpOutline,
+  IoCaretForward,
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
@@ -19,6 +21,11 @@ export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
+  const [variables, setVariables] = useState('');
+  const [viewer, setViewer] = useState('');
+  const [variables, setVariables] = useState('');
+  const [viewer, setViewer] = useState('');
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -58,23 +65,56 @@ export const GraphiQLPage = () => {
     );
   };
 
-  //   useEffect(() => {
-  //     if (loading) {
-  //       return;
-  //     }
-  //     fetchData();
-  //     if (!user) {
-  //       navigate('/');
-  //     }
-  //   }, [user, loading]);
+  const clickHandler = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (variables === '' || activeTabTemp.code === '') {
+      return;
+    }
+    let res = '';
+    const variablesArray = Object.entries(JSON.parse(variables));
+    variablesArray?.forEach((item) => {
+      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
+    });
+    setViewer(res);
+  };
+
+  const toggleDocumentation = () => {
+    setIsDocumentationOpen(!isDocumentationOpen);
+  };
+
+  const clickHandler = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (variables === '' || activeTabTemp.code === '') {
+      return;
+    }
+    let res = '';
+    const variablesArray = Object.entries(JSON.parse(variables));
+    variablesArray?.forEach((item) => {
+      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
+    });
+    setViewer(res);
+  };
 
   return (
     <div className='container'>
       <div className='sidebar'>
-        <IoFileTrayFullOutline className='sidebar-icon docs' />
-        <IoSettingsSharp className='sidebar-icon settings' />
-        <IoAddSharp className='sidebar-icon add' onClick={addTab} />
+        <IoFileTrayFullOutline
+          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
+          onClick={toggleDocumentation}
+          title='show documentation'
+        />
+        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+        <IoAddSharp
+          className='sidebar-icon add'
+          onClick={addTab}
+          title='add tab'
+        />
       </div>
+      <Documentation isDocumentationOpen={isDocumentationOpen} />
       <div className='container code'>
         <div className='editor'>
           <div className='tab-names'>
@@ -103,7 +143,15 @@ export const GraphiQLPage = () => {
             )}
           </div>
           <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-            <div className='variables'>variables</div>
+            <div className='variables'>
+              variables
+              {isFooterOpen && (
+                <EditorWindow
+                  code={variables}
+                  updateData={(data: string) => setVariables(data)}
+                />
+              )}
+            </div>
             <div className='headers'>headers</div>
             <IoChevronUpOutline
               className={`editor-footer-icon arrow ${
@@ -113,7 +161,12 @@ export const GraphiQLPage = () => {
             />
           </div>
         </div>
-        <div className='viewer'></div>
+        <button onClick={clickHandler} className='run-button'>
+          <IoCaretForward className='run-button-icon' />
+        </button>
+        <div className='viewer'>
+          <EditorWindow code={viewer} />
+        </div>
       </div>
     </div>
   );
