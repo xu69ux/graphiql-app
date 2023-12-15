@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import {
   EditorWindow,
   EditorTab,
@@ -15,6 +15,8 @@ import {
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
+import { QUERY_FOR_SHEMA_FETCHING } from '../utils/constants';
+import { graphqlRequest } from '../utils/graphqlApi';
 
 interface IEditorTab {
   id: number;
@@ -29,7 +31,16 @@ export const GraphiQLPage = () => {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
-  const [endpoint, setEndpoint] = '';
+  const [endpoint, setEndpoint] = useState('');
+
+  const fetchShema = useCallback(async () => {
+    try {
+      const shema = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
+      console.log(shema);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [endpoint]);
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -109,7 +120,11 @@ export const GraphiQLPage = () => {
         <Documentation isDocumentationOpen={isDocumentationOpen} />
       </div>
       <div className='container-wrap'>
-        <Endpoint endpointValue={endpoint} />
+        <Endpoint
+          endpointValue={endpoint}
+          setEndpoint={setEndpoint}
+          fetchShema={fetchShema}
+        />
         <div className='container code'>
           <div className='editor'>
             <div className='tab-names'>

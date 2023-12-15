@@ -37,7 +37,7 @@ export const GRAPHQLWORDS = [
   },
 ];
 
-export const QUERY_FOR_SHEMA_GETTING = `
+export const QUERY_FOR_SHEMA_FETCHING = `
   fragment FullType on __Type {
     kind
     name

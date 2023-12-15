@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://rickandmortyapi.graphcdn.app/';
+// const BASE_URL = 'https://rickandmortyapi.graphcdn.app/';
 
-export const graphqlRequest = async (query: string, headers: object = {}) => {
+export const graphqlRequest = async (
+  url: string,
+  query: string,
+  headers: object = {},
+) => {
+  const fullURL = 'https://' + url;
   const result = await axios.post(
-    BASE_URL,
+    fullURL,
     {
       query: query,
     },
