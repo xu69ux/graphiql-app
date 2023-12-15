@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
     }
   }, [navigate]);
 
-  return user ? null : <>{children}</>;
+  return !user ? null : <>{children}</>;
 };
 
 export default PrivateRoute;
