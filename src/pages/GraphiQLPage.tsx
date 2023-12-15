@@ -1,8 +1,4 @@
 import { useState } from 'react';
-/* import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { fetchUserName } from '../services/api/fetchUserName'; */
 import { EditorWindow, EditorTab, Documentation } from '../components';
 
 import {
@@ -28,18 +24,8 @@ export const GraphiQLPage = () => {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
-  /*   const [name, setName] = useState('');
-   */ /*   const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate(); */
-
-  console.log(name);
-
-  /*   const fetchData = async () => {
-    if (user) {
-      const userName = await fetchUserName(user);
-      setName(userName);
-    }
-  }; */
+  const [variables, setVariables] = useState('');
+  const [viewer, setViewer] = useState('');
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -96,6 +82,21 @@ export const GraphiQLPage = () => {
 
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
+  };
+
+  const clickHandler = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (variables === '' || activeTabTemp.code === '') {
+      return;
+    }
+    let res = '';
+    const variablesArray = Object.entries(JSON.parse(variables));
+    variablesArray?.forEach((item) => {
+      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
+    });
+    setViewer(res);
   };
 
   return (
