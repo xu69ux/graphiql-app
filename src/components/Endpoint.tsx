@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { IoChevronForward } from 'react-icons/io5';
+
 import '@styles/Endpoint.css';
 
 interface IEndpointProps {
@@ -9,17 +11,24 @@ interface IEndpointProps {
 export const Endpoint: FC<IEndpointProps> = ({ endpointValue }) => {
   return (
     <div className='endpoint'>
-      <label className='label' htmlFor='endpoint'>
-        Endpoint
-      </label>
       <div className='endpoint-wrap'>
-        <span className='http'>http://</span>
-        <input
-          type='text'
-          className='endpoint'
-          name='endpoint'
-          value={endpointValue}
-        />
+        <label className='endpoint-label' htmlFor='endpoint'>
+          Endpoint
+        </label>
+        <div className='arrows'>
+          <IoChevronForward />
+          <IoChevronForward />
+          <IoChevronForward />
+        </div>
+        <div className='input-wrap'>
+          <span className='http'>http://</span>
+          <input
+            type='text'
+            className='endpoint-input'
+            name='endpoint'
+            value={endpointValue}
+          />
+        </div>
       </div>
     </div>
   );

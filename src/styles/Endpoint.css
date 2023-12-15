@@ -1,0 +1,42 @@
+.endpoint {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 2rem;
+  color: white;
+  background-color: var(--blue);
+  border-radius: 0.5rem;
+}
+
+.endpoint-label {
+  font-size: 1.2rem;
+}
+
+.http {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.arrows {
+  display: flex;
+  animation: colorChange 1s infinite;
+}
+
+.endpoint-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.endpoint-input {
+  margin: 0;
+  padding: 0;
+  color: var(--green);
+  background-color: transparent;
+  font-size: 1.2rem;
+}
