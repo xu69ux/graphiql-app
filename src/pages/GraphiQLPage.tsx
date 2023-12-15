@@ -24,8 +24,6 @@ export const GraphiQLPage = () => {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
-  const [variables, setVariables] = useState('');
-  const [viewer, setViewer] = useState('');
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -82,21 +80,6 @@ export const GraphiQLPage = () => {
 
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
-  };
-
-  const clickHandler = () => {
-    const activeTabTemp: IEditorTab = tabs.find(
-      (item) => item.id === activeTab,
-    )!;
-    if (variables === '' || activeTabTemp.code === '') {
-      return;
-    }
-    let res = '';
-    const variablesArray = Object.entries(JSON.parse(variables));
-    variablesArray?.forEach((item) => {
-      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
-    });
-    setViewer(res);
   };
 
   return (
