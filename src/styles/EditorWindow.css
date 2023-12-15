@@ -45,7 +45,7 @@
   top: 0;
   z-index: 1;
   padding-left: 2.5rem;
-  color: var(--light);
+  color: var(--yellow);
 }
 
 .keyword,
