@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { EditorWindow, EditorTab } from '../components';
+import { useState } from 'react';
+import { EditorWindow, EditorTab, Documentation } from '../components';
+
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
@@ -20,20 +21,11 @@ export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
-  const [name, setName] = useState('');
-  const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
-
-  console.log(name);
-
-  const fetchData = async () => {
-    if (user) {
-      const userName = await fetchUserName(user);
-      setName(userName);
-    }
-  };
+  const [variables, setVariables] = useState('');
+  const [viewer, setViewer] = useState('');
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -73,15 +65,24 @@ export const GraphiQLPage = () => {
     );
   };
 
-  //   useEffect(() => {
-  //     if (loading) {
-  //       return;
-  //     }
-  //     fetchData();
-  //     if (!user) {
-  //       navigate('/');
-  //     }
-  //   }, [user, loading]);
+  const clickHandler = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (variables === '' || activeTabTemp.code === '') {
+      return;
+    }
+    let res = '';
+    const variablesArray = Object.entries(JSON.parse(variables));
+    variablesArray?.forEach((item) => {
+      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
+    });
+    setViewer(res);
+  };
+
+  const toggleDocumentation = () => {
+    setIsDocumentationOpen(!isDocumentationOpen);
+  };
 
   const clickHandler = () => {
     const activeTabTemp: IEditorTab = tabs.find(
@@ -101,10 +102,19 @@ export const GraphiQLPage = () => {
   return (
     <div className='container'>
       <div className='sidebar'>
-        <IoFileTrayFullOutline className='sidebar-icon docs' />
-        <IoSettingsSharp className='sidebar-icon settings' />
-        <IoAddSharp className='sidebar-icon add' onClick={addTab} />
+        <IoFileTrayFullOutline
+          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
+          onClick={toggleDocumentation}
+          title='show documentation'
+        />
+        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+        <IoAddSharp
+          className='sidebar-icon add'
+          onClick={addTab}
+          title='add tab'
+        />
       </div>
+      <Documentation isDocumentationOpen={isDocumentationOpen} />
       <div className='container code'>
         <div className='editor'>
           <div className='tab-names'>
