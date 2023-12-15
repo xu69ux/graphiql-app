@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { fetchUserName } from '../services/api/fetchUserName';
 import { EditorWindow, EditorTab } from '../components';
-
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
@@ -78,15 +73,15 @@ export const GraphiQLPage = () => {
     );
   };
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    fetchData();
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, loading]);
+  //   useEffect(() => {
+  //     if (loading) {
+  //       return;
+  //     }
+  //     fetchData();
+  //     if (!user) {
+  //       navigate('/');
+  //     }
+  //   }, [user, loading]);
 
   const clickHandler = () => {
     const activeTabTemp: IEditorTab = tabs.find(
