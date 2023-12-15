@@ -33,34 +33,56 @@
 
 .footer-icons {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 8rem;
+  justify-content: flex-end;
+  width: 15rem;
 }
 
-.footer-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.iconDiv {
+  width: 1.3rem;
+  margin: 1.25rem 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    width 300ms ease-in-out 0s,
+    background-color 300ms linear 200ms;
 }
 
-.xu-icon,
-.db-icon,
-.gekko-icon {
-  height: 100%;
-  width: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.4rem;
-  transition: all 0.2s ease-in-out;
+.iconSVG {
+  font-size: 1rem;
 }
 
-.xu-icon:hover,
-.db-icon:hover,
-.gekko-icon:hover {
-  color: var(--green);
-  transform: scale(1.2);
+.iconDiv:hover,
+.iconDiv:focus-visible {
+  width: 5rem;
+  background-color: var(--green);
+  transition:
+    width 300ms ease-in-out 0s,
+    background-color 100ms linear 0s;
+}
+
+.iconDiv:active {
+  opacity: 0.9;
+}
+
+.iconDiv::after {
+  content: attr(data-tooltip);
+  margin-left: 0.5rem;
+  animation: fadeIn 600ms linear forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
