@@ -10,6 +10,7 @@ import {
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
+import { graphqlRequest } from '../utils/graphqlApi';
 
 interface IEditorTab {
   id: number;

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { translations } from '../contexts/translations';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { MEMES_URL } from '../constants';
+import { MEMES_URL } from '../utils/constants';
 
 import '@styles/NotFoundPage.css';
 
