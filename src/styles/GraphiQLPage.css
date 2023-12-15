@@ -44,10 +44,11 @@
   width: 100%;
   padding: 0.5rem;
   color: var(--green);
+  overflow: hidden;
 }
 
 .editor-footer.open {
-  height: 15rem;
+  height: 25rem;
 }
 
 .editor-footer-icon.arrow {
