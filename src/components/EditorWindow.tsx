@@ -65,6 +65,18 @@ export const EditorWindow: FC<IEditWindowProps> = ({
         ref={textarea}
         onChange={handleChange}
         value={inputCode}
+        onKeyDown={(e) => {
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = e.currentTarget.selectionStart;
+            const end = e.currentTarget.selectionEnd;
+            setInputCode(
+              inputCode.substring(0, start) + '    ' + inputCode.substring(end),
+            );
+            e.currentTarget.selectionStart = e.currentTarget.selectionEnd =
+              start + 4;
+          }
+        }}
         onBlur={(e) => {
           e.stopPropagation();
           if (updateData && e.target.value !== code) {
