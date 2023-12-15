@@ -6,14 +6,22 @@
   text-align: center;
   background-color: var(--dark);
   color: var(--light);
-  height: 100vh;
-  width: 50%;
+  min-height: 100vh;
+  width: 80%;
   margin: 0 auto;
 }
 
 .welcome-title {
   font-size: 3rem;
   margin-bottom: 1rem;
+  margin-top: 17rem;
+}
+
+.welcome-title span {
+  color: var(--extra);
+  font-size: inherit;
+  font-weight: 600;
+  margin: 0;
 }
 
 .welcome-auth {
@@ -79,7 +87,7 @@ span {
 }
 
 .typing-effect {
-  border-right: 0.15em solid orange;
+  border-right: 0.15em solid var(--extra);
   white-space: nowrap;
   overflow: hidden;
   animation:
@@ -94,6 +102,33 @@ span {
     border-color: transparent;
   }
   50% {
-    border-color: orange;
+    border-color: var(--extra);
   }
+}
+
+.welcome-description {
+  width: 80%;
+  font-size: 1.5rem;
+  margin-top: 10rem;
+  margin-bottom: 8rem;
+  transition: filter 1s ease-in-out;
+}
+
+.welcome-description p {
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: color 1.2s ease-in-out;
+}
+
+.blur {
+  filter: blur(3px);
+}
+
+.default-color {
+  color: var(--green);
+}
+
+.change-color {
+  color: var(--light);
 }

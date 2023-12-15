@@ -28,6 +28,7 @@ input {
   width: 50%;
   height: 2rem;
   margin-top: 1rem;
+  margin-bottom: 1.5rem;
   border: none;
   border-radius: 5px;
   outline: none;
@@ -40,75 +41,27 @@ input {
   transition: all 0.2s ease-in-out;
 }
 
-.btn.login:hover,
-.btn.register:hover {
+.btn.log:hover,
+.btn.reg:hover {
   background-color: var(--green);
   color: var(--blue);
 }
 
-.tooltip {
-  white-space: nowrap;
-  visibility: hidden;
-  color: var(--light);
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-.tooltip.email {
-  bottom: 47%;
-  left: 100%;
-  margin-left: 0.8rem;
-}
-
-.tooltip.password {
-  bottom: 47%;
-  right: 100%;
-  margin-right: 0.8rem;
-}
-
-.tooltip.username {
-  bottom: 47%;
-  right: 100%;
-  margin-right: 0.8rem;
-}
-
-.input-wrapper:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-
-.strip {
-  visibility: hidden;
-  width: 0;
-  height: 2px;
-  background: var(--green);
-  position: absolute;
-  transition: width 0.4s;
-  top: 50%;
-}
-
-.strip.right {
-  left: 100%;
-}
-
-.strip.left {
-  right: 100%;
-}
-
-.input-wrapper:hover .strip {
-  visibility: visible;
-  width: 100%;
-}
-
 .error {
-  color: red;
-  height: 2rem;
+  color: var(--error);
+  font-size: 0.8rem;
+  height: 1rem;
   width: 37rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .error p {
   text-align: center;
+}
+
+.password-indicator {
+  height: 0.15rem;
+  width: 60%;
+  margin-top: 0.5rem;
 }

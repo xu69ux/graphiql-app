@@ -8,6 +8,7 @@
   height: 4rem;
   background: linear-gradient(90deg, var(--dark), var(--blue), var(--green));
   padding: 1rem;
+  z-index: 1;
 }
 
 .user {
@@ -35,7 +36,7 @@
   height: 2px;
   bottom: 0.3rem;
   left: 0;
-  background-color: orange;
+  background-color: var(--extra);
   transition: width 0.3s ease-in-out;
 }
 
@@ -47,7 +48,9 @@
   width: 100%;
 }
 
-.btn.logout {
+.btn-logout,
+.btn-login,
+.btn-signup {
   background-color: var(--dark);
   border: 1px solid var(--green);
   color: var(--green);
@@ -56,9 +59,12 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 1rem;
+  min-width: 6rem;
 }
 
-.btn.logout:hover {
+.btn-logout:hover,
+.btn-login:hover,
+.btn-signup:hover {
   background-color: var(--blue);
   color: var(--light);
 }
@@ -103,16 +109,19 @@
   visibility: visible;
 }
 
-.lang-dropdown a {
+.lang-dropdown button {
   color: var(--light);
   font-size: 0.9rem;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
   display: block;
   margin-right: 0.5rem;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.lang-dropdown a.selected {
+.lang-dropdown button.selected {
   color: var(--green);
 }
 
