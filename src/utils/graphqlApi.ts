@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'https://rickandmortyapi.graphcdn.app/';
 
 export const graphqlRequest = async (query: string, headers: object = {}) => {
-  const res = await axios.post(
+  const result = await axios.post(
     BASE_URL,
     {
       query: query,
@@ -13,5 +13,5 @@ export const graphqlRequest = async (query: string, headers: object = {}) => {
     },
   );
 
-  return res;
+  return result;
 };
