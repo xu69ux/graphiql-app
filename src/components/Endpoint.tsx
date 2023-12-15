@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import '@styles/Endpoint.css';
 
-interface IendpointProps {
+interface IEndpointProps {
   endpointValue: string;
 }
 
-const Endpoint: FC<IendpointProps> = ({ endpointValue }) => {
+export const Endpoint: FC<IEndpointProps> = ({ endpointValue }) => {
   return (
     <div className='endpoint'>
       <label className='label' htmlFor='endpoint'>
@@ -24,5 +24,3 @@ const Endpoint: FC<IendpointProps> = ({ endpointValue }) => {
     </div>
   );
 };
-
-export default Endpoint;

@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { EditorWindow, EditorTab, Documentation } from '../components';
+import {
+  EditorWindow,
+  EditorTab,
+  Documentation,
+  Endpoint,
+} from '../components';
 
 import {
   IoSettingsSharp,
@@ -10,7 +15,6 @@ import {
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
-import { graphqlRequest } from '../utils/graphqlApi';
 
 interface IEditorTab {
   id: number;
@@ -25,6 +29,7 @@ export const GraphiQLPage = () => {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
+  const [endpoint, setEndpoint] = '';
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -86,70 +91,77 @@ export const GraphiQLPage = () => {
   return (
     <div className='container'>
       <div className='sidebar'>
-        <IoFileTrayFullOutline
-          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
-          onClick={toggleDocumentation}
-          title='show documentation'
-        />
-        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
-        <IoAddSharp
-          className='sidebar-icon add'
-          onClick={addTab}
-          title='add tab'
-        />
+        <div className='sidebar-wrap'>
+          <IoFileTrayFullOutline
+            className={`sidebar-icon docs ${
+              isDocumentationOpen ? 'active' : ''
+            }`}
+            onClick={toggleDocumentation}
+            title='show documentation'
+          />
+          <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+          <IoAddSharp
+            className='sidebar-icon add'
+            onClick={addTab}
+            title='add tab'
+          />
+        </div>
+        <Documentation isDocumentationOpen={isDocumentationOpen} />
       </div>
-      <Documentation isDocumentationOpen={isDocumentationOpen} />
-      <div className='container code'>
-        <div className='editor'>
-          <div className='tab-names'>
-            {tabs.map((tab) => (
-              <EditorTab
-                key={tab.id}
-                id={tab.id}
-                name={tab.name}
-                isActive={tab.id === activeTab}
-                onTabClick={setActiveTab}
-                onCloseClick={removeTab}
-                onNameChange={handleNameChange}
-              />
-            ))}
-          </div>
-          <div className='tab-container'>
-            {tabs.map(
-              (tab) =>
-                tab.id === activeTab && (
-                  <EditorWindow
-                    key={tab.id}
-                    code={tab.code}
-                    updateData={updateData}
-                  />
-                ),
-            )}
-          </div>
-          <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-            <div className='variables'>
-              variables
-              {isFooterOpen && (
-                <EditorWindow
-                  code={variables}
-                  updateData={(data: string) => setVariables(data)}
+      <div className='container-wrap'>
+        <Endpoint endpointValue={endpoint} />
+        <div className='container code'>
+          <div className='editor'>
+            <div className='tab-names'>
+              {tabs.map((tab) => (
+                <EditorTab
+                  key={tab.id}
+                  id={tab.id}
+                  name={tab.name}
+                  isActive={tab.id === activeTab}
+                  onTabClick={setActiveTab}
+                  onCloseClick={removeTab}
+                  onNameChange={handleNameChange}
                 />
+              ))}
+            </div>
+            <div className='tab-container'>
+              {tabs.map(
+                (tab) =>
+                  tab.id === activeTab && (
+                    <EditorWindow
+                      key={tab.id}
+                      code={tab.code}
+                      updateData={updateData}
+                    />
+                  ),
               )}
             </div>
-            <div className='headers'>headers</div>
-            <IoChevronUpOutline
-              className={`editor-footer-icon arrow ${
-                isFooterOpen ? 'open' : ''
-              }`}
-              onClick={() => setIsFooterOpen(!isFooterOpen)}
-            />
+            <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
+              <div className='variables'>
+                variables
+                {isFooterOpen && (
+                  <EditorWindow
+                    code={variables}
+                    updateData={(data: string) => setVariables(data)}
+                  />
+                )}
+              </div>
+              <div className='headers'>headers</div>
+              <IoChevronUpOutline
+                className={`editor-footer-icon arrow ${
+                  isFooterOpen ? 'open' : ''
+                }`}
+                onClick={() => setIsFooterOpen(!isFooterOpen)}
+              />
+            </div>
           </div>
-        </div>
-        <button onClick={clickHandler} className='run-button'>
-          <IoCaretForward className='run-button-icon' />
-        </button>
-        <div className='viewer'>
-          <EditorWindow code={viewer} />
+          <button onClick={clickHandler} className='run-button'>
+            <IoCaretForward className='run-button-icon' />
+          </button>
+          <div className='viewer'>
+            <EditorWindow code={viewer} />
+          </div>
         </div>
       </div>
     </div>

@@ -7,3 +7,4 @@ export { EditorTab } from './EditorTab';
 export { Documentation } from './Documentation';
 export { PasswordValidIndicator } from './PasswordValidIndicator';
 export { FallBackUI } from './FallBackUI';
+export { Endpoint } from './Endpoint';
