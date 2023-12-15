@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+/* import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { fetchUserName } from '../services/api/fetchUserName';
+import { fetchUserName } from '../services/api/fetchUserName'; */
 import { EditorWindow, EditorTab, Documentation } from '../components';
 
 import {
@@ -28,19 +28,18 @@ export const GraphiQLPage = () => {
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [viewer, setViewer] = useState('');
-  const [name, setName] = useState('');
-  const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
+  /*   const [name, setName] = useState('');
+   */ /*   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate(); */
 
   console.log(name);
 
-  const fetchData = async () => {
+  /*   const fetchData = async () => {
     if (user) {
       const userName = await fetchUserName(user);
       setName(userName);
     }
-  };
-
+  }; */
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
