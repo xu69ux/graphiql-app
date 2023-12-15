@@ -30,7 +30,9 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 
   useEffect(() => {
     recalcLines(code);
-  }, []);
+  }, [code]);
+
+  console.log('render');
 
   return (
     <div className='code-container'>

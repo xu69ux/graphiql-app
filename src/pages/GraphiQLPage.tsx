@@ -30,6 +30,7 @@ export const GraphiQLPage = () => {
   const [isFooterOpen, setIsFooterOpen] = useState(false);
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
+  const [headers, setHeaders] = useState('');
   const [viewer, setViewer] = useState('');
   const [endpoint, setEndpoint] = useState('');
 
@@ -80,19 +81,27 @@ export const GraphiQLPage = () => {
     );
   };
 
-  const clickHandler = () => {
+  const sendGraphqlRequest = async () => {
     const activeTabTemp: IEditorTab = tabs.find(
       (item) => item.id === activeTab,
     )!;
-    if (variables === '' || activeTabTemp.code === '') {
+    if (activeTabTemp.code === '') {
       return;
     }
-    let res = '';
-    const variablesArray = Object.entries(JSON.parse(variables));
+    let res = activeTabTemp.code;
+    const variablesArray = variables
+      ? Object.entries(JSON.parse(variables))
+      : [];
     variablesArray?.forEach((item) => {
       res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
     });
-    setViewer(res);
+
+    const result = (
+      await graphqlRequest(endpoint, res, headers ? JSON.parse(headers) : {})
+    ).data;
+    setViewer(
+      JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
+    );
   };
 
   const toggleDocumentation = () => {
@@ -162,7 +171,15 @@ export const GraphiQLPage = () => {
                   />
                 )}
               </div>
-              <div className='headers'>headers</div>
+              <div className='headers'>
+                headers
+                {isFooterOpen && (
+                  <EditorWindow
+                    code={headers}
+                    updateData={(data: string) => setHeaders(data)}
+                  />
+                )}
+              </div>
               <IoChevronUpOutline
                 className={`editor-footer-icon arrow ${
                   isFooterOpen ? 'open' : ''
@@ -171,11 +188,11 @@ export const GraphiQLPage = () => {
               />
             </div>
           </div>
-          <button onClick={clickHandler} className='run-button'>
+          <button onClick={sendGraphqlRequest} className='run-button'>
             <IoCaretForward className='run-button-icon' />
           </button>
           <div className='viewer'>
-            <EditorWindow code={viewer} />
+            <EditorWindow code={viewer} disabled />
           </div>
         </div>
       </div>
