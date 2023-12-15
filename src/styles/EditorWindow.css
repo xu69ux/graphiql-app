@@ -1,18 +1,19 @@
+.code-container,
+.line-numbers,
+.code,
+.highlighted-code {
+  font-family: 'Courier New', monospace;
+  white-space: pre;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow: auto;
+}
+
 .code-container {
   display: flex;
   overflow: hidden;
   height: 100%;
-}
-
-.line-numbers,
-.code {
-  font-family: 'Courier New', monospace;
-  white-space: pre;
-  font-size: 0.9rem;
-  margin: 0;
-  padding: 0.5rem;
-  line-height: 1.5;
-  overflow: auto;
+  position: relative;
 }
 
 .line-numbers {
@@ -24,11 +25,40 @@
   user-select: none;
 }
 
-.code {
+.code,
+.highlighted-code {
   flex-grow: 1;
-  background-color: transparent;
-  color: var(--light);
   resize: none;
   border: none;
   outline: none;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--light);
+  padding-left: 0.5rem;
+}
+
+.highlighted-code {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding-left: 2.5rem;
+  color: var(--light);
+}
+
+.keyword,
+.braces {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+.keyword {
+  color: var(--purple);
+}
+
+.braces {
+  color: var(--light-blue);
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useRef } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 
 import '@styles/EditorWindow.css';
 
@@ -15,6 +15,13 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 }) => {
   const lines = useRef<HTMLPreElement>(null);
   const textarea = useRef<HTMLTextAreaElement>(null);
+  const [inputCode, setInputCode] = useState(code);
+  const [highlightedCode, setHighlightedCode] = useState('');
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputCode(e.target.value);
+    recalcLines(e.target.value);
+  };
 
   const recalcLines = (code: string) => {
     const numLines = code.split('\n').length;
@@ -24,13 +31,30 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     lines.current!.innerText = newLines;
   };
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    recalcLines(e.target.value);
-  };
-
   useEffect(() => {
     recalcLines(code);
   }, [code]);
+
+  useEffect(() => {
+    const keywords = ['query'];
+    const braces = ['{', '}'];
+
+    const highlightedQuery = inputCode
+      .split(/(\s+|\{|\})/)
+      .map((word) => {
+        if (braces.includes(word.trim())) {
+          return `<span class="braces">${word}</span>`;
+        }
+        if (keywords.includes(word.trim())) {
+          return `<span class="keyword">${word}</span>`;
+        } else {
+          return word;
+        }
+      })
+      .join('');
+
+    setHighlightedCode(highlightedQuery);
+  }, [inputCode]);
 
   return (
     <div className='code-container'>
@@ -39,7 +63,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
         className='code'
         ref={textarea}
         onChange={handleChange}
-        defaultValue={code}
+        value={inputCode}
         onBlur={(e) => {
           e.stopPropagation();
           if (updateData && e.target.value !== code) {
@@ -47,6 +71,10 @@ export const EditorWindow: FC<IEditWindowProps> = ({
           }
         }}
         disabled={disabled}
+      />
+      <div
+        className='highlighted-code'
+        dangerouslySetInnerHTML={{ __html: highlightedCode }}
       />
     </div>
   );
