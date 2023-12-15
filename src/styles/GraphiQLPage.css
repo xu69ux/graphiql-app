@@ -9,6 +9,7 @@
 }
 
 .container.code {
+  position: relative;
   display: flex;
   flex-direction: row;
   background-color: var(--dark);
@@ -174,4 +175,46 @@
 
 .tab-close:hover {
   transform: scale(1.3);
+}
+
+.run-button {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5vw;
+  height: 5vw;
+  border: none;
+  border-radius: 50%;
+  background: var(--dark);
+  transition: background 0.5s ease-out;
+  cursor: pointer;
+}
+
+.run-button:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(transparent, var(--blue), var(--green));
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  z-index: 2;
+}
+
+.run-button:hover:after {
+  opacity: 1;
+  /* background: radial-gradient(var(--dark), var(--blue), var(--green)); */
+}
+
+.run-button-icon {
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  font-size: 2vw;
+  color: var(--green);
 }
