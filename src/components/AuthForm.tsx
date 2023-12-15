@@ -52,7 +52,10 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     if (loading) {
       return;
     }
-    if (user) navigate('/graphiql');
+    if (user) {
+      navigate('/graphiql');
+      sessionStorage.setItem('authInfo', 'userIs');
+    }
   }, [user, loading, navigate]);
 
   useEffect(() => {

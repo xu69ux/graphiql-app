@@ -52,6 +52,7 @@ export const Header = () => {
     logout();
     navigate('/');
     showMessage(msg.LOG_OUT_SUCCESS);
+    sessionStorage.removeItem('authInfo');
   };
 
   useEffect(() => {
