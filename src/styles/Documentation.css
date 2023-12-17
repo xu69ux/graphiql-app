@@ -1,5 +1,4 @@
 .documentation {
-  visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -12,7 +11,6 @@
   height: 100%;
   max-width: 0;
   width: 20rem;
-  padding: 1rem;
   transform: scaleX(0);
   transform-origin: left;
   transition:
@@ -22,7 +20,6 @@
 }
 
 .documentation.open {
-  visibility: visible;
   transform: scaleX(1);
   transition:
     transform 0.2s ease-out,
@@ -53,6 +50,7 @@
 .documentation-container {
   text-align: left;
   width: 100%;
+  padding: 1rem;
 }
 
 .documentation-back {

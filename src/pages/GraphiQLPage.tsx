@@ -1,5 +1,13 @@
-import { useState } from 'react';
-import { EditorWindow, EditorTab, Documentation } from '../components';
+import { useState, useCallback } from 'react';
+import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
+import { graphqlRequest } from '../utils/graphqlApi';
+
+import {
+  EditorWindow,
+  EditorTab,
+  Documentation,
+  Endpoint,
+} from '../components';
 
 import {
   IoSettingsSharp,
@@ -23,7 +31,18 @@ export const GraphiQLPage = () => {
   const [isFooterOpen, setIsFooterOpen] = useState(false);
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
+  const [headers, setHeaders] = useState('');
   const [viewer, setViewer] = useState('');
+  const [endpoint, setEndpoint] = useState('');
+
+  const fetchShema = useCallback(async () => {
+    try {
+      const shema = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
+      console.log(shema);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [endpoint]);
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -63,92 +82,121 @@ export const GraphiQLPage = () => {
     );
   };
 
-  const clickHandler = () => {
+  const sendGraphqlRequest = async () => {
     const activeTabTemp: IEditorTab = tabs.find(
       (item) => item.id === activeTab,
     )!;
-    if (variables === '' || activeTabTemp.code === '') {
+    if (!activeTabTemp.code) {
       return;
     }
-    let res = '';
-    const variablesArray = Object.entries(JSON.parse(variables));
+    let res = activeTabTemp.code;
+    const variablesArray = variables
+      ? Object.entries(JSON.parse(variables))
+      : [];
     variablesArray?.forEach((item) => {
       res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
     });
-    setViewer(res);
+
+    const result = (
+      await graphqlRequest(endpoint, res, headers ? JSON.parse(headers) : {})
+    ).data;
+    setViewer(
+      JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
+    );
   };
 
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };
 
+  console.log('render');
+
   return (
     <div className='container'>
       <div className='sidebar'>
-        <IoFileTrayFullOutline
-          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
-          onClick={toggleDocumentation}
-          title='show documentation'
-        />
-        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
-        <IoAddSharp
-          className='sidebar-icon add'
-          onClick={addTab}
-          title='add tab'
-        />
+        <div className='sidebar-wrap'>
+          <IoFileTrayFullOutline
+            className={`sidebar-icon docs ${
+              isDocumentationOpen ? 'active' : ''
+            }`}
+            onClick={toggleDocumentation}
+            title='show documentation'
+          />
+          <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+          <IoAddSharp
+            className='sidebar-icon add'
+            onClick={addTab}
+            title='add tab'
+          />
+        </div>
+        <Documentation isDocumentationOpen={isDocumentationOpen} />
       </div>
-      <Documentation isDocumentationOpen={isDocumentationOpen} />
-      <div className='container code'>
-        <div className='editor'>
-          <div className='tab-names'>
-            {tabs.map((tab) => (
-              <EditorTab
-                key={tab.id}
-                id={tab.id}
-                name={tab.name}
-                isActive={tab.id === activeTab}
-                onTabClick={setActiveTab}
-                onCloseClick={removeTab}
-                onNameChange={handleNameChange}
-              />
-            ))}
-          </div>
-          <div className='tab-container'>
-            {tabs.map(
-              (tab) =>
-                tab.id === activeTab && (
-                  <EditorWindow
-                    key={tab.id}
-                    code={tab.code}
-                    updateData={updateData}
-                  />
-                ),
-            )}
-          </div>
-          <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-            <div className='variables'>
-              variables
-              {isFooterOpen && (
-                <EditorWindow
-                  code={variables}
-                  updateData={(data: string) => setVariables(data)}
+      <div className='container-wrap'>
+        <Endpoint
+          endpointValue={endpoint}
+          setEndpoint={setEndpoint}
+          fetchShema={fetchShema}
+        />
+        <div className='container code'>
+          <div className='editor'>
+            <div className='tab-names'>
+              {tabs.map((tab) => (
+                <EditorTab
+                  key={tab.id}
+                  id={tab.id}
+                  name={tab.name}
+                  isActive={tab.id === activeTab}
+                  onTabClick={setActiveTab}
+                  onCloseClick={removeTab}
+                  onNameChange={handleNameChange}
                 />
+              ))}
+            </div>
+            <div className='tab-container'>
+              {tabs.map(
+                (tab) =>
+                  tab.id === activeTab && (
+                    <EditorWindow
+                      key={tab.id}
+                      code={tab.code}
+                      updateData={updateData}
+                    />
+                  ),
               )}
             </div>
-            <div className='headers'>headers</div>
-            <IoChevronUpOutline
-              className={`editor-footer-icon arrow ${
-                isFooterOpen ? 'open' : ''
-              }`}
-              onClick={() => setIsFooterOpen(!isFooterOpen)}
-            />
+            <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
+              <div className='variables'>
+                variables
+                {isFooterOpen && (
+                  <EditorWindow
+                    code={variables}
+                    updateData={(data: string) => setVariables(data)}
+                  />
+                )}
+              </div>
+              <div className='headers'>
+                headers
+                {isFooterOpen && (
+                  <EditorWindow
+                    code={headers}
+                    updateData={(data: string) => setHeaders(data)}
+                  />
+                )}
+              </div>
+              <IoChevronUpOutline
+                className={`editor-footer-icon arrow ${
+                  isFooterOpen ? 'open' : ''
+                }`}
+                onClick={() => setIsFooterOpen(!isFooterOpen)}
+              />
+            </div>
           </div>
-        </div>
-        <button onClick={clickHandler} className='run-button'>
-          <IoCaretForward className='run-button-icon' />
-        </button>
-        <div className='viewer'>
-          <EditorWindow code={viewer} />
+          <button onClick={sendGraphqlRequest} className='run-button'>
+            <IoCaretForward className='run-button-icon' />
+          </button>
+          <div className='viewer'>
+            <EditorWindow code={viewer} disabled />
+          </div>
         </div>
       </div>
     </div>

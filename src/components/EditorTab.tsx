@@ -1,4 +1,5 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
+
 import { IoIosClose } from 'react-icons/io';
 
 interface IEditorTabProps {

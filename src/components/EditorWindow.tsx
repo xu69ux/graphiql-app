@@ -16,7 +16,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   const lines = useRef<HTMLPreElement>(null);
   const textarea = useRef<HTMLTextAreaElement>(null);
 
-  const recalcLines = (code: string) => {
+  const recalculateLines = (code: string) => {
     const numLines = code.split('\n').length;
     const newLines = Array.from({ length: numLines }, (_, i) => i + 1).join(
       '\n',
@@ -25,12 +25,12 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    recalcLines(e.target.value);
+    recalculateLines(e.target.value);
   };
 
   useEffect(() => {
-    recalcLines(code);
-  }, []);
+    recalculateLines(code);
+  }, [code]);
 
   return (
     <div className='code-container'>
