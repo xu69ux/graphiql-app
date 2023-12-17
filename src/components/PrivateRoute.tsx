@@ -1,20 +1,9 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-interface PrivateRouteProps {
-  children: React.ReactElement;
-}
+import { Navigate, Outlet } from 'react-router-dom';
 
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const navigate = useNavigate();
+const PrivateRoute = () => {
   const user = sessionStorage.getItem('authInfo');
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [navigate]);
-
-  return !user ? null : <>{children}</>;
+  return user ? <Outlet /> : <Navigate to='/' />;
 };
 
 export default PrivateRoute;

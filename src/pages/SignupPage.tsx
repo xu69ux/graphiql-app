@@ -17,19 +17,21 @@ export const SignupPage = () => {
 
   useEffect(() => {
     if (userIs) navigate('/graphiql');
-  }, [navigate]);
+  }, [navigate, userIs]);
 
-  return userIs ? null : (
-    <div className='auth-container'>
-      <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
-      <AuthForm mode='register' />
-      <p className='no-account'>
-        {translations?.[language]?.yesAccount}
-        <Link to='/login' className='login-link'>
-          {translations?.[language]?.login}
-        </Link>
-        !
-      </p>
-    </div>
+  return (
+    !userIs && (
+      <div className='auth-container'>
+        <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
+        <AuthForm mode='register' />
+        <p className='no-account'>
+          {translations?.[language]?.yesAccount}
+          <Link to='/login' className='login-link'>
+            {translations?.[language]?.login}
+          </Link>
+          !
+        </p>
+      </div>
+    )
   );
 };
