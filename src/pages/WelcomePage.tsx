@@ -1,7 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
+
+import { Link } from 'react-router-dom';
+
 import { IoChevronForward } from 'react-icons/io5';
 
 import '@styles/WelcomePage.css';

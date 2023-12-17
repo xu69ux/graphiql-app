@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
+import { GRAPHQLWORDS } from '../constants';
+
 import { IoChevronForward, IoSearchOutline } from 'react-icons/io5';
-import { GRAPHQLWORDS } from '../utils/constants';
 
 import '@styles/Documentation.css';
 

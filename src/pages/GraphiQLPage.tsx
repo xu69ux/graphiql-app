@@ -1,4 +1,7 @@
 import { useState, useCallback } from 'react';
+import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
+import { graphqlRequest } from '../utils/graphqlApi';
+
 import {
   EditorWindow,
   EditorTab,
@@ -15,8 +18,6 @@ import {
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
-import { QUERY_FOR_SHEMA_FETCHING } from '../utils/constants';
-import { graphqlRequest } from '../utils/graphqlApi';
 
 interface IEditorTab {
   id: number;

@@ -2,13 +2,15 @@ import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IoEarthOutline } from 'react-icons/io5';
-import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
 import { auth, logout } from '../utils/firebase';
 import useShowMessage from '../hooks/useShowMessage';
 import useMsg from '../hooks/useMsg';
+
+import { LanguageContext } from '../contexts/LanguageContext';
+
+import { IoEarthOutline } from 'react-icons/io5';
 
 import '@styles/Header.css';
 
