@@ -85,7 +85,7 @@ export const GraphiQLPage = () => {
     const activeTabTemp: IEditorTab = tabs.find(
       (item) => item.id === activeTab,
     )!;
-    if (activeTabTemp.code === '') {
+    if (!activeTabTemp.code) {
       return;
     }
     let res = activeTabTemp.code;
@@ -107,6 +107,8 @@ export const GraphiQLPage = () => {
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };
+
+  console.log('render');
 
   return (
     <div className='container'>

@@ -1,6 +1,7 @@
 .endpoint {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   padding: 0.5rem 2rem;
   color: white;
   background-color: var(--blue);
@@ -19,12 +20,6 @@
 .arrows {
   display: flex;
   animation: colorChange 1s infinite;
-}
-
-.endpoint-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .input-wrap {

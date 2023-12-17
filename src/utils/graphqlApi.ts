@@ -7,9 +7,8 @@ export const graphqlRequest = async (
   query: string,
   headers: object = {},
 ) => {
-  const fullURL = 'https://' + url;
   const result = await axios.post(
-    fullURL,
+    'https://' + url,
     {
       query: query,
     },
