@@ -44,7 +44,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
       <h1 className='docs-title'>Documentation</h1>
       {schema ? (
         <>
-          <Search />
+          <Search schema={schema} />
           {selectedType || selectedField ? (
             <button className='docs-back' onClick={handleBackClick}>
               <IoChevronForward className='back-icon' />

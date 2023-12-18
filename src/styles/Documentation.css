@@ -77,50 +77,6 @@
   color: var(--light);
 }
 
-.docs-search {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0.3rem;
-  margin: 1rem 1rem 0 auto;
-  border-radius: 0.3rem;
-  border: none;
-  background-color: var(--dark);
-  cursor: pointer;
-  color: var(--light);
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.docs-search.active {
-  width: 90%;
-}
-
-.docs-search input {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: var(--light);
-}
-
-.docs-search input:not(:focus) {
-  width: 0;
-  padding: 0;
-  border: none;
-}
-
-.docs-search input:focus {
-  outline: none;
-  width: 100%;
-}
-
-.docs-search-icon {
-  position: absolute;
-  right: 0.5rem;
-  font-size: 1.5rem;
-}
-
 .no-docs {
   margin: 5rem 1rem 0;
 }
