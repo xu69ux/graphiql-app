@@ -1,28 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Search } from './Search';
 import { IoChevronForward } from 'react-icons/io5';
+import { Schema, FieldType, Type } from '../../types';
 
 import '@styles/Documentation.css';
-
-interface FieldType {
-  name: string;
-  description: string;
-}
-
-interface Type {
-  name: string;
-  description: string;
-  fields: FieldType[];
-}
-
-interface Schema {
-  types: Type[];
-}
 
 interface DocumentationProps {
   isDocumentationOpen: boolean;
   schema: Schema | null;
 }
+
+const findTypeByName = (types: Type[], name: string): Type | undefined =>
+  types.find((t) => t.name === name);
+const findFieldByName = (
+  fields: FieldType[],
+  name: string,
+): FieldType | undefined => fields.find((f) => f.name === name);
 
 export const Documentation: React.FC<DocumentationProps> = ({
   isDocumentationOpen,
@@ -34,11 +27,11 @@ export const Documentation: React.FC<DocumentationProps> = ({
 
   useEffect(() => {
     if (searchItem) {
-      const [type, field] = searchItem.split('.');
-      const typeObj = schema?.types.find((t) => t.name === type);
+      const [typeName, fieldName] = searchItem.split('.');
+      const typeObj = schema && findTypeByName(schema.types, typeName);
       if (typeObj) {
         setSelectedType(typeObj);
-        const fieldObj = typeObj.fields.find((f) => f.name === field);
+        const fieldObj = findFieldByName(typeObj.fields, fieldName);
         if (fieldObj) {
           setSelectedField(fieldObj);
         }

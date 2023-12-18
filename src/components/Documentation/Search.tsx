@@ -1,16 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, FC } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
+import { Schema } from '../../types';
 
 import '@styles/Search.css';
 
-export const Search = ({ schema, setSearchItem }) => {
+interface SearchProps {
+  schema: Schema;
+  setSearchItem: (item: string) => void;
+}
+
+interface SearchResult {
+  name: string;
+}
+
+export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<
-    { name: string; description: string }[]
-  >([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
-  useEffect(() => {
+  const search = () => {
     if (searchTerm !== '') {
       const results = schema.types.flatMap((type) => [
         { name: type.name },
@@ -31,35 +39,36 @@ export const Search = ({ schema, setSearchItem }) => {
     } else {
       setSearchResults([]);
     }
-  }, [searchTerm, schema]);
+  };
+
+  useEffect(search, [searchTerm, schema]);
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
     setSearchTerm('');
   };
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div className={`docs-search ${isSearchOpen ? 'active' : ''}`}>
-      <IoSearchOutline
-        className='docs-search-icon'
-        onClick={() => {
-          toggleSearch();
-        }}
-      />
+      <IoSearchOutline className='docs-search-icon' onClick={toggleSearch} />
       {isSearchOpen && (
         <input
           type='text'
           placeholder='Search...'
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleInputChange}
         />
       )}
       {isSearchOpen && searchTerm !== '' && (
         <div className='autocomplete-dropdown'>
           {searchResults.length > 0 ? (
-            searchResults.map((item, index) => (
+            searchResults.map((item) => (
               <div
-                key={index}
+                key={item.name}
                 className='autocomplete-item'
                 onClick={() => {
                   setSearchItem(item.name);

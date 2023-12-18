@@ -16,6 +16,7 @@ import {
   IoChevronUpOutline,
   IoCaretForward,
 } from 'react-icons/io5';
+import { Schema } from '../types';
 
 import '@styles/GraphiQLPage.css';
 
@@ -24,19 +25,13 @@ interface IEditorTab {
   code: string;
   name: string;
 }
-interface FieldType {
-  name: string;
-  description: string;
-}
-interface Type {
-  name: string;
-  description: string;
-  fields: FieldType[];
-}
 
-interface Schema {
-  types: Type[];
-}
+const updateTab = (
+  tabs: IEditorTab[],
+  id: number,
+  newValues: Partial<IEditorTab>,
+): IEditorTab[] =>
+  tabs.map((tab) => (tab.id === id ? { ...tab, ...newValues } : tab));
 
 export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
@@ -49,25 +44,27 @@ export const GraphiQLPage = () => {
   const [endpoint, setEndpoint] = useState('');
   const [schema, setSchema] = useState<Schema | null>(null);
 
-  const fetchShema = useCallback(async () => {
+  const fetchShema = useCallback(async (): Promise<void> => {
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      console.log(response);
       setSchema(response.data.data.__schema);
     } catch (error) {
       console.log(error);
     }
   }, [endpoint]);
+
   useEffect(() => {
     fetchShema();
   }, [fetchShema]);
 
   const updateData = (data: string) => {
-    setTabs((prevTabs) =>
-      prevTabs.map((tab) =>
-        tab.id === activeTab ? { ...tab, code: data } : tab,
-      ),
-    );
+    if (activeTab !== null) {
+      setTabs((prevTabs) => updateTab(prevTabs, activeTab, { code: data }));
+    }
+  };
+
+  const handleNameChange = (id: number, newName: string) => {
+    setTabs((prevTabs) => updateTab(prevTabs, id, { name: newName }));
   };
 
   const addTab = () => {
@@ -92,12 +89,6 @@ export const GraphiQLPage = () => {
 
       return newTabs;
     });
-  };
-
-  const handleNameChange = (id: number, newName: string) => {
-    setTabs((prevTabs) =>
-      prevTabs.map((tab) => (tab.id === id ? { ...tab, name: newName } : tab)),
-    );
   };
 
   const sendGraphqlRequest = async () => {

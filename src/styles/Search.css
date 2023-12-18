@@ -16,6 +16,7 @@
 
 .docs-search.active {
   width: 90%;
+  min-height: 2.5rem;
 }
 
 .docs-search input {
