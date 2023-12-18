@@ -78,7 +78,9 @@ export const Documentation: React.FC<DocumentationProps> = ({
           )}
           {selectedField ? (
             <div className='docs-container'>
-              <h2 className='docs-subtitle'>{selectedField.name}:</h2>
+              <h2 className='docs-subtitle description'>
+                {selectedField.name}:
+              </h2>
               <p>{selectedField.description}</p>
             </div>
           ) : selectedType ? (

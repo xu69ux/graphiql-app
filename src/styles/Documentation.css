@@ -82,6 +82,11 @@
   color: var(--light);
 }
 
+.docs-subtitle.description {
+  border-bottom: 0.08rem solid var(--extra);
+  width: fit-content;
+}
+
 .no-docs {
   margin: 5rem 1rem 0;
 }
