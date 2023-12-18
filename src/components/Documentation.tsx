@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IoChevronForward } from 'react-icons/io5';
+import { IoChevronForward, IoSearchOutline } from 'react-icons/io5';
 
 import '@styles/Documentation.css';
 
@@ -29,6 +29,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
 }) => {
   const [selectedType, setSelectedType] = useState<Type | null>(null);
   const [selectedField, setSelectedField] = useState<FieldType | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleBackClick = () => {
     if (selectedField) {
@@ -37,53 +38,71 @@ export const Documentation: React.FC<DocumentationProps> = ({
       setSelectedType(null);
     }
   };
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
 
   return (
     <div className={`documentation ${isDocumentationOpen ? 'open' : ''}`}>
       <h1 className='docs-title'>Documentation</h1>
-      {selectedType || selectedField ? (
-        <button className='docs-back' onClick={handleBackClick}>
-          <IoChevronForward className='back-icon' />
-          <IoChevronForward className='back-icon' />
-          <IoChevronForward className='back-icon' />
-          <span>Back</span>
-        </button>
-      ) : null}
-      {selectedField ? (
-        <div className='docs-container'>
-          <h2 className='docs-subtitle'>{selectedField.name}:</h2>
-          <p>{selectedField.description}</p>
-        </div>
-      ) : selectedType ? (
-        <div className='docs-container'>
-          <h2 className='docs-subtitle'>{selectedType.name}:</h2>
-          {selectedType.fields
-            ? selectedType.fields.map((field) => (
-                <div
-                  key={field.name}
-                  className='docs-item'
-                  onClick={() => setSelectedField(field)}
-                >
-                  {field.name}
-                </div>
-              ))
-            : null}
-        </div>
+      {schema ? (
+        <>
+          <div
+            className={`docs-search ${isSearchOpen ? 'active' : ''}`}
+            onClick={() => {
+              toggleSearch();
+            }}
+          >
+            <input type='text' placeholder='Search...' />
+            <IoSearchOutline className='docs-search-icon' />
+          </div>
+          {selectedType || selectedField ? (
+            <button className='docs-back' onClick={handleBackClick}>
+              <IoChevronForward className='back-icon' />
+              <IoChevronForward className='back-icon' />
+              <IoChevronForward className='back-icon' />
+              <span>Back</span>
+            </button>
+          ) : null}
+          {selectedField ? (
+            <div className='docs-container'>
+              <h2 className='docs-subtitle'>{selectedField.name}:</h2>
+              <p>{selectedField.description}</p>
+            </div>
+          ) : selectedType ? (
+            <div className='docs-container'>
+              <h2 className='docs-subtitle'>{selectedType.name}:</h2>
+              {selectedType.fields
+                ? selectedType.fields.map((field) => (
+                    <div
+                      key={field.name}
+                      className='docs-item'
+                      onClick={() => setSelectedField(field)}
+                    >
+                      {field.name}
+                    </div>
+                  ))
+                : null}
+            </div>
+          ) : (
+            <div className='docs-container'>
+              <h2 className='docs-subtitle'>Types:</h2>
+              {schema?.types
+                ? schema.types.map((type) => (
+                    <div
+                      key={type.name}
+                      className='docs-item'
+                      onClick={() => setSelectedType(type)}
+                    >
+                      {type.name}
+                    </div>
+                  ))
+                : null}
+            </div>
+          )}
+        </>
       ) : (
-        <div className='docs-container'>
-          <h2 className='docs-subtitle'>Types:</h2>
-          {schema?.types
-            ? schema.types.map((type) => (
-                <div
-                  key={type.name}
-                  className='docs-item'
-                  onClick={() => setSelectedType(type)}
-                >
-                  {type.name}
-                </div>
-              ))
-            : null}
-        </div>
+        <p className='no-docs'>Enter the endpoint to retrieve documentation</p>
       )}
     </div>
   );

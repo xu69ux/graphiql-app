@@ -10,7 +10,7 @@
   color: var(--light);
   height: 100%;
   max-width: 0;
-  width: 20rem;
+  width: 25rem;
   transform: scaleX(0);
   transform-origin: left;
   transition:
@@ -24,7 +24,7 @@
   transition:
     transform 0.2s ease-out,
     visibility 0s 0s;
-  max-width: 20rem;
+  max-width: 25rem;
 }
 
 .docs-title {
@@ -83,6 +83,7 @@
   flex-direction: row;
   align-items: center;
   padding: 0.3rem;
+  margin: 1rem 1rem 0 auto;
   border-radius: 0.3rem;
   border: none;
   background-color: var(--dark);
@@ -93,7 +94,7 @@
 }
 
 .docs-search.active {
-  width: 100%;
+  width: 90%;
 }
 
 .docs-search input {
@@ -118,4 +119,8 @@
   position: absolute;
   right: 0.5rem;
   font-size: 1.5rem;
+}
+
+.no-docs {
+  margin: 5rem 1rem 0;
 }
