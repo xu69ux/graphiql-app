@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { IoChevronForward, IoSearchOutline } from 'react-icons/io5';
+import { Search } from './Search';
+import { IoChevronForward } from 'react-icons/io5';
 
 import '@styles/Documentation.css';
 
@@ -29,7 +30,6 @@ export const Documentation: React.FC<DocumentationProps> = ({
 }) => {
   const [selectedType, setSelectedType] = useState<Type | null>(null);
   const [selectedField, setSelectedField] = useState<FieldType | null>(null);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleBackClick = () => {
     if (selectedField) {
@@ -38,24 +38,13 @@ export const Documentation: React.FC<DocumentationProps> = ({
       setSelectedType(null);
     }
   };
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
 
   return (
     <div className={`documentation ${isDocumentationOpen ? 'open' : ''}`}>
       <h1 className='docs-title'>Documentation</h1>
       {schema ? (
         <>
-          <div
-            className={`docs-search ${isSearchOpen ? 'active' : ''}`}
-            onClick={() => {
-              toggleSearch();
-            }}
-          >
-            <input type='text' placeholder='Search...' />
-            <IoSearchOutline className='docs-search-icon' />
-          </div>
+          <Search />
           {selectedType || selectedField ? (
             <button className='docs-back' onClick={handleBackClick}>
               <IoChevronForward className='back-icon' />
