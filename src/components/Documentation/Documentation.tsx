@@ -47,9 +47,9 @@ export const Documentation: React.FC<DocumentationProps> = ({
   }, [schema, searchItem]);
 
   const handleBackClick = () => {
-    if (selectedField) {
-      setSelectedField(null);
-    } else if (selectedType) {
+    setSearchItem('');
+    setSelectedField(null);
+    if (!selectedField) {
       setSelectedType(null);
     }
   };
