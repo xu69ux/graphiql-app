@@ -76,17 +76,23 @@ export const Documentation: React.FC<DocumentationProps> = ({
           ) : selectedType ? (
             <div className='docs-container'>
               <h2 className='docs-subtitle'>{selectedType.name}:</h2>
-              {selectedType.fields
-                ? selectedType.fields.map((field) => (
-                    <div
-                      key={field.name}
-                      className='docs-item'
-                      onClick={() => setSelectedField(field)}
-                    >
-                      {field.name}
-                    </div>
-                  ))
-                : null}
+              {selectedType.fields && selectedType.fields.length > 0 ? (
+                selectedType.fields.map((field) => (
+                  <div
+                    key={field.name}
+                    className='docs-item'
+                    onClick={() => setSelectedField(field)}
+                  >
+                    {field.name}
+                  </div>
+                ))
+              ) : (
+                <p>
+                  This is some scalar;
+                  <br />
+                  there are no fields.
+                </p>
+              )}
             </div>
           ) : (
             <div className='docs-container'>
