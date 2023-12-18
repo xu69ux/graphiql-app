@@ -3,7 +3,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 
 import '@styles/Search.css';
 
-export const Search = ({ schema }) => {
+export const Search = ({ schema, setSearchItem }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<
@@ -62,7 +62,7 @@ export const Search = ({ schema }) => {
                 key={index}
                 className='autocomplete-item'
                 onClick={() => {
-                  localStorage.setItem('selectedItem', JSON.stringify(item));
+                  setSearchItem(item.name);
                   setSearchTerm('');
                 }}
               >

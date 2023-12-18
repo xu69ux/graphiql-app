@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from './Search';
 import { IoChevronForward } from 'react-icons/io5';
 
@@ -30,6 +30,21 @@ export const Documentation: React.FC<DocumentationProps> = ({
 }) => {
   const [selectedType, setSelectedType] = useState<Type | null>(null);
   const [selectedField, setSelectedField] = useState<FieldType | null>(null);
+  const [searchItem, setSearchItem] = useState('');
+
+  useEffect(() => {
+    if (searchItem) {
+      const [type, field] = searchItem.split('.');
+      const typeObj = schema?.types.find((t) => t.name === type);
+      if (typeObj) {
+        setSelectedType(typeObj);
+        const fieldObj = typeObj.fields.find((f) => f.name === field);
+        if (fieldObj) {
+          setSelectedField(fieldObj);
+        }
+      }
+    }
+  }, [schema, searchItem]);
 
   const handleBackClick = () => {
     if (selectedField) {
@@ -44,7 +59,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
       <h1 className='docs-title'>Documentation</h1>
       {schema ? (
         <>
-          <Search schema={schema} />
+          <Search schema={schema} setSearchItem={setSearchItem} />
           {selectedType || selectedField ? (
             <button className='docs-back' onClick={handleBackClick}>
               <IoChevronForward className='back-icon' />
