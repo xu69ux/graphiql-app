@@ -11,51 +11,56 @@ export const Search = ({ schema }) => {
   >([]);
 
   useEffect(() => {
-    if (schema) {
+    if (searchTerm !== '') {
       const results = schema.types.flatMap((type) => [
-        { name: type.name, description: type.description },
+        { name: type.name },
         ...(type.fields
           ? type.fields.map((field) => ({
               name: `${type.name}.${field.name}`,
-              description: field.description,
             }))
           : []),
       ]);
 
       setSearchResults(
-        results.filter(
-          (item) =>
-            item.name.includes(searchTerm) ||
-            item.description.includes(searchTerm),
-        ),
+        results.filter((item) => item.name && item.name.includes(searchTerm)),
       );
+    } else {
+      setSearchResults([]);
     }
   }, [searchTerm, schema]);
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
+    setSearchTerm('');
   };
 
   return (
-    <div
-      className={`docs-search ${isSearchOpen ? 'active' : ''}`}
-      onClick={toggleSearch}
-    >
-      <IoSearchOutline className='docs-search-icon' />
-      <input
-        type='text'
-        placeholder='Search...'
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+    <div className={`docs-search ${isSearchOpen ? 'active' : ''}`}>
+      <IoSearchOutline
+        className='docs-search-icon'
+        onClick={() => {
+          toggleSearch();
+        }}
       />
       {isSearchOpen && (
+        <input
+          type='text'
+          placeholder='Search...'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      )}
+      {isSearchOpen && searchTerm !== '' && (
         <div className='autocomplete-dropdown'>
-          {searchResults.map((item, index) => (
-            <div key={index} className='autocomplete-item'>
-              <div>{item.name}</div>
-              <div>{item.description}</div>
-            </div>
-          ))}
+          {searchResults.length > 0 ? (
+            searchResults.map((item, index) => (
+              <div key={index} className='autocomplete-item'>
+                <div>{item.name}</div>
+              </div>
+            ))
+          ) : (
+            <div>No results</div>
+          )}
         </div>
       )}
     </div>
