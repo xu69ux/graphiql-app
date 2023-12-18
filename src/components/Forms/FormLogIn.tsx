@@ -10,6 +10,7 @@ import { translations } from '../../contexts/translations';
 import { LanguageContext } from '../../contexts/LanguageContext';
 import { PasswordValidIndicator } from '..';
 import useMsg from '../../hooks/useMsg';
+import { CustomButton } from '../../components';
 
 import '@styles/Form.css';
 
@@ -110,9 +111,12 @@ export const FormLogIn = () => {
               <p>{errors.password.message}</p>
             )}
         </div>
-        <button className='btn log' type='submit' disabled={isSubmitting}>
-          {translations?.[language]?.loginTitle}
-        </button>
+        <CustomButton
+          className='btn btn-log'
+          type='submit'
+          disabled={isSubmitting}
+          title={translations?.[language]?.loginTitle}
+        />
       </div>
     </form>
   );

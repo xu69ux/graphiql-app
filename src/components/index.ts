@@ -1,5 +1,6 @@
 export { FormLogIn } from './Forms/FormLogIn';
 export { FormSignUp } from './Forms/FormSignUp';
+export { CustomButton } from './CustomButton';
 export { Header } from './Header';
 export { Footer } from './Footer';
 export { Fade } from './Fade';
