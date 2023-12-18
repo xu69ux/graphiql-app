@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthForm } from '../components';
+import { FormLogIn } from '../components';
 import { useEffect, useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebase';
@@ -19,12 +19,12 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user) return navigate('/graphiql');
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className='auth-container'>
       <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
-      <AuthForm mode='login' />
+      <FormLogIn />
       <p className='no-account'>
         {translations?.[language]?.noAccount}
         <Link to='/signup' className='signup-link'>

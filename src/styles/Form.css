@@ -1,4 +1,4 @@
-.register,
+.signup,
 .login {
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@ input {
 }
 
 .btn.log,
-.btn.reg {
+.btn.sign {
   width: 50%;
   height: 2rem;
   margin-top: 1rem;
@@ -42,7 +42,7 @@ input {
 }
 
 .btn.log:hover,
-.btn.reg:hover {
+.btn.sign:hover {
   background-color: var(--green);
   color: var(--blue);
 }

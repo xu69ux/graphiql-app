@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthForm } from '../components';
+import { FormSignUp } from '../components';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
@@ -19,12 +19,12 @@ export const SignupPage = () => {
 
   useEffect(() => {
     if (user) return navigate('/graphiql');
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className='auth-container'>
       <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
-      <AuthForm mode='register' />
+      <FormSignUp />
       <p className='no-account'>
         {translations?.[language]?.yesAccount}
         <Link to='/login' className='login-link'>
