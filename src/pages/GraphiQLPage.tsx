@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
 import { graphqlRequest } from '../utils/graphqlApi';
 
@@ -24,6 +24,19 @@ interface IEditorTab {
   code: string;
   name: string;
 }
+interface FieldType {
+  name: string;
+  description: string;
+}
+interface Type {
+  name: string;
+  description: string;
+  fields: FieldType[];
+}
+
+interface Schema {
+  types: Type[];
+}
 
 export const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
@@ -34,15 +47,20 @@ export const GraphiQLPage = () => {
   const [headers, setHeaders] = useState('');
   const [viewer, setViewer] = useState('');
   const [endpoint, setEndpoint] = useState('');
+  const [schema, setSchema] = useState<Schema | null>(null);
 
   const fetchShema = useCallback(async () => {
     try {
-      const shema = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      console.log(shema);
+      const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
+      console.log(response);
+      setSchema(response.data.data.__schema);
     } catch (error) {
       console.log(error);
     }
   }, [endpoint]);
+  useEffect(() => {
+    fetchShema();
+  }, [fetchShema]);
 
   const updateData = (data: string) => {
     setTabs((prevTabs) =>
@@ -129,7 +147,10 @@ export const GraphiQLPage = () => {
             title='add tab'
           />
         </div>
-        <Documentation isDocumentationOpen={isDocumentationOpen} />
+        <Documentation
+          isDocumentationOpen={isDocumentationOpen}
+          schema={schema}
+        />
       </div>
       <div className='container-wrap'>
         <Endpoint
