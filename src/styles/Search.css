@@ -56,3 +56,7 @@
   margin-bottom: 0.5rem;
   cursor: pointer;
 }
+
+.autocomplete-item:hover {
+  color: var(--green);
+}

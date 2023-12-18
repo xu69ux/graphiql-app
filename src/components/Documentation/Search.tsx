@@ -58,7 +58,14 @@ export const Search = ({ schema }) => {
         <div className='autocomplete-dropdown'>
           {searchResults.length > 0 ? (
             searchResults.map((item, index) => (
-              <div key={index} className='autocomplete-item'>
+              <div
+                key={index}
+                className='autocomplete-item'
+                onClick={() => {
+                  localStorage.setItem('selectedItem', JSON.stringify(item));
+                  setSearchTerm('');
+                }}
+              >
                 <div>{item.name}</div>
               </div>
             ))
