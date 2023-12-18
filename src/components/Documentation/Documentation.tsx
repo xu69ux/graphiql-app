@@ -65,9 +65,17 @@ export const Documentation: React.FC<DocumentationProps> = ({
               <IoChevronForward className='back-icon' />
               <IoChevronForward className='back-icon' />
               <IoChevronForward className='back-icon' />
-              <span>Back</span>
+              <span>
+                {selectedField
+                  ? 'Back to Fields'
+                  : selectedType
+                    ? 'Back to Types'
+                    : 'Back'}
+              </span>
             </button>
-          ) : null}
+          ) : (
+            <button className='docs-back hidden' />
+          )}
           {selectedField ? (
             <div className='docs-container'>
               <h2 className='docs-subtitle'>{selectedField.name}:</h2>
