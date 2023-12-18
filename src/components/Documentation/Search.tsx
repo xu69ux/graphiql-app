@@ -22,7 +22,11 @@ export const Search = ({ schema }) => {
       ]);
 
       setSearchResults(
-        results.filter((item) => item.name && item.name.includes(searchTerm)),
+        results.filter(
+          (item) =>
+            item.name &&
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
       );
     } else {
       setSearchResults([]);
