@@ -1,6 +1,5 @@
 export { FormLogIn } from './Forms/FormLogIn';
 export { FormSignUp } from './Forms/FormSignUp';
-export { InputField } from './Forms/InputField';
 export { Header } from './Header';
 export { Footer } from './Footer';
 export { Fade } from './Fade';
