@@ -128,9 +128,13 @@
 }
 
 .graphiql {
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
   border-bottom: 0.1rem solid transparent;
 }
 .graphiql:hover {
+  cursor: pointer;
   border-bottom: 0.1rem solid var(--extra);
 }
 

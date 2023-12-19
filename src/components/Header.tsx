@@ -1,15 +1,13 @@
+import { useState, useEffect, useContext, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth, logout } from '../utils/firebase';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useEffect, useContext, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
-import { Fade } from '../components';
-import { auth, logout } from '../utils/firebase';
+import { Fade, CustomButton } from '../components';
 import useShowMessage from '../hooks/useShowMessage';
 import useMsg from '../hooks/useMsg';
-import { CustomButton } from '../components';
-import { LanguageContext } from '../contexts/LanguageContext';
-
 import { IoEarthOutline } from 'react-icons/io5';
 
 import '@styles/Header.css';
@@ -20,7 +18,6 @@ export const Header = () => {
   const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
   const showMessage = useShowMessage();
   const msg = useMsg();
   const languageContext = useContext(LanguageContext) || {
@@ -60,13 +57,6 @@ export const Header = () => {
     fetchData();
   }, [user, loading, fetchData]);
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    fetchData();
-  }, [user, loading, fetchData]);
-
   const logoutHandle = () => {
     logout();
     navigate('/');
@@ -83,11 +73,12 @@ export const Header = () => {
               <span>
                 {translations[language]?.greeting}, {username}!
               </span>
-              <Link to='/graphiql' className='graphiql'>
-                <span>
-                  go to <b>IDE</b>
-                </span>
-              </Link>
+              <button
+                className='graphiql'
+                onClick={() => navigate('/graphiql')}
+              >
+                go to <b>IDE</b>
+              </button>
             </>
           )}
           <CustomButton
