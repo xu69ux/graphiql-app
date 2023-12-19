@@ -19,29 +19,29 @@ export const EditorTab: FC<IEditorTabProps> = ({
   onCloseClick,
   onNameChange,
 }) => {
-  const handleTabClick = (event: MouseEvent) => {
+  const onTabSelected = (event: MouseEvent) => {
     event.stopPropagation();
     onTabClick(id);
   };
 
-  const handleCloseClick = (event: MouseEvent) => {
+  const onTabClose = (event: MouseEvent) => {
     event.stopPropagation();
     onCloseClick(id);
   };
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTabNameUpdated = (event: ChangeEvent<HTMLInputElement>) => {
     onNameChange(id, event.target.value);
   };
 
   return (
-    <div className='tab' onClick={handleTabClick}>
+    <div className='tab' onClick={onTabSelected}>
       <div className={isActive ? 'tab-title active' : 'tab-title'}>
         <input
           className='tab-title-input'
           value={name}
-          onChange={handleNameChange}
+          onChange={onTabNameUpdated}
         />
-        <IoIosClose className='tab-close' onClick={handleCloseClick} />
+        <IoIosClose className='tab-close' onClick={onTabClose} />
       </div>
     </div>
   );
