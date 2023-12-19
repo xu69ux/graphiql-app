@@ -64,7 +64,8 @@
   color: inherit;
 }
 
-.docs-container {
+.docs-container,
+.kind-container {
   margin-top: 1rem;
   padding: 0 1rem 6rem;
   width: 100%;
@@ -92,4 +93,14 @@
 
 .no-docs {
   margin: 5rem 1rem 0;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.field-type {
+  margin-left: 0.5rem;
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search } from './Search';
 import { IoChevronForward } from 'react-icons/io5';
-import { Schema, FieldType, Type } from '../../types';
+import { Schema, FieldType, Type, TypeKind } from '../../types';
 
 import '@styles/Documentation.css';
 
@@ -23,7 +23,10 @@ export const Documentation: React.FC<DocumentationProps> = ({
 }) => {
   const [selectedType, setSelectedType] = useState<Type | null>(null);
   const [selectedField, setSelectedField] = useState<FieldType | null>(null);
+  const [selectedKind, setSelectedKind] = useState<TypeKind | null>(null);
   const [searchItem, setSearchItem] = useState('');
+
+  console.log(schema);
 
   useEffect(() => {
     if (searchItem) {
@@ -42,6 +45,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
   const handleBackClick = () => {
     setSearchItem('');
     setSelectedField(null);
+    setSelectedKind(null);
     if (!selectedField) {
       setSelectedType(null);
     }
@@ -69,7 +73,12 @@ export const Documentation: React.FC<DocumentationProps> = ({
           ) : (
             <button className='docs-back hidden' />
           )}
-          {selectedField ? (
+          {selectedKind ? (
+            <div className='kind-container'>
+              <h2 className='docs-subtitle'>{selectedKind.kind}:</h2>
+              <p>{selectedKind.description}</p>
+            </div>
+          ) : selectedField ? (
             <div className='docs-container'>
               <h2 className='docs-subtitle description'>
                 {selectedField.name}:
@@ -84,12 +93,24 @@ export const Documentation: React.FC<DocumentationProps> = ({
               <h2 className='docs-subtitle'>{selectedType.name}:</h2>
               {selectedType.fields && selectedType.fields.length > 0 ? (
                 selectedType.fields.map((field) => (
-                  <div
-                    key={field.name}
-                    className='docs-item'
-                    onClick={() => setSelectedField(field)}
-                  >
-                    {field.name}
+                  <div className='field-container'>
+                    <div
+                      key={field.name}
+                      className='docs-item'
+                      onClick={() => setSelectedField(field)}
+                    >
+                      {field.name}:
+                    </div>
+                    <div
+                      key={field.name}
+                      className='field-type'
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedKind(field.type);
+                      }}
+                    >
+                      {field.type.kind}
+                    </div>
                   </div>
                 ))
               ) : (
