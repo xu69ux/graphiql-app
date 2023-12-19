@@ -11,10 +11,18 @@
   z-index: 1;
 }
 
+.header.scrolled {
+  background: linear-gradient(90deg, var(--green), var(--blue), var(--dark));
+}
+
 .user {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.user.scrolled {
+  color: var(--light);
 }
 
 .logo {
@@ -26,7 +34,10 @@
   font-size: large;
   color: var(--light);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+}
+
+.logo.scrolled {
+  color: var(--dark);
 }
 
 .logo::after {
@@ -38,10 +49,6 @@
   left: 0;
   background-color: var(--extra);
   transition: width 0.3s ease-in-out;
-}
-
-.logo:hover {
-  transform: scale(1.05);
 }
 
 .logo:hover::after {
@@ -72,7 +79,11 @@
   margin-left: 1rem;
   margin-right: 1rem;
   position: relative;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+}
+
+.lang-icon.scrolled {
+  color: var(--dark);
 }
 
 .lang-icon:hover {
@@ -114,6 +125,13 @@
 
 .lang-dropdown button.selected {
   color: var(--green);
+}
+
+.graphiql {
+  border-bottom: 0.1rem solid transparent;
+}
+.graphiql:hover {
+  border-bottom: 0.1rem solid var(--extra);
 }
 
 @keyframes fadeIn {
