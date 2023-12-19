@@ -1,8 +1,6 @@
-import { useEffect, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormSignUp } from '../components';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 
@@ -10,7 +8,7 @@ import '@styles/Auth.css';
 
 export const SignupPage = () => {
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+  const userIs = sessionStorage.getItem('authInfo');
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},
@@ -18,8 +16,8 @@ export const SignupPage = () => {
   const { language } = languageContext;
 
   useEffect(() => {
-    if (user) return navigate('/graphiql');
-  }, [user, navigate]);
+    if (userIs) return navigate('/graphiql');
+  }, [userIs, navigate]);
 
   return (
     <div className='auth-container'>
