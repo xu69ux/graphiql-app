@@ -12,19 +12,20 @@
   max-width: 0;
   width: 25rem;
   transform: scaleX(0);
+  opacity: 0;
   transform-origin: left;
   transition:
-    transform 0.2s ease-out,
-    visibility 0.2s ease-out,
-    max-width 0.2s ease-out;
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 
 .documentation.open {
+  max-width: 25rem;
+  opacity: 1;
   transform: scaleX(1);
   transition:
-    transform 0.2s ease-out,
-    visibility 0s 0s;
-  max-width: 25rem;
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 
 .docs-title {
@@ -65,10 +66,11 @@
 
 .docs-container {
   margin-top: 1rem;
-  padding: 0 1rem;
+  padding: 0 1rem 6rem;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .docs-item {
@@ -76,6 +78,7 @@
   color: var(--extra);
   margin-bottom: 0.5rem;
   cursor: pointer;
+  max-width: 10rem;
 }
 
 .docs-item:hover {
