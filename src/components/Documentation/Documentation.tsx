@@ -44,9 +44,11 @@ export const Documentation: React.FC<DocumentationProps> = ({
 
   const handleBackClick = () => {
     setSearchItem('');
-    setSelectedField(null);
-    setSelectedKind(null);
-    if (!selectedField) {
+    if (selectedKind) {
+      setSelectedKind(null);
+    } else if (selectedField) {
+      setSelectedField(null);
+    } else if (selectedType) {
       setSelectedType(null);
     }
   };
@@ -76,7 +78,8 @@ export const Documentation: React.FC<DocumentationProps> = ({
           {selectedKind ? (
             <div className='kind-container'>
               <h2 className='docs-subtitle'>{selectedKind.kind}:</h2>
-              {selectedKind.description === null ? (
+              {selectedKind.description === null ||
+              selectedKind.description === '' ? (
                 <p>There is no description for this.</p>
               ) : (
                 <p>{selectedKind.description}</p>
