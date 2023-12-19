@@ -12,10 +12,10 @@ import {
 import {
   IoSettingsSharp,
   IoFileTrayFullOutline,
-  IoAddSharp,
   IoChevronUpOutline,
   IoCaretForward,
 } from 'react-icons/io5';
+import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { Schema } from '../types';
 
 import '@styles/GraphiQLPage.css';
@@ -78,11 +78,28 @@ export const GraphiQLPage = () => {
     setActiveTab(newTab.id);
   };
 
+  const deleteAllTabs = () => {
+    const newTab: IEditorTab = {
+      id: 1,
+      code: '',
+      name: 'untitled 1',
+    };
+    setActiveTab(newTab.id);
+    setTabs([newTab]);
+  };
+
   const removeTab = (id: number) => {
     setTabs((prevTabs) => {
-      const newTabs = prevTabs.filter((tab) => tab.id !== id);
-
-      if (id === activeTab) {
+      let newTabs = prevTabs.filter((tab) => tab.id !== id);
+      if (newTabs.length === 0) {
+        const newTab: IEditorTab = {
+          id: 1,
+          code: '',
+          name: 'untitled 1',
+        };
+        newTabs = [newTab];
+        setActiveTab(newTab.id);
+      } else if (id === activeTab) {
         const newActiveTab = newTabs[newTabs.length - 1] || null;
         setActiveTab(newActiveTab ? newActiveTab.id : null);
       }
@@ -131,12 +148,26 @@ export const GraphiQLPage = () => {
             onClick={toggleDocumentation}
             title='show documentation'
           />
-          <IoSettingsSharp className='sidebar-icon settings' title='settings' />
-          <IoAddSharp
+          <LuFilePlus2
             className='sidebar-icon add'
-            onClick={addTab}
             title='add tab'
+            onClick={addTab}
           />
+          <LuFileMinus2
+            className={`sidebar-icon remove ${
+              tabs.length === 1 ? 'disabled' : ''
+            }`}
+            title='remove tab'
+            onClick={() => removeTab(activeTab!)}
+          />
+          <LuFileX2
+            className={`sidebar-icon clear ${
+              tabs.length === 1 ? 'disabled' : ''
+            }`}
+            title='delete all tabs'
+            onClick={deleteAllTabs}
+          />
+          <IoSettingsSharp className='sidebar-icon settings' title='settings' />
         </div>
         <Documentation
           isDocumentationOpen={isDocumentationOpen}
