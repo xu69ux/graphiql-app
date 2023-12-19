@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { auth, logout } from '../utils/firebase';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,6 +14,7 @@ import '@styles/Header.css';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [username, setUserName] = useState('');
   const [user, loading] = useAuthState(auth);
   const [isDropdownOpen, toggleDropdown] = useState(false);
@@ -73,12 +74,14 @@ export const Header = () => {
               <span>
                 {translations[language]?.greeting}, {username}!
               </span>
-              <button
-                className='graphiql'
-                onClick={() => navigate('/graphiql')}
-              >
-                go to <b>IDE</b>
-              </button>
+              {location.pathname !== '/graphiql' && (
+                <button
+                  className='graphiql'
+                  onClick={() => navigate('/graphiql')}
+                >
+                  go to <b>IDE</b>
+                </button>
+              )}
             </>
           )}
           <CustomButton
