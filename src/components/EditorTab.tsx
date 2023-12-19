@@ -1,7 +1,7 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
-
 import { IoIosClose } from 'react-icons/io';
 
+import '@styles/EditorTab.css';
 interface IEditorTabProps {
   id: number;
   name: string;
@@ -9,6 +9,7 @@ interface IEditorTabProps {
   onTabClick: (id: number) => void;
   onCloseClick: (id: number) => void;
   onNameChange: (id: number, name: string) => void;
+  totalTabs: number;
 }
 
 export const EditorTab: FC<IEditorTabProps> = ({
@@ -18,6 +19,7 @@ export const EditorTab: FC<IEditorTabProps> = ({
   onTabClick,
   onCloseClick,
   onNameChange,
+  totalTabs,
 }) => {
   const onTabSelected = (event: MouseEvent) => {
     event.stopPropagation();
@@ -26,7 +28,9 @@ export const EditorTab: FC<IEditorTabProps> = ({
 
   const onTabClose = (event: MouseEvent) => {
     event.stopPropagation();
-    onCloseClick(id);
+    if (totalTabs > 1) {
+      onCloseClick(id);
+    }
   };
 
   const onTabNameUpdated = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +45,10 @@ export const EditorTab: FC<IEditorTabProps> = ({
           value={name}
           onChange={onTabNameUpdated}
         />
-        <IoIosClose className='tab-close' onClick={onTabClose} />
+        <IoIosClose
+          className={`tab-close ${totalTabs === 1 ? 'disabled' : ''}`}
+          onClick={onTabClose}
+        />
       </div>
     </div>
   );

@@ -192,6 +192,7 @@ export const GraphiQLPage = () => {
                   onTabClick={setActiveTab}
                   onCloseClick={removeTab}
                   onNameChange={handleNameChange}
+                  totalTabs={tabs.length}
                 />
               ))}
             </div>
