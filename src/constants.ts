@@ -12,31 +12,6 @@ export const MEMES_URL = [
   'https://www.meme-arsenal.com/memes/105a259367db6e03d4c5b0c50155ba17.jpg',
 ];
 
-export const GRAPHQLWORDS = [
-  { name: 'String', description: 'A data type representing textual data.' },
-  { name: 'Int', description: 'A data type representing integers.' },
-  { name: 'FilmsConnection', description: 'Connection to a list of films.' },
-  {
-    name: 'PageInfo',
-    description: 'Information about pagination in a connection.',
-  },
-  {
-    name: 'Boolean',
-    description: 'A data type representing true or false values.',
-  },
-  {
-    name: 'FilmsEdge',
-    description: 'An edge in a connection to a list of films.',
-  },
-  { name: 'Film', description: 'Represents a single film.' },
-  { name: 'Node', description: 'An interface for objects with an ID.' },
-  { name: 'ID', description: 'A data type representing a unique identifier.' },
-  {
-    name: 'FilmSpeciesConnection',
-    description: 'Connection to a list of species in a film.',
-  },
-];
-
 export const QUERY_FOR_SHEMA_FETCHING = `
   fragment FullType on __Type {
     kind
