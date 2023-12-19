@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthForm } from '../components';
+import { FormSignUp } from '../components';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 
@@ -16,22 +16,20 @@ export const SignupPage = () => {
   const { language } = languageContext;
 
   useEffect(() => {
-    if (userIs) navigate('/graphiql');
-  }, [navigate, userIs]);
+    if (userIs) return navigate('/graphiql');
+  }, [userIs, navigate]);
 
   return (
-    !userIs && (
-      <div className='auth-container'>
-        <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
-        <AuthForm mode='register' />
-        <p className='no-account'>
-          {translations?.[language]?.yesAccount}
-          <Link to='/login' className='login-link'>
-            {translations?.[language]?.login}
-          </Link>
-          !
-        </p>
-      </div>
-    )
+    <div className='auth-container'>
+      <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
+      <FormSignUp />
+      <p className='no-account'>
+        {translations?.[language]?.yesAccount}
+        <Link to='/login' className='login-link'>
+          {translations?.[language]?.login}
+        </Link>
+        !
+      </p>
+    </div>
   );
 };

@@ -1,13 +1,13 @@
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { translations } from '../contexts/translations';
 import { Fade } from '../components';
 import { auth, logout } from '../utils/firebase';
 import useShowMessage from '../hooks/useShowMessage';
 import useMsg from '../hooks/useMsg';
-
+import { CustomButton } from '../components';
 import { LanguageContext } from '../contexts/LanguageContext';
 
 import { IoEarthOutline } from 'react-icons/io5';
@@ -28,14 +28,14 @@ export const Header = () => {
   };
   const { language, setLanguage } = languageContext;
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (user) {
       const userName = await fetchUserName(user);
       setUserName(userName);
     } else {
       setUserName('');
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     const onScroll = () => setScrollPosition(window.pageYOffset);
@@ -48,7 +48,7 @@ export const Header = () => {
       return;
     }
     fetchData();
-  }, [user, loading]);
+  }, [user, loading, fetchData]);
 
   const logoutHandle = () => {
     logout();
@@ -62,7 +62,7 @@ export const Header = () => {
       return;
     }
     fetchData();
-  }, [user, loading]);
+  }, [user, loading, fetchData]);
 
   const headerStyle: React.CSSProperties = {
     background:
@@ -81,10 +81,11 @@ export const Header = () => {
               {translations[language]?.greeting}, {username}!
             </span>
           )}
-
-          <button className='btn-logout' onClick={logoutHandle}>
-            {translations[language]?.logout}
-          </button>
+          <CustomButton
+            className='btn btn-header btn-logout'
+            onClick={logoutHandle}
+            title={translations[language]?.logout}
+          />
         </div>
       </nav>
     );
@@ -94,12 +95,16 @@ export const Header = () => {
     return (
       <nav>
         <div className='user'>
-          <button className='btn-login' onClick={() => navigate('/login')}>
-            {translations[language]?.login}
-          </button>
-          <button className='btn-signup' onClick={() => navigate('/signup')}>
-            {translations[language]?.signup}
-          </button>
+          <CustomButton
+            className='btn btn-header btn-login'
+            onClick={() => navigate('/login')}
+            title={translations[language]?.login}
+          />
+          <CustomButton
+            className='btn btn-header btn-signup'
+            onClick={() => navigate('/signup')}
+            title={translations[language]?.signup}
+          />
         </div>
       </nav>
     );
