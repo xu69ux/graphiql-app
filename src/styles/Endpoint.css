@@ -46,3 +46,19 @@
   background-color: transparent;
   font-size: 1.2rem;
 }
+
+.history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: var(--light);
+  font-size: 1.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.history:hover {
+  color: var(--green);
+}

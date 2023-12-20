@@ -1,6 +1,7 @@
 import { FC, Dispatch, SetStateAction, memo } from 'react';
 
 import { IoChevronForward } from 'react-icons/io5';
+import { LiaHistorySolid } from 'react-icons/lia';
 
 import '@styles/Endpoint.css';
 
@@ -12,6 +13,12 @@ interface IEndpointProps {
 
 export const Endpoint: FC<IEndpointProps> = memo(
   ({ endpointValue, setEndpoint, fetchShema }) => {
+    const setFromHistory = () => {
+      const prevEndpoint = localStorage.getItem('prevEndpoint');
+      if (prevEndpoint) {
+        setEndpoint(prevEndpoint);
+      }
+    };
     return (
       <div className='endpoint'>
         <label className='endpoint-label' htmlFor='endpoint'>
@@ -35,6 +42,13 @@ export const Endpoint: FC<IEndpointProps> = memo(
             onBlur={fetchShema}
           />
         </div>
+        <button
+          className='history'
+          title='use previous endpoint'
+          onClick={setFromHistory}
+        >
+          <LiaHistorySolid />
+        </button>
       </div>
     );
   },
