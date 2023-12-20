@@ -62,3 +62,13 @@
 .history:hover {
   color: var(--green);
 }
+
+.history.disabled {
+  opacity: 0.5;
+}
+
+.history.disabled:hover {
+  cursor: default;
+  transform: none;
+  color: var(--light);
+}
