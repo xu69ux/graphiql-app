@@ -21,12 +21,6 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   const [inputCode, setInputCode] = useState(code);
   const [highlightedCode, setHighlightedCode] = useState('');
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newCode = e.target.value;
-    setInputCode(newCode);
-    recalcLines(newCode);
-  };
-
   const recalcLines = (code: string) => {
     const numLines = code.split('\n').length;
     lines.current!.innerText = Array.from(
@@ -34,6 +28,9 @@ export const EditorWindow: FC<IEditWindowProps> = ({
       (_, i) => i + 1,
     ).join('\n');
   };
+  useEffect(() => {
+    setInputCode(code);
+  }, [code]);
 
   useEffect(() => {
     recalcLines(code);
@@ -56,6 +53,15 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 
     setHighlightedCode(highlightedQuery);
   }, [inputCode]);
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newCode = e.target.value;
+    setInputCode(newCode);
+    recalcLines(newCode);
+    if (updateData && e.target.value !== code) {
+      updateData(newCode);
+    }
+  };
 
   return (
     <div className='code-container'>

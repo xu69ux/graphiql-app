@@ -7,9 +7,11 @@ import {
   IoAddSharp,
   IoChevronUpOutline,
   IoCaretForward,
+  IoSparklesOutline,
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
+import formatGraphQLQuery from '../utils/prettifying';
 
 interface IEditorTab {
   id: number;
@@ -82,6 +84,17 @@ export const GraphiQLPage = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };
 
+  const handleFormatCode = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (!activeTabTemp.code) {
+      return;
+    }
+    const formattedQuery = formatGraphQLQuery(activeTabTemp.code);
+    updateData(formattedQuery);
+  };
+
   return (
     <div className='container'>
       <div className='sidebar'>
@@ -95,6 +108,11 @@ export const GraphiQLPage = () => {
           className='sidebar-icon add'
           onClick={addTab}
           title='add tab'
+        />
+        <IoSparklesOutline
+          className='sidebar-icon add'
+          onClick={handleFormatCode}
+          title='prettify query'
         />
       </div>
       <Documentation isDocumentationOpen={isDocumentationOpen} />
