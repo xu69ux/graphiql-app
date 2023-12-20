@@ -80,60 +80,8 @@
   color: var(--light);
 }
 
-.sidebar {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: var(--blue);
-  height: 100%;
-  min-width: 5rem;
-}
-
-.sidebar-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: var(--blue);
-  height: 100%;
-  min-width: 5rem;
-  padding: 1rem;
-}
-
-.sidebar-icon.settings,
-.sidebar-icon.docs,
-.sidebar-icon.add,
-.sidebar-icon.remove,
-.sidebar-icon.clear {
-  color: var(--green);
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.sidebar-icon.settings:hover,
-.sidebar-icon.docs:hover,
-.sidebar-icon.add:hover,
-.sidebar-icon.remove:hover,
-.sidebar-icon.clear:hover {
-  color: var(--light);
-  transform: scale(1.1);
-}
-
-.sidebar-icon.docs.active {
-  color: var(--light);
-}
-
 .disabled {
   opacity: 0.5;
-}
-
-.sidebar-icon.remove.disabled:hover,
-.sidebar-icon.clear.disabled:hover {
-  cursor: default;
-  transform: none;
-  color: var(--green);
 }
 
 .tab-container {

@@ -19,3 +19,9 @@ export interface Type {
 export interface Schema {
   types: Type[];
 }
+
+export interface IEditorTab {
+  id: number;
+  code: string;
+  name: string;
+}
