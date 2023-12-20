@@ -24,6 +24,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };
+
   const addTab = () => {
     const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
     const newTab: IEditorTab = {
@@ -67,33 +68,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className='sidebar'>
-      <div className='sidebar-wrap'>
-        <IoFileTrayFullOutline
-          className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
-          onClick={toggleDocumentation}
-          title='show documentation'
-        />
-        <LuFilePlus2
-          className='sidebar-icon add'
-          title='add tab'
-          onClick={addTab}
-        />
-        <LuFileMinus2
-          className={`sidebar-icon remove ${
-            tabs.length === 1 ? 'disabled' : ''
-          }`}
-          title='remove tab'
-          onClick={() => removeTab(activeTab!)}
-        />
-        <LuFileX2
-          className={`sidebar-icon clear ${
-            tabs.length === 1 ? 'disabled' : ''
-          }`}
-          title='delete all tabs'
-          onClick={deleteAllTabs}
-        />
-        <IoSettingsSharp className='sidebar-icon settings' title='settings' />
-      </div>
+      <IoFileTrayFullOutline
+        className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
+        onClick={toggleDocumentation}
+        title='show documentation'
+      />
+      <LuFilePlus2
+        className='sidebar-icon add'
+        title='add tab'
+        onClick={addTab}
+      />
+      <LuFileMinus2
+        className={`sidebar-icon remove ${tabs.length === 1 ? 'disabled' : ''}`}
+        title='remove tab'
+        onClick={() => removeTab(activeTab!)}
+      />
+      <LuFileX2
+        className={`sidebar-icon clear ${tabs.length === 1 ? 'disabled' : ''}`}
+        title='delete all tabs'
+        onClick={deleteAllTabs}
+      />
+      <IoSettingsSharp className='sidebar-icon settings' title='settings' />
     </div>
   );
 };
