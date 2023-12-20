@@ -102,7 +102,9 @@
 
 .sidebar-icon.settings,
 .sidebar-icon.docs,
-.sidebar-icon.add {
+.sidebar-icon.add,
+.sidebar-icon.remove,
+.sidebar-icon.clear {
   color: var(--green);
   font-size: 1.5rem;
   margin-bottom: 2rem;
@@ -112,7 +114,9 @@
 
 .sidebar-icon.settings:hover,
 .sidebar-icon.docs:hover,
-.sidebar-icon.add:hover {
+.sidebar-icon.add:hover,
+.sidebar-icon.remove:hover,
+.sidebar-icon.clear:hover {
   color: var(--light);
   transform: scale(1.1);
 }
@@ -121,56 +125,22 @@
   color: var(--light);
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
+.sidebar-icon.remove.disabled:hover,
+.sidebar-icon.clear.disabled:hover {
+  cursor: default;
+  transform: none;
+  color: var(--green);
+}
+
 .tab-container {
   display: flex;
   overflow-x: auto;
   height: 100%;
   width: 100%;
-}
-
-.tab {
-  margin: 1.5rem 0 0.8rem 2rem;
-  cursor: pointer;
-}
-
-.tab:hover {
-  color: var(--green);
-}
-
-.tab-title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 0.8rem;
-  margin-bottom: 0.5rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.5rem;
-  border: 0.5px solid var(--green);
-  transition: all 0.2s ease-in-out;
-}
-
-.tab-title.active {
-  border: 0.01rem solid var(--green);
-  background-color: var(--green);
-  color: var(--dark);
-  cursor: default;
-  font-weight: 600;
-}
-
-.tab-title-input {
-  all: inherit;
-  border: none;
-  background-color: transparent;
-  width: 7rem;
-  margin: 0;
-}
-
-.tab-title.active .tab-close {
-  color: var(--dark);
-}
-
-.tab-title.active .tab-title-input {
-  color: var(--dark);
 }
 
 .tab-names {
@@ -181,18 +151,6 @@
   max-height: 3.5rem;
   margin-bottom: 0.5rem;
   overflow-y: hidden;
-}
-
-.tab-close {
-  color: var(--light);
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.tab-close:hover {
-  transform: scale(1.3);
 }
 
 .run-button {

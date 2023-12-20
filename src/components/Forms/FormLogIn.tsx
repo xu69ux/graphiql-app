@@ -46,6 +46,7 @@ export const FormLogIn = () => {
       return;
     }
     if (user) navigate('/graphiql');
+    sessionStorage.setItem('authInfo', 'userIs');
   }, [user, loading, navigate]);
 
   useEffect(() => {

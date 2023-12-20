@@ -16,20 +16,22 @@ export const LoginPage = () => {
   const { language } = languageContext;
 
   useEffect(() => {
-    if (userIs) return navigate('/graphiql');
+    if (userIs) navigate('/graphiql');
   }, [userIs, navigate]);
 
   return (
-    <div className='auth-container'>
-      <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
-      <FormLogIn />
-      <p className='no-account'>
-        {translations?.[language]?.noAccount}
-        <Link to='/signup' className='signup-link'>
-          {translations?.[language]?.signup}
-        </Link>
-        !
-      </p>
-    </div>
+    !userIs && (
+      <div className='auth-container'>
+        <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
+        <FormLogIn />
+        <p className='no-account'>
+          {translations?.[language]?.noAccount}
+          <Link to='/signup' className='signup-link'>
+            {translations?.[language]?.signup}
+          </Link>
+          !
+        </p>
+      </div>
+    )
   );
 };
