@@ -8,6 +8,7 @@ interface SidebarProps {
   tabs: IEditorTab[];
   activeTab: number | null;
   isDocumentationOpen: boolean;
+  isFetchSuccessful: boolean;
   setTabs: React.Dispatch<React.SetStateAction<IEditorTab[]>>;
   setActiveTab: React.Dispatch<React.SetStateAction<number | null>>;
   setIsDocumentationOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +18,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   tabs,
   activeTab,
   isDocumentationOpen,
+  isFetchSuccessful,
   setTabs,
   setActiveTab,
   setIsDocumentationOpen,
@@ -69,7 +71,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className='sidebar'>
       <IoFileTrayFullOutline
-        className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''}`}
+        className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''} ${
+          isFetchSuccessful ? '' : 'disabled'
+        }`}
         onClick={toggleDocumentation}
         title='show documentation'
       />

@@ -33,6 +33,7 @@ export const GraphiQLPage = () => {
   const [viewer, setViewer] = useState('');
   const [endpoint, setEndpoint] = useState('');
   const [schema, setSchema] = useState<Schema | null>(null);
+  const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
 
   const saveEndpoint = useCallback((endpoint: string) => {
     localStorage.setItem('prevEndpoint', endpoint);
@@ -43,8 +44,10 @@ export const GraphiQLPage = () => {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
       setSchema(response.data.data.__schema);
       saveEndpoint(endpoint);
+      setIsFetchSuccessful(true);
     } catch (error) {
       console.log(error);
+      setIsFetchSuccessful(false);
     }
   }, [endpoint, saveEndpoint]);
 
@@ -113,6 +116,7 @@ export const GraphiQLPage = () => {
         tabs={tabs}
         activeTab={activeTab}
         isDocumentationOpen={isDocumentationOpen}
+        isFetchSuccessful={isFetchSuccessful}
         setTabs={setTabs}
         setActiveTab={setActiveTab}
         setIsDocumentationOpen={setIsDocumentationOpen}
