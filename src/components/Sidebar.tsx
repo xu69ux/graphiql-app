@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
-import { IoSettingsSharp, IoFileTrayFullOutline } from 'react-icons/io5';
+import { IoFileTrayFullOutline } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IEditorTab } from '../types';
 
@@ -100,10 +100,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         className={`sidebar-icon clear ${tabs.length === 1 ? 'disabled' : ''}`}
         title={translations[language]?.titleDeleteTabs}
         onClick={deleteAllTabs}
-      />
-      <IoSettingsSharp
-        className='sidebar-icon settings'
-        title={translations[language]?.titleSettings}
       />
     </div>
   );
