@@ -1,4 +1,4 @@
-.register,
+.signup,
 .login {
   display: flex;
   flex-direction: column;
@@ -23,26 +23,17 @@ input {
   transition: all 0.2s ease-in-out;
 }
 
-.btn.log,
-.btn.reg {
+.btn-log,
+.btn-sign {
   width: 50%;
   height: 2rem;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  font-size: 1rem;
   background-color: var(--blue);
-  border: 1px solid var(--green);
-  color: var(--green);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 
-.btn.log:hover,
-.btn.reg:hover {
+.btn-log:hover,
+.btn-sign:hover {
   background-color: var(--green);
   color: var(--blue);
 }

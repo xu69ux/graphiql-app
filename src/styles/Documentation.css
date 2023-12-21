@@ -1,119 +1,110 @@
 .documentation {
-  visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: var(--blue);
-  border-left: 0.3px solid var(--green);
+  border-left: 0.3px solid #01c38c00;
   border-right: 0.3px solid var(--green);
   font-size: 0.9rem;
   color: var(--light);
   height: 100%;
+  width: 25rem;
   max-width: 0;
-  width: 20rem;
-  padding: 1rem;
-  transform: scaleX(0);
-  transform-origin: left;
+  visibility: hidden;
+  transform: translateX(-150%);
   transition:
     transform 0.2s ease-out,
-    visibility 0.2s ease-out,
-    max-width 0.2s ease-out;
+    visibility 0.1s ease-out,
+    max-width 0.2s ease-out,
+    border-color 0.3s ease-out;
 }
 
 .documentation.open {
+  max-width: 25rem;
   visibility: visible;
-  transform: scaleX(1);
+  transform: translateX(0);
+  border-left: 0.3px solid #01c38c;
   transition:
     transform 0.2s ease-out,
-    visibility 0s 0s;
-  max-width: 20rem;
+    visibility 0.1s ease-out,
+    max-width 0.2s ease-out,
+    border-color 0.3s ease-in;
 }
 
-.documentation h2 {
-  margin-bottom: 1rem;
+.docs-title {
+  margin-top: 1rem;
+  font-size: 1.2rem;
 }
 
-.documentation-item-container {
-  margin-top: 4rem;
-}
-
-.documentation-item-name {
-  font-size: 0.8rem;
-  color: var(--extra);
-  color: orange;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-}
-
-.documentation-item-name:hover {
+.docs-subtitle {
+  font-size: 1rem;
   color: var(--light);
+  margin: 1rem 0;
 }
 
-.documentation-container {
-  text-align: left;
-  width: 100%;
-}
-
-.documentation-back {
+.docs-back {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 1rem 1rem 0 auto;
   border: none;
-  background-color: transparent;
   cursor: pointer;
+  background-color: transparent;
+  color: var(--green);
+}
+
+.docs-back.hidden {
+  visibility: hidden;
+  min-height: 1rem;
+}
+
+.docs-back:hover {
   color: var(--light);
 }
 
-.documentation-back.icon {
+.back-icon {
   rotate: 180deg;
   color: inherit;
 }
 
-.documentation-back:hover {
-  color: orange;
+.docs-container,
+.kind-container {
+  margin-top: 1rem;
+  padding: 0 1rem 6rem;
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
-.documentation-search {
-  position: relative;
+.docs-item {
+  font-size: 0.8rem;
+  color: var(--extra);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  max-width: 10rem;
+}
+
+.docs-item:hover {
+  color: var(--light);
+}
+
+.docs-subtitle.description {
+  border-bottom: 0.08rem solid var(--extra);
+  width: fit-content;
+}
+
+.no-docs {
+  margin: 5rem 1rem 0;
+}
+
+.field-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  padding: 0.3rem;
-  border-radius: 0.3rem;
-  border: none;
-  background-color: var(--dark);
+}
+
+.field-type {
+  margin-left: 0.5rem;
   cursor: pointer;
-  color: var(--light);
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.documentation-search.active {
-  width: 100%;
-}
-
-.documentation-search input {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: var(--light);
-}
-
-.documentation-search input:not(:focus) {
-  width: 0;
-  padding: 0;
-  border: none;
-}
-
-.documentation-search input:focus {
-  outline: none;
-  width: 100%;
-}
-
-.documentation-search-icon {
-  position: absolute;
-  right: 0.5rem;
-  font-size: 1.5rem;
 }

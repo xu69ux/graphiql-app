@@ -1,4 +1,10 @@
-.code-container,
+.code-container {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
 .line-numbers,
 .code,
 .highlighted-code {
@@ -7,13 +13,6 @@
   font-size: 0.9rem;
   line-height: 1.5;
   overflow: auto;
-}
-
-.code-container {
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  position: relative;
 }
 
 .line-numbers {

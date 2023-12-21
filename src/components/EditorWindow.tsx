@@ -21,22 +21,22 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   const [inputCode, setInputCode] = useState(code);
   const [highlightedCode, setHighlightedCode] = useState('');
 
+  const recalculateLines = (code: string) => {
+    const numLines = code.split('\n').length;
+    const newLines = Array.from({ length: numLines }, (_, i) => i + 1).join(
+      '\n',
+    );
+    lines.current!.innerText = newLines;
+  };
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newCode = e.target.value;
     setInputCode(newCode);
-    recalcLines(newCode);
-  };
-
-  const recalcLines = (code: string) => {
-    const numLines = code.split('\n').length;
-    lines.current!.innerText = Array.from(
-      { length: numLines },
-      (_, i) => i + 1,
-    ).join('\n');
+    recalculateLines(newCode);
   };
 
   useEffect(() => {
-    recalcLines(code);
+    recalculateLines(code);
   }, [code]);
 
   useEffect(() => {

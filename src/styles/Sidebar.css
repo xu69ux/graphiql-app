@@ -1,0 +1,38 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--blue);
+  height: 100%;
+  min-width: 5rem;
+  padding: 1rem;
+  z-index: 5;
+}
+
+.sidebar-icon {
+  color: var(--green);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-icon:hover {
+  color: var(--light);
+  transform: scale(1.1);
+}
+
+.sidebar-icon.docs.active {
+  color: var(--light);
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.sidebar-icon.disabled:hover {
+  cursor: default;
+  transform: none;
+  color: var(--green);
+}

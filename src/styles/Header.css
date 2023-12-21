@@ -11,10 +11,18 @@
   z-index: 10;
 }
 
+.header.scrolled {
+  background: linear-gradient(90deg, var(--green), var(--blue), var(--dark));
+}
+
 .user {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.user.scrolled {
+  color: var(--light);
 }
 
 .logo {
@@ -26,7 +34,10 @@
   font-size: large;
   color: var(--light);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+}
+
+.logo.scrolled {
+  color: var(--dark);
 }
 
 .logo::after {
@@ -40,31 +51,18 @@
   transition: width 0.3s ease-in-out;
 }
 
-.logo:hover {
-  transform: scale(1.05);
-}
-
 .logo:hover::after {
   width: 100%;
 }
 
-.btn-logout,
-.btn-login,
-.btn-signup {
+.btn-header {
   background-color: var(--dark);
-  border: 1px solid var(--green);
-  color: var(--green);
-  border-radius: 0.5rem;
   margin-left: 1rem;
   padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
   min-width: 6rem;
 }
 
-.btn-logout:hover,
-.btn-login:hover,
-.btn-signup:hover {
+.btn-header:hover {
   background-color: var(--blue);
   color: var(--light);
 }
@@ -81,7 +79,11 @@
   margin-left: 1rem;
   margin-right: 1rem;
   position: relative;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+}
+
+.lang-icon.scrolled {
+  color: var(--dark);
 }
 
 .lang-icon:hover {
@@ -123,6 +125,17 @@
 
 .lang-dropdown button.selected {
   color: var(--green);
+}
+
+.graphiql {
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  border-bottom: 0.1rem solid transparent;
+}
+.graphiql:hover {
+  cursor: pointer;
+  border-bottom: 0.1rem solid var(--extra);
 }
 
 @keyframes fadeIn {
