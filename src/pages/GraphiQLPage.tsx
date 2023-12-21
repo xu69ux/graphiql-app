@@ -7,24 +7,14 @@ import {
   EditorTab,
   Documentation,
   Endpoint,
+  Sidebar,
 } from '../components';
 
-import {
-  IoSettingsSharp,
-  IoFileTrayFullOutline,
-  IoChevronUpOutline,
-  IoCaretForward,
-} from 'react-icons/io5';
-import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
-import { Schema } from '../types';
+import { IoChevronUpOutline, IoCaretForward } from 'react-icons/io5';
+
+import { Schema, IEditorTab } from '../types';
 
 import '@styles/GraphiQLPage.css';
-
-interface IEditorTab {
-  id: number;
-  code: string;
-  name: string;
-}
 
 const updateTab = (
   tabs: IEditorTab[],
@@ -65,27 +55,6 @@ export const GraphiQLPage = () => {
 
   const handleNameChange = (id: number, newName: string) => {
     setTabs((prevTabs) => updateTab(prevTabs, id, { name: newName }));
-  };
-
-  const addTab = () => {
-    const nextId = tabs.length > 0 ? tabs[tabs.length - 1].id + 1 : 1;
-    const newTab: IEditorTab = {
-      id: nextId,
-      code: '',
-      name: `untitled ${nextId}`,
-    };
-    setTabs((prevTabs) => [...prevTabs, newTab]);
-    setActiveTab(newTab.id);
-  };
-
-  const deleteAllTabs = () => {
-    const newTab: IEditorTab = {
-      id: 1,
-      code: '',
-      name: 'untitled 1',
-    };
-    setActiveTab(newTab.id);
-    setTabs([newTab]);
   };
 
   const removeTab = (id: number) => {
@@ -131,49 +100,22 @@ export const GraphiQLPage = () => {
     );
   };
 
-  const toggleDocumentation = () => {
-    setIsDocumentationOpen(!isDocumentationOpen);
-  };
-
   console.log('render');
 
   return (
     <div className='container'>
-      <div className='sidebar'>
-        <div className='sidebar-wrap'>
-          <IoFileTrayFullOutline
-            className={`sidebar-icon docs ${
-              isDocumentationOpen ? 'active' : ''
-            }`}
-            onClick={toggleDocumentation}
-            title='show documentation'
-          />
-          <LuFilePlus2
-            className='sidebar-icon add'
-            title='add tab'
-            onClick={addTab}
-          />
-          <LuFileMinus2
-            className={`sidebar-icon remove ${
-              tabs.length === 1 ? 'disabled' : ''
-            }`}
-            title='remove tab'
-            onClick={() => removeTab(activeTab!)}
-          />
-          <LuFileX2
-            className={`sidebar-icon clear ${
-              tabs.length === 1 ? 'disabled' : ''
-            }`}
-            title='delete all tabs'
-            onClick={deleteAllTabs}
-          />
-          <IoSettingsSharp className='sidebar-icon settings' title='settings' />
-        </div>
-        <Documentation
-          isDocumentationOpen={isDocumentationOpen}
-          schema={schema}
-        />
-      </div>
+      <Sidebar
+        tabs={tabs}
+        activeTab={activeTab}
+        isDocumentationOpen={isDocumentationOpen}
+        setTabs={setTabs}
+        setActiveTab={setActiveTab}
+        setIsDocumentationOpen={setIsDocumentationOpen}
+      />
+      <Documentation
+        isDocumentationOpen={isDocumentationOpen}
+        schema={schema}
+      />
       <div className='container-wrap'>
         <Endpoint
           endpointValue={endpoint}
