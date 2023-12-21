@@ -46,8 +46,10 @@ export const FormSignUp = () => {
     if (loading) {
       return;
     }
-    if (user) navigate('/graphiql');
-    sessionStorage.setItem('authInfo', 'userIs');
+    if (user) {
+      navigate('/graphiql');
+      sessionStorage.setItem('authInfo', 'userIs');
+    }
   }, [user, loading, navigate]);
 
   useEffect(() => {
