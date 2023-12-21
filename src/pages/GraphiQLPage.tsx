@@ -8,6 +8,7 @@ import {
   IoChevronUpOutline,
   IoCaretForward,
   IoSparklesOutline,
+  IoRemoveCircle,
 } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
@@ -95,6 +96,17 @@ export const GraphiQLPage = () => {
     updateData(formattedQuery);
   };
 
+  const handleClearCode = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (!activeTabTemp.code) {
+      return;
+    }
+    const clearQuery = '';
+    updateData(clearQuery);
+  };
+
   return (
     <div className='container'>
       <div className='sidebar'>
@@ -108,11 +120,6 @@ export const GraphiQLPage = () => {
           className='sidebar-icon add'
           onClick={addTab}
           title='add tab'
-        />
-        <IoSparklesOutline
-          className='sidebar-icon add'
-          onClick={handleFormatCode}
-          title='prettify query'
         />
       </div>
       <Documentation isDocumentationOpen={isDocumentationOpen} />
@@ -142,6 +149,18 @@ export const GraphiQLPage = () => {
                   />
                 ),
             )}
+            <div className='editor-toolbar'>
+              <IoSparklesOutline
+                className='sidebar-icon add'
+                onClick={handleFormatCode}
+                title='prettify query'
+              />
+              <IoRemoveCircle
+                className='sidebar-icon add'
+                title='clear text area'
+                onClick={handleClearCode}
+              />
+            </div>
           </div>
           <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
             <div className='variables'>
