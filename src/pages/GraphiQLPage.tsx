@@ -34,14 +34,19 @@ export const GraphiQLPage = () => {
   const [endpoint, setEndpoint] = useState('');
   const [schema, setSchema] = useState<Schema | null>(null);
 
+  const saveEndpoint = useCallback((endpoint: string) => {
+    localStorage.setItem('prevEndpoint', endpoint);
+  }, []);
+
   const fetchShema = useCallback(async (): Promise<void> => {
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
       setSchema(response.data.data.__schema);
+      saveEndpoint(endpoint);
     } catch (error) {
       console.log(error);
     }
-  }, [endpoint]);
+  }, [endpoint, saveEndpoint]);
 
   useEffect(() => {
     fetchShema();
