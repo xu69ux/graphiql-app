@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { translations } from '../contexts/translations';
 import { IoSettingsSharp, IoFileTrayFullOutline } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IEditorTab } from '../types';
@@ -23,6 +26,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setActiveTab,
   setIsDocumentationOpen,
 }) => {
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language } = languageContext;
+
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };
@@ -75,24 +84,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
           isFetchSuccessful ? '' : 'disabled'
         }`}
         onClick={toggleDocumentation}
-        title='show documentation'
+        title={translations[language]?.titleDocs}
       />
       <LuFilePlus2
         className='sidebar-icon add'
-        title='add tab'
+        title={translations[language]?.titleAddTab}
         onClick={addTab}
       />
       <LuFileMinus2
         className={`sidebar-icon remove ${tabs.length === 1 ? 'disabled' : ''}`}
-        title='remove tab'
+        title={translations[language]?.titleRemoveTab}
         onClick={() => removeTab(activeTab!)}
       />
       <LuFileX2
         className={`sidebar-icon clear ${tabs.length === 1 ? 'disabled' : ''}`}
-        title='delete all tabs'
+        title={translations[language]?.titleDeleteTabs}
         onClick={deleteAllTabs}
       />
-      <IoSettingsSharp className='sidebar-icon settings' title='settings' />
+      <IoSettingsSharp
+        className='sidebar-icon settings'
+        title={translations[language]?.titleSettings}
+      />
     </div>
   );
 };

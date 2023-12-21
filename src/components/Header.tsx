@@ -128,7 +128,7 @@ export const Header = () => {
         >
           <IoEarthOutline
             className={`lang-icon ${scrolled ? 'scrolled' : ''}`}
-            title='change language'
+            title={translations[language]?.titleLanguage}
           />
           <Fade show={isDropdownOpen}>
             <div className='lang-dropdown'>
