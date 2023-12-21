@@ -1,0 +1,58 @@
+.signup,
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  margin: 0 auto;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  width: 100%;
+  height: 2rem;
+  padding: 0 1rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-log,
+.btn-sign {
+  width: 50%;
+  height: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--blue);
+}
+
+.btn-log:hover,
+.btn-sign:hover {
+  background-color: var(--green);
+  color: var(--blue);
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.8rem;
+  height: 1rem;
+  width: 37rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.error p {
+  text-align: center;
+}
+
+.password-indicator {
+  height: 0.15rem;
+  width: 60%;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,89 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--dark), var(--blue), var(--dark));
+  background-color: var(--dark);
+  color: var(--light);
+  height: 5rem;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.repo-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.repo-link:hover {
+  color: var(--green);
+}
+
+.course-logo {
+  height: 5rem;
+  margin-right: 0.5rem;
+}
+
+.course-link {
+  cursor: pointer;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: flex-end;
+  width: 15rem;
+}
+
+.iconDiv {
+  width: 1.3rem;
+  margin: 1.25rem 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    width 300ms ease-in-out 0s,
+    background-color 300ms linear 200ms;
+}
+
+.iconSVG {
+  font-size: 1rem;
+}
+
+.iconDiv:hover,
+.iconDiv:focus-visible {
+  width: 5rem;
+  background-color: var(--green);
+  transition:
+    width 300ms ease-in-out 0s,
+    background-color 100ms linear 0s;
+}
+
+.iconDiv:active {
+  opacity: 0.9;
+}
+
+.iconDiv::after {
+  content: attr(data-tooltip);
+  margin-left: 0.5rem;
+  animation: fadeIn 600ms linear forwards;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

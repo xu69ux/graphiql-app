@@ -1,0 +1,157 @@
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  background: linear-gradient(90deg, var(--dark), var(--blue), var(--green));
+  padding: 1rem;
+  z-index: 10;
+}
+
+.header.scrolled {
+  background: linear-gradient(90deg, var(--green), var(--blue), var(--dark));
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user.scrolled {
+  color: var(--light);
+}
+
+.logo {
+  position: relative;
+  height: 2rem;
+  width: fit-content;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: large;
+  color: var(--light);
+  cursor: pointer;
+}
+
+.logo.scrolled {
+  color: var(--dark);
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0.3rem;
+  left: 0;
+  background-color: var(--extra);
+  transition: width 0.3s ease-in-out;
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+.btn-header {
+  background-color: var(--dark);
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  min-width: 6rem;
+}
+
+.btn-header:hover {
+  background-color: var(--blue);
+  color: var(--light);
+}
+
+.welcome-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lang-icon {
+  color: var(--light);
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+}
+
+.lang-icon.scrolled {
+  color: var(--dark);
+}
+
+.lang-icon:hover {
+  transform: scale(1.2) rotate(180deg);
+}
+
+.lang-menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.lang-dropdown {
+  display: flex;
+  flex-direction: row;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+}
+
+.lang-menu:hover .lang-dropdown,
+.lang-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lang-dropdown button {
+  color: var(--light);
+  font-size: 0.9rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  display: block;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.lang-dropdown button.selected {
+  color: var(--green);
+}
+
+.graphiql {
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  border-bottom: 0.1rem solid transparent;
+}
+.graphiql:hover {
+  cursor: pointer;
+  border-bottom: 0.1rem solid var(--extra);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
