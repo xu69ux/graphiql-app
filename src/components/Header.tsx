@@ -1,8 +1,6 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { auth, logout } from '../utils/firebase';
-import { fetchUserName } from '../services/api/fetchUserName';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { logout } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { Fade, CustomButton } from '../components';
@@ -15,8 +13,7 @@ import '@styles/Header.css';
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [username, setUserName] = useState('');
-  const [user, loading] = useAuthState(auth);
+  const username = sessionStorage.getItem('userName');
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const showMessage = useShowMessage();
@@ -26,15 +23,6 @@ export const Header = () => {
     setLanguage: () => {},
   };
   const { language, setLanguage } = languageContext;
-
-  const fetchData = useCallback(async () => {
-    if (user) {
-      const userName = await fetchUserName(user);
-      setUserName(userName);
-    } else {
-      setUserName('');
-    }
-  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,18 +39,12 @@ export const Header = () => {
     };
   }, [scrolled]);
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    fetchData();
-  }, [user, loading, fetchData]);
-
   const logoutHandle = () => {
     logout();
     navigate('/');
     showMessage(msg.LOG_OUT_SUCCESS);
     sessionStorage.removeItem('authInfo');
+    sessionStorage.removeItem('userName');
   };
 
   const renderUser = () => {
@@ -128,7 +110,7 @@ export const Header = () => {
         >
           <IoEarthOutline
             className={`lang-icon ${scrolled ? 'scrolled' : ''}`}
-            title='change language'
+            title={translations[language]?.titleLanguage}
           />
           <Fade show={isDropdownOpen}>
             <div className='lang-dropdown'>
@@ -160,7 +142,7 @@ export const Header = () => {
           </Fade>
         </div>
       </div>
-      {user ? renderUser() : renderNoUser()}
+      {username ? renderUser() : renderNoUser()}
     </header>
   );
 };

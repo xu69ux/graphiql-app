@@ -1,5 +1,14 @@
-import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
-
+import {
+  FC,
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useState,
+  useContext,
+} from 'react';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { translations } from '../contexts/translations';
 import { IoChevronForward } from 'react-icons/io5';
 import { LiaHistorySolid } from 'react-icons/lia';
 
@@ -14,6 +23,12 @@ interface IEndpointProps {
 export const Endpoint: FC<IEndpointProps> = memo(
   ({ endpointValue, setEndpoint, fetchShema }) => {
     const [isDisabled, setIsDisabled] = useState(true);
+    const languageContext = useContext(LanguageContext) || {
+      language: 'eng',
+      setLanguage: () => {},
+    };
+    const { language } = languageContext;
+
     const setFromHistory = () => {
       const prevEndpoint = localStorage.getItem('prevEndpoint');
       if (prevEndpoint) {
@@ -50,7 +65,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
         </div>
         <button
           className={`history ${isDisabled ? 'disabled' : ''}`}
-          title='use previous endpoint'
+          title={translations[language]?.titleEndpointHistory}
           onClick={setFromHistory}
           disabled={isDisabled}
         >

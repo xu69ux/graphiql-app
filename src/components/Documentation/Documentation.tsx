@@ -26,8 +26,6 @@ export const Documentation: React.FC<DocumentationProps> = ({
   const [selectedKind, setSelectedKind] = useState<TypeKind | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
-  console.log(schema);
-
   useEffect(() => {
     if (searchItem) {
       const [typeName, fieldName] = searchItem.split('.');

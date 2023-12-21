@@ -1,7 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
 import { graphqlRequest } from '../utils/graphqlApi';
-
+import { LanguageContext } from '../contexts/LanguageContext';
+import { translations } from '../contexts/translations';
 import {
   EditorWindow,
   EditorTab,
@@ -33,6 +34,12 @@ export const GraphiQLPage = () => {
   const [viewer, setViewer] = useState('');
   const [endpoint, setEndpoint] = useState('');
   const [schema, setSchema] = useState<Schema | null>(null);
+  const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
+  const languageContext = useContext(LanguageContext) || {
+    language: 'eng',
+    setLanguage: () => {},
+  };
+  const { language } = languageContext;
 
   const saveEndpoint = useCallback((endpoint: string) => {
     localStorage.setItem('prevEndpoint', endpoint);
@@ -43,8 +50,10 @@ export const GraphiQLPage = () => {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
       setSchema(response.data.data.__schema);
       saveEndpoint(endpoint);
+      setIsFetchSuccessful(true);
     } catch (error) {
       console.log(error);
+      setIsFetchSuccessful(false);
     }
   }, [endpoint, saveEndpoint]);
 
@@ -113,6 +122,7 @@ export const GraphiQLPage = () => {
         tabs={tabs}
         activeTab={activeTab}
         isDocumentationOpen={isDocumentationOpen}
+        isFetchSuccessful={isFetchSuccessful}
         setTabs={setTabs}
         setActiveTab={setActiveTab}
         setIsDocumentationOpen={setIsDocumentationOpen}
@@ -182,7 +192,11 @@ export const GraphiQLPage = () => {
               />
             </div>
           </div>
-          <button onClick={sendGraphqlRequest} className='run-button'>
+          <button
+            onClick={sendGraphqlRequest}
+            className='run-button'
+            title={translations[language]?.titleRunQuery}
+          >
             <IoCaretForward className='run-button-icon' />
           </button>
           <div className='viewer'>

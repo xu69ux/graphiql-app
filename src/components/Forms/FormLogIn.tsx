@@ -1,5 +1,5 @@
 import { auth, logInWithEmailAndPassword } from '../../utils/firebase';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSchema } from '../../utils/validation/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { LanguageContext } from '../../contexts/LanguageContext';
 import { PasswordValidIndicator } from '..';
 import useMsg from '../../hooks/useMsg';
 import { CustomButton } from '../../components';
+import { fetchUserName } from '../../services/api/fetchUserName';
 
 import '@styles/Form.css';
 
@@ -40,14 +41,23 @@ export const FormLogIn = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+  const fetchData = useCallback(async () => {
+    if (user) {
+      const userName = await fetchUserName(user);
+      sessionStorage.setItem('userName', `${userName}`);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (loading) {
       return;
     }
-    if (user) navigate('/graphiql');
-    sessionStorage.setItem('authInfo', 'userIs');
-  }, [user, loading, navigate]);
+    if (user) {
+      navigate('/graphiql');
+      sessionStorage.setItem('authInfo', 'userIs');
+    }
+    fetchData();
+  }, [user, loading, navigate, fetchData]);
 
   useEffect(() => {
     trigger();
