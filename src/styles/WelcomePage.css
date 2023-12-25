@@ -219,7 +219,7 @@ span {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .welcome-description {
     margin-bottom: 12rem;
   }

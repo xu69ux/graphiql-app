@@ -35,3 +35,14 @@
     margin-bottom: 2rem;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .auth-container {
+    height: 35rem;
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
