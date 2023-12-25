@@ -183,6 +183,11 @@ span {
 }
 
 @media screen and (max-width: 450px) {
+  .typing-effect {
+    font-size: 1.2rem;
+    height: 5.5rem;
+  }
+
   .welcome-title {
     font-size: 2.2rem;
     margin-top: 10rem;
@@ -196,5 +201,10 @@ span {
   .welcome-auth {
     flex-direction: column;
     margin-top: 2rem;
+  }
+
+  .welcome-auth-login,
+  .welcome-auth-signup {
+    margin: 0 auto;
   }
 }

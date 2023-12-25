@@ -200,6 +200,7 @@
 
   .btn-header {
     margin-bottom: 0.3rem;
+    margin-left: auto;
   }
 }
 
@@ -228,6 +229,6 @@
   }
 
   .btn-header {
-    margin-bottom: 0.8rem;
+    margin: 0 0 0.8rem 0;
   }
 }
