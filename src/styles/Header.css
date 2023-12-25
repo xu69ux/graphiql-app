@@ -197,6 +197,10 @@
   .graphiql {
     margin-bottom: 0.5rem;
   }
+
+  .btn-header {
+    margin-bottom: 0.3rem;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -212,7 +216,7 @@
 
   nav {
     width: 90%;
-    margin: 0.5rem 3rem 0;
+    margin: 0 0.5rem;
   }
 
   .user {
@@ -221,5 +225,9 @@
 
   .welcome-link.scrolled {
     color: var(--light);
+  }
+
+  .btn-header {
+    margin-bottom: 0.8rem;
   }
 }
