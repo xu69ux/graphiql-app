@@ -165,14 +165,24 @@
     justify-content: center;
     flex-direction: row;
     order: 2;
+    font-size: 1rem;
   }
 
   .footer-icons {
+    width: 10rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     order: 1;
+  }
+
+  .iconSVG {
+    font-size: 1.5rem;
+  }
+
+  .iconDiv {
+    width: 2.1rem;
   }
 }

@@ -208,7 +208,27 @@
   .header {
     flex-direction: column;
     justify-content: center;
-    height: 6.5rem;
+    height: 8rem;
+  }
+
+  .logo {
+    font-size: x-large;
+  }
+
+  .logo.logo.scrolled {
+    color: var(--light);
+  }
+
+  .lang-icon {
+    font-size: 2rem;
+  }
+
+  .lang-icon.scrolled {
+    color: var(--light);
+  }
+
+  .lang-dropdown button {
+    font-size: 1.2rem;
   }
 
   .user {
@@ -217,7 +237,7 @@
 
   nav {
     width: 90%;
-    margin: 0 0.5rem;
+    margin: 0.5rem 0.5rem 0 0.5rem;
   }
 
   .user {
@@ -230,5 +250,8 @@
 
   .btn-header {
     margin: 0 0 0.8rem 0;
+    height: 3rem;
+    min-width: 8rem;
+    font-size: 1.5rem;
   }
 }
