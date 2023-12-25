@@ -35,9 +35,7 @@ describe('FallBackUI', () => {
     );
 
     window.location.reload = jest.fn();
-
     fireEvent.click(getByText('Reload page'));
-
     expect(resetErrorBoundary).toHaveBeenCalled();
     expect(window.location.reload).toHaveBeenCalled();
   });
