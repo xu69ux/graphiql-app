@@ -255,3 +255,14 @@
     font-size: 1.5rem;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .header {
+    height: 13rem;
+  }
+
+  .user {
+    flex-direction: column;
+    align-items: center;
+  }
+}
