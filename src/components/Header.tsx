@@ -116,7 +116,10 @@ export const Header = () => {
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+    <header
+      className={`header ${scrolled ? 'scrolled' : ''}`}
+      data-testid='header'
+    >
       <div className='welcome-link'>
         <div
           className={`logo ${scrolled ? 'scrolled' : ''}`}

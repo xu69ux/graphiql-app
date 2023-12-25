@@ -15,7 +15,7 @@ export const Footer = () => {
   const { language } = languageContext;
 
   return (
-    <footer className='footer'>
+    <footer className='footer' data-testid='footer'>
       <a href='https://rs.school/react/' className='course-link'>
         <img src={courseLogo} alt='rs school logo' className='course-logo' />
       </a>
