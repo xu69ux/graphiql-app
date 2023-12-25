@@ -142,6 +142,17 @@ span {
 }
 
 @media screen and (max-width: 700px) {
+  .welcome-title {
+    font-size: 2.5rem;
+    margin-top: 10rem;
+  }
+
+  .welcome-description {
+    font-size: 1.2rem;
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+  }
+
   .typing-effect {
     white-space: normal;
     overflow: hidden;
@@ -190,12 +201,12 @@ span {
 
   .welcome-title {
     font-size: 2.2rem;
-    margin-top: 10rem;
+    margin-top: 7rem;
   }
 
   .welcome-description {
     font-size: 1.2rem;
-    margin-top: 5rem;
+    margin: 5rem 0 8rem 0;
   }
 
   .welcome-auth {
@@ -206,5 +217,11 @@ span {
   .welcome-auth-login,
   .welcome-auth-signup {
     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .welcome-description {
+    margin-bottom: 12rem;
   }
 }
