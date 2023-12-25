@@ -1,9 +1,10 @@
+import { reloadPage } from '../utils/reloadPage';
 import '@styles/FallBackUI.css';
 
 export const FallBackUI = ({ error, resetErrorBoundary }) => {
   const handleClick = () => {
     resetErrorBoundary();
-    window.location.reload();
+    reloadPage();
   };
 
   return (
