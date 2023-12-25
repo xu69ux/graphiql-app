@@ -78,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className='sidebar'>
+    <div className='sidebar' data-testid='sidebar'>
       <IoFileTrayFullOutline
         className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''} ${
           isFetchSuccessful ? '' : 'disabled'

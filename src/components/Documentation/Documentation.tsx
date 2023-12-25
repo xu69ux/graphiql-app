@@ -52,7 +52,10 @@ export const Documentation: React.FC<DocumentationProps> = ({
   };
 
   return (
-    <div className={`documentation ${isDocumentationOpen ? 'open' : ''}`}>
+    <div
+      className={`documentation ${isDocumentationOpen ? 'open' : ''}`}
+      data-testid='documentation'
+    >
       <h1 className='docs-title'>Documentation</h1>
       {schema ? (
         <>
