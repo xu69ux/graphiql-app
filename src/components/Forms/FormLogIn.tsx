@@ -119,6 +119,7 @@ export const FormLogIn = () => {
           type='submit'
           disabled={isSubmitting}
           title={translations?.[language]?.loginTitle}
+          data-testid='login-button'
         />
       </div>
     </form>
