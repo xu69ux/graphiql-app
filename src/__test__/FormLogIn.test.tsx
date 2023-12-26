@@ -31,19 +31,24 @@ describe('FormLogIn component', () => {
       </LanguageContext.Provider>,
     );
 
-    fireEvent.input(getByPlaceholderText(/Email/i), {
-      target: { value: 'test@email.com' },
-    });
-    fireEvent.input(getByPlaceholderText(/Password/i), {
-      target: { value: 'testPassword1!' },
+    act(() => {
+      fireEvent.input(getByPlaceholderText(/Email/i), {
+        target: { value: 'test@email.com' },
+      });
     });
 
     act(() => {
-      fireEvent.click(getByRole('button'));
+      fireEvent.input(getByPlaceholderText(/Password/i), {
+        target: { value: 'testPassword1!' },
+      });
     });
 
-    await waitFor(() => {
-      expect(getByRole('button')).toBeDisabled();
+    act(async () => {
+      fireEvent.click(getByRole('button'));
+
+      await waitFor(() => {
+        expect(getByRole('button')).toBeDisabled();
+      });
     });
   });
 });
