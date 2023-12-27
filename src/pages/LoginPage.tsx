@@ -21,7 +21,7 @@ export const LoginPage = () => {
 
   return (
     !userIs && (
-      <div className='auth-container'>
+      <div className='auth-container' data-testid='login-page'>
         <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
         <FormLogIn />
         <p className='no-account'>

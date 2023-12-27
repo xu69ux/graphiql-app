@@ -3,176 +3,87 @@
 exports[`SignUpPage component renders correctly 1`] = `
 <div>
   <div
-    class="welcome-container"
-    data-testid="welcome-page"
+    class="auth-container"
   >
     <h1
-      class="welcome-title"
+      class="auth-title"
+      data-testid="signup-title"
     >
-      Graphi
-      <span>
-        QL
-      </span>
-       IDE
+      Sign up
     </h1>
-    <p
-      class="typing-effect"
-    >
-      to use this awesome application, log in with a fake email
-    </p>
-    <div
-      class="welcome-auth"
-    >
+    <form>
       <div
-        class="login-icon"
+        class="signup"
       >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="input-wrapper"
         >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
+          <input
+            name="username"
+            placeholder="username"
+            type="text"
           />
-        </svg>
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+        </div>
+        <div
+          class="error"
+        />
+        <div
+          class="input-wrapper"
         >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
+          <input
+            name="email"
+            placeholder="email"
+            type="text"
           />
-        </svg>
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+        </div>
+        <div
+          class="error"
+        />
+        <div
+          class="input-wrapper"
         >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
+          <input
+            name="password"
+            placeholder="password"
+            type="password"
+            value=""
           />
-        </svg>
+        </div>
+        <div
+          class="password-indicator"
+        >
+          <div
+            style="width: 100%; height: 100%; opacity: 0;"
+          >
+            <div
+              style="width: 0%; height: 100%; opacity: 0;"
+            />
+          </div>
+        </div>
+        <div
+          class="error"
+        />
+        <button
+          class="btn btn-sign"
+          type="submit"
+        >
+          Sign up
+        </button>
       </div>
+    </form>
+    <p
+      class="no-account"
+    >
+      Have an account? Then, 
       <a
-        class="welcome-link"
+        class="login-link"
+        data-testid="login-link"
         href="/login"
       >
         log in
       </a>
-      <span>
-        or
-      </span>
-      <a
-        class="welcome-link"
-        href="/signup"
-      >
-        sign up
-      </a>
-      <div
-        class="signup-icon"
-      >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
-          />
-        </svg>
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
-          />
-        </svg>
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M184 112l144 144-144 144"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="48"
-          />
-        </svg>
-      </div>
-    </div>
-    <div
-      class="welcome-description blur"
-    >
-      <p
-        class="default-color"
-      >
-        JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox; it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.
-      </p>
-      <p
-        class="default-color"
-      >
-        JS do IT is our creative team gathered in the name of crafting inspiring projects. This marks our second step in collaborative development, and we aspire to make GraphiQL Playground not just a tool but a true piece of art in the world of GraphQL.
-      </p>
-      <p
-        class="default-color"
-      >
-        We believe that GraphiQL Playground will not only streamline your work with GraphQL queries but also serve as a splendid example of what can be achieved by combining creative potential and technical expertise.
-      </p>
-      <p
-        class="default-color"
-      >
-        Wishing you vibrant ideas, effective teamwork, and the joy of creating something extraordinary! Don't forget about inspiration and creativity in every line of code. Best of luck, JS do IT!
-      </p>
-    </div>
+      !
+    </p>
   </div>
 </div>
 `;
