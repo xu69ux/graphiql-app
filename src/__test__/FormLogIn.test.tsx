@@ -1,54 +1,62 @@
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { FormLogIn } from '../components';
+import * as firebase from '../utils/firebase';
 
 describe('FormLogIn component', () => {
-  it('renders correctly', () => {
-    const { getByPlaceholderText } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <FormLogIn />
-        </Router>
-      </LanguageContext.Provider>,
-    );
-
-    expect(getByPlaceholderText(/Email/i)).toBeInTheDocument();
-    expect(getByPlaceholderText(/Password/i)).toBeInTheDocument();
+  const useAuthState = jest.fn();
+  useAuthState.mockReturnValue([false]);
+  afterEach(jest.clearAllMocks);
+  it('renders correctly', async () => {
+    await act(async () => {
+      render(
+        <LanguageContext.Provider
+          value={{ language: 'eng', setLanguage: () => {} }}
+        >
+          <Router>
+            <FormLogIn />
+          </Router>
+        </LanguageContext.Provider>,
+      );
+    });
+    expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
   });
 
   it('submits the form', async () => {
-    const { getByPlaceholderText, getByRole } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <FormLogIn />
-        </Router>
-      </LanguageContext.Provider>,
-    );
+    const logInWithEmailAndPassword = jest
+      .spyOn(firebase, 'logInWithEmailAndPassword')
+      .mockResolvedValue('success');
+    await act(async () => {
+      render(
+        <LanguageContext.Provider
+          value={{ language: 'eng', setLanguage: () => {} }}
+        >
+          <Router>
+            <FormLogIn />
+          </Router>
+        </LanguageContext.Provider>,
+      );
+    });
 
-    act(() => {
-      fireEvent.input(getByPlaceholderText(/Email/i), {
-        target: { value: 'test@email.com' },
-      });
+    fireEvent.input(screen.getByPlaceholderText(/Email/i), {
+      target: { value: 'test@email.com' },
+    });
+
+    fireEvent.input(screen.getByPlaceholderText(/Password/i), {
+      target: { value: 'testPassword1!' },
     });
 
     act(() => {
-      fireEvent.input(getByPlaceholderText(/Password/i), {
-        target: { value: 'testPassword1!' },
-      });
+      fireEvent.click(screen.getByRole('button'));
     });
-
-    act(async () => {
-      fireEvent.click(getByRole('button'));
-
-      await waitFor(() => {
-        expect(getByRole('button')).toBeDisabled();
-      });
+    await waitFor(() => {
+      expect(logInWithEmailAndPassword).toHaveBeenCalledWith(
+        'test@email.com',
+        'testPassword1!',
+      );
     });
   });
 });
