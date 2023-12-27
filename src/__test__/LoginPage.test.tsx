@@ -1,16 +1,16 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { SignupPage } from '../pages';
+import { LoginPage } from '../pages';
 
-describe('SignUpPage component', () => {
+describe('LoginPage component', () => {
   test('renders correctly', () => {
     const { container } = render(
       <Router>
         <LanguageContext.Provider
           value={{ language: 'eng', setLanguage: () => {} }}
         >
-          <SignupPage />
+          <LoginPage />
         </LanguageContext.Provider>
       </Router>,
     );
@@ -18,48 +18,47 @@ describe('SignUpPage component', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('renders sign up title', () => {
+  it('renders log in title', () => {
     const { getByTestId } = render(
       <LanguageContext.Provider
         value={{ language: 'eng', setLanguage: () => {} }}
       >
         <Router>
-          <SignupPage />
+          <LoginPage />
         </Router>
       </LanguageContext.Provider>,
     );
 
-    expect(getByTestId('signup-title')).toBeInTheDocument();
+    expect(getByTestId('login-title')).toBeInTheDocument();
   });
 
-  it('renders sign up form', () => {
+  it('renders log in form', () => {
     const { getByPlaceholderText } = render(
       <LanguageContext.Provider
         value={{ language: 'eng', setLanguage: () => {} }}
       >
         <Router>
-          <SignupPage />
+          <LoginPage />
         </Router>
       </LanguageContext.Provider>,
     );
 
-    expect(getByPlaceholderText(/Username/i)).toBeInTheDocument();
     expect(getByPlaceholderText(/Email/i)).toBeInTheDocument();
     expect(getByPlaceholderText(/Password/i)).toBeInTheDocument();
   });
 
-  test('renders login link', () => {
+  test('renders sign up link', () => {
     const { getByTestId } = render(
       <Router>
         <LanguageContext.Provider
           value={{ language: 'eng', setLanguage: () => {} }}
         >
-          <SignupPage />
+          <LoginPage />
         </LanguageContext.Provider>
       </Router>,
     );
 
-    const linkElement = getByTestId('login-link');
+    const linkElement = getByTestId('signup-link');
     expect(linkElement).toBeInTheDocument();
   });
 });

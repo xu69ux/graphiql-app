@@ -38,16 +38,18 @@ export const EditorTab: FC<IEditorTabProps> = ({
   };
 
   return (
-    <div className='tab' onClick={onTabSelected}>
+    <div className='tab' onClick={onTabSelected} data-testid='tab'>
       <div className={isActive ? 'tab-title active' : 'tab-title'}>
         <input
           className='tab-title-input'
           value={name}
           onChange={onTabNameUpdated}
+          data-testid='tab-title-input'
         />
         <IoIosClose
           className={`tab-close ${totalTabs === 1 ? 'disabled' : ''}`}
           onClick={onTabClose}
+          data-testid='tab-close'
         />
       </div>
     </div>

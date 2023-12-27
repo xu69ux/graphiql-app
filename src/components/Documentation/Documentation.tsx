@@ -61,7 +61,11 @@ export const Documentation: React.FC<DocumentationProps> = ({
         <>
           <Search schema={schema} setSearchItem={setSearchItem} />
           {selectedType || selectedField ? (
-            <button className='docs-back' onClick={handleBackClick}>
+            <button
+              className='docs-back'
+              onClick={handleBackClick}
+              data-testid='back-button'
+            >
               <IoChevronForward className='back-icon' />
               <IoChevronForward className='back-icon' />
               <IoChevronForward className='back-icon' />
@@ -77,7 +81,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
             <button className='docs-back hidden' />
           )}
           {selectedKind ? (
-            <div className='kind-container'>
+            <div className='kind-container' data-testid='kind-item'>
               <h2 className='docs-subtitle'>{selectedKind.kind}:</h2>
               {selectedKind.description === null ||
               selectedKind.description === '' ? (
@@ -88,7 +92,10 @@ export const Documentation: React.FC<DocumentationProps> = ({
             </div>
           ) : selectedField ? (
             <div className='docs-container'>
-              <h2 className='docs-subtitle description'>
+              <h2
+                className='docs-subtitle description'
+                data-testid='selected-field'
+              >
                 {selectedField.name}:
               </h2>
               <p>
@@ -98,7 +105,9 @@ export const Documentation: React.FC<DocumentationProps> = ({
             </div>
           ) : selectedType ? (
             <div className='docs-container'>
-              <h2 className='docs-subtitle'>{selectedType.name}:</h2>
+              <h2 className='docs-subtitle' data-testid='selected-type'>
+                {selectedType.name}:
+              </h2>
               {selectedType.fields && selectedType.fields.length > 0 ? (
                 selectedType.fields.map((field) => (
                   <div className='field-container'>
@@ -106,6 +115,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
                       key={field.name}
                       className='docs-item'
                       onClick={() => setSelectedField(field)}
+                      data-testid={`field-item-${field.name}`}
                     >
                       {field.name}:
                     </div>
@@ -116,6 +126,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
                         e.stopPropagation();
                         setSelectedKind(field.type);
                       }}
+                      data-testid={`field-type-${field.name}`}
                     >
                       {field.type.kind}
                     </div>
@@ -138,6 +149,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
                       key={type.name}
                       className='docs-item'
                       onClick={() => setSelectedType(type)}
+                      data-testid='type-item'
                     >
                       {type.name}
                     </div>

@@ -1,32 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignUpPage component renders correctly 1`] = `
+exports[`LoginPage component renders correctly 1`] = `
 <div>
   <div
     class="auth-container"
+    data-testid="login-page"
   >
     <h1
       class="auth-title"
-      data-testid="signup-title"
+      data-testid="login-title"
     >
-      Sign up
+      Log in
     </h1>
     <form>
       <div
-        class="signup"
+        class="login"
       >
-        <div
-          class="input-wrapper"
-        >
-          <input
-            name="username"
-            placeholder="username"
-            type="text"
-          />
-        </div>
-        <div
-          class="error"
-        />
         <div
           class="input-wrapper"
         >
@@ -64,23 +53,24 @@ exports[`SignUpPage component renders correctly 1`] = `
           class="error"
         />
         <button
-          class="btn btn-sign"
+          class="btn btn-log"
+          data-testid="login-button"
           type="submit"
         >
-          Sign up
+          Log in
         </button>
       </div>
     </form>
     <p
       class="no-account"
     >
-      Have an account? Then, 
+      No account? Then, 
       <a
-        class="login-link"
-        data-testid="login-link"
-        href="/login"
+        class="signup-link"
+        data-testid="signup-link"
+        href="/signup"
       >
-        log in
+        sign up
       </a>
       !
     </p>
