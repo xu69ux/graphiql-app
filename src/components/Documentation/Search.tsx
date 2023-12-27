@@ -54,7 +54,11 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
 
   return (
     <div className={`docs-search ${isSearchOpen ? 'active' : ''}`}>
-      <IoSearchOutline className='docs-search-icon' onClick={toggleSearch} />
+      <IoSearchOutline
+        className='docs-search-icon'
+        onClick={toggleSearch}
+        data-testid='search-icon'
+      />
       {isSearchOpen && (
         <input
           type='text'

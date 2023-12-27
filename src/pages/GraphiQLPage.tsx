@@ -114,8 +114,6 @@ export const GraphiQLPage = () => {
     );
   };
 
-  console.log('render');
-
   return (
     <div className='container'>
       <Sidebar

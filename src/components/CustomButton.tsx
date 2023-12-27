@@ -4,6 +4,7 @@ interface CustomButtonProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   title: string;
+  'data-testid'?: string;
 }
 
 export const CustomButton: React.FC<CustomButtonProps> = ({
@@ -12,12 +13,14 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
   type = 'button',
   disabled = false,
   title,
+  'data-testid': testId,
 }) => (
   <button
     className={className}
     type={type}
     onClick={onClick}
     disabled={disabled}
+    data-testid={testId}
   >
     {title}
   </button>

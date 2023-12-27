@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { translations } from '../contexts/translations';
-
 import { LanguageContext } from '../contexts/LanguageContext';
 
 import { PiGithubLogoFill } from 'react-icons/pi';
@@ -16,7 +15,7 @@ export const Footer = () => {
   const { language } = languageContext;
 
   return (
-    <footer className='footer'>
+    <footer className='footer' data-testid='footer'>
       <a href='https://rs.school/react/' className='course-link'>
         <img src={courseLogo} alt='rs school logo' className='course-logo' />
       </a>
@@ -35,6 +34,7 @@ export const Footer = () => {
           data-tooltip='xu'
           tabIndex={0}
           target='_blank'
+          data-testid='xu-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />
@@ -46,6 +46,7 @@ export const Footer = () => {
           data-tooltip='dbox7'
           tabIndex={0}
           target='_blank'
+          data-testid='dbox7-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />
@@ -57,6 +58,7 @@ export const Footer = () => {
           data-tooltip='gekko'
           tabIndex={0}
           target='_blank'
+          data-testid='gekko-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />

@@ -22,11 +22,13 @@ export const SignupPage = () => {
   return (
     !userIs && (
       <div className='auth-container'>
-        <h1 className='auth-title'>{translations?.[language]?.signupTitle}</h1>
+        <h1 className='auth-title' data-testid='signup-title'>
+          {translations?.[language]?.signupTitle}
+        </h1>
         <FormSignUp />
         <p className='no-account'>
           {translations?.[language]?.yesAccount}
-          <Link to='/login' className='login-link'>
+          <Link to='/login' className='login-link' data-testid='login-link'>
             {translations?.[language]?.login}
           </Link>
           !

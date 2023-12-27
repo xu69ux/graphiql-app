@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomePage renders the WelcomePage component 1`] = `
+<div>
+  <div
+    class="welcome-container"
+    data-testid="welcome-page"
+  >
+    <h1
+      class="welcome-title"
+    >
+      Graphi
+      <span>
+        QL
+      </span>
+       IDE
+    </h1>
+    <p
+      class="typing-effect"
+    >
+      to use this awesome application, log in with a fake email
+    </p>
+    <div
+      class="welcome-auth"
+    >
+      <div
+        class="login-icon"
+      >
+        <div>
+          Mock Icon
+        </div>
+        <div>
+          Mock Icon
+        </div>
+        <div>
+          Mock Icon
+        </div>
+      </div>
+      <a
+        href="/login"
+      >
+        log in
+      </a>
+      <span>
+        or
+      </span>
+      <a
+        href="/signup"
+      >
+        sign up
+      </a>
+      <div
+        class="signup-icon"
+      >
+        <div>
+          Mock Icon
+        </div>
+        <div>
+          Mock Icon
+        </div>
+        <div>
+          Mock Icon
+        </div>
+      </div>
+    </div>
+    <div
+      class="welcome-description blur"
+    >
+      <p
+        class="default-color"
+      >
+        JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox; it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.
+      </p>
+      <p
+        class="default-color"
+      >
+        JS do IT is our creative team gathered in the name of crafting inspiring projects. This marks our second step in collaborative development, and we aspire to make GraphiQL Playground not just a tool but a true piece of art in the world of GraphQL.
+      </p>
+      <p
+        class="default-color"
+      >
+        We believe that GraphiQL Playground will not only streamline your work with GraphQL queries but also serve as a splendid example of what can be achieved by combining creative potential and technical expertise.
+      </p>
+      <p
+        class="default-color"
+      >
+        Wishing you vibrant ideas, effective teamwork, and the joy of creating something extraordinary! Don't forget about inspiration and creativity in every line of code. Best of luck, JS do IT!
+      </p>
+    </div>
+  </div>
+</div>
+`;

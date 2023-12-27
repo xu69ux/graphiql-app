@@ -17,6 +17,7 @@ export const Header = () => {
   const location = useLocation();
   const [user, loading] = useAuthState(auth);
   const storedName = sessionStorage.getItem('userName');
+  const isStoredName = sessionStorage.getItem('userName') !== null;
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -71,7 +72,7 @@ export const Header = () => {
     return (
       <nav>
         <div className={`user ${scrolled ? 'scrolled' : ''}`}>
-          {storedName && (
+          {isStoredName && (
             <>
               <span>
                 {translations[language]?.greeting}, {storedName}!
@@ -116,7 +117,10 @@ export const Header = () => {
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+    <header
+      className={`header ${scrolled ? 'scrolled' : ''}`}
+      data-testid='header'
+    >
       <div className='welcome-link'>
         <div
           className={`logo ${scrolled ? 'scrolled' : ''}`}
@@ -163,7 +167,7 @@ export const Header = () => {
         </div>
       </div>
       {isLoading && <div>Loading...</div>}{' '}
-      {storedName ? renderUser() : renderNoUser()}
+      {isStoredName ? renderUser() : renderNoUser()}
     </header>
   );
 };
