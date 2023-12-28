@@ -1,18 +1,14 @@
-import { useContext, useState } from 'react';
-import { LanguageContext } from '../../contexts/LanguageContext';
+import { useState } from 'react';
 import { translations } from '../../contexts/translations';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Fade } from '..';
+import { Fade } from '../../components';
+import useLanguage from 'src/hooks/useLanguage';
 
 import '@styles/LanguageMenu.css';
 
 export const LanguageMenu = ({ isScrolled }) => {
   const [isDropdownOpen, toggleDropdown] = useState(false);
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language, setLanguage } = languageContext;
+  const { language, setLanguage } = useLanguage();
 
   return (
     <div

@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '../../utils/firebase';
-import { LanguageContext } from '../../contexts/LanguageContext';
 import { translations } from '../../contexts/translations';
 import { LanguageMenu, Logo, Greeting } from '..';
 import { fetchUserName } from '../../services/api/fetchUserName';
 import useShowMessage from '../../hooks/useShowMessage';
 import useMsg from '../../hooks/useMsg';
+import useLanguage from '../../hooks/useLanguage';
 
 import '@styles/Header.css';
 
@@ -20,11 +20,7 @@ export const Header = () => {
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   const fetchData = useCallback(async () => {
     if (user) {

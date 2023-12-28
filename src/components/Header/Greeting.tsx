@@ -1,16 +1,11 @@
-import { useContext } from 'react';
-import { LanguageContext } from '../../contexts/LanguageContext';
 import { translations } from '../../contexts/translations';
-import { Loader } from '..';
+import { Loader } from '../../components';
+import useLanguage from 'src/hooks/useLanguage';
 
 import '@styles/Greeting.css';
 
 export const Greeting = ({ name, isLoading }) => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   return (
     <div className='greeting'>

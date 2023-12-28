@@ -1,16 +1,15 @@
 import { auth, logInWithEmailAndPassword } from '../../utils/firebase';
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getSchema } from '../../utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import useShowMessage from '../../hooks/useShowMessage';
 import { translations } from '../../contexts/translations';
-import { LanguageContext } from '../../contexts/LanguageContext';
-import { PasswordValidIndicator } from '..';
+import { CustomButton, PasswordValidIndicator } from '../../components';
+import useShowMessage from '../../hooks/useShowMessage';
+import useLanguage from 'src/hooks/useLanguage';
 import useMsg from '../../hooks/useMsg';
-import { CustomButton } from '../../components';
 
 import '@styles/Form.css';
 
@@ -22,11 +21,7 @@ export const FormLogIn = () => {
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const showMessage = useShowMessage();
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
   const schema = getSchema(language);
   const msg = useMsg();
 
