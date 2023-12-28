@@ -20,7 +20,7 @@ export const NotFoundPage = () => {
         {translations[language]?.notFoundTitle3}
       </h2>
       <div className='meme-container'>
-        <img src={randomMeme} alt='meme about garphQL' height={350} />
+        <img src={randomMeme} alt='meme about garphQL' />
       </div>
     </div>
   );
