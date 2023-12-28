@@ -15,7 +15,10 @@ export const LanguageMenu = ({ isScrolled }) => {
   const { language, setLanguage } = languageContext;
 
   return (
-    <div className='lang-menu' onClick={() => toggleDropdown(!isDropdownOpen)}>
+    <div
+      className={`lang-menu ${isScrolled ? 'scrolled' : ''}`}
+      onClick={() => toggleDropdown(!isDropdownOpen)}
+    >
       <IoEarthOutline
         className={`lang-icon ${isScrolled ? 'scrolled' : ''}`}
         title={translations[language]?.titleLanguage}

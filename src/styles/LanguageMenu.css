@@ -1,11 +1,13 @@
 .lang-icon {
   color: var(--light);
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
   margin-right: 1rem;
   position: relative;
   transition: transform 0.2s ease-in-out;
+}
+
+.lang-icon.scrolled {
+  color: var(--dark);
 }
 
 .lang-icon:hover {
@@ -13,11 +15,18 @@
 }
 
 .lang-menu {
+  position: relative;
   display: flex;
   flex-direction: row;
+  color: var(--light);
+}
+
+.lang-menu.scrolled {
+  color: var(--dark);
 }
 
 .lang-dropdown {
+  position: absolute;
   display: flex;
   flex-direction: row;
   opacity: 0;
@@ -27,42 +36,52 @@
     visibility 0.3s ease-in-out;
 }
 
-.lang-menu:hover .lang-dropdown,
+.lang-dropdown,
 .lang-dropdown.open {
   opacity: 1;
   visibility: visible;
 }
 
-.lang-dropdown button {
-  color: var(--light);
-  font-size: 0.9rem;
+.lang-menu button {
+  color: inherit;
+  font-size: 1rem;
   text-decoration: none;
   background-color: transparent;
   border: none;
   display: block;
   margin-right: 0.5rem;
-  transition: all 0.2s ease-in-out;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
-.lang-dropdown button.selected {
-  color: var(--green);
+.lang-menu button.selected {
+  color: var(--extra);
 }
 
-.lang-icon.scrolled {
-  color: var(--dark);
+.lang-menu.scrolled button.selected {
+  color: var(--light);
 }
 
-@media screen and (max-width: 450px) {
-  .lang-icon {
-    font-size: 2rem;
-  }
-
+@media screen and (max-width: 610px) {
   .lang-icon.scrolled {
     color: var(--light);
   }
 
-  .lang-dropdown button {
-    font-size: 1.2rem;
+  .lang-menu.scrolled {
+    color: var(--light);
+  }
+
+  .lang-menu.scrolled button.selected {
+    color: var(--extra);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .lang-dropdown {
+    flex-direction: column;
+  }
+
+  .lang-menu button {
+    margin: 0 0.3rem 0.3rem 0;
   }
 }

@@ -1,10 +1,9 @@
 .logo {
   position: relative;
-  height: 2rem;
   width: fit-content;
   margin-right: 1rem;
   font-weight: bold;
-  font-size: large;
+  font-size: 1.2rem;
   color: var(--light);
   cursor: pointer;
 }
@@ -18,7 +17,7 @@
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 0.3rem;
+  bottom: 0;
   left: 0;
   background-color: var(--extra);
   transition: width 0.3s ease-in-out;
@@ -28,19 +27,18 @@
   width: 100%;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 610px) {
   .logo {
-    font-size: medium;
-    margin-right: 0;
+    font-size: 1.3rem;
+  }
+
+  .logo.scrolled {
+    color: var(--light);
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 400px) {
   .logo {
-    font-size: x-large;
-  }
-
-  .logo.logo.scrolled {
-    color: var(--light);
+    font-size: 1.5rem;
   }
 }

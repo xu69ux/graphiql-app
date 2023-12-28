@@ -5,9 +5,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  height: 5rem;
   background: linear-gradient(90deg, var(--dark), var(--blue), var(--green));
-  padding: 1rem;
+  padding: 1rem 2rem;
   z-index: 10;
 }
 
@@ -34,13 +34,14 @@
   font-size: 1.2rem;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
-
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+  border-bottom: 2px solid var(--extra);
 }
 
 .header-link:hover {
   color: var(--extra);
+  border-bottom: 2px solid var(--light);
 }
 
 .link-sep {
@@ -63,40 +64,56 @@
   color: var(--light);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 850px) {
   .header {
-    height: 5rem;
+    height: 6rem;
+  }
+  .navigation-right {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .header {
+    height: 8rem;
+  }
+
+  .navigation {
+    flex-direction: column;
+  }
+
+  .navigation-left {
+    margin-bottom: 1rem;
+  }
+
+  .navigation-right {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
 @media screen and (max-width: 550px) {
   .header {
-    height: 6rem;
+    height: 10rem;
   }
 
-  .btn-header {
-    margin-bottom: 0.3rem;
-    margin-left: auto;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .header {
+  .navigation-right {
     flex-direction: column;
-    justify-content: center;
-    height: 8rem;
-  }
-
-  .btn-header {
-    margin: 0 0 0.8rem 0;
-    height: 3rem;
-    min-width: 8rem;
-    font-size: 1.5rem;
+    align-items: center;
   }
 }
 
 @media screen and (max-width: 400px) {
   .header {
     height: 13rem;
+  }
+
+  .header-link {
+    font-size: 1.3rem;
+  }
+
+  .navigation-left {
+    margin-bottom: 1.5rem;
   }
 }

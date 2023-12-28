@@ -16,7 +16,6 @@ export const Header = () => {
   const location = useLocation();
   const [user, loading] = useAuthState(auth);
   const storedName = sessionStorage.getItem('userName');
-  const isStoredName = sessionStorage.getItem('userName') !== null;
   const [isLoading, setIsLoading] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const showMessage = useShowMessage();
@@ -69,9 +68,8 @@ export const Header = () => {
   const renderUser = () => {
     return (
       <>
-        {isStoredName && (
+        {user && (
           <>
-            <Greeting name={storedName} isLoading={isLoading} />
             {location.pathname !== '/graphiql' && (
               <>
                 <Link to='/graphiql' className='header-link'>
@@ -92,7 +90,6 @@ export const Header = () => {
   const renderNoUser = () => {
     return (
       <>
-        <Greeting name={null} isLoading={false} />
         <Link to='/login' className='header-link'>
           {translations[language]?.login}
         </Link>
@@ -115,6 +112,11 @@ export const Header = () => {
           <LanguageMenu isScrolled={isScrolled} />
         </div>
         <div className='navigation-right'>
+          {storedName ? (
+            <Greeting name={storedName} isLoading={isLoading} />
+          ) : (
+            <Greeting name={null} isLoading={isLoading} />
+          )}
           <div className='header-links'>
             {user ? renderUser() : renderNoUser()}
           </div>
