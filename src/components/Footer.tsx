@@ -24,10 +24,14 @@ export const Footer = () => {
       <div className='footer-text'>
         <div className='made-with'>
           {translations[language]?.madeWith} <span>❤️</span>{' '}
-        <a className='repo-link' href='https://github.com/xu69ux/graphiql-app'>
-          {translations[language]?.by} <b>JS do IT,</b>
-        </a>
-        <div className='year'>2023</div>
+          <a
+            className='repo-link'
+            href='https://github.com/xu69ux/graphiql-app'
+          >
+            {translations[language]?.by} <b>JS do IT,</b>
+          </a>
+          <div className='year'>2023</div>
+        </div>
       </div>
       <div className='footer-icons'>
         <a

@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { auth, logout } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
-import { Fade, CustomButton } from '../components';
+import { LanguageMenu, Logo, Greeting } from '../components';
 import useShowMessage from '../hooks/useShowMessage';
 import useMsg from '../hooks/useMsg';
-import { IoEarthOutline } from 'react-icons/io5';
 import { fetchUserName } from '../services/api/fetchUserName';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -19,15 +18,14 @@ export const Header = () => {
   const storedName = sessionStorage.getItem('userName');
   const isStoredName = sessionStorage.getItem('userName') !== null;
   const [isLoading, setIsLoading] = useState(false);
-  const [isDropdownOpen, toggleDropdown] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const showMessage = useShowMessage();
   const msg = useMsg();
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},
   };
-  const { language, setLanguage } = languageContext;
+  const { language } = languageContext;
 
   const fetchData = useCallback(async () => {
     if (user) {
@@ -44,9 +42,9 @@ export const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 100;
-      if (isScrolled !== scrolled) {
-        setScrolled(!scrolled);
+      const scroll = window.scrollY > 100;
+      if (scroll !== isScrolled) {
+        setIsScrolled(!isScrolled);
       }
     };
     document.addEventListener('scroll', handleScroll, { passive: true });
@@ -54,7 +52,7 @@ export const Header = () => {
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  }, [scrolled]);
+  }, [isScrolled]);
 
   useEffect(() => {
     fetchData();
@@ -70,104 +68,58 @@ export const Header = () => {
 
   const renderUser = () => {
     return (
-      <nav>
-        <div className={`user ${scrolled ? 'scrolled' : ''}`}>
-          {isStoredName && (
-            <>
-              <span className='greeting'>
-                {translations[language]?.greeting}, {storedName}!
-              </span>
-              {location.pathname !== '/graphiql' && (
-                <button
-                  className={`graphiql ${scrolled ? 'scrolled' : ''}`}
-                  onClick={() => navigate('/graphiql')}
-                >
-                  go to <b>IDE PAGE</b>
-                </button>
-              )}
-            </>
-          )}
-          <CustomButton
-            className='btn btn-header btn-logout'
-            onClick={logoutHandle}
-            title={translations[language]?.logout}
-          />
-        </div>
-      </nav>
+      <>
+        {isStoredName && (
+          <>
+            <Greeting name={storedName} isLoading={isLoading} />
+            {location.pathname !== '/graphiql' && (
+              <>
+                <Link to='/graphiql' className='header-link'>
+                  IDE
+                </Link>
+                <span className='link-sep'>/</span>
+              </>
+            )}
+            <Link to='/' className='header-link' onClick={logoutHandle}>
+              {translations[language]?.logout}
+            </Link>
+          </>
+        )}
+      </>
     );
   };
 
   const renderNoUser = () => {
     return (
-      <nav>
-        <div className='user'>
-          <CustomButton
-            className='btn btn-header btn-login'
-            onClick={() => navigate('/login')}
-            title={translations[language]?.login}
-          />
-          <CustomButton
-            className='btn btn-header btn-signup'
-            onClick={() => navigate('/signup')}
-            title={translations[language]?.signup}
-          />
-        </div>
-      </nav>
+      <>
+        <Greeting name={null} isLoading={false} />
+        <Link to='/login' className='header-link'>
+          {translations[language]?.login}
+        </Link>
+        <span className='link-sep'>/</span>
+        <Link to='/signup' className='header-link'>
+          {translations[language]?.signup}
+        </Link>
+      </>
     );
   };
 
   return (
     <header
-      className={`header ${scrolled ? 'scrolled' : ''}`}
+      className={`header ${isScrolled ? 'scrolled' : ''}`}
       data-testid='header'
     >
-      <div className='welcome-link'>
-        <div
-          className={`logo ${scrolled ? 'scrolled' : ''}`}
-          onClick={() => navigate('/')}
-        >
-          GraphiQL IDE
+      <nav className='navigation'>
+        <div className='navigation-left'>
+          <Logo isScrolled={isScrolled} />
+          <LanguageMenu isScrolled={isScrolled} />
         </div>
-        <div
-          className='lang-menu'
-          onClick={() => toggleDropdown(!isDropdownOpen)}
-        >
-          <IoEarthOutline
-            className={`lang-icon ${scrolled ? 'scrolled' : ''}`}
-            title={translations[language]?.titleLanguage}
-          />
-          <Fade show={isDropdownOpen}>
-            <div className='lang-dropdown'>
-              <button
-                onClick={() => {
-                  setLanguage('eng');
-                }}
-                className={language === 'eng' ? 'selected' : ''}
-              >
-                eng
-              </button>
-              <button
-                onClick={() => {
-                  setLanguage('rus');
-                }}
-                className={language === 'rus' ? 'selected' : ''}
-              >
-                rus
-              </button>
-              <button
-                onClick={() => {
-                  setLanguage('ukr');
-                }}
-                className={language === 'ukr' ? 'selected' : ''}
-              >
-                ukr
-              </button>
-            </div>
-          </Fade>
+        <div className='navigation-right'>
+          <div className='header-links'>
+            {user ? renderUser() : renderNoUser()}
+          </div>
         </div>
-      </div>
-      {isLoading && <div>Loading...</div>}{' '}
-      {isStoredName ? renderUser() : renderNoUser()}
+      </nav>
     </header>
   );
 };

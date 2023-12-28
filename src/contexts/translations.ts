@@ -1,11 +1,13 @@
 export const translations = {
   eng: {
     greeting: 'hello',
-    login: 'log in',
-    loginTitle: 'Log in',
-    logout: 'log out',
-    signup: 'sign up',
-    signupTitle: 'Sign up',
+    noName: 'username',
+    login: 'login',
+    loginTitle: 'Login',
+    logout: 'logout',
+    logoutTitle: 'Logout',
+    signup: 'signup',
+    signupTitle: 'Signup',
     welcome: 'to use this awesome application, log in with a fake email',
     welcomeDescription1:
       "JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox; it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.",
@@ -57,9 +59,11 @@ export const translations = {
   },
   rus: {
     greeting: 'привет',
+    noName: 'юзернейм',
     login: 'войти',
     loginTitle: 'Войти',
     logout: 'выйти',
+    logoutTitle: 'Выйти',
     signup: 'зарегистрироваться',
     signupTitle: 'Зарегистрироваться',
     welcome:
@@ -116,9 +120,11 @@ export const translations = {
   },
   ukr: {
     greeting: 'привіт',
+    noName: 'юзернейм',
     login: 'увійти',
     loginTitle: 'Увійти',
     logout: 'вийти',
+    logoutTitle: 'Вийти',
     signup: 'зареєструватися',
     signupTitle: 'Зареєструватися',
     welcome:

@@ -1,0 +1,46 @@
+.logo {
+  position: relative;
+  height: 2rem;
+  width: fit-content;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: large;
+  color: var(--light);
+  cursor: pointer;
+}
+
+.logo.scrolled {
+  color: var(--dark);
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0.3rem;
+  left: 0;
+  background-color: var(--extra);
+  transition: width 0.3s ease-in-out;
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+@media screen and (max-width: 650px) {
+  .logo {
+    font-size: medium;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .logo {
+    font-size: x-large;
+  }
+
+  .logo.logo.scrolled {
+    color: var(--light);
+  }
+}

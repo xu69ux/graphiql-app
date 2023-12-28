@@ -12,3 +12,7 @@ export { FallBackUI } from './FallBackUI';
 export { Endpoint } from './Endpoint';
 export { Search } from './Documentation/Search';
 export { Sidebar } from './Sidebar';
+export { Logo } from './Logo';
+export { Loader } from './Loader';
+export { LanguageMenu } from './LanguageMenu';
+export { Greeting } from './Greeting';

@@ -15,40 +15,40 @@
   background: linear-gradient(90deg, var(--green), var(--blue), var(--dark));
 }
 
-.user {
+.navigation,
+.navigation-left,
+.navigation-right,
+.header-links {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.user.scrolled {
-  color: var(--light);
-}
-
-.logo {
-  position: relative;
-  height: 2rem;
-  width: fit-content;
-  margin-right: 1rem;
-  font-weight: bold;
-  font-size: large;
-  color: var(--light);
-  cursor: pointer;
-}
-
-.logo::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0.3rem;
-  left: 0;
-  background-color: var(--extra);
-  transition: width 0.3s ease-in-out;
-}
-
-.logo:hover::after {
+.navigation {
   width: 100%;
+  justify-content: space-between;
+}
+
+.header-link {
+  color: var(--light);
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.header-link:hover {
+  color: var(--extra);
+}
+
+.link-sep {
+  color: var(--light);
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0 0.5rem;
 }
 
 .btn-header {
@@ -63,139 +63,15 @@
   color: var(--light);
 }
 
-.welcome-link {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
-.lang-icon {
-  color: var(--light);
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  position: relative;
-  transition: transform 0.2s ease-in-out;
-}
-
-.lang-icon:hover {
-  transform: scale(1.2) rotate(180deg);
-}
-
-.lang-menu {
-  display: flex;
-  flex-direction: row;
-}
-
-.lang-dropdown {
-  display: flex;
-  flex-direction: row;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-}
-
-.lang-menu:hover .lang-dropdown,
-.lang-dropdown.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.lang-dropdown button {
-  color: var(--light);
-  font-size: 0.9rem;
-  text-decoration: none;
-  background-color: transparent;
-  border: none;
-  display: block;
-  margin-right: 0.5rem;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.lang-dropdown button.selected {
-  color: var(--green);
-}
-
-.graphiql {
-  border: none;
-  background-color: transparent;
-  font-size: inherit;
-  border-bottom: 0.1rem solid transparent;
-}
-
-.graphiql:hover {
-  cursor: pointer;
-  border-bottom: 0.1rem solid var(--extra);
-}
-
-.logo.scrolled {
-  color: var(--dark);
-}
-
-.lang-icon.scrolled {
-  color: var(--dark);
-}
-
-.graphiql.scrolled {
-  color: var(--light);
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@media screen and (max-width: 725px) {
-  .greeting {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 650px) {
   .header {
     height: 5rem;
-  }
-
-  .logo {
-    font-size: medium;
-    margin-right: 0;
-  }
-
-  .graphiql {
-    color: var(--light);
   }
 }
 
 @media screen and (max-width: 550px) {
   .header {
     height: 6rem;
-  }
-
-  .user {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .graphiql {
-    margin-bottom: 0.5rem;
   }
 
   .btn-header {
@@ -211,43 +87,6 @@
     height: 8rem;
   }
 
-  .logo {
-    font-size: x-large;
-  }
-
-  .logo.logo.scrolled {
-    color: var(--light);
-  }
-
-  .lang-icon {
-    font-size: 2rem;
-  }
-
-  .lang-icon.scrolled {
-    color: var(--light);
-  }
-
-  .lang-dropdown button {
-    font-size: 1.2rem;
-  }
-
-  .user {
-    flex-direction: row;
-  }
-
-  nav {
-    width: 90%;
-    margin: 0.5rem 0.5rem 0 0.5rem;
-  }
-
-  .user {
-    justify-content: space-between;
-  }
-
-  .welcome-link.scrolled {
-    color: var(--light);
-  }
-
   .btn-header {
     margin: 0 0 0.8rem 0;
     height: 3rem;
@@ -259,10 +98,5 @@
 @media screen and (max-width: 400px) {
   .header {
     height: 13rem;
-  }
-
-  .user {
-    flex-direction: column;
-    align-items: center;
   }
 }
