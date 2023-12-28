@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpPage component renders correctly 1`] = `
+<div>
+  <div
+    class="auth-container"
+  >
+    <h1
+      class="auth-title"
+      data-testid="signup-title"
+    >
+      Sign up
+    </h1>
+    <form>
+      <div
+        class="signup"
+      >
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="username"
+            placeholder="username"
+            type="text"
+          />
+        </div>
+        <div
+          class="error"
+        />
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="email"
+            placeholder="email"
+            type="text"
+          />
+        </div>
+        <div
+          class="error"
+        />
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="password"
+            placeholder="password"
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          class="password-indicator"
+        >
+          <div
+            style="width: 100%; height: 100%; opacity: 0;"
+          >
+            <div
+              style="width: 0%; height: 100%; opacity: 0;"
+            />
+          </div>
+        </div>
+        <div
+          class="error"
+        />
+        <button
+          class="btn btn-sign"
+          type="submit"
+        >
+          Sign up
+        </button>
+      </div>
+    </form>
+    <p
+      class="no-account"
+    >
+      Have an account? Then, 
+      <a
+        class="login-link"
+        data-testid="login-link"
+        href="/login"
+      >
+        log in
+      </a>
+      !
+    </p>
+  </div>
+</div>
+`;

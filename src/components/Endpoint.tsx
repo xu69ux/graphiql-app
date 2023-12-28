@@ -41,7 +41,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
     }, []);
 
     return (
-      <div className='endpoint'>
+      <div className='endpoint' data-testid='endpoint'>
         <label className='endpoint-label' htmlFor='endpoint'>
           Endpoint
         </label>
@@ -61,6 +61,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
               setEndpoint(e.target.value);
             }}
             onBlur={fetchShema}
+            data-testid='endpoint-input'
           />
         </div>
         <button

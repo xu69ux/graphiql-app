@@ -1,7 +1,7 @@
 import { auth, logInWithEmailAndPassword } from '../../utils/firebase';
 import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '../../utils/validation/shema';
+import { getSchema } from '../../utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -119,6 +119,7 @@ export const FormLogIn = () => {
           type='submit'
           disabled={isSubmitting}
           title={translations?.[language]?.loginTitle}
+          data-testid='login-button'
         />
       </div>
     </form>
