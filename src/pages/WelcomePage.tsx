@@ -43,22 +43,27 @@ export const WelcomePage = () => {
       </h1>
       <p className='typing-effect'>{translations[language]?.welcome}</p>
       <div className='welcome-auth'>
-        <div className='login-icon'>
-          <IoChevronForward />
-          <IoChevronForward />
-          <IoChevronForward />
+        <div className='welcome-auth-login'>
+          <div className='login-icon'>
+            <IoChevronForward />
+            <IoChevronForward />
+            <IoChevronForward />
+          </div>
+          <Link to='/login' className='welcome-link'>
+            {translations[language]?.login}
+          </Link>
         </div>
-        <Link to='/login' className='welcome-link'>
-          {translations[language]?.login}
-        </Link>
+
         <span>{translations[language]?.or}</span>
-        <Link to='/signup' className='welcome-link'>
-          {translations[language]?.signup}
-        </Link>
-        <div className='signup-icon'>
-          <IoChevronForward />
-          <IoChevronForward />
-          <IoChevronForward />
+        <div className='welcome-auth-signup'>
+          <Link to='/signup' className='welcome-link'>
+            {translations[language]?.signup}
+          </Link>
+          <div className='signup-icon'>
+            <IoChevronForward />
+            <IoChevronForward />
+            <IoChevronForward />
+          </div>
         </div>
       </div>
       <div className={`welcome-description ${isScrolled ? '' : 'blur'}`}>

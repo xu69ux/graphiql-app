@@ -34,7 +34,7 @@
 .welcome-link {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: 0 0.5rem;
+  margin: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
 
@@ -131,4 +131,96 @@ span {
 
 .change-color {
   color: var(--light);
+}
+
+.welcome-auth-signup,
+.welcome-auth-login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+  .welcome-title {
+    font-size: 2.5rem;
+    margin-top: 10rem;
+  }
+
+  .welcome-description {
+    font-size: 1.2rem;
+    margin-top: 5rem;
+  }
+
+  .typing-effect {
+    white-space: normal;
+    overflow: hidden;
+    height: 2.5rem;
+  }
+
+  .typing-effect::before {
+    animation:
+      typing-part1 2s steps(20, end),
+      blink-caret 0.75s step-end infinite;
+  }
+
+  .typing-effect::after {
+    content: attr(data-after);
+    visibility: hidden;
+    animation:
+      typing-part2 2s steps(20, end),
+      blink-caret 0.75s step-end infinite;
+    animation-delay: 2s;
+  }
+}
+
+@keyframes typing-part1 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+@keyframes typing-part2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .typing-effect {
+    font-size: 1.2rem;
+    height: 5.5rem;
+  }
+
+  .welcome-title {
+    font-size: 2.2rem;
+    margin-top: 7rem;
+  }
+
+  .welcome-description {
+    font-size: 1.2rem;
+    margin: 5rem 0 10rem 0;
+  }
+
+  .welcome-auth {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .welcome-auth-login,
+  .welcome-auth-signup {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .welcome-description {
+    margin-bottom: 12rem;
+  }
 }

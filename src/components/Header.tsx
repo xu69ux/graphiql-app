@@ -74,15 +74,15 @@ export const Header = () => {
         <div className={`user ${scrolled ? 'scrolled' : ''}`}>
           {isStoredName && (
             <>
-              <span>
+              <span className='greeting'>
                 {translations[language]?.greeting}, {storedName}!
               </span>
               {location.pathname !== '/graphiql' && (
                 <button
-                  className='graphiql'
+                  className={`graphiql ${scrolled ? 'scrolled' : ''}`}
                   onClick={() => navigate('/graphiql')}
                 >
-                  go to <b>IDE</b>
+                  go to <b>IDE PAGE</b>
                 </button>
               )}
             </>

@@ -16,17 +16,19 @@ export const Footer = () => {
 
   return (
     <footer className='footer' data-testid='footer'>
-      <a href='https://rs.school/react/' className='course-link'>
-        <img src={courseLogo} alt='rs school logo' className='course-logo' />
-      </a>
-      <p className='footer-text'>
-        {translations[language]?.madeWith} <span>❤️</span>{' '}
-        {translations[language]?.by}{' '}
-        <a className='repo-link' href='https://github.com/xu69ux/graphiql-app'>
-          <b>JS do IT</b>
+      <div className='footer-course'>
+        <a href='https://rs.school/react/' className='course-link'>
+          <img src={courseLogo} alt='rs school logo' className='course-logo' />
         </a>
-        , 2023
-      </p>
+      </div>
+      <div className='footer-text'>
+        <div className='made-with'>
+          {translations[language]?.madeWith} <span>❤️</span>{' '}
+        <a className='repo-link' href='https://github.com/xu69ux/graphiql-app'>
+          {translations[language]?.by} <b>JS do IT,</b>
+        </a>
+        <div className='year'>2023</div>
+      </div>
       <div className='footer-icons'>
         <a
           href='https://github.com/xu69ux'

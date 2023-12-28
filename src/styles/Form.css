@@ -56,3 +56,44 @@ input {
   width: 60%;
   margin-top: 0.5rem;
 }
+
+@media screen and (max-width: 600px) {
+  .error {
+    width: 100%;
+  }
+
+  .btn-log,
+  .btn-sign {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  input {
+    height: 3rem;
+    font-size: 1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .btn-log,
+  .btn-sign {
+    height: 3rem;
+    font-size: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .error {
+    width: 100%;
+  }
+
+  .password-indicator {
+    width: 95%;
+  }
+
+  .no-account {
+    text-align: center;
+    width: 15rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+}
