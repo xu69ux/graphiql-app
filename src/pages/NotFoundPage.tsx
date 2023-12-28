@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { translations } from '../contexts/translations';
 import { MEMES_URL } from '../constants';
-import useLanguage from 'src/hooks/useLanguage';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/NotFoundPage.css';
 
