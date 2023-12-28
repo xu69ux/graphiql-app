@@ -1,5 +1,11 @@
 export const translations = {
   eng: {
+    fallback: 'Something went wrong!',
+    error: 'error',
+    reloadPage: 'reload page',
+    search: 'search',
+    searchPlaceholder: 'search...',
+    noResults: 'no results',
     greeting: 'hello',
     noName: 'username',
     login: 'login',
@@ -58,6 +64,12 @@ export const translations = {
     titleRunQuery: 'run query',
   },
   rus: {
+    fallback: 'Что-то пошло не так!',
+    error: 'ошибка',
+    reloadPage: 'перезагрузить страницу',
+    search: 'поиск',
+    searchPlaceholder: 'поиск...',
+    noResults: 'нет результатов',
     greeting: 'привет',
     noName: 'юзернейм',
     login: 'войти',
@@ -119,6 +131,12 @@ export const translations = {
     titleRunQuery: 'запустить запрос',
   },
   ukr: {
+    fallback: 'Щось пішло не так!',
+    error: 'помилка',
+    reloadPage: 'перезавантажити сторінку',
+    search: 'пошук',
+    searchPlaceholder: 'пошук...',
+    noResults: 'немає результатів',
     greeting: 'привіт',
     noName: 'юзернейм',
     login: 'увійти',

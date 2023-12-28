@@ -1,13 +1,8 @@
-import { useContext } from 'react';
 import { translations } from '../contexts/translations';
-import { LanguageContext } from '../contexts/LanguageContext';
+import useLanguage from './useLanguage';
 
 const useMsg = () => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
   const msg = {
     COMMON_ERROR: {
       body: translations?.[language]?.commonErrorBody,

@@ -1,20 +1,14 @@
-import { useContext, useState, useEffect } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { translations } from '../contexts/translations';
-
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { translations } from '../contexts/translations';
 import { IoChevronForward } from 'react-icons/io5';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/WelcomePage.css';
 
 export const WelcomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   useEffect(() => {
     let previousScrollY = window.scrollY;

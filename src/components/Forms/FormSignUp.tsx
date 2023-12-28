@@ -8,7 +8,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { translations } from '../../contexts/translations';
 import { CustomButton, PasswordValidIndicator } from '../../components';
 import useMsg from '../../hooks/useMsg';
-import useLanguage from 'src/hooks/useLanguage';
+import useLanguage from '../../hooks/useLanguage';
 import useShowMessage from '../../hooks/useShowMessage';
 
 import '@styles/Form.css';

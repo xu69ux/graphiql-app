@@ -1,18 +1,12 @@
-import { useContext } from 'react';
-import { translations } from '../contexts/translations';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { MEMES_URL } from '../constants';
-
 import { Link } from 'react-router-dom';
+import { translations } from '../contexts/translations';
+import { MEMES_URL } from '../constants';
+import useLanguage from 'src/hooks/useLanguage';
 
 import '@styles/NotFoundPage.css';
 
 export const NotFoundPage = () => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
   const randomMeme = MEMES_URL[Math.floor(Math.random() * MEMES_URL.length)];
 
   return (

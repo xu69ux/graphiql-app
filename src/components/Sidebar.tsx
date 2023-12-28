@@ -2,7 +2,7 @@ import { translations } from '../contexts/translations';
 import { IoFileTrayFullOutline } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IEditorTab } from '../types';
-import useLanguage from 'src/hooks/useLanguage';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Sidebar.css';
 

@@ -1,6 +1,6 @@
 import { translations } from '../../contexts/translations';
 import { Loader } from '../../components';
-import useLanguage from 'src/hooks/useLanguage';
+import useLanguage from '../../hooks/useLanguage';
 
 import '@styles/Greeting.css';
 
