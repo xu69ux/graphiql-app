@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logout } from '../utils/firebase';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { translations } from '../contexts/translations';
-import { LanguageMenu, Logo, Greeting } from '../components';
-import { fetchUserName } from '../services/api/fetchUserName';
-import useShowMessage from '../hooks/useShowMessage';
-import useMsg from '../hooks/useMsg';
+import { auth, logout } from '../../utils/firebase';
+import { LanguageContext } from '../../contexts/LanguageContext';
+import { translations } from '../../contexts/translations';
+import { LanguageMenu, Logo, Greeting } from '..';
+import { fetchUserName } from '../../services/api/fetchUserName';
+import useShowMessage from '../../hooks/useShowMessage';
+import useMsg from '../../hooks/useMsg';
 
 import '@styles/Header.css';
 

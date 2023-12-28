@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { translations } from '../contexts/translations';
+import { LanguageContext } from '../../contexts/LanguageContext';
+import { translations } from '../../contexts/translations';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Fade } from '../components';
+import { Fade } from '..';
 
 import '@styles/LanguageMenu.css';
 

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { translations } from '../contexts/translations';
-import { Loader } from '../components';
+import { LanguageContext } from '../../contexts/LanguageContext';
+import { translations } from '../../contexts/translations';
+import { Loader } from '..';
 
 import '@styles/Greeting.css';
 
