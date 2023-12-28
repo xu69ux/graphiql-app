@@ -1,25 +1,25 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '../utils/firebase';
 import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { LanguageMenu, Logo, Greeting } from '../components';
+import { fetchUserName } from '../services/api/fetchUserName';
 import useShowMessage from '../hooks/useShowMessage';
 import useMsg from '../hooks/useMsg';
-import { fetchUserName } from '../services/api/fetchUserName';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 import '@styles/Header.css';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [user, loading] = useAuthState(auth);
-  const storedName = sessionStorage.getItem('userName');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const showMessage = useShowMessage();
   const msg = useMsg();
+  const location = useLocation();
+  const storedName = sessionStorage.getItem('userName');
+  const [user, loading] = useAuthState(auth);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const languageContext = useContext(LanguageContext) || {
     language: 'eng',
     setLanguage: () => {},
