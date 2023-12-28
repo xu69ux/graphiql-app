@@ -24,42 +24,50 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
       class="welcome-auth"
     >
       <div
-        class="login-icon"
+        class="welcome-auth-login"
       >
-        <div>
-          Mock Icon
+        <div
+          class="login-icon"
+        >
+          <div>
+            Mock Icon
+          </div>
+          <div>
+            Mock Icon
+          </div>
+          <div>
+            Mock Icon
+          </div>
         </div>
-        <div>
-          Mock Icon
-        </div>
-        <div>
-          Mock Icon
-        </div>
+        <a
+          href="/login"
+        >
+          log in
+        </a>
       </div>
-      <a
-        href="/login"
-      >
-        log in
-      </a>
       <span>
         or
       </span>
-      <a
-        href="/signup"
-      >
-        sign up
-      </a>
       <div
-        class="signup-icon"
+        class="welcome-auth-signup"
       >
-        <div>
-          Mock Icon
-        </div>
-        <div>
-          Mock Icon
-        </div>
-        <div>
-          Mock Icon
+        <a
+          href="/signup"
+        >
+          sign up
+        </a>
+        <div
+          class="signup-icon"
+        >
+          <div>
+            Mock Icon
+          </div>
+          <div>
+            Mock Icon
+          </div>
+          <div>
+            Mock Icon
+          </div>
         </div>
       </div>
     </div>

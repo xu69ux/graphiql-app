@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import App from '../App';
 
-test('renders App with Header, Routes and Footer', () => {
-  render(<App />);
+test('renders App with Header, Routes and Footer', async () => {
+  await act(async () => {
+    render(<App />);
+  });
 
   const headerElement = screen.getByTestId('header');
   expect(headerElement).toBeInTheDocument();
