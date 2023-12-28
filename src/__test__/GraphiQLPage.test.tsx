@@ -1,8 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { GraphiQLPage } from '../pages';
+import { LanguageProvider } from '../contexts/LanguageProvider';
+import GraphiQLPage from '../pages/GraphiQLPage';
 
 test('renders GraphiQLPage with initial state', () => {
-  render(<GraphiQLPage />);
+  render(
+    <LanguageProvider>
+      <GraphiQLPage />
+    </LanguageProvider>,
+  );
 
   expect(screen.getByText(/variables/i)).toBeInTheDocument();
   expect(screen.getByText(/headers/i)).toBeInTheDocument();

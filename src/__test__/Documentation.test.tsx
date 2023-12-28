@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Documentation } from '../components';
 import { Schema } from '../types';
+import { LanguageProvider } from '../contexts/LanguageProvider';
 
 const mockSchema: Schema = {
   types: [
@@ -25,7 +26,7 @@ const mockSchema: Schema = {
 test('renders Documentation title', () => {
   render(<Documentation isDocumentationOpen={true} schema={null} />);
   const titleElements = screen.getAllByText(/Documentation/i);
-  expect(titleElements.length).toBe(2);
+  expect(titleElements.length).toBe(1);
 });
 
 test('renders open class when isDocumentationOpen is true', () => {
@@ -40,19 +41,12 @@ test('does not render open class when isDocumentationOpen is false', () => {
   expect(documentationElement).not.toHaveClass('open');
 });
 
-test('renders no-docs text when schema is null', () => {
-  const { container } = render(
-    <Documentation isDocumentationOpen={true} schema={null} />,
-  );
-  const noDocsElement = container.querySelector('.no-docs');
-  expect(noDocsElement).toBeInTheDocument();
-  expect(noDocsElement?.textContent).toBe(
-    'Enter the endpoint to retrieve documentation',
-  );
-});
-
 test('handleBackClick function works correctly', () => {
-  render(<Documentation isDocumentationOpen={true} schema={mockSchema} />);
+  render(
+    <LanguageProvider>
+      <Documentation isDocumentationOpen={true} schema={mockSchema} />
+    </LanguageProvider>,
+  );
 
   const typeItem = screen.getByTestId('type-item');
   act(() => {

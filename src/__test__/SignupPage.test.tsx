@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { SignupPage } from '../pages';
+import SignupPage from '../pages/SignupPage';
 
 describe('SignUpPage component', () => {
   test('renders correctly', () => {
