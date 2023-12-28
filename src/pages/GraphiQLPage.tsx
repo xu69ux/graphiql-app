@@ -22,7 +22,7 @@ const updateTab = (
 ): IEditorTab[] =>
   tabs.map((tab) => (tab.id === id ? { ...tab, ...newValues } : tab));
 
-export const GraphiQLPage = () => {
+const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
@@ -199,3 +199,5 @@ export const GraphiQLPage = () => {
     </div>
   );
 };
+
+export default GraphiQLPage;

@@ -16,3 +16,4 @@ export { Logo } from './Header/Logo';
 export { Loader } from './Loader';
 export { LanguageMenu } from './Header/LanguageMenu';
 export { Greeting } from './Header/Greeting';
+export { PrivateRoute } from './PrivateRoute';

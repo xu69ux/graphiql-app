@@ -5,7 +5,7 @@ import useLanguage from '../hooks/useLanguage';
 
 import '@styles/NotFoundPage.css';
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   const { language } = useLanguage();
   const randomMeme = MEMES_URL[Math.floor(Math.random() * MEMES_URL.length)];
 
@@ -25,3 +25,5 @@ export const NotFoundPage = () => {
     </div>
   );
 };
+
+export default NotFoundPage;

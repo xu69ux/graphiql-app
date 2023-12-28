@@ -6,7 +6,7 @@ import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Auth.css';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const userIs = sessionStorage.getItem('authInfo');
   const { language } = useLanguage();
@@ -33,3 +33,5 @@ export const LoginPage = () => {
     )
   );
 };
+
+export default LoginPage;

@@ -6,7 +6,7 @@ import useLanguage from '../hooks/useLanguage';
 
 import '@styles/WelcomePage.css';
 
-export const WelcomePage = () => {
+const WelcomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { language } = useLanguage();
 
@@ -77,3 +77,5 @@ export const WelcomePage = () => {
     </div>
   );
 };
+
+export default WelcomePage;

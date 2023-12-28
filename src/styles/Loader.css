@@ -1,3 +1,10 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .loader-icon {
   color: var(--light);
   font-size: 1.5rem;
