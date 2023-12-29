@@ -109,8 +109,8 @@ export const Documentation: React.FC<DocumentationProps> = ({
                 {selectedType.name}:
               </h2>
               {selectedType.fields && selectedType.fields.length > 0 ? (
-                selectedType.fields.map((field) => (
-                  <div className='field-container'>
+                selectedType.fields.map((field, index) => (
+                  <div className='field-container' key={index}>
                     <div
                       key={field.name}
                       className='docs-item'
@@ -120,7 +120,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
                       {field.name}:
                     </div>
                     <div
-                      key={field.name}
+                      key={field.type.kind}
                       className='field-type'
                       onClick={(e) => {
                         e.stopPropagation();
