@@ -1,12 +1,16 @@
-import { useState } from 'react';
-import { translations } from '../../contexts/translations';
+import { useState, FC } from 'react';
+import { translations } from '../../../contexts/translations';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Fade } from '../../components';
-import useLanguage from '../../hooks/useLanguage';
+import { Fade } from '../..';
+import useLanguage from '../../../hooks/useLanguage';
 
 import '@styles/LanguageMenu.css';
 
-export const LanguageMenu = ({ isScrolled }) => {
+interface ILanguageMenuProps {
+  isScrolled: boolean;
+}
+
+export const LanguageMenu: FC<ILanguageMenuProps> = ({ isScrolled }) => {
   const [isDropdownOpen, toggleDropdown] = useState(false);
   const { language, setLanguage } = useLanguage();
 

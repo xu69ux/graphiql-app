@@ -29,21 +29,6 @@
   justify-content: space-between;
 }
 
-.header-link {
-  color: var(--light);
-  font-size: 1.2rem;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  border-bottom: 2px solid var(--extra);
-}
-
-.header-link:hover {
-  color: var(--extra);
-  border-bottom: 2px solid var(--light);
-}
-
 .link-sep {
   color: var(--light);
   font-size: 1.2rem;
@@ -107,10 +92,6 @@
 @media screen and (max-width: 400px) {
   .header {
     height: 13rem;
-  }
-
-  .header-link {
-    font-size: 1.3rem;
   }
 
   .navigation-left {

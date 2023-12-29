@@ -1,8 +1,13 @@
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '@styles/Logo.css';
 
-export const Logo = ({ isScrolled }) => {
+interface ILogoProps {
+  isScrolled: boolean;
+}
+
+export const Logo: FC<ILogoProps> = ({ isScrolled }) => {
   const navigate = useNavigate();
 
   return (

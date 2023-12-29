@@ -1,26 +1,22 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logout } from '../../utils/firebase';
-import { translations } from '../../contexts/translations';
-import { LanguageMenu, Logo, Greeting } from '..';
+import { auth } from '../../utils/firebase';
+import {
+  LanguageMenu,
+  Logo,
+  Greeting,
+  UserComponent,
+  NoUserComponent,
+} from '..';
 import { fetchUserName } from '../../services/api/fetchUserName';
-import useShowMessage from '../../hooks/useShowMessage';
-import useMsg from '../../hooks/useMsg';
-import useLanguage from '../../hooks/useLanguage';
 
 import '@styles/Header.css';
 
 export const Header = () => {
-  const navigate = useNavigate();
-  const showMessage = useShowMessage();
-  const msg = useMsg();
-  const location = useLocation();
   const storedName = sessionStorage.getItem('userName');
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { language } = useLanguage();
 
   const fetchData = useCallback(async () => {
     if (user) {
@@ -53,50 +49,6 @@ export const Header = () => {
     fetchData();
   }, [user, loading, fetchData]);
 
-  const logoutHandle = () => {
-    logout();
-    navigate('/');
-    showMessage(msg.LOG_OUT_SUCCESS);
-    sessionStorage.removeItem('authInfo');
-    sessionStorage.removeItem('userName');
-  };
-
-  const renderUser = () => {
-    return (
-      <>
-        {user && (
-          <>
-            {location.pathname !== '/graphiql' && (
-              <>
-                <Link to='/graphiql' className='header-link'>
-                  IDE
-                </Link>
-                <span className='link-sep'>/</span>
-              </>
-            )}
-            <Link to='/' className='header-link' onClick={logoutHandle}>
-              {translations[language]?.logout}
-            </Link>
-          </>
-        )}
-      </>
-    );
-  };
-
-  const renderNoUser = () => {
-    return (
-      <>
-        <Link to='/login' className='header-link'>
-          {translations[language]?.login}
-        </Link>
-        <span className='link-sep'>/</span>
-        <Link to='/signup' className='header-link'>
-          {translations[language]?.signup}
-        </Link>
-      </>
-    );
-  };
-
   return (
     <header
       className={`header ${isScrolled ? 'scrolled' : ''}`}
@@ -111,10 +63,10 @@ export const Header = () => {
           {storedName ? (
             <Greeting name={storedName} isLoading={isLoading} />
           ) : (
-            <Greeting name={null} isLoading={isLoading} />
+            <Greeting isLoading={isLoading} />
           )}
           <div className='header-links'>
-            {user ? renderUser() : renderNoUser()}
+            {user ? <UserComponent user={user} /> : <NoUserComponent />}
           </div>
         </div>
       </nav>
