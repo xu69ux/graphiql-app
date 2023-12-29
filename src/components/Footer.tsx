@@ -1,18 +1,12 @@
-import { useContext } from 'react';
 import { translations } from '../contexts/translations';
-import { LanguageContext } from '../contexts/LanguageContext';
-
 import { PiGithubLogoFill } from 'react-icons/pi';
 import courseLogo from '../assets/rs_school_js.svg';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Footer.css';
 
 export const Footer = () => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   return (
     <footer className='footer' data-testid='footer'>
@@ -24,10 +18,14 @@ export const Footer = () => {
       <div className='footer-text'>
         <div className='made-with'>
           {translations[language]?.madeWith} <span>❤️</span>{' '}
-        <a className='repo-link' href='https://github.com/xu69ux/graphiql-app'>
-          {translations[language]?.by} <b>JS do IT,</b>
-        </a>
-        <div className='year'>2023</div>
+          <a
+            className='repo-link'
+            href='https://github.com/xu69ux/graphiql-app'
+          >
+            {translations[language]?.by} <b>JS do IT,</b>
+          </a>
+          <div className='year'>2023</div>
+        </div>
       </div>
       <div className='footer-icons'>
         <a

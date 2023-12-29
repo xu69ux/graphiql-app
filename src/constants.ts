@@ -9,7 +9,6 @@ export const MEMES_URL = [
   'https://images.ctfassets.net/lpvian6u6i39/5Cjg11vLA7TtBltK2eZRgC/a7796e4116aa02c7fab44bcf41d5bb74/632814946fdd0783ccd383fe_What_you_really_want_is_GraphQL.jpeg',
   'https://pbs.twimg.com/media/DgsXLk_X4AEKiJJ.jpg',
   'https://res.cloudinary.com/practicaldev/image/fetch/s--Mj-l1XJQ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/810rx3aflyr74a87hkgt.png',
-  'https://www.meme-arsenal.com/memes/105a259367db6e03d4c5b0c50155ba17.jpg',
 ];
 
 export const QUERY_FOR_SHEMA_FETCHING = `

@@ -1,16 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { NotFoundPage } from '../pages';
+import { LanguageProvider } from '../contexts/LanguageProvider';
+import NotFoundPage from '../pages/NotFoundPage';
 
 test('renders not found message', () => {
   render(
-    <Router>
-      <NotFoundPage />
-    </Router>,
+    <LanguageProvider>
+      <Router>
+        <NotFoundPage />
+      </Router>
+    </LanguageProvider>,
   );
   const linkElement = screen.getByText(
-    /oops, you've ended up somewhere you didn't mean to!/i,
+    /oops, the page you're looking for is not found!/i,
   );
   expect(linkElement).toBeInTheDocument();
 });
@@ -26,7 +29,7 @@ test('renders not found titles based on language context', () => {
     </LanguageContext.Provider>,
   );
   const title1 = screen.getByText(
-    /oops, you've ended up somewhere you didn't mean to!/i,
+    /oops, the page you're looking for is not found!/i,
   );
   const title2 = screen.getByText(/go back to the/i);
   const title3 = screen.getByText(/or check out a random meme:/i);

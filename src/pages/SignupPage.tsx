@@ -1,19 +1,15 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormSignUp } from '../components';
-import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Auth.css';
 
-export const SignupPage = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
   const userIs = sessionStorage.getItem('authInfo');
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (userIs) navigate('/graphiql');
@@ -37,3 +33,5 @@ export const SignupPage = () => {
     )
   );
 };
+
+export default SignupPage;

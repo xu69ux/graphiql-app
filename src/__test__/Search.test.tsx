@@ -1,6 +1,7 @@
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { Search } from '../components';
 import { Schema } from '../types';
+import { LanguageProvider } from '../contexts/LanguageProvider';
 
 const mockSchema: Schema = {
   types: [
@@ -38,28 +39,40 @@ const mockSchema: Schema = {
 };
 
 test('renders search icon', () => {
-  render(<Search schema={{ types: [] }} setSearchItem={() => {}} />);
+  render(
+    <LanguageProvider>
+      <Search schema={{ types: [] }} setSearchItem={() => {}} />
+    </LanguageProvider>,
+  );
   const searchIcon = screen.getByTestId('search-icon');
   expect(searchIcon).toBeInTheDocument();
 });
 
 test('opens search on icon click', () => {
-  render(<Search schema={{ types: [] }} setSearchItem={() => {}} />);
+  render(
+    <LanguageProvider>
+      <Search schema={{ types: [] }} setSearchItem={() => {}} />
+    </LanguageProvider>,
+  );
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);
   });
-  const searchInput = screen.getByPlaceholderText('Search...');
+  const searchInput = screen.getByPlaceholderText('search...');
   expect(searchInput).toBeInTheDocument();
 });
 
 test('displays search results', () => {
-  render(<Search schema={mockSchema} setSearchItem={() => {}} />);
+  render(
+    <LanguageProvider>
+      <Search schema={mockSchema} setSearchItem={() => {}} />
+    </LanguageProvider>,
+  );
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);
   });
-  const searchInput = screen.getByPlaceholderText('Search...');
+  const searchInput = screen.getByPlaceholderText('search...');
   act(() => {
     fireEvent.change(searchInput, { target: { value: 'Type1' } });
   });
@@ -68,15 +81,19 @@ test('displays search results', () => {
 });
 
 test('displays no results message', () => {
-  render(<Search schema={mockSchema} setSearchItem={() => {}} />);
+  render(
+    <LanguageProvider>
+      <Search schema={mockSchema} setSearchItem={() => {}} />
+    </LanguageProvider>,
+  );
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);
   });
-  const searchInput = screen.getByPlaceholderText('Search...');
+  const searchInput = screen.getByPlaceholderText('search...');
   act(() => {
     fireEvent.change(searchInput, { target: { value: 'Type3' } });
   });
-  const searchResults = screen.getByText('No results');
+  const searchResults = screen.getByText('no results');
   expect(searchResults).toBeInTheDocument();
 });

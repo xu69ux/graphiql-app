@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
 import { translations } from '../contexts/translations';
 import { IoFileTrayFullOutline } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IEditorTab } from '../types';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Sidebar.css';
 
@@ -26,12 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setActiveTab,
   setIsDocumentationOpen,
 }) => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
-
+  const { language } = useLanguage();
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
   };

@@ -57,7 +57,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
       data-testid='documentation'
     >
       <h1 className='docs-title'>Documentation</h1>
-      {schema ? (
+      {schema && (
         <>
           <Search schema={schema} setSearchItem={setSearchItem} />
           {selectedType || selectedField ? (
@@ -158,8 +158,6 @@ export const Documentation: React.FC<DocumentationProps> = ({
             </div>
           )}
         </>
-      ) : (
-        <p className='no-docs'>Enter the endpoint to retrieve documentation</p>
       )}
     </div>
   );

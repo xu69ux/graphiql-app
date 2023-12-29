@@ -9,7 +9,7 @@ exports[`SignUpPage component renders correctly 1`] = `
       class="auth-title"
       data-testid="signup-title"
     >
-      Sign up
+      Signup
     </h1>
     <form>
       <div
@@ -67,7 +67,7 @@ exports[`SignUpPage component renders correctly 1`] = `
           class="btn btn-sign"
           type="submit"
         >
-          Sign up
+          Signup
         </button>
       </div>
     </form>
@@ -80,7 +80,7 @@ exports[`SignUpPage component renders correctly 1`] = `
         data-testid="login-link"
         href="/login"
       >
-        log in
+        login
       </a>
       !
     </p>
