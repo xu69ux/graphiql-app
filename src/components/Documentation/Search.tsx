@@ -1,6 +1,8 @@
 import { useState, useEffect, ChangeEvent, FC } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 import { Schema } from '../../types';
+import { translations } from '../../contexts/translations';
+import useLanguage from '../../hooks/useLanguage';
 
 import '@styles/Search.css';
 
@@ -17,6 +19,7 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const { language } = useLanguage();
 
   const search = () => {
     if (searchTerm !== '') {
@@ -62,7 +65,7 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
       {isSearchOpen && (
         <input
           type='text'
-          placeholder='Search...'
+          placeholder={translations[language]?.searchPlaceholder}
           value={searchTerm}
           onChange={handleInputChange}
         />
@@ -83,7 +86,7 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
               </div>
             ))
           ) : (
-            <div>No results</div>
+            <div>{translations[language].noResults}</div>
           )}
         </div>
       )}

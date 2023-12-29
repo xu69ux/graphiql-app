@@ -1,0 +1,20 @@
+.header-link {
+  color: var(--light);
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  border-bottom: 2px solid var(--extra);
+}
+
+.header-link:hover {
+  color: var(--extra);
+  border-bottom: 2px solid var(--light);
+}
+
+@media screen and (max-width: 400px) {
+  .header-link {
+    font-size: 1.3rem;
+  }
+}

@@ -1,7 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { LoginPage } from '../pages';
+import LoginPage from '../pages/LoginPage';
 
 describe('LoginPage component', () => {
   let container: HTMLElement;

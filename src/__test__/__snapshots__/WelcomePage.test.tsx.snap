@@ -42,7 +42,7 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
         <a
           href="/login"
         >
-          log in
+          login
         </a>
       </div>
       <span>
@@ -54,7 +54,7 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
         <a
           href="/signup"
         >
-          sign up
+          signup
         </a>
         <div
           class="signup-icon"

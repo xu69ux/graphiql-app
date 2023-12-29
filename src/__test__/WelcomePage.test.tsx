@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { WelcomePage } from '../pages';
+import WelcomePage from '../pages/WelcomePage';
 import { LanguageContext } from '../contexts/LanguageContext';
 
 jest.mock('react-router-dom', () => ({

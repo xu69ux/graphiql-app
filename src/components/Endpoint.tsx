@@ -1,16 +1,8 @@
-import {
-  FC,
-  Dispatch,
-  SetStateAction,
-  memo,
-  useEffect,
-  useState,
-  useContext,
-} from 'react';
-import { LanguageContext } from '../contexts/LanguageContext';
+import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
 import { translations } from '../contexts/translations';
 import { IoChevronForward } from 'react-icons/io5';
 import { LiaHistorySolid } from 'react-icons/lia';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Endpoint.css';
 
@@ -22,12 +14,8 @@ interface IEndpointProps {
 
 export const Endpoint: FC<IEndpointProps> = memo(
   ({ endpointValue, setEndpoint, fetchShema }) => {
+    const { language } = useLanguage();
     const [isDisabled, setIsDisabled] = useState(true);
-    const languageContext = useContext(LanguageContext) || {
-      language: 'eng',
-      setLanguage: () => {},
-    };
-    const { language } = languageContext;
 
     const setFromHistory = () => {
       const prevEndpoint = localStorage.getItem('prevEndpoint');

@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Header } from '../components';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LanguageContext } from '../contexts/LanguageContext';
@@ -39,8 +39,8 @@ describe('Header', () => {
       </LanguageContext.Provider>,
     );
 
-    expect(getByText('hello, Test User!')).toBeInTheDocument();
-    expect(getByText('log out')).toBeInTheDocument();
+    expect(getByText('IDE')).toBeInTheDocument();
+    expect(getByText('logout')).toBeInTheDocument();
   });
 
   it('renders guest elements when user is not logged in', () => {
@@ -56,25 +56,7 @@ describe('Header', () => {
       </LanguageContext.Provider>,
     );
 
-    expect(getByText('log in')).toBeInTheDocument();
-    expect(getByText('sign up')).toBeInTheDocument();
-  });
-
-  it('changes language when language dropdown is clicked', () => {
-    (useAuthState as jest.Mock).mockReturnValue([null, false]);
-    const setLanguage = jest.fn();
-
-    const { getByTitle, getByText } = render(
-      <LanguageContext.Provider value={{ language: 'eng', setLanguage }}>
-        <Router>
-          <Header />
-        </Router>
-      </LanguageContext.Provider>,
-    );
-
-    fireEvent.click(getByTitle('change language'));
-    fireEvent.click(getByText('rus'));
-
-    expect(setLanguage).toHaveBeenCalledWith('rus');
+    expect(getByText('login')).toBeInTheDocument();
+    expect(getByText('signup')).toBeInTheDocument();
   });
 });

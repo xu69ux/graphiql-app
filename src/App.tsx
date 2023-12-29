@@ -1,13 +1,18 @@
-import { BrowserRouter as Router, Routes } from 'react-router-dom';
-import { routes } from './routes';
-
-import { Footer, Header, FallBackUI } from './components';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Footer, Header, FallBackUI, Loader, PrivateRoute } from './components';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 import { LanguageProvider } from './contexts/LanguageProvider';
 
-import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+
+const WelcomePage = lazy(() => import('./pages/WelcomePage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const SignupPage = lazy(() => import('./pages/SignupPage'));
+const GraphiQLPage = lazy(() => import('./pages/GraphiQLPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
@@ -16,7 +21,21 @@ function App() {
         <LanguageProvider>
           <Router>
             <Header />
-            <Routes>{routes}</Routes>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path='/' element={<WelcomePage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/signup' element={<SignupPage />} />
+                <Route key='/private-route' element={<PrivateRoute />}>
+                  <Route
+                    key='/graphiql'
+                    path='/graphiql'
+                    element={<GraphiQLPage />}
+                  />
+                </Route>
+                <Route path='*' element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
             <Footer />
             <ToastContainer
               position='top-center'

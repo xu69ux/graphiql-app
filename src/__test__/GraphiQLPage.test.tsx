@@ -5,7 +5,8 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import { GraphiQLPage } from '../pages';
+import { LanguageProvider } from '../contexts/LanguageProvider';
+import GraphiQLPage from '../pages/GraphiQLPage';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -37,7 +38,11 @@ describe('GraphiQLPage page', () => {
 
   test('renders GraphiQLPage with initial state', async () => {
     await act(async () => {
-      render(<GraphiQLPage />);
+      render(
+        <LanguageProvider>
+          <GraphiQLPage />
+        </LanguageProvider>,
+      );
     });
 
     expect(screen.getByText(/variables/i)).toBeInTheDocument();
@@ -52,7 +57,11 @@ describe('GraphiQLPage page', () => {
   });
 
   test('adds a new tab when clicking the "Add Tab" button', async () => {
-    render(<GraphiQLPage />);
+    render(
+      <LanguageProvider>
+        <GraphiQLPage />
+      </LanguageProvider>,
+    );
 
     fireEvent.click(screen.getByText('add tab'));
 
@@ -62,7 +71,11 @@ describe('GraphiQLPage page', () => {
     axiosPostSpy.mockRestore();
   });
   test('sends a GraphQL request when clicking the "Run" button', async () => {
-    render(<GraphiQLPage />);
+    render(
+      <LanguageProvider>
+        <GraphiQLPage />
+      </LanguageProvider>,
+    );
 
     fireEvent.click(screen.getByTitle('run query'));
 
