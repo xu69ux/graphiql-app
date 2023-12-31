@@ -6,9 +6,3 @@
   overflow-x: scroll;
   overflow-y: scroll;
 }
-
-.kind-subtitle {
-  font-size: 1rem;
-  color: var(--light);
-  margin: 1rem 0;
-}
