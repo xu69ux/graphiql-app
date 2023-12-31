@@ -40,7 +40,7 @@ export const TypeComponent: React.FC<TypeComponentProps> = ({
       ) : (
         <>
           <p className='type-subtitle'>{type.name}:</p>
-          {Array.isArray(type.fields) &&
+          {Array.isArray(type.fields) && type.fields.length > 0 ? (
             type.fields.map((field) => (
               <p
                 className='field'
@@ -49,7 +49,10 @@ export const TypeComponent: React.FC<TypeComponentProps> = ({
               >
                 {field.name}
               </p>
-            ))}
+            ))
+          ) : (
+            <p>This type has no fields.</p>
+          )}
         </>
       )}
     </div>
