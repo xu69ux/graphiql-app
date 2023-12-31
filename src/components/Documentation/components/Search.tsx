@@ -1,13 +1,13 @@
 import { useState, useEffect, ChangeEvent, FC } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
-import { Schema } from '../../types';
-import { translations } from '../../contexts/translations';
-import useLanguage from '../../hooks/useLanguage';
+import { GraphQLSchema } from '../../../types';
+import { translations } from '../../../contexts/translations';
+import useLanguage from '../../../hooks/useLanguage';
 
 import '@styles/Search.css';
 
 interface SearchProps {
-  schema: Schema;
+  schema: GraphQLSchema;
   setSearchItem: (item: string) => void;
 }
 
@@ -23,20 +23,27 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
 
   const search = () => {
     if (searchTerm !== '') {
-      const results = schema.types.flatMap((type) => [
-        { name: type.name },
-        ...(type.fields
-          ? type.fields.map((field) => ({
-              name: `${type.name}.${field.name}`,
-            }))
-          : []),
-      ]);
+      const kindSet = new Set<string>();
+      const results = schema.types.flatMap((type) => {
+        if (type.kind) {
+          kindSet.add(type.kind);
+        }
+        return [
+          { name: type.name },
+          ...(type.fields
+            ? type.fields.map((field) => ({
+                name: `${type.name}.${field.name}`,
+              }))
+            : []),
+          ...(type.kind ? [{ name: `${type.name}.${type.kind}` }] : []),
+        ];
+      });
+
+      const kindResults = Array.from(kindSet).map((kind) => ({ name: kind }));
 
       setSearchResults(
-        results.filter(
-          (item) =>
-            item.name &&
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        [...results, ...kindResults].filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       );
     } else {

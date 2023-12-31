@@ -1,0 +1,24 @@
+.back-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 1rem 0 auto;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--green);
+}
+
+.back-button.hidden {
+  visibility: hidden;
+  min-height: 1rem;
+}
+
+.back-button:hover {
+  color: var(--light);
+}
+
+.back-icon {
+  rotate: 180deg;
+  color: inherit;
+}
