@@ -28,8 +28,6 @@ export const Documentation: FC<DocumentationProps> = ({
   const [selectedKind, setSelectedKind] = useState<KindType | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
-  console.log(selectedKind);
-
   const handleTypeClick = (type: Type) => {
     setSelectedType(type);
   };
