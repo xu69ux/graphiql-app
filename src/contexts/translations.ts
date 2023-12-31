@@ -37,6 +37,10 @@ export const translations = {
     searchPlaceholder: 'search...',
     signup: 'signup',
     signupTitle: 'Signup',
+    thanxSlava1: 'Special heartfelt thanks to ',
+    thanxSlava2:
+      'for valuable advice and implicit motivation for multiple refactoring.',
+    ViachaslauShpileuski: 'Viachaslau Shpileuski',
     titleAddTab: 'add tab',
     titleDeleteTabs: 'delete all tabs',
     titleDocs: 'show documentation',
@@ -101,6 +105,10 @@ export const translations = {
     searchPlaceholder: 'поиск...',
     signup: 'зарегистрироваться',
     signupTitle: 'Зарегистрироваться',
+    thanxSlava1: 'Отдельная искренняя благодарность ',
+    thanxSlava2:
+      ' за ценные советы и неявную мотивацию к многократному рефакторингу.',
+    ViachaslauShpileuski: 'Вячеславу Шпилевскому',
     titleAddTab: 'добавить вкладку',
     titleDeleteTabs: 'удалить все вкладки',
     titleDocs: 'показать документацию',
@@ -164,6 +172,10 @@ export const translations = {
     searchPlaceholder: 'пошук...',
     signup: 'зареєструватися',
     signupTitle: 'Зареєструватися',
+    thanxSlava1: 'Окрема щиря подяка ',
+    thanxSlava2:
+      ' за цінні поради та неявну мотивацію до багаторазового рефакторингу.',
+    ViachaslauShpileuski: 'В’ячеславу Шпилевському',
     titleAddTab: 'додати вкладку',
     titleDeleteTabs: 'видалити всі вкладки',
     titleDocs: 'показати документацію',
