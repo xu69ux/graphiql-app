@@ -1,18 +1,19 @@
-import { FieldType, GraphQLSchema, Type } from '../../../types';
+import { FC } from 'react';
+import { FieldType, GraphQLSchema, KindType, Type } from '../../../types';
 import { FieldComponent } from '../../../components';
 
 import '@styles/TypeComponent.css';
 
 interface TypeComponentProps {
+  schema: GraphQLSchema | null;
   selectedType: Type;
   selectedField: FieldType | null;
   setSelectedField: (field: FieldType | null) => void;
-  setSelectedKind: (kind: string | null) => void;
-  schema: GraphQLSchema;
+  setSelectedKind: (kind: KindType | null) => void;
   setSelectedType: (type: Type | null) => void;
 }
 
-export const TypeComponent: React.FC<TypeComponentProps> = ({
+export const TypeComponent: FC<TypeComponentProps> = ({
   selectedType,
   selectedField,
   setSelectedField,
@@ -27,7 +28,7 @@ export const TypeComponent: React.FC<TypeComponentProps> = ({
   };
 
   return (
-    <div className='type-container'>
+    <div className='type-container' data-testid='selected-type'>
       {selectedField ? (
         <>
           <FieldComponent

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import {
   BackButton,
   KindComponent,
   Search,
   TypeComponent,
 } from '../../components';
-import { Type, FieldType, GraphQLSchema } from '../../types';
+import { GraphQLSchema, Type, FieldType, KindType } from '../../types';
 import {
   findTypeByName,
   findFieldByName,
@@ -15,17 +15,17 @@ import {
 import '@styles/Documentation.css';
 
 interface DocumentationProps {
+  schema: GraphQLSchema | null;
   isDocumentationOpen: boolean;
-  schema: GraphQLSchema;
 }
 
-export const Documentation: React.FC<DocumentationProps> = ({
+export const Documentation: FC<DocumentationProps> = ({
   isDocumentationOpen,
   schema,
 }) => {
   const [selectedType, setSelectedType] = useState<Type | null>(null);
   const [selectedField, setSelectedField] = useState<FieldType | null>(null);
-  const [selectedKind, setSelectedKind] = useState<string | null>(null);
+  const [selectedKind, setSelectedKind] = useState<KindType | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
   console.log(selectedKind);
@@ -37,7 +37,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
   const handleKindClick = (kindName: string) => {
     const kind = schema?.types.find((type) => type.kind === kindName);
     if (kind) {
-      setSelectedKind(kind.kind);
+      setSelectedKind(kind);
     }
   };
 
@@ -54,7 +54,7 @@ export const Documentation: React.FC<DocumentationProps> = ({
         const kindObj = findKindByName(schema.types, kindName);
 
         if (kindObj) {
-          setSelectedKind(kindObj.kind);
+          setSelectedKind(kindObj);
         }
       }
     }
@@ -103,7 +103,11 @@ export const Documentation: React.FC<DocumentationProps> = ({
           <div className='types-container'>
             {schema?.types.map((type, index) => (
               <div key={index} className='type-kind-container'>
-                <p className='type' onClick={() => handleTypeClick(type)}>
+                <p
+                  className='type'
+                  data-testid='type-item'
+                  onClick={() => handleTypeClick(type)}
+                >
                   {type.name}:
                 </p>
                 <p className='kind' onClick={() => handleKindClick(type.kind)}>

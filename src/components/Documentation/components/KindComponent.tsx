@@ -1,6 +1,13 @@
+import { FC } from 'react';
+import { KindType } from '../../../types';
+
 import '@styles/KindComponent.css';
 
-export const KindComponent = ({ selectedKind }) => {
+interface KindComponentProps {
+  selectedKind: KindType;
+}
+
+export const KindComponent: FC<KindComponentProps> = ({ selectedKind }) => {
   return (
     <div className='kind-container' data-testid='kind-item'>
       {selectedKind.description ? (

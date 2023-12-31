@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Type, FieldType } from '../../../types';
+import { Type, FieldType, KindType } from '../../../types';
 import { IoChevronForward } from 'react-icons/io5';
 
 import '@styles/BackButton.css';
@@ -8,10 +8,10 @@ interface IBackButtonProps {
   className?: string;
   selectedType?: Type | null;
   selectedField?: FieldType | null;
-  selectedKind?: string | null;
+  selectedKind?: KindType | null;
   setSelectedType?: (type: Type | null) => void;
   setSelectedField?: (field: FieldType | null) => void;
-  setSelectedKind?: (kind: string | null) => void;
+  setSelectedKind?: (kind: KindType | null) => void;
 }
 
 export const BackButton: FC<IBackButtonProps> = ({

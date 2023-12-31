@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Documentation } from '../components';
-import { Schema } from '../types';
+import { GraphQLSchema } from '../types';
 import { LanguageProvider } from '../contexts/LanguageProvider';
 
-const mockSchema: Schema = {
+const mockSchema: GraphQLSchema = {
   types: [
     {
       name: 'TypeName',
@@ -24,19 +24,31 @@ const mockSchema: Schema = {
 };
 
 test('renders Documentation title', () => {
-  render(<Documentation isDocumentationOpen={true} schema={null} />);
+  render(
+    <LanguageProvider>
+      <Documentation isDocumentationOpen={true} schema={null} />
+    </LanguageProvider>,
+  );
   const titleElements = screen.getAllByText(/Documentation/i);
   expect(titleElements.length).toBe(1);
 });
 
 test('renders open class when isDocumentationOpen is true', () => {
-  render(<Documentation isDocumentationOpen={true} schema={null} />);
+  render(
+    <LanguageProvider>
+      <Documentation isDocumentationOpen={true} schema={null} />
+    </LanguageProvider>,
+  );
   const documentationElement = screen.getByTestId('documentation');
   expect(documentationElement).toHaveClass('open');
 });
 
 test('does not render open class when isDocumentationOpen is false', () => {
-  render(<Documentation isDocumentationOpen={false} schema={null} />);
+  render(
+    <LanguageProvider>
+      <Documentation isDocumentationOpen={false} schema={null} />
+    </LanguageProvider>,
+  );
   const documentationElement = screen.getByTestId('documentation');
   expect(documentationElement).not.toHaveClass('open');
 });
@@ -52,17 +64,23 @@ test('handleBackClick function works correctly', () => {
   act(() => {
     fireEvent.click(typeItem);
   });
-  expect(screen.getByTestId('selected-type').textContent).toBe('TypeName:');
+  expect(screen.getByTestId('selected-type').textContent).toBe(
+    'TypeName:FieldName',
+  );
 
-  const fieldItem = screen.getByTestId('field-item-FieldName');
+  const fieldItem = screen.getByText('FieldName');
   act(() => {
     fireEvent.click(fieldItem);
   });
-  expect(screen.getByTestId('selected-field').textContent).toBe('FieldName:');
+  expect(screen.getByTestId('field-item').textContent).toBe(
+    'FieldName:KindField Description',
+  );
 
   const backButton = screen.getByTestId('back-button');
   act(() => {
     fireEvent.click(backButton);
   });
-  expect(screen.getByTestId('selected-type').textContent).toBe('TypeName:');
+  expect(screen.getByTestId('selected-type').textContent).toBe(
+    'TypeName:FieldName',
+  );
 });

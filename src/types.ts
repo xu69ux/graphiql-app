@@ -1,5 +1,6 @@
 export interface KindType {
   kind: string;
+  description?: string;
 }
 
 export interface FieldType {

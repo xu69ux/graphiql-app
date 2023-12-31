@@ -1,16 +1,16 @@
-import React from 'react';
-import { FieldType, GraphQLSchema, Type } from '../../../types';
+import { FC } from 'react';
+import { GraphQLSchema, Type, FieldType, KindType } from '../../../types';
 
 import '@styles/FieldComponent.css';
 
 interface FieldComponentProps {
+  schema: GraphQLSchema | null;
   field: FieldType;
-  setSelectedKind: (kind: string | null) => void;
-  schema: GraphQLSchema;
+  setSelectedKind: (kind: KindType | null) => void;
   setSelectedType: (type: Type | null) => void;
 }
 
-export const FieldComponent: React.FC<FieldComponentProps> = ({
+export const FieldComponent: FC<FieldComponentProps> = ({
   field,
   setSelectedKind,
   schema,
@@ -19,17 +19,13 @@ export const FieldComponent: React.FC<FieldComponentProps> = ({
   const handleKindClick = (kindName: string) => {
     const kind = schema?.types?.find((type) => type.kind === kindName);
     if (kind) {
-      setSelectedKind(kind.kind);
+      setSelectedKind(kind);
       setSelectedType(null);
     }
   };
 
   return (
-    <div
-      key={field.name}
-      className='field-item'
-      data-testid={`field-item-${field.name}`}
-    >
+    <div key={field.name} className='field-item' data-testid='field-item'>
       <div className='field-kind-container'>
         <p className='field-name'>{field.name}:</p>
         <p

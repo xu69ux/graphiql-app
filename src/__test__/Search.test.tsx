@@ -1,9 +1,9 @@
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { Search } from '../components';
-import { Schema } from '../types';
+import { GraphQLSchema } from '../types';
 import { LanguageProvider } from '../contexts/LanguageProvider';
 
-const mockSchema: Schema = {
+const mockSchema: GraphQLSchema = {
   types: [
     {
       name: 'Type1',

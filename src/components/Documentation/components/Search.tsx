@@ -7,7 +7,7 @@ import useLanguage from '../../../hooks/useLanguage';
 import '@styles/Search.css';
 
 interface SearchProps {
-  schema: GraphQLSchema;
+  schema: GraphQLSchema | null;
   setSearchItem: (item: string) => void;
 }
 
@@ -24,7 +24,7 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
   const search = () => {
     if (searchTerm !== '') {
       const kindSet = new Set<string>();
-      const results = schema.types.flatMap((type) => {
+      const results = schema?.types.flatMap((type) => {
         if (type.kind) {
           kindSet.add(type.kind);
         }
@@ -42,7 +42,7 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
       const kindResults = Array.from(kindSet).map((kind) => ({ name: kind }));
 
       setSearchResults(
-        [...results, ...kindResults].filter((item) =>
+        [...(results || []), ...(kindResults || [])].filter((item) =>
           item.name.toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       );
