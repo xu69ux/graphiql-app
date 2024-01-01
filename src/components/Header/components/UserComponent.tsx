@@ -15,7 +15,8 @@ export const UserComponent: FC<IUserComponentProps> = ({ user }) => {
   const showMessage = useShowMessage();
   const msg = useMsg();
 
-  const logoutHandle = () => {
+  const logoutHandle = (event: React.MouseEvent) => {
+    event.preventDefault();
     logout();
     navigate('/');
     showMessage(msg.LOG_OUT_SUCCESS);
@@ -37,7 +38,7 @@ export const UserComponent: FC<IUserComponentProps> = ({ user }) => {
             to='/'
             translationKey='logout'
             className='header-link'
-            onClick={logoutHandle}
+            onClick={(event) => logoutHandle(event)}
           />
         </>
       )}
