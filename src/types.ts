@@ -23,8 +23,15 @@ export interface Type {
   kind: string;
 }
 
+interface Directive {
+  name: string;
+  description: string;
+  locations: string[];
+}
+
 export interface GraphQLSchema {
   types: Type[];
+  directives: Directive[];
 }
 
 export interface IEditorTab {
