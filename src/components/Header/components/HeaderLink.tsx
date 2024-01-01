@@ -9,7 +9,7 @@ interface IHeaderLinkProps {
   text?: string;
   translationKey?: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export const HeaderLink: FC<IHeaderLinkProps> = ({
@@ -17,11 +17,12 @@ export const HeaderLink: FC<IHeaderLinkProps> = ({
   text,
   translationKey,
   className,
+  onClick,
 }) => {
   const { language } = useLanguage();
 
   return (
-    <Link to={to} className={className}>
+    <Link to={to} className={className} onClick={onClick}>
       {translationKey ? translations[language]?.[translationKey] : text}
     </Link>
   );
