@@ -21,6 +21,7 @@ const mockSchema: GraphQLSchema = {
       kind: 'Kind',
     },
   ],
+  directives: [],
 };
 
 test('renders Documentation title', () => {

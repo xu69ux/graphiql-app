@@ -36,12 +36,13 @@ const mockSchema: GraphQLSchema = {
       kind: 'Kind',
     },
   ],
+  directives: [],
 };
 
 test('renders search icon', () => {
   render(
     <LanguageProvider>
-      <Search schema={{ types: [] }} setSearchItem={() => {}} />
+      <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />
     </LanguageProvider>,
   );
   const searchIcon = screen.getByTestId('search-icon');
@@ -51,7 +52,7 @@ test('renders search icon', () => {
 test('opens search on icon click', () => {
   render(
     <LanguageProvider>
-      <Search schema={{ types: [] }} setSearchItem={() => {}} />
+      <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />
     </LanguageProvider>,
   );
   const searchIcon = screen.getByTestId('search-icon');
