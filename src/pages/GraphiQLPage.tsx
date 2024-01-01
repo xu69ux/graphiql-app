@@ -40,6 +40,9 @@ const GraphiQLPage = () => {
   }, []);
 
   const fetchShema = useCallback(async (): Promise<void> => {
+    if (!endpoint) {
+      return;
+    }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
       setSchema(response.data.data.__schema);
