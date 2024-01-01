@@ -94,6 +94,21 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
       >
         Wishing you vibrant ideas, effective teamwork, and the joy of creating something extraordinary! Don't forget about inspiration and creativity in every line of code. Best of luck, JS do IT!
       </p>
+      <p
+        class="default-color"
+      >
+        Special heartfelt thanks to 
+        <br />
+        <a
+          class="slava-git"
+          href="https://github.com/SlavaJSFE"
+        >
+          Viachaslau Shpileuski
+        </a>
+        <span>
+          for valuable advice and implicit motivation for multiple refactoring.
+        </span>
+      </p>
     </div>
   </div>
 </div>
