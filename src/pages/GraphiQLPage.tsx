@@ -49,7 +49,7 @@ const GraphiQLPage = () => {
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsFetchSuccessful(false);
     }
   }, [endpoint, saveEndpoint]);
