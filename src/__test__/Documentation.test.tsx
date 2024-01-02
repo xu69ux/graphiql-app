@@ -52,6 +52,7 @@ test('handleBackClick function works correctly', () => {
   act(() => {
     fireEvent.click(typeItem);
   });
+
   expect(screen.getByTestId('selected-type').textContent).toBe('TypeName:');
 
   const fieldItem = screen.getByTestId('field-item-FieldName');

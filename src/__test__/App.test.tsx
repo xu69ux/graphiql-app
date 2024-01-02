@@ -1,13 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
 
 test('renders App with Header, Routes and Footer', async () => {
-  render(
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <App />
-    </React.Suspense>,
-  );
+  await act(async () => {
+    render(
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <App />
+      </React.Suspense>,
+    );
+  });
 
   const headerElement = await screen.findByTestId('header');
   expect(headerElement).toBeInTheDocument();
