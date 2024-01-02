@@ -99,8 +99,8 @@ export const Documentation: FC<DocumentationProps> = ({
           <BackButton className='hidden' />
           <div className='subtitle'>Types:</div>
           <div className='types-container'>
-            {schema?.types.map((type, index) => (
-              <div key={index} className='type-kind-container'>
+            {schema?.types.map((type) => (
+              <div key={type.name} className='type-kind-container'>
                 <p
                   className='type'
                   data-testid='type-item'

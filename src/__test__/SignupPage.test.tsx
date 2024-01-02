@@ -2,10 +2,11 @@ import { act, render, screen } from './test-utils';
 import SignupPage from '../pages/SignupPage';
 
 describe('SignUpPage component', () => {
-  let container: HTMLElement;
   test('renders correctly', async () => {
-    await act(async () => ({ container } = render(<SignupPage />)));
-    expect(container).toMatchSnapshot();
+    await act(async () => {
+      const { container } = render(<SignupPage />);
+      expect(container).toMatchSnapshot();
+    });
   });
 
   test('renders sign up title', async () => {

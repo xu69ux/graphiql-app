@@ -2,11 +2,11 @@ import { act, render, screen } from './test-utils';
 import LoginPage from '../pages/LoginPage';
 
 describe('LoginPage component', () => {
-  let container: HTMLElement;
   test('renders correctly', async () => {
-    await act(async () => ({ container } = render(<LoginPage />)));
-
-    expect(container).toMatchSnapshot();
+    await act(async () => {
+      const { container } = render(<LoginPage />);
+      expect(container).toMatchSnapshot();
+    });
   });
 
   test('renders log in title', async () => {

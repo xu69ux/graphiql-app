@@ -41,7 +41,6 @@ describe('GraphiQLPage page', () => {
     expect(screen.getByTestId('documentation')).toBeInTheDocument();
     expect(screen.getByTestId('endpoint')).toHaveTextContent('Endpoint');
     expect(screen.getByTestId('endpoint-input')).toHaveValue('');
-    axiosPostSpy.mockRestore();
   });
 
   test('adds a new tab when clicking the "Add Tab" button', async () => {
@@ -53,6 +52,5 @@ describe('GraphiQLPage page', () => {
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
-    axiosPostSpy.mockRestore();
   });
 });
