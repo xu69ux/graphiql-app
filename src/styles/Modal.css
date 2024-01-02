@@ -68,10 +68,10 @@
 .local {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
-  width: 20rem;
+  width: 25rem;
 }
 
 .theme-btn,

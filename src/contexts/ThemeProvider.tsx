@@ -1,11 +1,22 @@
 import { useState, useEffect } from 'react';
 import { ThemeContext } from './ThemeContext';
+import { translations } from './translations';
+import useLanguage from '../hooks/useLanguage';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark');
+  const { language } = useLanguage();
+  const darkTheme = translations?.[language].dark;
+  const crazyTheme = translations?.[language].crazy;
+  const [theme, setTheme] = useState(darkTheme);
+
+  useEffect(() => {
+    setTheme(darkTheme ? darkTheme : crazyTheme);
+  }, [language, darkTheme, crazyTheme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'crazy' ? 'dark' : 'crazy'));
+    setTheme((prevTheme) =>
+      prevTheme === crazyTheme ? darkTheme : crazyTheme,
+    );
   };
 
   useEffect(() => {

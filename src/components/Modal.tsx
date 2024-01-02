@@ -2,7 +2,9 @@ import { FC } from 'react';
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { IoCloseOutline } from 'react-icons/io5';
+import { translations } from '../contexts/translations';
 import useShowMessage from '../hooks/useShowMessage';
+import useLanguage from '../hooks/useLanguage';
 import useMsg from '../hooks/useMsg';
 
 import '@styles/Modal.css';
@@ -14,6 +16,7 @@ interface IModalProps {
 
 export const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
   const msg = useMsg();
+  const { language } = useLanguage();
   const showMessage = useShowMessage();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
@@ -28,21 +31,24 @@ export const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
     <div className='modal-overlay'>
       <div className='modal-window'>
         <button onClick={onClose} className='modal-btn close'>
-          <IoCloseOutline className='modal-icon close' />
+          <IoCloseOutline
+            className='modal-icon close'
+            title={translations?.[language].titleCloseModal}
+          />
         </button>
         <div className='modal-content'>
-          <h3>Settings</h3>
+          <h3>{translations?.[language].settings}</h3>
           <div className='settings'>
             <div className='theme'>
-              <h4>Theme Change:</h4>
+              <h4>{translations?.[language].themeChange}:</h4>
               <button className='theme-btn' onClick={toggleTheme}>
                 {theme}
               </button>
             </div>
             <div className='local'>
-              <h4>Local Storage:</h4>
+              <h4>{translations?.[language].localStorage}:</h4>
               <button className='local-btn' onClick={handleLocalClear}>
-                clear
+                {translations?.[language].clear}
               </button>
             </div>
           </div>

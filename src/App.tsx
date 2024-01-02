@@ -19,8 +19,8 @@ function App() {
   return (
     <div className='app'>
       <ErrorBoundary FallbackComponent={FallBackUI}>
-        <ThemeProvider>
-          <LanguageProvider>
+        <LanguageProvider>
+          <ThemeProvider>
             <Router>
               <Header />
               <Suspense fallback={<Loader />}>
@@ -52,8 +52,8 @@ function App() {
                 theme='light'
               />
             </Router>
-          </LanguageProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </ErrorBoundary>
     </div>
   );
