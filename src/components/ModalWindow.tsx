@@ -3,11 +3,11 @@ import { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { IoCloseOutline } from 'react-icons/io5';
 import { translations } from '../contexts/translations';
-import useShowMessage from '../hooks/useShowMessage';
 import useLanguage from '../hooks/useLanguage';
-import useMsg from '../hooks/useMsg';
+import useShowMessage from 'src/hooks/useShowMessage';
+import useMsg from 'src/hooks/useMsg';
 
-import '@styles/Modal.css';
+import '@styles/ModalWindow.css';
 
 interface IModalProps {
   isOpen: boolean;
@@ -15,9 +15,9 @@ interface IModalProps {
 }
 
 export const Modal: FC<IModalProps> = ({ isOpen, onClose }) => {
+  const showMessage = useShowMessage();
   const msg = useMsg();
   const { language } = useLanguage();
-  const showMessage = useShowMessage();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   if (!isOpen) return null;
