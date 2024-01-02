@@ -53,7 +53,6 @@ describe('GraphiQLPage page', () => {
 
     expect(screen.getByTestId('endpoint')).toHaveTextContent('Endpoint');
     expect(screen.getByTestId('endpoint-input')).toHaveValue('');
-    axiosPostSpy.mockRestore();
   });
 
   test('adds a new tab when clicking the "Add Tab" button', async () => {
@@ -68,8 +67,8 @@ describe('GraphiQLPage page', () => {
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
-    axiosPostSpy.mockRestore();
   });
+
   test('sends a GraphQL request when clicking the "Run" button', async () => {
     render(
       <LanguageProvider>
@@ -82,6 +81,5 @@ describe('GraphiQLPage page', () => {
     await waitFor(() => {
       expect(axiosPostSpy).toHaveBeenCalledTimes(1);
     });
-    axiosPostSpy.mockRestore();
   });
 });

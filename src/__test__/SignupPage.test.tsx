@@ -4,22 +4,20 @@ import { LanguageContext } from '../contexts/LanguageContext';
 import SignupPage from '../pages/SignupPage';
 
 describe('SignUpPage component', () => {
-  let container: HTMLElement;
   test('renders correctly', async () => {
-    await act(
-      async () =>
-        ({ container } = render(
-          <Router>
-            <LanguageContext.Provider
-              value={{ language: 'eng', setLanguage: () => {} }}
-            >
-              <SignupPage />
-            </LanguageContext.Provider>
-          </Router>,
-        )),
-    );
+    await act(async () => {
+      const { container } = render(
+        <Router>
+          <LanguageContext.Provider
+            value={{ language: 'eng', setLanguage: () => {} }}
+          >
+            <SignupPage />
+          </LanguageContext.Provider>
+        </Router>,
+      );
 
-    expect(container).toMatchSnapshot();
+      expect(container).toMatchSnapshot();
+    });
   });
 
   it('renders sign up title', async () => {
