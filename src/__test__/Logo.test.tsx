@@ -1,21 +1,12 @@
-import { render } from '@testing-library/react';
+import { render } from './test-utils';
 import { Logo } from '../components';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders Logo with correct class when isScrolled is true', () => {
-  const { container } = render(
-    <Router>
-      <Logo isScrolled={true} />
-    </Router>,
-  );
+  const { container } = render(<Logo isScrolled={true} />);
   expect(container.firstChild).toHaveClass('logo scrolled');
 });
 
 test('renders Logo with correct class when isScrolled is false', () => {
-  const { container } = render(
-    <Router>
-      <Logo isScrolled={false} />
-    </Router>,
-  );
+  const { container } = render(<Logo isScrolled={false} />);
   expect(container.firstChild).toHaveClass('logo');
 });

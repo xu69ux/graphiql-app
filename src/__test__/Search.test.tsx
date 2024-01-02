@@ -1,7 +1,6 @@
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import { render, fireEvent, screen, act } from './test-utils';
 import { Search } from '../components';
 import { GraphQLSchema } from '../types';
-import { LanguageProvider } from '../contexts/LanguageProvider';
 
 const mockSchema: GraphQLSchema = {
   types: [
@@ -41,9 +40,7 @@ const mockSchema: GraphQLSchema = {
 
 test('renders search icon', () => {
   render(
-    <LanguageProvider>
-      <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />
-    </LanguageProvider>,
+    <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />,
   );
   const searchIcon = screen.getByTestId('search-icon');
   expect(searchIcon).toBeInTheDocument();
@@ -51,9 +48,7 @@ test('renders search icon', () => {
 
 test('opens search on icon click', () => {
   render(
-    <LanguageProvider>
-      <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />
-    </LanguageProvider>,
+    <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />,
   );
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
@@ -64,11 +59,7 @@ test('opens search on icon click', () => {
 });
 
 test('displays search results', () => {
-  render(
-    <LanguageProvider>
-      <Search schema={mockSchema} setSearchItem={() => {}} />
-    </LanguageProvider>,
-  );
+  render(<Search schema={mockSchema} setSearchItem={() => {}} />);
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);
@@ -82,11 +73,7 @@ test('displays search results', () => {
 });
 
 test('displays no results message', () => {
-  render(
-    <LanguageProvider>
-      <Search schema={mockSchema} setSearchItem={() => {}} />
-    </LanguageProvider>,
-  );
+  render(<Search schema={mockSchema} setSearchItem={() => {}} />);
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);

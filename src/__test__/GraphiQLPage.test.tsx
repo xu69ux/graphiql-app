@@ -1,11 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import { LanguageProvider } from '../contexts/LanguageProvider';
+import { act, fireEvent, render, screen, waitFor } from './test-utils';
 import GraphiQLPage from '../pages/GraphiQLPage';
 import axios from 'axios';
 
@@ -38,11 +31,7 @@ describe('GraphiQLPage page', () => {
 
   test('renders GraphiQLPage with initial state', async () => {
     await act(async () => {
-      render(
-        <LanguageProvider>
-          <GraphiQLPage />
-        </LanguageProvider>,
-      );
+      render(<GraphiQLPage />);
     });
 
     expect(screen.getByText(/variables/i)).toBeInTheDocument();
@@ -56,12 +45,7 @@ describe('GraphiQLPage page', () => {
   });
 
   test('adds a new tab when clicking the "Add Tab" button', async () => {
-    render(
-      <LanguageProvider>
-        <GraphiQLPage />
-      </LanguageProvider>,
-    );
-
+    render(<GraphiQLPage />);
     act(() => {
       fireEvent.click(screen.getByText('add tab'));
     });

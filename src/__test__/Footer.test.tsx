@@ -1,28 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from './test-utils';
 import { Footer } from '../components';
-import { LanguageContext } from '../contexts/LanguageContext';
 
 describe('Footer', () => {
-  const mockContext = {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-
   it('renders without crashing', () => {
-    render(
-      <LanguageContext.Provider value={mockContext}>
-        <Footer />
-      </LanguageContext.Provider>,
-    );
+    render(<Footer />);
   });
 
   it('displays the correct links', () => {
-    render(
-      <LanguageContext.Provider value={mockContext}>
-        <Footer />
-      </LanguageContext.Provider>,
-    );
-
+    render(<Footer />);
     expect(screen.getByRole('link', { name: /JS do IT/i })).toHaveAttribute(
       'href',
       'https://github.com/xu69ux/graphiql-app',
@@ -42,12 +27,7 @@ describe('Footer', () => {
   });
 
   it('displays the course logo', () => {
-    render(
-      <LanguageContext.Provider value={mockContext}>
-        <Footer />
-      </LanguageContext.Provider>,
-    );
-
+    render(<Footer />);
     expect(screen.getByAltText('rs school logo')).toBeInTheDocument();
   });
 });

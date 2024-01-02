@@ -1,7 +1,5 @@
-import { render, fireEvent } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render, fireEvent } from './test-utils';
 import { UserComponent } from '../components';
-import { LanguageProvider } from '../contexts/LanguageProvider';
 
 describe('UserComponent', () => {
   it('calls logout function when logout button is clicked', () => {
@@ -9,13 +7,7 @@ describe('UserComponent', () => {
       displayName: 'Test user',
     };
 
-    const { getByText } = render(
-      <Router>
-        <LanguageProvider>
-          <UserComponent user={mockUser} />
-        </LanguageProvider>
-      </Router>,
-    );
+    const { getByText } = render(<UserComponent user={mockUser} />);
 
     const logoutButton = getByText(/logout/i);
     fireEvent.click(logoutButton);

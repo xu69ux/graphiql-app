@@ -1,7 +1,6 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, screen, act } from './test-utils';
 import { Documentation } from '../components';
 import { GraphQLSchema } from '../types';
-import { LanguageProvider } from '../contexts/LanguageProvider';
 
 const mockSchema: GraphQLSchema = {
   types: [
@@ -25,41 +24,25 @@ const mockSchema: GraphQLSchema = {
 };
 
 test('renders Documentation title', () => {
-  render(
-    <LanguageProvider>
-      <Documentation isDocumentationOpen={true} schema={null} />
-    </LanguageProvider>,
-  );
+  render(<Documentation isDocumentationOpen={true} schema={null} />);
   const titleElements = screen.getAllByText(/Documentation/i);
   expect(titleElements.length).toBe(1);
 });
 
 test('renders open class when isDocumentationOpen is true', () => {
-  render(
-    <LanguageProvider>
-      <Documentation isDocumentationOpen={true} schema={null} />
-    </LanguageProvider>,
-  );
+  render(<Documentation isDocumentationOpen={true} schema={null} />);
   const documentationElement = screen.getByTestId('documentation');
   expect(documentationElement).toHaveClass('open');
 });
 
 test('does not render open class when isDocumentationOpen is false', () => {
-  render(
-    <LanguageProvider>
-      <Documentation isDocumentationOpen={false} schema={null} />
-    </LanguageProvider>,
-  );
+  render(<Documentation isDocumentationOpen={false} schema={null} />);
   const documentationElement = screen.getByTestId('documentation');
   expect(documentationElement).not.toHaveClass('open');
 });
 
 test('handleBackClick function works correctly', () => {
-  render(
-    <LanguageProvider>
-      <Documentation isDocumentationOpen={true} schema={mockSchema} />
-    </LanguageProvider>,
-  );
+  render(<Documentation isDocumentationOpen={true} schema={mockSchema} />);
 
   const typeItem = screen.getByTestId('type-item');
   act(() => {
