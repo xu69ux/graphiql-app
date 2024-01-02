@@ -4,8 +4,8 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { IoCloseOutline } from 'react-icons/io5';
 import { translations } from '../contexts/translations';
 import useLanguage from '../hooks/useLanguage';
-import useShowMessage from 'src/hooks/useShowMessage';
-import useMsg from 'src/hooks/useMsg';
+import useShowMessage from '../hooks/useShowMessage';
+import useMsg from '../hooks/useMsg';
 
 import '@styles/ModalWindow.css';
 
