@@ -1,30 +1,18 @@
-export interface KindType {
+export interface GraphQLType {
+  name: string;
   kind: string;
   description?: string;
+  fields?: GraphQLField[];
 }
 
-export interface FieldType {
+export interface GraphQLField {
   name: string;
-  description: string;
-  type: KindType;
-}
-
-export interface Field {
-  name: string;
-  description: string;
-  args: FieldType[];
-  type: KindType;
-}
-
-export interface Type {
-  name: string;
-  description: string;
-  fields: FieldType[];
-  kind: string;
+  description?: string;
+  type: GraphQLType;
 }
 
 export interface GraphQLSchema {
-  types: Type[];
+  types: GraphQLType[];
 }
 
 export interface IEditorTab {

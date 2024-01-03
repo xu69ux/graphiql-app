@@ -1,17 +1,23 @@
 import { FC } from 'react';
-import { KindType } from '../../../types';
+import { GraphQLType } from '../../../types';
 
 import '@styles/KindComponent.css';
 
 interface KindComponentProps {
-  selectedKind: KindType;
+  selectedKind: GraphQLType;
 }
 
 export const KindComponent: FC<KindComponentProps> = ({ selectedKind }) => {
+  let firstFieldDescription: string | undefined;
+
+  if (selectedKind.fields && selectedKind.fields.length > 0) {
+    firstFieldDescription = selectedKind.fields[0].type.description;
+  }
+
   return (
     <div className='kind-container' data-testid='kind-item'>
-      {selectedKind.description ? (
-        <div>{selectedKind.description}</div>
+      {firstFieldDescription ? (
+        <div>{firstFieldDescription}</div>
       ) : (
         <div>
           Sorry, there is no description here. The API developers have not

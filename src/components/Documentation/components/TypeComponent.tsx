@@ -1,29 +1,28 @@
 import { FC } from 'react';
-import { FieldType, GraphQLSchema, KindType, Type } from '../../../types';
+import { GraphQLSchema, GraphQLType, GraphQLField } from '../../../types';
 import { FieldComponent } from '../../../components';
 
 import '@styles/TypeComponent.css';
 
 interface TypeComponentProps {
   schema: GraphQLSchema | null;
-  selectedType: Type;
-  selectedField: FieldType | null;
-  setSelectedField: (field: FieldType | null) => void;
-  setSelectedKind: (kind: KindType | null) => void;
-  setSelectedType: (type: Type | null) => void;
+  selectedType: GraphQLType;
+  selectedField: GraphQLField | null;
+  setSelectedField: (field: GraphQLField | null) => void;
+  setSelectedKind: (kind: GraphQLType | null) => void;
+  setSelectedType: (type: GraphQLType | null) => void;
+  handleKindClick: (typeName: string) => void;
 }
 
 export const TypeComponent: FC<TypeComponentProps> = ({
   selectedType,
   selectedField,
   setSelectedField,
-  setSelectedKind,
-  setSelectedType,
-  schema,
+  handleKindClick,
 }) => {
   const type = selectedType;
 
-  const handleFieldClick = (field: FieldType) => {
+  const handleFieldClick = (field: GraphQLField) => {
     setSelectedField(field);
   };
 
@@ -33,9 +32,7 @@ export const TypeComponent: FC<TypeComponentProps> = ({
         <>
           <FieldComponent
             field={selectedField}
-            setSelectedKind={setSelectedKind}
-            schema={schema}
-            setSelectedType={setSelectedType}
+            handleKindClick={handleKindClick}
           />
         </>
       ) : (

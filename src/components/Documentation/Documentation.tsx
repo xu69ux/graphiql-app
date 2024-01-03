@@ -5,7 +5,7 @@ import {
   Search,
   TypeComponent,
 } from '../../components';
-import { GraphQLSchema, Type, FieldType, KindType } from '../../types';
+import { GraphQLSchema, GraphQLType, GraphQLField } from '../../types';
 import {
   findTypeByName,
   findFieldByName,
@@ -23,19 +23,25 @@ export const Documentation: FC<DocumentationProps> = ({
   isDocumentationOpen,
   schema,
 }) => {
-  const [selectedType, setSelectedType] = useState<Type | null>(null);
-  const [selectedField, setSelectedField] = useState<FieldType | null>(null);
-  const [selectedKind, setSelectedKind] = useState<KindType | null>(null);
+  const [selectedType, setSelectedType] = useState<GraphQLType | null>(null);
+  const [selectedField, setSelectedField] = useState<GraphQLField | null>(null);
+  const [selectedKind, setSelectedKind] = useState<GraphQLType | null>(null);
   const [searchItem, setSearchItem] = useState('');
+  console.log(schema);
 
-  const handleTypeClick = (type: Type) => {
+  const handleTypeClick = (type: GraphQLType) => {
     setSelectedType(type);
   };
 
-  const handleKindClick = (kindName: string) => {
-    const kind = schema?.types.find((type) => type.kind === kindName);
+  const handleKindClick = (typeName: string) => {
+    console.log(typeName);
+    const lowerCaseTypeName = typeName.toLowerCase();
+    const kind = schema?.types?.find(
+      (type) => type.name.toLowerCase() === lowerCaseTypeName,
+    );
     if (kind) {
       setSelectedKind(kind);
+      setSelectedType(null);
     }
   };
 
@@ -81,6 +87,7 @@ export const Documentation: FC<DocumentationProps> = ({
           setSelectedField={setSelectedField}
           setSelectedKind={setSelectedKind}
           setSelectedType={setSelectedType}
+          handleKindClick={handleKindClick}
           schema={schema}
         />
       ) : selectedKind ? (
@@ -99,7 +106,7 @@ export const Documentation: FC<DocumentationProps> = ({
                 >
                   {type.name}:
                 </p>
-                <p className='kind' onClick={() => handleKindClick(type.kind)}>
+                <p className='kind' onClick={() => handleKindClick(type.name)}>
                   {type.kind}
                 </p>
               </div>
