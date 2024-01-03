@@ -27,14 +27,12 @@ export const Documentation: FC<DocumentationProps> = ({
   const [selectedField, setSelectedField] = useState<GraphQLField | null>(null);
   const [selectedKind, setSelectedKind] = useState<GraphQLType | null>(null);
   const [searchItem, setSearchItem] = useState('');
-  console.log(schema);
 
   const handleTypeClick = (type: GraphQLType) => {
     setSelectedType(type);
   };
 
   const handleKindClick = (typeName: string) => {
-    console.log(typeName);
     const lowerCaseTypeName = typeName.toLowerCase();
     const kind = schema?.types?.find(
       (type) => type.name.toLowerCase() === lowerCaseTypeName,
@@ -46,19 +44,25 @@ export const Documentation: FC<DocumentationProps> = ({
   };
 
   useEffect(() => {
-    if (searchItem) {
+    if (schema && searchItem) {
       const [typeName, fieldName, kindName] = searchItem.split('.');
-      const typeObj = schema && findTypeByName(schema.types, typeName);
-      if (typeObj) {
-        setSelectedType(typeObj);
-        const fieldObj = findFieldByName(typeObj.fields, fieldName);
-        if (fieldObj) {
-          setSelectedField(fieldObj);
-        }
-        const kindObj = findKindByName(schema.types, kindName);
-
-        if (kindObj) {
-          setSelectedKind(kindObj);
+      if (typeName) {
+        const type = findTypeByName(schema, typeName);
+        if (type) {
+          setSelectedType(type);
+          if (fieldName) {
+            const field = findFieldByName(schema, fieldName);
+            if (field) {
+              setSelectedField(field);
+            }
+          }
+          if (kindName) {
+            const kind = findKindByName(schema, kindName);
+            console.log(kind);
+            if (kind) {
+              setSelectedKind(kind);
+            }
+          }
         }
       }
     }
@@ -94,7 +98,6 @@ export const Documentation: FC<DocumentationProps> = ({
         <KindComponent selectedKind={selectedKind} />
       ) : (
         <>
-          <BackButton className='hidden' />
           <div className='subtitle'>Types:</div>
           <div className='types-container'>
             {schema?.types.map((type, index) => (

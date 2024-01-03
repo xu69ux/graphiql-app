@@ -1,17 +1,17 @@
 import { FC } from 'react';
-import { Type, FieldType, KindType } from '../../../types';
+import { GraphQLType, GraphQLField } from '../../../types';
 import { IoChevronForward } from 'react-icons/io5';
 
 import '@styles/BackButton.css';
 
 interface IBackButtonProps {
   className?: string;
-  selectedType?: Type | null;
-  selectedField?: FieldType | null;
-  selectedKind?: KindType | null;
-  setSelectedType?: (type: Type | null) => void;
-  setSelectedField?: (field: FieldType | null) => void;
-  setSelectedKind?: (kind: KindType | null) => void;
+  selectedType: GraphQLType | null;
+  selectedField: GraphQLField | null;
+  selectedKind: GraphQLType | null;
+  setSelectedType: (type: GraphQLType | null) => void;
+  setSelectedField: (field: GraphQLField | null) => void;
+  setSelectedKind: (kind: GraphQLType | null) => void;
 }
 
 export const BackButton: FC<IBackButtonProps> = ({
@@ -24,11 +24,11 @@ export const BackButton: FC<IBackButtonProps> = ({
   setSelectedKind,
 }) => {
   const handleBackClick = () => {
-    if (selectedField && setSelectedField) {
-      setSelectedField(null);
-    } else if (selectedKind && setSelectedKind) {
+    if (selectedKind) {
       setSelectedKind(null);
-    } else if (selectedType && setSelectedType) {
+    } else if (selectedField) {
+      setSelectedField(null);
+    } else if (selectedType) {
       setSelectedType(null);
     }
   };

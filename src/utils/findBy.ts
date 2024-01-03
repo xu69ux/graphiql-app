@@ -1,16 +1,28 @@
-import { Type, FieldType, KindType } from '../types';
+import { GraphQLType, GraphQLSchema, GraphQLField } from '../types';
 
-export const findTypeByName = (types: Type[], name: string): Type | undefined =>
-  types.find((t) => t.name === name);
+export const findTypeByName = (
+  schema: GraphQLSchema,
+  typeName: string,
+): GraphQLType | undefined => {
+  return schema.types.find((type) => type.name === typeName);
+};
 
 export const findFieldByName = (
-  fields: FieldType[],
-  name: string,
-): FieldType | undefined => fields.find((f) => f.name === name);
+  schema: GraphQLSchema,
+  fieldName: string,
+): GraphQLField | undefined => {
+  for (const type of schema.types) {
+    const field = type.fields?.find((field) => field.name === fieldName);
+    if (field) {
+      return field;
+    }
+  }
+  return undefined;
+};
 
 export const findKindByName = (
-  kinds: KindType[],
+  schema: GraphQLSchema,
   kindName: string,
-): KindType | undefined => {
-  return kinds.find((kind) => kind.kind === kindName);
+): GraphQLType | undefined => {
+  return schema.types.find((type) => type.kind === kindName);
 };
