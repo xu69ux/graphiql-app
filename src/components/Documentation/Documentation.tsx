@@ -65,35 +65,26 @@ export const Documentation: FC<DocumentationProps> = ({
     >
       <h1 className='docs-title'>Documentation</h1>
       <Search schema={schema} setSearchItem={setSearchItem} />
+      <BackButton
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+        selectedField={selectedField}
+        setSelectedField={setSelectedField}
+        selectedKind={selectedKind}
+        setSelectedKind={setSelectedKind}
+        className={selectedType || selectedKind ? '' : 'hidden'}
+      />
       {selectedType ? (
-        <>
-          <BackButton
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-          />
-          <TypeComponent
-            selectedType={selectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-            setSelectedKind={setSelectedKind}
-            setSelectedType={setSelectedType}
-            schema={schema}
-          />
-        </>
+        <TypeComponent
+          selectedType={selectedType}
+          selectedField={selectedField}
+          setSelectedField={setSelectedField}
+          setSelectedKind={setSelectedKind}
+          setSelectedType={setSelectedType}
+          schema={schema}
+        />
       ) : selectedKind ? (
-        <>
-          <BackButton
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-            selectedKind={selectedKind}
-            setSelectedKind={setSelectedKind}
-          />
-          <KindComponent selectedKind={selectedKind} />
-        </>
+        <KindComponent selectedKind={selectedKind} />
       ) : (
         <>
           <BackButton className='hidden' />
