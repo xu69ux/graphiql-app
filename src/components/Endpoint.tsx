@@ -1,7 +1,10 @@
 import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import { IconButton } from './IconButton';
 import { translations } from '../contexts/translations';
-import { IoChevronForward } from 'react-icons/io5';
+import { GRAPHQL_ENDPOINTS } from '../constants';
+import { IoChevronForward, IoCloseOutline } from 'react-icons/io5';
 import { LiaHistorySolid } from 'react-icons/lia';
+import { LuPenLine } from 'react-icons/lu';
 import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Endpoint.css';
@@ -17,12 +20,23 @@ export const Endpoint: FC<IEndpointProps> = memo(
     const { language } = useLanguage();
     const [isDisabled, setIsDisabled] = useState(true);
 
+    const handleRandomEndpoint = () => {
+      const randomEndpoint =
+        GRAPHQL_ENDPOINTS[Math.floor(Math.random() * GRAPHQL_ENDPOINTS.length)];
+      setEndpoint(randomEndpoint);
+    };
+
     const setFromHistory = () => {
       const prevEndpoint = localStorage.getItem('prevEndpoint');
       if (prevEndpoint) {
         setEndpoint(prevEndpoint);
       }
     };
+
+    const handleCleanEndpoint = () => {
+      setEndpoint('');
+    };
+
     useEffect(() => {
       const prevEndpoint = localStorage.getItem('prevEndpoint');
       setIsDisabled(!prevEndpoint);
@@ -52,14 +66,28 @@ export const Endpoint: FC<IEndpointProps> = memo(
             data-testid='endpoint-input'
           />
         </div>
-        <button
+        <IconButton
+          className='random-endpoint'
+          title={translations[language]?.titleEndpointRandom}
+          onClick={handleRandomEndpoint}
+        >
+          <LuPenLine />
+        </IconButton>
+        <IconButton
           className={`history ${isDisabled ? 'disabled' : ''}`}
           title={translations[language]?.titleEndpointHistory}
           onClick={setFromHistory}
           disabled={isDisabled}
         >
           <LiaHistorySolid />
-        </button>
+        </IconButton>
+        <IconButton
+          className='clean-endpoint'
+          title={translations[language]?.titleEndpointClean}
+          onClick={handleCleanEndpoint}
+        >
+          <IoCloseOutline />
+        </IconButton>
       </div>
     );
   },
