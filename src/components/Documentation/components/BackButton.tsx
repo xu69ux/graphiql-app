@@ -4,9 +4,9 @@ import { GraphQLField, GraphQLType, GraphQLKind } from 'src/types';
 
 import '@styles/BackButton.css';
 
-interface IBackButtonProps {
+export interface IBackButtonProps {
   className?: string;
-  selectedType: GraphQLType;
+  selectedType: GraphQLType | null;
   setSelectedType: (type: GraphQLType | null) => void;
   selectedField: GraphQLField | null;
   setSelectedField: (field: GraphQLField | null) => void;
