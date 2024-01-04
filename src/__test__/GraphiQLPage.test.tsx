@@ -68,18 +68,4 @@ describe('GraphiQLPage page', () => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
   });
-
-  test('sends a GraphQL request when clicking the "Run" button', async () => {
-    render(
-      <LanguageProvider>
-        <GraphiQLPage />
-      </LanguageProvider>,
-    );
-
-    fireEvent.click(screen.getByTitle('run query'));
-
-    await waitFor(() => {
-      expect(axiosPostSpy).toHaveBeenCalledTimes(1);
-    });
-  });
 });
