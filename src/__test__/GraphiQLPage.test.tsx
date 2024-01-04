@@ -48,8 +48,8 @@ describe('GraphiQLPage page', () => {
     act(() => {
       fireEvent.click(screen.getByText('add tab'));
     });
-
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
   });
+
