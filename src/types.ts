@@ -1,18 +1,22 @@
+export interface GraphQLSchema {
+  types: GraphQLType[];
+}
 export interface GraphQLType {
   name: string;
   kind: string;
-  description?: string;
   fields?: GraphQLField[];
 }
 
 export interface GraphQLField {
   name: string;
   description?: string;
-  type: GraphQLType;
+  type: GraphQLKind;
 }
 
-export interface GraphQLSchema {
-  types: GraphQLType[];
+export interface GraphQLKind {
+  kind: string;
+  name: string;
+  description?: string;
 }
 
 export interface IEditorTab {

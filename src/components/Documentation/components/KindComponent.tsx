@@ -1,29 +1,24 @@
 import { FC } from 'react';
-import { GraphQLType } from '../../../types';
+import { NO_DESCRIPTION_MESSAGE } from '../../../constants';
+import { GraphQLKind } from '../../../types';
 
-import '@styles/KindComponent.css';
+import '@styles/Documentation.css';
 
 interface KindComponentProps {
-  selectedKind: GraphQLType;
+  kind: GraphQLKind;
 }
 
-export const KindComponent: FC<KindComponentProps> = ({ selectedKind }) => {
-  let firstFieldDescription: string | undefined;
-
-  if (selectedKind.fields && selectedKind.fields.length > 0) {
-    firstFieldDescription = selectedKind.fields[0].type.description;
-  }
+export const KindComponent: FC<KindComponentProps> = ({ kind }) => {
+  const { name, description } = kind;
 
   return (
-    <div className='kind-container' data-testid='kind-item'>
-      {firstFieldDescription ? (
-        <div>{firstFieldDescription}</div>
-      ) : (
-        <div>
-          Sorry, there is no description here. The API developers have not
-          provided one.
-        </div>
-      )}
-    </div>
+    <section className='docs-container' data-testid='kind-item'>
+      <h2 className='docs-title'>
+        {name}: {kind.kind}
+      </h2>
+      <p className='docs-description'>
+        {description || NO_DESCRIPTION_MESSAGE}
+      </p>
+    </section>
   );
 };

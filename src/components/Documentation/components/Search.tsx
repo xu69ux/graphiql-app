@@ -39,10 +39,8 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
         ];
       });
 
-      const kindResults = Array.from(kindSet).map((kind) => ({ name: kind }));
-
       setSearchResults(
-        [...(results || []), ...(kindResults || [])].filter((item) =>
+        [...(results || [])].filter((item) =>
           item.name.toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       );

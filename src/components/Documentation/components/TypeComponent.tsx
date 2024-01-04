@@ -1,58 +1,47 @@
 import { FC } from 'react';
-import { GraphQLSchema, GraphQLType, GraphQLField } from '../../../types';
-import { FieldComponent } from '../../../components';
+import { NO_FIELDS_MESSAGE } from '../../../constants';
+import { GraphQLType, GraphQLField, GraphQLKind } from '../../../types';
 
-import '@styles/TypeComponent.css';
+import '@styles/Documentation.css';
 
 interface TypeComponentProps {
-  schema: GraphQLSchema | null;
-  selectedType: GraphQLType;
-  selectedField: GraphQLField | null;
-  setSelectedField: (field: GraphQLField | null) => void;
-  setSelectedKind: (kind: GraphQLType | null) => void;
-  setSelectedType: (type: GraphQLType | null) => void;
-  handleKindClick: (typeName: string) => void;
+  type: GraphQLType;
+  onFieldClick: (field: GraphQLField) => void;
+  onKindClick: (kind: GraphQLKind) => void;
 }
 
 export const TypeComponent: FC<TypeComponentProps> = ({
-  selectedType,
-  selectedField,
-  setSelectedField,
-  handleKindClick,
+  type,
+  onFieldClick,
+  onKindClick,
 }) => {
-  const type = selectedType;
-
-  const handleFieldClick = (field: GraphQLField) => {
-    setSelectedField(field);
-  };
-
+  const { name, fields } = type;
   return (
-    <div className='type-container' data-testid='selected-type'>
-      {selectedField ? (
-        <>
-          <FieldComponent
-            field={selectedField}
-            handleKindClick={handleKindClick}
-          />
-        </>
+    <section className='docs-container' data-testid='type-item'>
+      <h2 className='docs-title'>{name}:</h2>
+      {fields?.length ? (
+        <ul className='fields-list'>
+          {fields.map((field) => (
+            <li
+              key={field.name}
+              className='fields-list-item'
+              onClick={() => onFieldClick(field)}
+            >
+              <div className='name-kind-container'>
+                <span className='name'>{field.name}:</span>
+                <span
+                  className='kind-name'
+                  onClick={() => onKindClick(field.type)}
+                >
+                  {field.type.name}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <>
-          <p className='type-subtitle'>{type.name}:</p>
-          {Array.isArray(type.fields) && type.fields.length > 0 ? (
-            type.fields.map((field) => (
-              <p
-                className='field'
-                key={field.name}
-                onClick={() => handleFieldClick(field)}
-              >
-                {field.name}
-              </p>
-            ))
-          ) : (
-            <p>This type has no fields.</p>
-          )}
-        </>
+        <p className='docs-description'>{NO_FIELDS_MESSAGE}</p>
       )}
-    </div>
+    </section>
   );
 };

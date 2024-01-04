@@ -1,3 +1,10 @@
+export const NO_DESCRIPTION_MESSAGE =
+  'Sorry, there is no description here. The API developers have not provided one.';
+
+export const NO_FIELDS_MESSAGE = 'This type has no fields';
+
+export const NO_SCHEMA_MESSAGE = 'No schema available.';
+
 export const MEMES_URL = [
   'https://colinhacks.com/graphql_grave.jpg',
   'https://1.bp.blogspot.com/-OhRLnerbm0M/YZDsgdY6k2I/AAAAAAAARCg/kWejTW8xiuca4nwODjSvz2Dyt8Es-IiMACLcBGAsYHQ/s528/graphql-statuscode.png',

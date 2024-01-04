@@ -1,16 +1,23 @@
 import { useState, useEffect, FC } from 'react';
 import {
   BackButton,
+  FieldComponent,
   KindComponent,
   Search,
   TypeComponent,
 } from '../../components';
-import { GraphQLSchema, GraphQLType, GraphQLField } from '../../types';
+import {
+  GraphQLSchema,
+  GraphQLType,
+  GraphQLField,
+  GraphQLKind,
+} from '../../types';
 import {
   findTypeByName,
   findFieldByName,
   findKindByName,
 } from '../../utils/findBy';
+import { NO_SCHEMA_MESSAGE } from '../../constants';
 
 import '@styles/Documentation.css';
 
@@ -25,24 +32,10 @@ export const Documentation: FC<DocumentationProps> = ({
 }) => {
   const [selectedType, setSelectedType] = useState<GraphQLType | null>(null);
   const [selectedField, setSelectedField] = useState<GraphQLField | null>(null);
-  const [selectedKind, setSelectedKind] = useState<GraphQLType | null>(null);
+  const [selectedKind, setSelectedKind] = useState<GraphQLKind | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
-  const handleTypeClick = (type: GraphQLType) => {
-    setSelectedType(type);
-  };
-
-  const handleKindClick = (typeName: string) => {
-    const lowerCaseTypeName = typeName.toLowerCase();
-    const kind = schema?.types?.find(
-      (type) => type.name.toLowerCase() === lowerCaseTypeName,
-    );
-    if (kind) {
-      setSelectedKind(kind);
-      setSelectedType(null);
-    }
-  };
-
+  console.log(schema);
   useEffect(() => {
     if (schema && searchItem) {
       const [typeName, fieldName, kindName] = searchItem.split('.');
@@ -58,7 +51,6 @@ export const Documentation: FC<DocumentationProps> = ({
           }
           if (kindName) {
             const kind = findKindByName(schema, kindName);
-            console.log(kind);
             if (kind) {
               setSelectedKind(kind);
             }
@@ -70,53 +62,53 @@ export const Documentation: FC<DocumentationProps> = ({
 
   return (
     <div
-      className={`documentation ${isDocumentationOpen ? 'open' : ''}`}
+      className={`documentation ${schema && isDocumentationOpen ? 'open' : ''}`}
       data-testid='documentation'
     >
       <h1 className='docs-title'>Documentation</h1>
       <Search schema={schema} setSearchItem={setSearchItem} />
-      <BackButton
-        selectedType={selectedType}
-        setSelectedType={setSelectedType}
-        selectedField={selectedField}
-        setSelectedField={setSelectedField}
-        selectedKind={selectedKind}
-        setSelectedKind={setSelectedKind}
-        className={selectedType || selectedKind ? '' : 'hidden'}
-      />
-      {selectedType ? (
-        <TypeComponent
+      {selectedType && (
+        <BackButton
+          className={selectedType ? '' : 'hidden'}
           selectedType={selectedType}
+          setSelectedType={setSelectedType}
           selectedField={selectedField}
           setSelectedField={setSelectedField}
+          selectedKind={selectedKind}
           setSelectedKind={setSelectedKind}
-          setSelectedType={setSelectedType}
-          handleKindClick={handleKindClick}
-          schema={schema}
         />
-      ) : selectedKind ? (
-        <KindComponent selectedKind={selectedKind} />
-      ) : (
-        <>
-          <div className='subtitle'>Types:</div>
-          <div className='types-container'>
-            {schema?.types.map((type, index) => (
-              <div key={index} className='type-kind-container'>
-                <p
-                  className='type'
-                  data-testid='type-item'
-                  onClick={() => handleTypeClick(type)}
-                >
-                  {type.name}:
-                </p>
-                <p className='kind' onClick={() => handleKindClick(type.name)}>
-                  {type.kind}
-                </p>
-              </div>
+      )}
+      {selectedKind ? (
+        <KindComponent kind={selectedKind as GraphQLKind} />
+      ) : selectedField ? (
+        <FieldComponent field={selectedField as GraphQLField} />
+      ) : selectedType ? (
+        <TypeComponent
+          type={selectedType as GraphQLType}
+          onFieldClick={setSelectedField}
+          onKindClick={setSelectedKind}
+        />
+      ) : schema && schema.types && schema.types.length > 0 ? (
+        <section className='docs-container' data-testid='type-item'>
+          <h2 className='docs-title'>Types:</h2>
+          <ul className='types-list'>
+            {schema.types.map((type) => (
+              <li key={type.name} className='types-list-item'>
+                <div className='name-kind-container'>
+                  <span
+                    className='name'
+                    onClick={() => setSelectedType(type as GraphQLType)}
+                  >
+                    {type.name}:
+                  </span>
+                  <span className='kind'>{type.kind}</span>
+                </div>
+              </li>
             ))}
-            {selectedKind && <KindComponent selectedKind={selectedKind} />}
-          </div>
-        </>
+          </ul>
+        </section>
+      ) : (
+        <p>{NO_SCHEMA_MESSAGE}</p>
       )}
     </div>
   );
