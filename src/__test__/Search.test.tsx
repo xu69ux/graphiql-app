@@ -6,50 +6,45 @@ const mockSchema: GraphQLSchema = {
   types: [
     {
       name: 'Type1',
-      description: 'Type1 Description',
+      kind: 'Type1 Kind',
       fields: [
         {
           name: 'Field1',
           description: 'Field1 Description',
           type: {
-            kind: 'Kind',
-            description: 'Type1 Description',
+            kind: 'Kind1',
+            name: 'Kind1 Name',
+            description: 'Kind1 Description',
           },
         },
       ],
-      kind: 'Kind',
     },
     {
       name: 'Type2',
-      description: 'Type2 Description',
+      kind: 'Type2 Kind',
       fields: [
         {
           name: 'Field2',
           description: 'Field2 Description',
           type: {
-            kind: 'Kind',
-            description: 'Type2 Description',
+            kind: 'Kind2',
+            name: 'Kind2 Name',
+            description: 'Kind2 Description',
           },
         },
       ],
-      kind: 'Kind',
     },
   ],
-  directives: [],
 };
 
 test('renders search icon', () => {
-  render(
-    <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />,
-  );
+  render(<Search schema={{ types: [] }} setSearchItem={() => {}} />);
   const searchIcon = screen.getByTestId('search-icon');
   expect(searchIcon).toBeInTheDocument();
 });
 
 test('opens search on icon click', () => {
-  render(
-    <Search schema={{ types: [], directives: [] }} setSearchItem={() => {}} />,
-  );
+  render(<Search schema={{ types: [] }} setSearchItem={() => {}} />);
   const searchIcon = screen.getByTestId('search-icon');
   act(() => {
     fireEvent.click(searchIcon);

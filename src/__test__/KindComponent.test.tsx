@@ -1,26 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import { KindComponent } from '../components';
-import { KindType } from '../types';
+import { GraphQLKind } from '../types';
 
 test('renders the KindComponent with a description', () => {
-  const mockKind: KindType = {
-    kind: 'Test kind',
-    description: 'Test description',
+  const mockKind: GraphQLKind = {
+    kind: 'Kind1 kind',
+    name: 'Kind1 name',
+    description: 'Kind1 description',
   };
-
-  render(<KindComponent selectedKind={mockKind} />);
-
-  expect(screen.getByText('Test description')).toBeInTheDocument();
+  render(<KindComponent kind={mockKind} />);
+  expect(screen.getByText('Kind1 description')).toBeInTheDocument();
 });
 
 test('renders the KindComponent without a description', () => {
-  const mockKind: KindType = {
-    kind: 'Test kind',
+  const mockKind: GraphQLKind = {
+    kind: 'Kind1 kind',
+    name: 'Kind1 name',
     description: '',
   };
 
-  render(<KindComponent selectedKind={mockKind} />);
-
+  render(<KindComponent kind={mockKind} />);
   expect(
     screen.getByText(
       'Sorry, there is no description here. The API developers have not provided one.',

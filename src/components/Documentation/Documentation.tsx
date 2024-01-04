@@ -1,16 +1,23 @@
 import { useState, useEffect, FC } from 'react';
 import {
   BackButton,
+  FieldComponent,
   KindComponent,
   Search,
   TypeComponent,
 } from '../../components';
-import { GraphQLSchema, Type, FieldType, KindType } from '../../types';
+import {
+  GraphQLSchema,
+  GraphQLType,
+  GraphQLField,
+  GraphQLKind,
+} from '../../types';
 import {
   findTypeByName,
   findFieldByName,
   findKindByName,
 } from '../../utils/findBy';
+import { NO_SCHEMA_MESSAGE } from '../../constants';
 
 import '@styles/Documentation.css';
 
@@ -23,36 +30,30 @@ export const Documentation: FC<DocumentationProps> = ({
   isDocumentationOpen,
   schema,
 }) => {
-  const [selectedType, setSelectedType] = useState<Type | null>(null);
-  const [selectedField, setSelectedField] = useState<FieldType | null>(null);
-  const [selectedKind, setSelectedKind] = useState<KindType | null>(null);
+  const [selectedType, setSelectedType] = useState<GraphQLType | null>(null);
+  const [selectedField, setSelectedField] = useState<GraphQLField | null>(null);
+  const [selectedKind, setSelectedKind] = useState<GraphQLKind | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
-  const handleTypeClick = (type: Type) => {
-    setSelectedType(type);
-  };
-
-  const handleKindClick = (kindName: string) => {
-    const kind = schema?.types.find((type) => type.kind === kindName);
-    if (kind) {
-      setSelectedKind(kind);
-    }
-  };
-
   useEffect(() => {
-    if (searchItem) {
+    if (schema && searchItem) {
       const [typeName, fieldName, kindName] = searchItem.split('.');
-      const typeObj = schema && findTypeByName(schema.types, typeName);
-      if (typeObj) {
-        setSelectedType(typeObj);
-        const fieldObj = findFieldByName(typeObj.fields, fieldName);
-        if (fieldObj) {
-          setSelectedField(fieldObj);
-        }
-        const kindObj = findKindByName(schema.types, kindName);
-
-        if (kindObj) {
-          setSelectedKind(kindObj);
+      if (typeName) {
+        const type = findTypeByName(schema, typeName);
+        if (type) {
+          setSelectedType(type);
+          if (fieldName) {
+            const field = findFieldByName(schema, fieldName);
+            if (field) {
+              setSelectedField(field);
+            }
+          }
+          if (kindName) {
+            const kind = findKindByName(schema, kindName);
+            if (kind) {
+              setSelectedKind(kind);
+            }
+          }
         }
       }
     }
@@ -60,62 +61,53 @@ export const Documentation: FC<DocumentationProps> = ({
 
   return (
     <div
-      className={`documentation ${isDocumentationOpen ? 'open' : ''}`}
+      className={`documentation ${schema && isDocumentationOpen ? 'open' : ''}`}
       data-testid='documentation'
     >
       <h1 className='docs-title'>Documentation</h1>
       <Search schema={schema} setSearchItem={setSearchItem} />
-      {selectedType ? (
-        <>
-          <BackButton
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-          />
-          <TypeComponent
-            selectedType={selectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-            setSelectedKind={setSelectedKind}
-            setSelectedType={setSelectedType}
-            schema={schema}
-          />
-        </>
-      ) : selectedKind ? (
-        <>
-          <BackButton
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-            selectedKind={selectedKind}
-            setSelectedKind={setSelectedKind}
-          />
-          <KindComponent selectedKind={selectedKind} />
-        </>
-      ) : (
-        <>
-          <BackButton className='hidden' />
-          <div className='subtitle'>Types:</div>
-          <div className='types-container'>
-            {schema?.types.map((type) => (
-              <div key={type.name} className='type-kind-container'>
-                <p
-                  className='type'
-                  data-testid='type-item'
-                  onClick={() => handleTypeClick(type)}
-                >
-                  {type.name}:
-                </p>
-                <p className='kind' onClick={() => handleKindClick(type.kind)}>
-                  {type.kind}
-                </p>
-              </div>
+      {selectedType && (
+        <BackButton
+          className={selectedType ? '' : 'hidden'}
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+          selectedField={selectedField}
+          setSelectedField={setSelectedField}
+          selectedKind={selectedKind}
+          setSelectedKind={setSelectedKind}
+        />
+      )}
+      {selectedKind ? (
+        <KindComponent kind={selectedKind as GraphQLKind} />
+      ) : selectedField ? (
+        <FieldComponent field={selectedField as GraphQLField} />
+      ) : selectedType ? (
+        <TypeComponent
+          type={selectedType as GraphQLType}
+          onFieldClick={setSelectedField}
+          onKindClick={setSelectedKind}
+        />
+      ) : schema && schema.types && schema.types.length > 0 ? (
+        <section className='docs-container' data-testid='type-item'>
+          <h2 className='docs-title'>Types:</h2>
+          <ul className='types-list'>
+            {schema.types.map((type) => (
+              <li key={type.name} className='types-list-item'>
+                <div className='name-kind-container'>
+                  <span
+                    className='name'
+                    onClick={() => setSelectedType(type as GraphQLType)}
+                  >
+                    {type.name}:
+                  </span>
+                  <span className='kind'>{type.kind}</span>
+                </div>
+              </li>
             ))}
-            {selectedKind && <KindComponent selectedKind={selectedKind} />}
-          </div>
-        </>
+          </ul>
+        </section>
+      ) : (
+        <p>{NO_SCHEMA_MESSAGE}</p>
       )}
     </div>
   );

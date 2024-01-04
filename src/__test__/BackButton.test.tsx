@@ -1,43 +1,38 @@
 import { render, fireEvent } from '@testing-library/react';
 import { BackButton } from '../components';
+import { IBackButtonProps } from '../components/Documentation/components/BackButton';
 
-const mockSelectedType = {
-  name: 'Test type',
-  description: 'Test description',
-  fields: [
-    {
-      name: 'Test field',
-      description: 'Test description',
-      type: {
-        kind: 'Test type',
-        description: 'Test type description',
-      },
-    },
-  ],
-  kind: 'Test kind',
+const selectedField = {
+  name: 'field',
+  description: 'desc',
+  type: { kind: 'kind', name: 'name', description: 'desc' },
 };
+const selectedKind = null;
+const selectedType = null;
 
-const mockSelectedField = {
-  name: 'Test field',
-  description: 'Test description',
-  type: {
-    kind: 'Test type',
-    description: 'Test type description',
-  },
-};
+const setSelectedField = jest.fn();
+const setSelectedKind = jest.fn();
+const setSelectedType = jest.fn();
 
-const mockSelectedKind = {
-  kind: 'Test kind',
-  description: 'Test description',
+const mockProps: IBackButtonProps = {
+  selectedField,
+  setSelectedField,
+  selectedKind,
+  setSelectedKind,
+  selectedType,
+  setSelectedType,
 };
 
 describe('BackButton', () => {
   it('calls setSelectedField with null when selectedField is not null', () => {
-    const setSelectedField = jest.fn();
     const { getByTestId } = render(
       <BackButton
-        selectedField={mockSelectedField}
-        setSelectedField={setSelectedField}
+        selectedField={mockProps.selectedField}
+        setSelectedField={mockProps.setSelectedField}
+        selectedType={mockProps.selectedType}
+        setSelectedType={mockProps.setSelectedType}
+        selectedKind={mockProps.selectedKind}
+        setSelectedKind={mockProps.setSelectedKind}
       />,
     );
 
@@ -47,10 +42,13 @@ describe('BackButton', () => {
   });
 
   it('calls setSelectedKind with null when selectedKind is not null and selectedField is null', () => {
-    const setSelectedKind = jest.fn();
     const { getByTestId } = render(
       <BackButton
-        selectedKind={mockSelectedKind}
+        selectedField={null}
+        setSelectedField={setSelectedField}
+        selectedType={null}
+        setSelectedType={setSelectedType}
+        selectedKind={mockProps.selectedKind}
         setSelectedKind={setSelectedKind}
       />,
     );
@@ -61,11 +59,14 @@ describe('BackButton', () => {
   });
 
   it('calls setSelectedType with null when selectedType is not null, and selectedField and selectedKind are null', () => {
-    const setSelectedType = jest.fn();
     const { getByTestId } = render(
       <BackButton
-        selectedType={mockSelectedType}
+        selectedField={null}
+        setSelectedField={setSelectedField}
+        selectedType={mockProps.selectedType}
         setSelectedType={setSelectedType}
+        selectedKind={null}
+        setSelectedKind={setSelectedKind}
       />,
     );
 

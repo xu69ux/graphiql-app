@@ -1,35 +1,53 @@
 import { FC } from 'react';
-import { Type, FieldType, KindType } from '../../../types';
 import { IoChevronForward } from 'react-icons/io5';
+import { GraphQLField, GraphQLType, GraphQLKind } from 'src/types';
 
 import '@styles/BackButton.css';
 
-interface IBackButtonProps {
+export interface IBackButtonProps {
   className?: string;
-  selectedType?: Type | null;
-  selectedField?: FieldType | null;
-  selectedKind?: KindType | null;
-  setSelectedType?: (type: Type | null) => void;
-  setSelectedField?: (field: FieldType | null) => void;
-  setSelectedKind?: (kind: KindType | null) => void;
+  selectedType: GraphQLType | null;
+  setSelectedType: (type: GraphQLType | null) => void;
+  selectedField: GraphQLField | null;
+  setSelectedField: (field: GraphQLField | null) => void;
+  selectedKind: GraphQLKind | null;
+  setSelectedKind: (kind: GraphQLKind | null) => void;
 }
 
 export const BackButton: FC<IBackButtonProps> = ({
   className,
   selectedType,
-  selectedField,
-  selectedKind,
   setSelectedType,
+  selectedField,
   setSelectedField,
+  selectedKind,
   setSelectedKind,
 }) => {
   const handleBackClick = () => {
-    if (selectedField && setSelectedField) {
-      setSelectedField(null);
-    } else if (selectedKind && setSelectedKind) {
-      setSelectedKind(null);
-    } else if (selectedType && setSelectedType) {
-      setSelectedType(null);
+    if (selectedKind) {
+      if (!selectedType && !selectedField) {
+        setSelectedType(null);
+        setSelectedField(null);
+        setSelectedKind(null);
+      } else if (selectedType && !selectedField) {
+        setSelectedType(selectedType);
+        setSelectedField(null);
+        setSelectedKind(null);
+      } else if (selectedType && selectedField) {
+        setSelectedType(selectedType);
+        setSelectedField(null);
+        setSelectedKind(null);
+      }
+    } else {
+      if (selectedField) {
+        setSelectedType(selectedType);
+        setSelectedField(null);
+        setSelectedKind(null);
+      } else if (selectedType) {
+        setSelectedType(null);
+        setSelectedField(null);
+        setSelectedKind(null);
+      }
     }
   };
 
@@ -42,15 +60,13 @@ export const BackButton: FC<IBackButtonProps> = ({
       <IoChevronForward className='back-icon' />
       <IoChevronForward className='back-icon' />
       <IoChevronForward className='back-icon' />
-      <span>
-        {selectedKind
-          ? selectedField
-            ? 'Back to Fields'
-            : 'Back to Types'
-          : selectedField
-            ? 'Back to Fields'
-            : 'Back to Types'}
-      </span>
+      {selectedField
+        ? 'Back to Fields'
+        : selectedType
+          ? 'Back to Types'
+          : selectedKind
+            ? 'Back to Schema'
+            : null}
     </button>
   );
 };

@@ -1,55 +1,61 @@
-import {
-  findTypeByName,
-  findFieldByName,
-  findKindByName,
-} from '../utils/findBy';
-import { Type, FieldType, KindType } from '../types';
+import { GraphQLSchema } from '../types';
+import { findTypeByName, findFieldByName } from '../utils/findBy';
 
-describe('findBy utility functions', () => {
-  const mockTypes: Type[] = [
-    { name: 'Type1', description: 'Description1', fields: [], kind: 'Kind1' },
-    { name: 'Type2', description: 'Description2', fields: [], kind: 'Kind2' },
-  ];
-
-  const mockFields: FieldType[] = [
+const mockSchema: GraphQLSchema = {
+  types: [
     {
-      name: 'Field1',
-      description: 'Description1',
-      type: { kind: 'Kind1', description: 'Description1' },
+      name: 'Type1 name',
+      kind: 'Type1 kind',
+      fields: [
+        {
+          name: 'Field1 name',
+          description: 'Field1 description',
+          type: {
+            kind: 'Kind1 kind',
+            name: 'Kind1 name',
+          },
+        },
+      ],
     },
-    {
-      name: 'Field2',
-      description: 'Description2',
-      type: { kind: 'Kind2', description: 'Description2' },
+  ],
+};
+
+test('findTypeByName returns the correct type', () => {
+  const result = findTypeByName(mockSchema, 'Type1 name');
+  expect(result).toEqual({
+    name: 'Type1 name',
+    kind: 'Type1 kind',
+    fields: [
+      {
+        name: 'Field1 name',
+        description: 'Field1 description',
+        type: {
+          kind: 'Kind1 kind',
+          name: 'Kind1 name',
+        },
+      },
+    ],
+  });
+});
+
+test('findTypeByName returns undefined if type is not found', () => {
+  const result = findTypeByName(mockSchema, 'Type2');
+  expect(result).toEqual(undefined);
+});
+
+test('findFieldByName returns the correct field', () => {
+  const result = findFieldByName(mockSchema, 'Field1 name');
+  expect(result).toEqual({
+    name: 'Field1 name',
+    description: 'Field1 description',
+    type: {
+      kind: 'Kind1 kind',
+      name: 'Kind1 name',
     },
-  ];
-
-  const mockKinds: KindType[] = [
-    { kind: 'Kind1', description: 'Description1' },
-    { kind: 'Kind2', description: 'Description2' },
-  ];
-
-  test('findTypeByName', () => {
-    const result = findTypeByName(mockTypes, 'Type1');
-    expect(result).toEqual({
-      name: 'Type1',
-      description: 'Description1',
-      fields: [],
-      kind: 'Kind1',
-    });
   });
+});
 
-  test('findFieldByName', () => {
-    const result = findFieldByName(mockFields, 'Field1');
-    expect(result).toEqual({
-      name: 'Field1',
-      description: 'Description1',
-      type: { kind: 'Kind1', description: 'Description1' },
-    });
-  });
-
-  test('findKindByName', () => {
-    const result = findKindByName(mockKinds, 'Kind1');
-    expect(result).toEqual({ kind: 'Kind1', description: 'Description1' });
-  });
+test('findFieldByName returns undefined if field is not found', () => {
+  const result = findFieldByName(mockSchema, 'Field2');
+  expect(result).toEqual(undefined);
 });

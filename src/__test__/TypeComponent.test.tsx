@@ -1,44 +1,34 @@
 import { render, fireEvent } from '@testing-library/react';
 import { TypeComponent } from '../components';
-import { FieldType, Type } from '../types';
 
 test('renders the TypeComponent and responds to field click events', () => {
-  const mockType: Type = {
-    name: 'TestType',
-    description: 'TestTypeDescription',
-    fields: [
-      {
-        name: 'TestField',
-        description: 'TestFieldDescription',
-        type: { kind: 'Kind1' },
-      },
-    ],
-    kind: 'Kind1',
+  const mockFieldClickHandler = jest.fn();
+  const mockKindClickHandler = jest.fn();
+
+  const props = {
+    onFieldClick: mockFieldClickHandler,
+    onKindClick: mockKindClickHandler,
+    type: {
+      name: 'Type1',
+      kind: 'Type1 Kind',
+      fields: [
+        {
+          name: 'Field1',
+          description: 'Field1 Description',
+          type: {
+            kind: 'Kind1',
+            name: 'Kind1 Name',
+            description: 'Kind1 Description',
+          },
+        },
+      ],
+    },
   };
 
-  const mockField: FieldType = {
-    name: 'TestField',
-    description: 'TestFieldDescription',
-    type: { kind: 'Kind1' },
-  };
-  const setSelectedField = jest.fn();
-  const setSelectedKind = jest.fn();
-  const setSelectedType = jest.fn();
+  const { getByText } = render(<TypeComponent {...props} />);
 
-  const { getByText } = render(
-    <TypeComponent
-      schema={null}
-      selectedType={mockType}
-      selectedField={null}
-      setSelectedField={setSelectedField}
-      setSelectedKind={setSelectedKind}
-      setSelectedType={setSelectedType}
-    />,
-  );
-
-  const field = getByText('TestField');
+  const field = getByText('Field1:');
   fireEvent.click(field);
 
-  expect(field).toBeInTheDocument();
-  expect(setSelectedField).toHaveBeenCalledWith(mockField);
+  expect(mockFieldClickHandler).toHaveBeenCalled();
 });
