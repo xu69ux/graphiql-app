@@ -8,7 +8,7 @@ import '@styles/Auth.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const userIs = sessionStorage.getItem('authInfo');
+  const userIs = sessionStorage.getItem('userName') !== null;
   const { language } = useLanguage();
 
   useEffect(() => {

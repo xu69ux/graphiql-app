@@ -14,6 +14,7 @@ import '@styles/Header.css';
 
 export const Header = () => {
   const storedName = sessionStorage.getItem('userName');
+  const isStoredName = sessionStorage.getItem('userName') !== null;
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,13 +61,9 @@ export const Header = () => {
           <LanguageMenu isScrolled={isScrolled} />
         </div>
         <div className='navigation-right'>
-          {storedName ? (
-            <Greeting name={storedName} isLoading={isLoading} />
-          ) : (
-            <Greeting isLoading={isLoading} />
-          )}
+          <Greeting name={storedName} isLoading={isLoading} />
           <div className='header-links'>
-            {user ? <UserComponent user={user} /> : <NoUserComponent />}
+            {isStoredName ? <UserComponent /> : <NoUserComponent />}
           </div>
         </div>
       </nav>
