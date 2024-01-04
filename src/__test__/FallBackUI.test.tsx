@@ -1,6 +1,5 @@
-import { render, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, act } from './test-utils';
 import { FallBackUI } from '../components';
-import { LanguageProvider } from '../contexts/LanguageProvider';
 
 Object.defineProperty(window, 'location', {
   value: {
@@ -10,6 +9,7 @@ Object.defineProperty(window, 'location', {
 });
 
 let reload: () => void;
+const resetErrorBoundary = jest.fn();
 
 beforeAll(() => {
   reload = window.location.reload;
@@ -23,20 +23,15 @@ describe('FallBackUI', () => {
   it('displays the error message', () => {
     const error = new Error('Test error');
     const { getByText } = render(
-      <LanguageProvider>
-        <FallBackUI error={error} resetErrorBoundary={jest.fn()} />
-      </LanguageProvider>,
+      <FallBackUI error={error} resetErrorBoundary={resetErrorBoundary} />,
     );
     expect(getByText('Test error')).toBeInTheDocument();
   });
 
   it('calls resetErrorBoundary and reloads the page when the button is clicked', () => {
     const error = new Error('Test error');
-    const resetErrorBoundary = jest.fn();
     const { getByText } = render(
-      <LanguageProvider>
-        <FallBackUI error={error} resetErrorBoundary={resetErrorBoundary} />
-      </LanguageProvider>,
+      <FallBackUI error={error} resetErrorBoundary={resetErrorBoundary} />,
     );
 
     window.location.reload = jest.fn();

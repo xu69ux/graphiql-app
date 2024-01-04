@@ -1,18 +1,16 @@
-import { render, fireEvent } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { LanguageContext } from '../contexts/LanguageContext';
+import {
+  render,
+  fireEvent,
+  MockLanguageProvider,
+  setLanguage,
+} from './test-utils';
 import { LanguageMenu } from '../components';
 
 describe('LanguageMenu', () => {
   it('changes language when language dropdown is clicked', () => {
-    const setLanguage = jest.fn();
-
     const { getByTitle, getByText } = render(
-      <LanguageContext.Provider value={{ language: 'eng', setLanguage }}>
-        <Router>
-          <LanguageMenu isScrolled={false} />
-        </Router>
-      </LanguageContext.Provider>,
+      <LanguageMenu isScrolled={false} />,
+      { wrapper: MockLanguageProvider },
     );
 
     fireEvent.click(getByTitle('change language'));
@@ -22,29 +20,13 @@ describe('LanguageMenu', () => {
   });
 
   it('renders with correct class when isScrolled is true', () => {
-    const { container } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <LanguageMenu isScrolled={true} />
-        </Router>
-      </LanguageContext.Provider>,
-    );
+    const { container } = render(<LanguageMenu isScrolled={true} />);
 
     expect(container.firstChild).toHaveClass('lang-menu scrolled');
   });
 
   it('renders with correct class when isScrolled is false', () => {
-    const { container } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <LanguageMenu isScrolled={false} />
-        </Router>
-      </LanguageContext.Provider>,
-    );
+    const { container } = render(<LanguageMenu isScrolled={false} />);
 
     expect(container.firstChild).toHaveClass('lang-menu');
   });

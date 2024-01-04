@@ -10,7 +10,7 @@ import {
   Sidebar,
 } from '../components';
 import { IoChevronUpOutline, IoCaretForward } from 'react-icons/io5';
-import { Schema, IEditorTab } from '../types';
+import { GraphQLSchema, IEditorTab } from '../types';
 import useLanguage from '../hooks/useLanguage';
 
 import '@styles/GraphiQLPage.css';
@@ -31,7 +31,7 @@ const GraphiQLPage = () => {
   const [headers, setHeaders] = useState('');
   const [viewer, setViewer] = useState('');
   const [endpoint, setEndpoint] = useState('');
-  const [schema, setSchema] = useState<Schema | null>(null);
+  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
   const { language } = useLanguage();
 

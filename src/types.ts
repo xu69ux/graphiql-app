@@ -1,12 +1,19 @@
-export interface TypeKind {
+export interface KindType {
   kind: string;
-  description: string;
+  description?: string;
 }
 
 export interface FieldType {
   name: string;
   description: string;
-  type: TypeKind;
+  type: KindType;
+}
+
+export interface Field {
+  name: string;
+  description: string;
+  args: FieldType[];
+  type: KindType;
 }
 
 export interface Type {
@@ -16,8 +23,15 @@ export interface Type {
   kind: string;
 }
 
-export interface Schema {
+interface Directive {
+  name: string;
+  description: string;
+  locations: string[];
+}
+
+export interface GraphQLSchema {
   types: Type[];
+  directives: Directive[];
 }
 
 export interface IEditorTab {

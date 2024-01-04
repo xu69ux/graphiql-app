@@ -1,11 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import { LanguageProvider } from '../contexts/LanguageProvider';
+import { act, fireEvent, render, screen, waitFor } from './test-utils';
 import GraphiQLPage from '../pages/GraphiQLPage';
 import axios from 'axios';
 
@@ -38,11 +31,7 @@ describe('GraphiQLPage page', () => {
 
   test('renders GraphiQLPage with initial state', async () => {
     await act(async () => {
-      render(
-        <LanguageProvider>
-          <GraphiQLPage />
-        </LanguageProvider>,
-      );
+      render(<GraphiQLPage />);
     });
 
     expect(screen.getByText(/variables/i)).toBeInTheDocument();
@@ -50,22 +39,17 @@ describe('GraphiQLPage page', () => {
     expect(screen.getByTestId('endpoint')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     expect(screen.getByTestId('documentation')).toBeInTheDocument();
-
     expect(screen.getByTestId('endpoint')).toHaveTextContent('Endpoint');
     expect(screen.getByTestId('endpoint-input')).toHaveValue('');
   });
 
   test('adds a new tab when clicking the "Add Tab" button', async () => {
-    render(
-      <LanguageProvider>
-        <GraphiQLPage />
-      </LanguageProvider>,
-    );
-
-    fireEvent.click(screen.getByText('add tab'));
-
+    render(<GraphiQLPage />);
+    act(() => {
+      fireEvent.click(screen.getByText('add tab'));
+    });
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
   });
-});
+

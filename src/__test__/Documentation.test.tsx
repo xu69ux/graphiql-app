@@ -1,9 +1,8 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, screen, act } from './test-utils';
 import { Documentation } from '../components';
-import { Schema } from '../types';
-import { LanguageProvider } from '../contexts/LanguageProvider';
+import { GraphQLSchema } from '../types';
 
-const mockSchema: Schema = {
+const mockSchema: GraphQLSchema = {
   types: [
     {
       name: 'TypeName',
@@ -21,6 +20,7 @@ const mockSchema: Schema = {
       kind: 'Kind',
     },
   ],
+  directives: [],
 };
 
 test('renders Documentation title', () => {
@@ -42,28 +42,29 @@ test('does not render open class when isDocumentationOpen is false', () => {
 });
 
 test('handleBackClick function works correctly', () => {
-  render(
-    <LanguageProvider>
-      <Documentation isDocumentationOpen={true} schema={mockSchema} />
-    </LanguageProvider>,
-  );
+  render(<Documentation isDocumentationOpen={true} schema={mockSchema} />);
 
   const typeItem = screen.getByTestId('type-item');
   act(() => {
     fireEvent.click(typeItem);
   });
+  expect(screen.getByTestId('selected-type').textContent).toBe(
+    'TypeName:FieldName',
+  );
 
-  expect(screen.getByTestId('selected-type').textContent).toBe('TypeName:');
-
-  const fieldItem = screen.getByTestId('field-item-FieldName');
+  const fieldItem = screen.getByText('FieldName');
   act(() => {
     fireEvent.click(fieldItem);
   });
-  expect(screen.getByTestId('selected-field').textContent).toBe('FieldName:');
+  expect(screen.getByTestId('field-item').textContent).toBe(
+    'FieldName:KindField Description',
+  );
 
   const backButton = screen.getByTestId('back-button');
   act(() => {
     fireEvent.click(backButton);
   });
-  expect(screen.getByTestId('selected-type').textContent).toBe('TypeName:');
+  expect(screen.getByTestId('selected-type').textContent).toBe(
+    'TypeName:FieldName',
+  );
 });
