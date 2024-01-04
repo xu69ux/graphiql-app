@@ -1,35 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from './test-utils';
 import { Greeting } from '../components';
-import { LanguageProvider } from '../contexts/LanguageProvider';
 
 test('renders Loader when isLoading is true', () => {
   const mockName = 'John';
 
-  render(
-    <LanguageProvider>
-      <Greeting isLoading={true} name={mockName} />
-    </LanguageProvider>,
-  );
+  render(<Greeting isLoading={true} name={mockName} />);
   const loaderElement = screen.getByTestId('loader');
   expect(loaderElement).toBeInTheDocument();
 });
 
 test('renders greeting with name when name is provided', () => {
-  render(
-    <LanguageProvider>
-      <Greeting name='John' isLoading={false} />
-    </LanguageProvider>,
-  );
+  render(<Greeting name='John' isLoading={false} />);
   const greetingElement = screen.getByText(/John/);
   expect(greetingElement).toBeInTheDocument();
 });
 
 test('renders greeting with noName when name is not provided', () => {
-  render(
-    <LanguageProvider>
-      <Greeting isLoading={false} name={undefined} />
-    </LanguageProvider>,
-  );
+  render(<Greeting isLoading={false} name={undefined} />);
   const greetingElement = screen.getByText('hello, username!');
   expect(greetingElement).toBeInTheDocument();
 });

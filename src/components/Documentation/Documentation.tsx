@@ -35,7 +35,6 @@ export const Documentation: FC<DocumentationProps> = ({
   const [selectedKind, setSelectedKind] = useState<GraphQLKind | null>(null);
   const [searchItem, setSearchItem] = useState('');
 
-  console.log(schema);
   useEffect(() => {
     if (schema && searchItem) {
       const [typeName, fieldName, kindName] = searchItem.split('.');

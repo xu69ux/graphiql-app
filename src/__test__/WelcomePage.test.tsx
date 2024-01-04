@@ -1,7 +1,5 @@
-import { render } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render } from './test-utils';
 import WelcomePage from '../pages/WelcomePage';
-import { LanguageContext } from '../contexts/LanguageContext';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -14,29 +12,13 @@ jest.mock('react-icons/io5', () => ({
 
 describe('WelcomePage', () => {
   it('renders the WelcomePage component', () => {
-    const { container } = render(
-      <Router>
-        <LanguageContext.Provider
-          value={{ language: 'eng', setLanguage: () => {} }}
-        >
-          <WelcomePage />
-        </LanguageContext.Provider>
-      </Router>,
-    );
+    const { container } = render(<WelcomePage />);
 
     expect(container).toMatchSnapshot();
   });
 
   it('renders welcome message', () => {
-    const { getByText } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <WelcomePage />
-        </Router>
-      </LanguageContext.Provider>,
-    );
+    const { getByText } = render(<WelcomePage />);
 
     expect(
       getByText((_, node) => {
@@ -53,15 +35,7 @@ describe('WelcomePage', () => {
   });
 
   it('renders login and signup links', async () => {
-    const { container } = render(
-      <LanguageContext.Provider
-        value={{ language: 'eng', setLanguage: () => {} }}
-      >
-        <Router>
-          <WelcomePage />
-        </Router>
-      </LanguageContext.Provider>,
-    );
+    const { container } = render(<WelcomePage />);
 
     const loginLink = container.querySelector('a[href="/login"]');
     expect(loginLink).toHaveTextContent(/log\s*in/i);

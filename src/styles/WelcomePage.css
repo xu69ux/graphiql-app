@@ -121,6 +121,10 @@ span {
   transition: color 1.2s ease-in-out;
 }
 
+.welcome-description p span {
+  font-size: inherit;
+}
+
 .blur {
   filter: blur(3px);
 }
@@ -139,6 +143,16 @@ span {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.slava-git {
+  cursor: pointer;
+  border-bottom: 0.08rem solid transparent;
+}
+
+.slava-git:hover {
+  border-bottom: 0.08rem solid var(--green);
+  transition: all 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 700px) {

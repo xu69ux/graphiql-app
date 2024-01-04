@@ -33,7 +33,7 @@ export const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scroll = window.scrollY > 100;
+      const scroll = window.scrollY > 50;
       if (scroll !== isScrolled) {
         setIsScrolled(!isScrolled);
       }

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from './test-utils';
 import { PasswordValidIndicator } from '../components';
 
 test('PasswordValidIndicator shows correct progress for password validity', () => {

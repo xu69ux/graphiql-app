@@ -1,7 +1,5 @@
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render, fireEvent, waitFor, screen } from './test-utils';
 import { act } from 'react-dom/test-utils';
-import { LanguageContext } from '../contexts/LanguageContext';
 import { FormSignUp } from '../components';
 import * as firebase from '../utils/firebase';
 
@@ -11,15 +9,7 @@ describe('FormSignUp component', () => {
   afterEach(jest.clearAllMocks);
   it('renders correctly', async () => {
     await act(async () => {
-      render(
-        <LanguageContext.Provider
-          value={{ language: 'eng', setLanguage: () => {} }}
-        >
-          <Router>
-            <FormSignUp />
-          </Router>
-        </LanguageContext.Provider>,
-      );
+      render(<FormSignUp />);
     });
     expect(screen.getByPlaceholderText(/Username/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
@@ -31,15 +21,7 @@ describe('FormSignUp component', () => {
       .spyOn(firebase, 'registerWithEmailAndPassword')
       .mockResolvedValue('success');
     act(() => {
-      render(
-        <LanguageContext.Provider
-          value={{ language: 'eng', setLanguage: () => {} }}
-        >
-          <Router>
-            <FormSignUp />
-          </Router>
-        </LanguageContext.Provider>,
-      );
+      render(<FormSignUp />);
     });
 
     fireEvent.input(screen.getByPlaceholderText(/Username/i), {

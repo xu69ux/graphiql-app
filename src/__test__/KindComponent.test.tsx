@@ -8,9 +8,7 @@ test('renders the KindComponent with a description', () => {
     name: 'Kind1 name',
     description: 'Kind1 description',
   };
-
   render(<KindComponent kind={mockKind} />);
-
   expect(screen.getByText('Kind1 description')).toBeInTheDocument();
 });
 
@@ -22,7 +20,6 @@ test('renders the KindComponent without a description', () => {
   };
 
   render(<KindComponent kind={mockKind} />);
-
   expect(
     screen.getByText(
       'Sorry, there is no description here. The API developers have not provided one.',
