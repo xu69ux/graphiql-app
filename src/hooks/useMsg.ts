@@ -20,6 +20,10 @@ const useMsg = () => {
       body: translations?.[language]?.logOutSuccesBody,
       error: false,
     },
+    LOCAL_STORAGE_CLEAR_SUCCESS: {
+      body: translations?.[language]?.localStorageClearSuccessBody,
+      error: false,
+    },
   };
   return msg;
 };
