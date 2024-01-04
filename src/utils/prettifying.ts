@@ -1,72 +1,116 @@
-function fixBrackets(query: string): string {
-  let openBrackets = 0;
-  let closeBrackets = 0;
-  const stack: string[] = [];
+///////////////////// PRETTIFYING
 
-  for (let i = 0; i < query.length; i++) {
-    const char = query[i];
-
-    if (char === '{') {
-      openBrackets++;
-      stack.push('{');
-    } else if (char === '}') {
-      closeBrackets++;
-
-      if (stack.length > 0 && stack[stack.length - 1] === '{') {
-        stack.pop();
-      }
-    }
+const stuckBracketCheck = (word: string) => {
+  if (word.length > 1 && word.match(/[{}()]/)) {
+    word = word.replaceAll(/(?=>\w){/g, ' {');
+    word = word.replaceAll(/(?=\w)\(/g, '( ');
+    word = word.replaceAll(/}(?=\w)/g, '} ');
+    word = word.replaceAll(/\)(?=>\w)/g, ' )');
+    // console.log('stuckBracketCheck false');
+    return word.split(' ');
+  } else {
+    // console.log('stuckBracketCheck true');
+    return word;
   }
-
-  const bracketDifference = openBrackets - closeBrackets;
-
-  if (bracketDifference > 0) {
-    /* добавляются закрывающие скобки, если открытых больше -
-    можно убрать если поведение непредсказуемое, и например просто выделять лишниие скобки как ошибки*/
-    query += '}'.repeat(bracketDifference);
-  } else if (bracketDifference < 0) {
-    // добавляются открывающие скобки, если закрытых больше - аналогично можно убрать
-    query = '{'.repeat(Math.abs(bracketDifference)) + query;
-  }
-
-  return query;
-}
-
-const formatGraphQLQuery = (query: string): string => {
-  let result = '';
-  let indentationLevel = 0;
-  const indentation = '  ';
-
-  const fixedQuery = fixBrackets(query);
-
-  const lines = fixedQuery.split('\n');
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-
-    if (line.length === 0) {
-      continue;
-    }
-
-    for (let j = 0; j < line.length; j++) {
-      const char = line[j];
-      if (char === '{') {
-        result += `${char}\n`;
-        indentationLevel++;
-        result += indentation.repeat(indentationLevel);
-      } else if (char === '}') {
-        indentationLevel--;
-        result += `\n${indentation.repeat(indentationLevel)}}`;
-      } else {
-        result += char;
-      }
-    }
-    if (line[line.length - 1] !== '{' && line[line.length - 1] !== '}') {
-      result += `\n${indentation.repeat(indentationLevel)}`;
-    }
-  }
-
-  return result.trim();
 };
 
-export default formatGraphQLQuery;
+export const checkCode = (code: string) => {
+  let wordIdx = 0;
+  const nestingLevel = 0;
+  const codeBlockType: string[] = [];
+  // const bracketsLevels = {};
+  const words = code.split(/[\n, \t, \s]/);
+
+  // const rootLevel = ['mutation', 'subscription'];
+
+  const checkFragmentPattern = () => {
+    wordIdx += 1;
+    for (let i = 0; i < 3; i++) {
+      switch (i) {
+        case 1:
+          if (!words[wordIdx].match(/[A-Za-z0-9_]/g)) {
+            // console.log('error');
+          }
+      }
+    }
+  };
+
+  // const displayError = (word: string) => {
+  //   // console.log(word, div.current!.innerText);
+  //   div.current!.innerHTML = div.current!.innerHTML.replace(
+  //     `${word}`,
+  //     `<b>${word}</b>`,
+  //   );
+  //   // console.log('HTML', div.current!.innerHTML);
+  // };
+
+  const wordCheckOnRootLevel = () => {
+    const word = words[wordIdx].toLowerCase();
+    if (word === '{' || word === 'query') {
+      // console.log('wordCheckOnRootLevel true');
+      codeBlockType.push('query');
+      return;
+    }
+    if (word === 'fragment') {
+      codeBlockType.push('fragment');
+      checkFragmentPattern();
+      return;
+    }
+    // displayError(word);
+  };
+
+  while (wordIdx < words.length) {
+    if (words[wordIdx] === '') {
+      wordIdx += 1;
+      return;
+    }
+    const res = stuckBracketCheck(words[wordIdx]);
+    if (typeof res !== 'string') {
+      words.splice(wordIdx, 1, ...res);
+    }
+    if (nestingLevel === 0) {
+      wordCheckOnRootLevel();
+    }
+    wordIdx += 1;
+    return res;
+  }
+};
+
+/////////////////////
+
+const fixStuckedBrackets = (code: string) => {
+  return code
+    .replaceAll(/(?<=\w){/g, ' {')
+    .replaceAll(/}(?=\w)/g, '} ')
+    .replaceAll(/:(?=\w)/g, ': ');
+};
+
+export const prettify = (code: string) => {
+  let indentationLevel = 0;
+  const INDENTATION = '  ';
+  let result = '';
+  code = fixStuckedBrackets(code);
+  const lines = code.split('\n');
+
+  lines.forEach((line) => {
+    line = line.trim();
+    if (line.match(/\S/)) {
+      for (const char of line) {
+        if (char === '{') {
+          result += `${char}\n`;
+          indentationLevel++;
+          result += INDENTATION.repeat(indentationLevel);
+        } else if (char === '}') {
+          indentationLevel--;
+          result +=
+            indentationLevel < 0
+              ? `\n}`
+              : `\n${INDENTATION.repeat(indentationLevel)}}`;
+        } else {
+          result += char;
+        }
+      }
+    }
+  });
+  return result;
+};

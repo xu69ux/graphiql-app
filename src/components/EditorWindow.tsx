@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
+import { checkCode, prettify } from '../utils/prettifying';
 
 import '@styles/EditorWindow.css';
 
@@ -37,6 +38,17 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   }, [code]);
 
   useEffect(() => {
+    console.log(inputCode);
+    const formattedQuery = checkCode(inputCode);
+    console.log(formattedQuery);
+    if (formattedQuery && typeof formattedQuery === 'string') {
+      setInputCode(formattedQuery);
+    } else if (formattedQuery && typeof formattedQuery !== 'string') {
+      setInputCode(formattedQuery.join(' '));
+    }
+  }, [inputCode]);
+
+  useEffect(() => {
     const highlightedQuery = inputCode
       .split(/(\s+|\{|\})/)
       .map((word) => {
@@ -56,9 +68,10 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newCode = e.target.value;
+    checkCode(newCode);
     setInputCode(newCode);
     recalcLines(newCode);
-    if (updateData && e.target.value !== code) {
+    if (updateData && newCode !== code) {
       updateData(newCode);
     }
   };

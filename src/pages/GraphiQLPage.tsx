@@ -10,9 +10,9 @@ import {
   IoSparklesOutline,
   IoRemoveCircle,
 } from 'react-icons/io5';
+import { prettify } from '../utils/prettifying';
 
 import '@styles/GraphiQLPage.css';
-import formatGraphQLQuery from '../utils/prettifying';
 
 interface IEditorTab {
   id: number;
@@ -92,7 +92,7 @@ export const GraphiQLPage = () => {
     if (!activeTabTemp.code) {
       return;
     }
-    const formattedQuery = formatGraphQLQuery(activeTabTemp.code);
+    const formattedQuery = prettify(activeTabTemp.code);
     updateData(formattedQuery);
   };
 
