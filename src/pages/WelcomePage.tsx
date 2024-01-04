@@ -73,6 +73,14 @@ const WelcomePage = () => {
         <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
           {translations[language]?.welcomeDescription4}
         </p>
+        <p className={`${isScrolled ? 'change-color' : 'default-color'}`}>
+          {translations[language]?.thanxSlava1}
+          <br />
+          <a href='https://github.com/SlavaJSFE' className='slava-git'>
+            {translations[language]?.ViachaslauShpileuski}
+          </a>
+          <span>{translations[language]?.thanxSlava2}</span>
+        </p>
       </div>
     </div>
   );

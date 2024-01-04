@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { translations } from '../contexts/translations';
-import { IoFileTrayFullOutline } from 'react-icons/io5';
+import { IoFileTrayFullOutline, IoSettingsSharp } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
+import { Modal } from '../components';
 import { IEditorTab } from '../types';
 import useLanguage from '../hooks/useLanguage';
 
@@ -26,8 +28,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setIsDocumentationOpen,
 }) => {
   const { language } = useLanguage();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toggleDocumentation = () => {
     setIsDocumentationOpen(!isDocumentationOpen);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const addTab = () => {
@@ -95,6 +107,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         title={translations[language]?.titleDeleteTabs}
         onClick={deleteAllTabs}
       />
+      <IoSettingsSharp className='sidebar-icon settings' onClick={openModal} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

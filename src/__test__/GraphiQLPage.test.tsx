@@ -53,4 +53,3 @@ describe('GraphiQLPage page', () => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
   });
-});

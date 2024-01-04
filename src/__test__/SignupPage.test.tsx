@@ -20,7 +20,6 @@ describe('SignUpPage component', () => {
     await act(async () => {
       render(<SignupPage />);
     });
-
     expect(screen.getByPlaceholderText(/Username/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
