@@ -33,7 +33,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
       }
     };
 
-    const handleEndpointClean = () => {
+    const handleCleanEndpoint = () => {
       setEndpoint('');
     };
 
@@ -84,7 +84,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
         <IconButton
           className='clean-endpoint'
           title={translations[language]?.titleEndpointClean}
-          onClick={handleEndpointClean}
+          onClick={handleCleanEndpoint}
         >
           <IoCloseOutline />
         </IconButton>
