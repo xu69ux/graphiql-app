@@ -14,6 +14,7 @@ export { KindComponent } from './Documentation/components/KindComponent';
 export { PasswordValidIndicator } from './PasswordValidIndicator';
 export { FallBackUI } from './FallBackUI';
 export { Endpoint } from './Endpoint';
+export { IconButton } from './IconButton';
 export { Search } from './Documentation/components/Search';
 export { Sidebar } from './Sidebar';
 export { Logo } from './Header/components/Logo';

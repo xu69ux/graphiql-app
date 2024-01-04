@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// const BASE_URL = 'https://rickandmortyapi.graphcdn.app/';
-
 export const graphqlRequest = async (
   url: string,
   query: string,
