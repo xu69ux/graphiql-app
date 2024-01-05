@@ -26,6 +26,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 
   useEffect(() => {
     recalcLines(code);
+    highlightCode(code);
   }, [code]);
 
   const recalcLines = (code: string) => {
@@ -50,9 +51,9 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     textarea.current!.selectionEnd = start + indent;
   };
 
-  const highlightCode = () => {
-    const highlightedQuery = textarea
-      .current!.value.split(/(\s+|\{|\})/)
+  const highlightCode = (code: string) => {
+    const highlightedQuery = code
+      .split(/(\s+|\{|\})/)
       .map((word) => {
         if (braces.includes(word.trim())) {
           return `<span class="braces">${word}</span>`;
@@ -112,12 +113,12 @@ export const EditorWindow: FC<IEditWindowProps> = ({
       )}\n${INDENTATION.repeat(indentationLevel)}}`;
       insertIntoString(start, end, text, text.length - indentationLevel - 2);
     }
-    highlightCode();
+    highlightCode(textarea.current!.value);
     recalcLines(textarea.current!.value);
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    highlightCode();
+    highlightCode(e.target.value);
     recalcLines(e.target.value);
   };
 
@@ -136,7 +137,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
           e.stopPropagation();
           const formatedCode = prettify(e.target.value);
           e.target.value = formatedCode;
-          highlightCode();
+          highlightCode(e.target.value);
           if (updateData && e.target.value !== code) {
             updateData(formatedCode);
           }

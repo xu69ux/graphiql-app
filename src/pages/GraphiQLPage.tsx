@@ -103,9 +103,10 @@ export const GraphiQLPage = () => {
     if (!activeTabTemp.code) {
       return;
     }
-    const clearQuery = '';
-    updateData(clearQuery);
+    updateData('');
   };
+
+  console.log('render page');
 
   return (
     <div className='container'>
