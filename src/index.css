@@ -6,15 +6,15 @@
 
 :root {
   --dark: #191e29;
-  --light: #ffffff;
+  --light: #f2f2f2;
   --grey: #696e79;
   --green: #01c38d;
   --blue: #132d46;
   --error: #e8153c;
   --extra: #e45c01;
-  --purple: #6c2e9c;
+  --purple: #cea1f1;
   --teal: #2e9c9c;
-  --yellow: #e4c901;
+  --yellow: #ffec5b;
   --light-blue: #2e5c9c;
   font-family: 'JetBrains Mono', monospace;
 }

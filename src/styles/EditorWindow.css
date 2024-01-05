@@ -50,7 +50,7 @@
   top: 0;
   z-index: 1;
   padding-left: 2.5rem;
-  color: var(--yellow);
+  color: var(--light);
 }
 
 .keyword,
@@ -61,9 +61,10 @@
 }
 
 .keyword {
-  color: var(--purple);
+  color: var(--yellow);
 }
 
 .braces {
-  color: var(--light-blue);
+  color: var(--green);
+  font-weight: bold;
 }
