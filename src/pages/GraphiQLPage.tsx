@@ -3,13 +3,19 @@ import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
 import { graphqlRequest } from '../utils/graphqlApi';
 import { translations } from '../contexts/translations';
 import {
+  IoChevronUpOutline,
+  IoCaretForward,
+  IoSparklesOutline,
+  IoRemoveCircle,
+} from 'react-icons/io5';
+import { prettify } from '../utils/prettifying';
+import {
   EditorWindow,
   EditorTab,
   Documentation,
   Endpoint,
   Sidebar,
 } from '../components';
-import { IoChevronUpOutline, IoCaretForward } from 'react-icons/io5';
 import { GraphQLSchema, IEditorTab } from '../types';
 import useLanguage from '../hooks/useLanguage';
 
@@ -111,6 +117,29 @@ const GraphiQLPage = () => {
     );
   };
 
+  const handleFormatCode = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (!activeTabTemp.code) {
+      return;
+    }
+    const formattedQuery = prettify(activeTabTemp.code);
+    updateData(formattedQuery);
+  };
+
+  const handleClearCode = () => {
+    const activeTabTemp: IEditorTab = tabs.find(
+      (item) => item.id === activeTab,
+    )!;
+    if (!activeTabTemp.code) {
+      return;
+    }
+    updateData('');
+  };
+
+  console.log('render page');
+
   return (
     <div className='container'>
       <Sidebar
@@ -159,6 +188,18 @@ const GraphiQLPage = () => {
                     />
                   ),
               )}
+              <div className='editor-toolbar'>
+                <IoSparklesOutline
+                  className='sidebar-icon add'
+                  onClick={handleFormatCode}
+                  title='prettify query'
+                />
+                <IoRemoveCircle
+                  className='sidebar-icon add'
+                  title='clear text area'
+                  onClick={handleClearCode}
+                />
+              </div>
             </div>
             <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
               <div className='variables'>
