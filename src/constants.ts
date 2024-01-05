@@ -1,3 +1,18 @@
+export const NO_DESCRIPTION_MESSAGE =
+  'Sorry, there is no description here. The API developers have not provided one.';
+
+export const NO_FIELDS_MESSAGE = 'This type has no fields';
+
+export const NO_SCHEMA_MESSAGE = 'No schema available.';
+
+export const GRAPHQL_ENDPOINTS = [
+  'rickandmortyapi.graphcdn.app',
+  'spacex-production.up.railway.app',
+  'swapi-graphql.netlify.app/.netlify/functions/index',
+  'beta.pokeapi.co/graphql/v1beta',
+  'countries.trevorblades.com/graphql',
+];
+
 export const MEMES_URL = [
   'https://colinhacks.com/graphql_grave.jpg',
   'https://1.bp.blogspot.com/-OhRLnerbm0M/YZDsgdY6k2I/AAAAAAAARCg/kWejTW8xiuca4nwODjSvz2Dyt8Es-IiMACLcBGAsYHQ/s528/graphql-statuscode.png',
@@ -9,7 +24,6 @@ export const MEMES_URL = [
   'https://images.ctfassets.net/lpvian6u6i39/5Cjg11vLA7TtBltK2eZRgC/a7796e4116aa02c7fab44bcf41d5bb74/632814946fdd0783ccd383fe_What_you_really_want_is_GraphQL.jpeg',
   'https://pbs.twimg.com/media/DgsXLk_X4AEKiJJ.jpg',
   'https://res.cloudinary.com/practicaldev/image/fetch/s--Mj-l1XJQ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/810rx3aflyr74a87hkgt.png',
-  'https://www.meme-arsenal.com/memes/105a259367db6e03d4c5b0c50155ba17.jpg',
 ];
 
 export const GRAPHQLWORDS = [
@@ -38,3 +52,105 @@ export const GRAPHQLWORDS = [
 ];
 
 export const INDENTATION = '\t';
+
+export const QUERY_FOR_SHEMA_FETCHING = `
+  fragment FullType on __Type {
+    kind
+    name
+    fields(includeDeprecated: true) {
+      name
+      description
+      args {
+        ...InputValue
+      }
+      type {
+        ...TypeRef
+      }
+      isDeprecated
+      deprecationReason
+    }
+    inputFields {
+      ...InputValue
+    }
+    interfaces {
+      ...TypeRef
+    }
+    enumValues(includeDeprecated: true) {
+      name
+      description
+      isDeprecated
+      deprecationReason
+    }
+    possibleTypes {
+      ...TypeRef
+    }
+  }
+  fragment InputValue on __InputValue {
+    name
+    description
+    type {
+      ...TypeRef
+    }
+    defaultValue
+  }
+  fragment TypeRef on __Type {
+    kind
+    name
+    description
+    ofType {
+      kind
+      name
+      description
+      ofType {
+        kind
+        name
+        description
+        ofType {
+          kind
+          name
+          description
+          ofType {
+            kind
+            name
+            description
+            ofType {
+              kind
+              name
+              description
+              ofType {
+                kind
+                name
+                description
+                ofType {
+                  kind
+                  name
+                  description
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  query IntrospectionQuery {
+    __schema {
+      queryType {
+        name
+      }
+      mutationType {
+        name
+      }
+      types {
+        ...FullType
+      }
+      directives {
+        name
+        description
+        locations
+        args {
+          ...InputValue
+        }
+      }
+    }
+  }`;

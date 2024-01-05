@@ -1,31 +1,32 @@
-import { useContext } from 'react';
 import { translations } from '../contexts/translations';
-import { LanguageContext } from '../contexts/LanguageContext';
 import { PiGithubLogoFill } from 'react-icons/pi';
 import courseLogo from '../assets/rs_school_js.svg';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Footer.css';
 
 export const Footer = () => {
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const { language } = useLanguage();
 
   return (
-    <footer className='footer'>
-      <a href='https://rs.school/react/' className='course-link'>
-        <img src={courseLogo} alt='rs school logo' className='course-logo' />
-      </a>
-      <p className='footer-text'>
-        {translations[language]?.madeWith} <span>❤️</span>{' '}
-        {translations[language]?.by}{' '}
-        <a className='repo-link' href='https://github.com/xu69ux/graphiql-app'>
-          <b>JS do IT</b>
+    <footer className='footer' data-testid='footer'>
+      <div className='footer-course'>
+        <a href='https://rs.school/react/' className='course-link'>
+          <img src={courseLogo} alt='rs school logo' className='course-logo' />
         </a>
-        , 2023
-      </p>
+      </div>
+      <div className='footer-text'>
+        <div className='made-with'>
+          {translations[language]?.madeWith} <span>❤️</span>{' '}
+          <a
+            className='repo-link'
+            href='https://github.com/xu69ux/graphiql-app'
+          >
+            {translations[language]?.by} <b>JS do IT,</b>
+          </a>
+          <div className='year'>2023</div>
+        </div>
+      </div>
       <div className='footer-icons'>
         <a
           href='https://github.com/xu69ux'
@@ -33,6 +34,7 @@ export const Footer = () => {
           data-tooltip='xu'
           tabIndex={0}
           target='_blank'
+          data-testid='xu-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />
@@ -44,6 +46,7 @@ export const Footer = () => {
           data-tooltip='dbox7'
           tabIndex={0}
           target='_blank'
+          data-testid='dbox7-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />
@@ -55,6 +58,7 @@ export const Footer = () => {
           data-tooltip='gekko'
           tabIndex={0}
           target='_blank'
+          data-testid='gekko-link'
         >
           <div className='iconSVG'>
             <PiGithubLogoFill />

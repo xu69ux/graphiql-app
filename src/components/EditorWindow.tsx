@@ -28,7 +28,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     recalcLines(code);
   }, [code]);
 
-  const recalcLines = (code: string) => {
+  const recalculateLines = (code: string) => {
     const numLines = code.split('\n').length;
     lines.current!.innerText = Array.from(
       { length: numLines },

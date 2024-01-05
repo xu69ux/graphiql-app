@@ -1,0 +1,65 @@
+.tab {
+  margin: 1.5rem 0 0.8rem 2rem;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--green);
+}
+
+.tab-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 0.8rem;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--green);
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-title.active {
+  border: 0.01rem solid var(--green);
+  background-color: var(--green);
+  color: var(--dark);
+  cursor: default;
+  font-weight: 600;
+}
+
+.tab-title-input {
+  all: inherit;
+  border: none;
+  background-color: transparent;
+  width: 7rem;
+  margin: 0;
+}
+
+.tab-title.active .tab-close {
+  color: var(--dark);
+}
+
+.tab-title.active .tab-title-input {
+  color: var(--dark);
+}
+
+.tab-close {
+  color: var(--light);
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-close:hover {
+  transform: scale(1.3);
+}
+
+.tab-close.disabled {
+  opacity: 0.5;
+}
+
+.tab-close.disabled:hover {
+  transform: none;
+  cursor: default;
+}
