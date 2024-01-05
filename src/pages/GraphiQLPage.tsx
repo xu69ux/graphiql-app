@@ -201,28 +201,6 @@ const GraphiQLPage = () => {
                 />
               </div>
             </div>
-            {/* <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-              <div className='variables'>
-                variables
-                {isFooterOpen && (
-                  <EditorWindow
-                    code={variables}
-                    updateData={(data: string) => setVariables(data)}
-                  />
-                )}
-              </div>
-              <div className='tab-container'>
-                {tabs.map(
-                  (tab) =>
-                    tab.id === activeTab && (
-                      <EditorWindow
-                        key={tab.id}
-                        code={tab.code}
-                        updateData={updateData}
-                      />
-                    ),
-                )}
-              </div> */}
             <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
               <div className='variables'>
                 variables

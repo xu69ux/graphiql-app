@@ -27,6 +27,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   useEffect(() => {
     recalculateLines(code);
     highlightCode(code);
+    textarea.current!.value = code;
   }, [code]);
 
   const recalculateLines = (code: string) => {
