@@ -30,6 +30,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 
   useEffect(() => {
     recalculateLines(code);
+    textarea.current!.value = code;
   }, [code]);
 
   return (
@@ -39,7 +40,6 @@ export const EditorWindow: FC<IEditWindowProps> = ({
         className='code'
         ref={textarea}
         onChange={handleChange}
-        defaultValue={code}
         onBlur={(e) => {
           e.stopPropagation();
           if (updateData && e.target.value !== code) {

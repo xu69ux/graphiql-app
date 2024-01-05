@@ -37,12 +37,11 @@
 
 .editor-footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-top: 0.5px solid var(--green);
   border-radius: 0%;
-  height: 6rem;
+  height: 3rem;
   width: 100%;
-  padding: 0.5rem;
   color: var(--green);
   overflow: hidden;
 }
@@ -51,10 +50,38 @@
   height: 25rem;
 }
 
+.editor-footer__tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+
+.editor-footer.open .editor-footer__tabs {
+  border-bottom: 0.5px solid var(--green);
+}
+
+.tabs_wrap {
+  display: flex;
+  gap: 3rem;
+}
+
+.editor-footer__tab {
+  cursor: pointer;
+}
+
+.editor-footer__tab.checked {
+  font-weight: 600;
+}
+
+.editor-footer__editor {
+  width: 100%;
+  height: 100%;
+}
+
 .editor-footer-icon.arrow {
   color: var(--green);
   font-size: 1.5rem;
-  margin-bottom: 2rem;
   margin-left: auto;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
