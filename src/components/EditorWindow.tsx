@@ -1,5 +1,6 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import { checkCode, prettify } from '../utils/prettifying';
+import { ChangeEvent, FC, useEffect, useRef, KeyboardEvent } from 'react';
+import { prettify } from '../utils/prettifying';
+import { INDENTATION } from '../constants';
 
 import '@styles/EditorWindow.css';
 
@@ -19,8 +20,13 @@ export const EditorWindow: FC<IEditWindowProps> = ({
 }) => {
   const lines = useRef<HTMLPreElement>(null);
   const textarea = useRef<HTMLTextAreaElement>(null);
-  const [inputCode, setInputCode] = useState(code);
-  const [highlightedCode, setHighlightedCode] = useState('');
+  const highlightedCode = useRef<HTMLDivElement>(null);
+
+  const pressed = new Set();
+
+  useEffect(() => {
+    recalcLines(code);
+  }, [code]);
 
   const recalcLines = (code: string) => {
     const numLines = code.split('\n').length;
@@ -29,28 +35,24 @@ export const EditorWindow: FC<IEditWindowProps> = ({
       (_, i) => i + 1,
     ).join('\n');
   };
-  useEffect(() => {
-    setInputCode(code);
-  }, [code]);
 
-  useEffect(() => {
-    recalcLines(code);
-  }, [code]);
+  const insertIntoString = (
+    start: number,
+    end: number,
+    text: string,
+    indent: number = text.length,
+  ) => {
+    textarea.current!.value =
+      textarea.current!.value.substring(0, start) +
+      text +
+      textarea.current!.value.substring(end);
+    textarea.current!.selectionStart = start + indent;
+    textarea.current!.selectionEnd = start + indent;
+  };
 
-  useEffect(() => {
-    console.log(inputCode);
-    const formattedQuery = checkCode(inputCode);
-    console.log(formattedQuery);
-    if (formattedQuery && typeof formattedQuery === 'string') {
-      setInputCode(formattedQuery);
-    } else if (formattedQuery && typeof formattedQuery !== 'string') {
-      setInputCode(formattedQuery.join(' '));
-    }
-  }, [inputCode]);
-
-  useEffect(() => {
-    const highlightedQuery = inputCode
-      .split(/(\s+|\{|\})/)
+  const highlightCode = () => {
+    const highlightedQuery = textarea
+      .current!.value.split(/(\s+|\{|\})/)
       .map((word) => {
         if (braces.includes(word.trim())) {
           return `<span class="braces">${word}</span>`;
@@ -63,18 +65,63 @@ export const EditorWindow: FC<IEditWindowProps> = ({
       })
       .join('');
 
-    setHighlightedCode(highlightedQuery);
-  }, [inputCode]);
+    highlightedCode.current!.innerHTML = highlightedQuery;
+  };
+
+  const getIndentationLevel = () => {
+    let indentationLevel = 0;
+    const selectionIndex = Math.max(
+      textarea.current!.selectionStart,
+      textarea.current!.selectionEnd,
+    );
+    const beforeSelectionText = textarea.current!.value.substring(
+      0,
+      selectionIndex,
+    );
+    for (const char of beforeSelectionText) {
+      if (char === '{') {
+        indentationLevel++;
+      }
+      if (char === '}') {
+        indentationLevel--;
+      }
+    }
+    return indentationLevel;
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    const start = textarea.current!.selectionStart;
+    const end = textarea.current!.selectionEnd;
+    const indentationLevel = getIndentationLevel();
+    pressed.add(e.code);
+    if (e.code === 'Enter') {
+      e.preventDefault();
+      insertIntoString(start, end, `\n${INDENTATION.repeat(indentationLevel)}`);
+    }
+    if (e.code === 'Tab') {
+      e.preventDefault();
+      insertIntoString(start, end, INDENTATION);
+    }
+    if (
+      (pressed.has('ShiftLeft') || pressed.has('ShiftRight')) &&
+      pressed.has('BracketLeft')
+    ) {
+      e.preventDefault();
+      const text = `{\n${INDENTATION.repeat(
+        indentationLevel + 1,
+      )}\n${INDENTATION.repeat(indentationLevel)}}`;
+      insertIntoString(start, end, text, text.length - indentationLevel - 2);
+    }
+    highlightCode();
+    recalcLines(textarea.current!.value);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newCode = e.target.value;
-    checkCode(newCode);
-    setInputCode(newCode);
-    recalcLines(newCode);
-    if (updateData && newCode !== code) {
-      updateData(newCode);
-    }
+    highlightCode();
+    recalcLines(e.target.value);
   };
+
+  console.log('render');
 
   return (
     <div className='code-container'>
@@ -83,31 +130,20 @@ export const EditorWindow: FC<IEditWindowProps> = ({
         className='code'
         ref={textarea}
         onChange={handleChange}
-        value={inputCode}
-        onKeyDown={(e) => {
-          if (e.key === 'Tab') {
-            e.preventDefault();
-            const start = e.currentTarget.selectionStart;
-            const end = e.currentTarget.selectionEnd;
-            setInputCode(
-              inputCode.substring(0, start) + '    ' + inputCode.substring(end),
-            );
-            e.currentTarget.selectionStart = e.currentTarget.selectionEnd =
-              start + 4;
-          }
-        }}
+        onKeyDown={handleKeyDown}
+        onKeyUp={(e) => pressed.delete(e.code)}
         onBlur={(e) => {
           e.stopPropagation();
+          const formatedCode = prettify(e.target.value);
+          e.target.value = formatedCode;
+          highlightCode();
           if (updateData && e.target.value !== code) {
-            updateData(e.target.value);
+            updateData(formatedCode);
           }
         }}
         disabled={disabled}
       />
-      <div
-        className='highlighted-code'
-        dangerouslySetInnerHTML={{ __html: highlightedCode }}
-      />
+      <div className='highlighted-code' ref={highlightedCode} />
     </div>
   );
 };

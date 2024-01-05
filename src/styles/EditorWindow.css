@@ -40,6 +40,10 @@
   padding-left: 0.5rem;
 }
 
+.code {
+  tab-size: 2;
+}
+
 .highlighted-code {
   position: absolute;
   left: 0;

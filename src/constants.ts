@@ -36,3 +36,5 @@ export const GRAPHQLWORDS = [
     description: 'Connection to a list of species in a film.',
   },
 ];
+
+export const INDENTATION = '\t';
