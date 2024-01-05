@@ -1,37 +1,37 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthForm } from '../components';
-import { useEffect, useContext } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../utils/firebase';
-import { LanguageContext } from '../contexts/LanguageContext';
+import { FormLogIn } from '../components';
 import { translations } from '../contexts/translations';
+import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Auth.css';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
-  const languageContext = useContext(LanguageContext) || {
-    language: 'eng',
-    setLanguage: () => {},
-  };
-  const { language } = languageContext;
+  const userIs = sessionStorage.getItem('userName') !== null;
+  const { language } = useLanguage();
 
   useEffect(() => {
-    if (user) return navigate('/graphiql');
-  }, [user]);
+    if (userIs) navigate('/graphiql');
+  }, [userIs, navigate]);
 
   return (
-    <div className='auth-container'>
-      <h1 className='auth-title'>{translations?.[language]?.loginTitle}</h1>
-      <AuthForm mode='login' />
-      <p className='no-account'>
-        {translations?.[language]?.noAccount}
-        <Link to='/signup' className='signup-link'>
-          {translations?.[language]?.signup}
-        </Link>
-        !
-      </p>
-    </div>
+    !userIs && (
+      <div className='auth-container' data-testid='login-page'>
+        <h1 className='auth-title' data-testid='login-title'>
+          {translations?.[language]?.loginTitle}
+        </h1>
+        <FormLogIn />
+        <p className='no-account'>
+          {translations?.[language]?.noAccount}
+          <Link to='/signup' className='signup-link' data-testid='signup-link'>
+            {translations?.[language]?.signup}
+          </Link>
+          !
+        </p>
+      </div>
+    )
   );
 };
+
+export default LoginPage;

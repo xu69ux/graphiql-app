@@ -25,11 +25,11 @@ export const EditorWindow: FC<IEditWindowProps> = ({
   const pressed = new Set();
 
   useEffect(() => {
-    recalcLines(code);
+    recalculateLines(code);
     highlightCode(code);
   }, [code]);
 
-  const recalcLines = (code: string) => {
+  const recalculateLines = (code: string) => {
     const numLines = code.split('\n').length;
     lines.current!.innerText = Array.from(
       { length: numLines },
@@ -114,12 +114,12 @@ export const EditorWindow: FC<IEditWindowProps> = ({
       insertIntoString(start, end, text, text.length - indentationLevel - 2);
     }
     highlightCode(textarea.current!.value);
-    recalcLines(textarea.current!.value);
+    recalculateLines(textarea.current!.value);
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     highlightCode(e.target.value);
-    recalcLines(e.target.value);
+    recalculateLines(e.target.value);
   };
 
   console.log('render');

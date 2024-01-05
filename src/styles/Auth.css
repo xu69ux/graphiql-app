@@ -24,3 +24,25 @@
   color: var(--green);
   border-bottom: 1px solid var(--light);
 }
+
+@media screen and (max-width: 600px) {
+  .auth-container {
+    height: 40rem;
+  }
+
+  .auth-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .auth-container {
+    height: 35rem;
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}

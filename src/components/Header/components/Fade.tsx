@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import '@styles/Fade.css';
 
 export const Fade = ({ show, children }) => {
   const [shouldRender, setRender] = useState(false);

@@ -3,29 +3,46 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50rem;
+  min-height: calc(100vh - 3.75rem);
+  padding: 1.25rem;
+  text-align: center;
   color: var(--light);
   font-family: 'Courier New', Courier, monospace;
 }
 
 .notfound-container h1 {
-  text-align: center;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+  width: 90%;
 }
 
 .notfound-container h2 {
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  width: 70%;
 }
 
-.meme-container {
-  margin-top: 2rem;
-}
-
-.notfound-link {
+.notfound-container .notfound-link {
   color: var(--green);
-  transition: all 0.2s ease-in-out;
+  text-decoration: none;
 }
 
-.notfound-link:hover {
-  color: var(--extra);
+.notfound-container .meme-container {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.notfound-container .meme-container img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .notfound-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .notfound-container h2 {
+    font-size: 1.2rem;
+  }
 }

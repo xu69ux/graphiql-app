@@ -19,6 +19,30 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+body[data-theme='crazy'],
+body[data-theme='сумасшедший'],
+body[data-theme='божевільний'] {
+  --dark: #333333;
+  --light: #f5f5f5;
+  --grey: #cccccc;
+  --green: #4caf50;
+  --blue: #3f51b5;
+  --error: #f44336;
+  --extra: #ff9800;
+}
+
+body[data-theme='dark'],
+body[data-theme='тёмный'],
+body[data-theme='темний'] {
+  --dark: #191e29;
+  --light: #ffffff;
+  --grey: #696e79;
+  --green: #01c38d;
+  --blue: #132d46;
+  --error: #e8153c;
+  --extra: #e45c01;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -34,4 +58,14 @@ code {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.btn {
+  border: 1px solid var(--green);
+  color: var(--green);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
 }
