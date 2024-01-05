@@ -86,20 +86,12 @@ export const FormSignUp = () => {
   const showSubmitMessage = () => {
     if (!isValid) {
       showMessage(msg.EMPTY_FIELDS_SUBMIT);
-      return false;
+      return;
     }
-    return true;
   };
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (showSubmitMessage()) {
-          handleSubmit(onSubmit)();
-        }
-      }}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='signup'>
         <div className='input-wrapper'>
           <input
@@ -144,6 +136,7 @@ export const FormSignUp = () => {
           type='submit'
           disabled={isSubmitting}
           title={translations?.[language]?.signupTitle}
+          onClick={showSubmitMessage}
         />
       </div>
     </form>

@@ -77,23 +77,16 @@ export const FormLogIn = () => {
   };
 
   const password = watch('password', '');
+
   const showSubmitMessage = () => {
     if (!isValid) {
       showMessage(msg.EMPTY_FIELDS_SUBMIT);
-      return false;
+      return;
     }
-    return true;
   };
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (showSubmitMessage()) {
-          handleSubmit(onSubmit)();
-        }
-      }}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='login'>
         <div className='input-wrapper'>
           <input
@@ -129,6 +122,7 @@ export const FormLogIn = () => {
           disabled={isSubmitting}
           title={translations?.[language]?.loginTitle}
           data-testid='login-button'
+          onClick={showSubmitMessage}
         />
       </div>
     </form>
