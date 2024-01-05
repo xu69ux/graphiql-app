@@ -96,17 +96,15 @@ const GraphiQLPage = () => {
   };
 
   const dragStart = (e: DragEvent) => {
-    if (isFooterOpen) {
-      setInitialPos(e.clientY);
-      setInitialSize(tabsDragable.current!.offsetHeight);
-    }
+    setInitialPos(e.clientY);
+    setInitialSize(tabsDragable.current!.offsetHeight);
   };
 
   const resize = (e: DragEvent) => {
     console.log(initialSize, e.clientY, initialPos);
 
     footer.current!.style.height = `${
-      initialSize! - e.clientY + initialPos!
+      initialSize! + e.clientY - initialPos!
     }px`;
   };
 
@@ -193,7 +191,8 @@ const GraphiQLPage = () => {
                 ref={tabsDragable}
                 onDragStart={dragStart}
                 onDrag={resize}
-                draggable
+                draggable={isFooterOpen}
+                onClick={(e) => console.log(initialSize, e.clientY, initialPos)}
               >
                 <div className='tabs_wrap'>
                   <span
