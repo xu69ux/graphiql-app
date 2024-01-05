@@ -24,6 +24,10 @@ const useMsg = () => {
       body: translations?.[language]?.localStorageClearSuccessBody,
       error: false,
     },
+    EMPTY_FIELDS_SUBMIT: {
+      body: translations?.[language]?.emptyFieldsSubmit,
+      error: false,
+    },
   };
   return msg;
 };

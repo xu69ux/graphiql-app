@@ -74,6 +74,7 @@ export const translations = {
     welcomeDescription4:
       "Wishing you vibrant ideas, effective teamwork, and the joy of creating something extraordinary! Don't forget about inspiration and creativity in every line of code. Best of luck, JS do IT!",
     yesAccount: 'Have an account? Then, ',
+    emptyFieldsSubmit: 'Please, complete the fields before, submiting the form',
   },
   rus: {
     by: '',
@@ -153,6 +154,8 @@ export const translations = {
     welcomeDescription4:
       'Желаем вам ярких идей, эффективной работы в команде и удовольствия от создания чего-то удивительного! Не забывайте о вдохновении и креативности в каждой строчке кода. Удачи, JS do IT!',
     yesAccount: 'Есть аккаунт? Тогда, ',
+    emptyFieldsSubmit:
+      'Прежде чем подтверждать отправку формы, пожалуйста, заполните поля',
   },
   ukr: {
     by: '',
@@ -230,5 +233,7 @@ export const translations = {
     welcomeDescription4:
       'Бажаємо вам яскравих ідей, ефективної роботи в команді та задоволення від створення чогось неймовірного! Не забувайте про натхнення та креативність в кожному рядку коду. Удачі, JS do IT!',
     yesAccount: 'Є аккаунт? Тоді, ',
+    emptyFieldsSubmit:
+      'Перш ніж підтверджувати форму, будь ласка, заповніть поля',
   },
 };
