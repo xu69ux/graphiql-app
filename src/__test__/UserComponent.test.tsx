@@ -1,5 +1,5 @@
 import { render, fireEvent } from './test-utils';
-import { UserComponent } from '../components';
+import { UserComponent } from '@components/index';
 
 describe('UserComponent', () => {
   it('calls logout function when logout button is clicked', () => {

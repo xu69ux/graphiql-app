@@ -1,5 +1,5 @@
 import { act, render, screen } from './test-utils';
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '@pages/LoginPage';
 
 describe('LoginPage component', () => {
   test('renders correctly', async () => {

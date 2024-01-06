@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, KeyboardEvent } from 'react';
-import { prettify } from '../utils/prettifying';
-import { INDENTATION } from '../constants';
+import { prettify } from '@utils/prettifying';
+import { INDENTATION } from '@constants/constants';
 
 import '@styles/EditorWindow.css';
 
@@ -122,8 +122,6 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     highlightCode(e.target.value);
     recalculateLines(e.target.value);
   };
-
-  console.log('render');
 
   return (
     <div className='code-container'>

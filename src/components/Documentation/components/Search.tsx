@@ -1,8 +1,8 @@
 import { useState, useEffect, ChangeEvent, FC } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
-import { GraphQLSchema } from '../../../types';
-import { translations } from '../../../contexts/translations';
-import useLanguage from '../../../hooks/useLanguage';
+import { GraphQLSchema } from '@appTypes/types';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Search.css';
 

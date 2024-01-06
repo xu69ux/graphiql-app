@@ -1,5 +1,5 @@
 import { render } from './test-utils';
-import { Header } from '../components';
+import { Header } from '@components/index';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 jest.mock('react-firebase-hooks/auth');

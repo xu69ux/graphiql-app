@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { translations } from '../contexts/translations';
-import { IoChevronForward } from 'react-icons/io5';
-import useLanguage from '../hooks/useLanguage';
+import { AnimatedArrows } from '@components/index';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/WelcomePage.css';
 
@@ -32,17 +32,13 @@ const WelcomePage = () => {
 
   return (
     <div className='welcome-container' data-testid='welcome-page'>
-      <h1 className='welcome-title'>
-        Graphi<span>QL</span> IDE
+      <h1 className='welcome-title' data-testid='graphiqlide'>
+        Graphi<span>QL</span>IDE
       </h1>
       <p className='typing-effect'>{translations[language]?.welcome}</p>
       <div className='welcome-auth'>
         <div className='welcome-auth-login'>
-          <div className='login-icon'>
-            <IoChevronForward />
-            <IoChevronForward />
-            <IoChevronForward />
-          </div>
+          <AnimatedArrows />
           <Link to='/login' className='welcome-link'>
             {translations[language]?.login}
           </Link>
@@ -53,11 +49,7 @@ const WelcomePage = () => {
           <Link to='/signup' className='welcome-link'>
             {translations[language]?.signup}
           </Link>
-          <div className='signup-icon'>
-            <IoChevronForward />
-            <IoChevronForward />
-            <IoChevronForward />
-          </div>
+          <AnimatedArrows style={{ transform: 'rotate(180deg)' }} />
         </div>
       </div>
       <div className={`welcome-description ${isScrolled ? '' : 'blur'}`}>

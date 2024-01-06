@@ -21,7 +21,7 @@
   color: var(--extra);
   font-size: inherit;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0.5rem 0 0;
 }
 
 .welcome-auth {
@@ -46,21 +46,6 @@ span {
   font-size: 1rem;
   font-weight: 400;
   margin: 0 0.5rem;
-}
-
-@keyframes colorChange {
-  0% {
-    color: var(--light);
-  }
-  33% {
-    color: var(--green);
-  }
-  66% {
-    color: var(--light);
-  }
-  100% {
-    color: var(--light);
-  }
 }
 
 .login-icon,

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { NO_FIELDS_MESSAGE } from '../../../constants';
-import { GraphQLType, GraphQLField, GraphQLKind } from '../../../types';
+import { NO_FIELDS_MESSAGE } from '@constants/constants';
+import { GraphQLType, GraphQLField, GraphQLKind } from '@appTypes/types';
 
 import '@styles/Documentation.css';
 
@@ -33,7 +33,7 @@ export const TypeComponent: FC<TypeComponentProps> = ({
                   className='kind-name'
                   onClick={() => onKindClick(field.type)}
                 >
-                  {field.type.name}
+                  {field.type.name ? field.type.name : 'No kind name'}
                 </span>
               </div>
             </li>

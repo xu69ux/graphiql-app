@@ -1,4 +1,4 @@
-import { HeaderLink } from '../../../components';
+import { HeaderLink } from '@components/index';
 
 export const NoUserComponent = () => {
   return (

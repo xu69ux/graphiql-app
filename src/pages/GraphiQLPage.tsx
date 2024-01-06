@@ -1,23 +1,25 @@
 import { useState, useCallback, useEffect, DragEvent, useRef } from 'react';
-import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
-import { graphqlRequest } from '../utils/graphqlApi';
-import { translations } from '../contexts/translations';
+import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
+import { graphqlRequest } from '@utils/graphqlApi';
+import { translations } from '@contexts/translations';
 import {
   IoChevronUpOutline,
   IoCaretForward,
   IoSparklesOutline,
   IoRemoveCircle,
 } from 'react-icons/io5';
-import { prettify } from '../utils/prettifying';
+import { prettify } from '@utils/prettifying';
 import {
   EditorWindow,
   EditorTab,
   Documentation,
   Endpoint,
   Sidebar,
-} from '../components';
-import { GraphQLSchema, IEditorTab } from '../types';
-import useLanguage from '../hooks/useLanguage';
+} from '@components/index';
+import { GraphQLSchema, IEditorTab } from '@appTypes/types';
+import useLanguage from '@hooks/useLanguage';
+import useShowMessage from '@hooks/useShowMessage';
+import useMsg from '@hooks/useMsg';
 
 import '@styles/GraphiQLPage.css';
 
@@ -41,6 +43,8 @@ const GraphiQLPage = () => {
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
   const { language } = useLanguage();
+  const showMessage = useShowMessage();
+  const msg = useMsg();
 
   const [initialPos, setInitialPos] = useState<number | null>(null);
   const [initialSize, setInitialSize] = useState<number | null>(null);
@@ -58,14 +62,16 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      setSchema(response.data.data.__schema);
+      console.log(response);
+      setSchema(response.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
     } catch (error) {
       console.error(error);
       setIsFetchSuccessful(false);
+      showMessage(msg.COMMON_ERROR);
     }
-  }, [endpoint, saveEndpoint]);
+  }, [endpoint, msg.COMMON_ERROR, saveEndpoint, showMessage]);
 
   useEffect(() => {
     fetchShema();
@@ -151,12 +157,20 @@ const GraphiQLPage = () => {
       res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
     });
 
-    const result = (
-      await graphqlRequest(endpoint, res, headers ? JSON.parse(headers) : {})
-    ).data;
-    setViewer(
-      JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
-    );
+    try {
+      const result = await graphqlRequest(
+        endpoint,
+        res,
+        headers ? JSON.parse(headers) : {},
+      );
+      setViewer(
+        JSON.stringify(result.data)
+          .replaceAll('{', '{\n')
+          .replaceAll('}', '}\n'),
+      );
+    } catch (error) {
+      showMessage(msg.GRAPHIQL_API_ERROR);
+    }
   };
 
   const handleFormatCode = () => {
@@ -179,8 +193,6 @@ const GraphiQLPage = () => {
     }
     updateData('');
   };
-
-  console.log('render page');
 
   return (
     <div className='container'>
@@ -234,11 +246,11 @@ const GraphiQLPage = () => {
                 <IoSparklesOutline
                   className='sidebar-icon add'
                   onClick={handleFormatCode}
-                  title='prettify query'
+                  title={translations[language]?.titleClearTextArea}
                 />
                 <IoRemoveCircle
                   className='sidebar-icon add'
-                  title='clear text area'
+                  title={translations[language]?.titlePrettify}
                   onClick={handleClearCode}
                 />
               </div>
