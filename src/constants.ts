@@ -1,3 +1,7 @@
+export const PERCENT = 100;
+export const FOOTER_BOTTOM_EDGE = 0.06;
+export const FOOTER_UPPER_EDGE = 5;
+
 export const NO_DESCRIPTION_MESSAGE =
   'Sorry, there is no description here. The API developers have not provided one.';
 

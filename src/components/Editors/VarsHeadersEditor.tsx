@@ -8,6 +8,11 @@ import {
   FC,
 } from 'react';
 import { IoChevronUpOutline } from 'react-icons/io5';
+import {
+  FOOTER_BOTTOM_EDGE,
+  FOOTER_UPPER_EDGE,
+  PERCENT,
+} from '../../constants';
 
 interface VarsHeadersEditorProps {
   headers: string;
@@ -32,7 +37,6 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
   const footer = useRef<HTMLDivElement>(null);
 
   const dragStart = (e: DragEvent) => {
-    console.log('start', e.clientY, tabsDragable.current!.offsetHeight);
     if (e.clientY !== 0) {
       setInitialPos(e.clientY);
     }
@@ -40,30 +44,38 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
   };
 
   const dragEnd = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
-    console.log(coordinate);
-    if (coordinate > 0.06 && coordinate < 5 && isFooterOpen) {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT;
+    if (
+      coordinate > FOOTER_BOTTOM_EDGE &&
+      coordinate < FOOTER_UPPER_EDGE &&
+      isFooterOpen
+    ) {
       footer.current!.style.flex = `${coordinate} 1 0`;
-    } else if (coordinate <= 0.06) {
-      footer.current!.style.flex = `0.06 1 0`;
+    } else if (coordinate <= FOOTER_BOTTOM_EDGE) {
+      footer.current!.style.flex = `${FOOTER_BOTTOM_EDGE} 1 0`;
       setIsFooterOpen(false);
     }
   };
 
   const resize = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
-    console.log(coordinate, -e.clientY, initialPos!, initialSize!);
-    if (coordinate > 0.06 && coordinate < 5 && isFooterOpen) {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT;
+    if (
+      coordinate > FOOTER_BOTTOM_EDGE &&
+      coordinate < FOOTER_UPPER_EDGE &&
+      isFooterOpen
+    ) {
       footer.current!.style.flex = `${coordinate} 1 0`;
-    } else if (coordinate <= 0.06) {
-      footer.current!.style.flex = `0.06 1 0`;
+    } else if (coordinate <= FOOTER_BOTTOM_EDGE) {
+      footer.current!.style.flex = `${FOOTER_BOTTOM_EDGE} 1 0`;
       setIsFooterOpen(false);
     }
   };
 
   const closeFooter = () => {
     setIsFooterOpen(!isFooterOpen);
-    footer.current!.style.flex = !isFooterOpen ? `1 1 0` : `0.06 1 0`;
+    footer.current!.style.flex = !isFooterOpen
+      ? `1 1 0`
+      : `${FOOTER_BOTTOM_EDGE} 1 0`;
   };
 
   return (
