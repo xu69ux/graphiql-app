@@ -9,7 +9,6 @@ interface FieldComponentProps {
 }
 
 export const FieldComponent: FC<FieldComponentProps> = ({ field }) => {
-  console.log('FieldComponent');
   const { name, description } = field;
 
   return (

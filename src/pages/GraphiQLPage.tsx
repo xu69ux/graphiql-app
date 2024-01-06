@@ -150,8 +150,6 @@ const GraphiQLPage = () => {
     updateData('');
   };
 
-  console.log('render page');
-
   return (
     <div className='container'>
       <Sidebar
