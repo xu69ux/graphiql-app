@@ -230,7 +230,6 @@ export const translations = {
     titleLanguage: 'змінити мову',
     titleRemoveTab: 'видалити вкладку',
     titleRunQuery: 'виконати запит',
-    titleRunQuery: 'виконати запит',
     titleSettings: 'налаштування',
 
     tooltipEmail: 'будь ласка, вкажіть будь-яку пошту',
