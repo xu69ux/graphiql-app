@@ -27,3 +27,4 @@ export { NoUserComponent } from './Header/components/NoUserComponent';
 export { PrivateRoute } from './PrivateRoute';
 export { Modal } from './ModalWindow';
 export { QueryEditor } from './Editors/QueryEditor';
+export { VarsHeadersEditor } from './Editors/VarsHeadersEditor';
