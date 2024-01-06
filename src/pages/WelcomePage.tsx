@@ -32,8 +32,8 @@ const WelcomePage = () => {
 
   return (
     <div className='welcome-container' data-testid='welcome-page'>
-      <h1 className='welcome-title'>
-        Graphi<span>QL</span> IDE
+      <h1 className='welcome-title' data-testid='graphiqlide'>
+        Graphi<span>QL</span>IDE
       </h1>
       <p className='typing-effect'>{translations[language]?.welcome}</p>
       <div className='welcome-auth'>

@@ -33,7 +33,7 @@ export const TypeComponent: FC<TypeComponentProps> = ({
                   className='kind-name'
                   onClick={() => onKindClick(field.type)}
                 >
-                  {field.type.name}
+                  {field.type.name ? field.type.name : 'No kind name'}
                 </span>
               </div>
             </li>

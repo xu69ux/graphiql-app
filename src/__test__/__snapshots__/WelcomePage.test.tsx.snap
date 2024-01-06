@@ -8,12 +8,13 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
   >
     <h1
       class="welcome-title"
+      data-testid="graphiqlide"
     >
       Graphi
       <span>
         QL
       </span>
-       IDE
+      IDE
     </h1>
     <p
       class="typing-effect"

@@ -18,20 +18,9 @@ describe('WelcomePage', () => {
   });
 
   it('renders welcome message', () => {
-    const { getByText } = render(<WelcomePage />);
+    const { getByTestId } = render(<WelcomePage />);
 
-    expect(
-      getByText((_, node) => {
-        const hasText = (node: HTMLElement) =>
-          node.textContent === 'GraphiQL IDE';
-        const nodeHasText = hasText(node as HTMLElement);
-        const childrenDontHaveText = Array.from(
-          (node as HTMLElement).children,
-        ).every((child) => !hasText(child as HTMLElement));
-
-        return nodeHasText && childrenDontHaveText;
-      }),
-    ).toBeInTheDocument();
+    expect(getByTestId('graphiqlide')).toBeInTheDocument();
   });
 
   it('renders login and signup links', async () => {

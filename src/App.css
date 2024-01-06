@@ -2,3 +2,9 @@
   min-height: 100vh;
   position: relative;
 }
+
+@media screen and (max-width: 450px) {
+  .app {
+    min-height: 110vh;
+  }
+}

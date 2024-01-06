@@ -55,14 +55,16 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      setSchema(response.data.data.__schema);
+      console.log(response);
+      setSchema(response.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
     } catch (error) {
       console.error(error);
       setIsFetchSuccessful(false);
+      showMessage(msg.COMMON_ERROR);
     }
-  }, [endpoint, saveEndpoint]);
+  }, [endpoint, msg.COMMON_ERROR, saveEndpoint, showMessage]);
 
   useEffect(() => {
     fetchShema();
@@ -150,8 +152,6 @@ const GraphiQLPage = () => {
     updateData('');
   };
 
-  console.log('render page');
-
   return (
     <div className='container'>
       <Sidebar
@@ -204,11 +204,11 @@ const GraphiQLPage = () => {
                 <IoSparklesOutline
                   className='sidebar-icon add'
                   onClick={handleFormatCode}
-                  title='prettify query'
+                  title={translations[language]?.titleClearTextArea}
                 />
                 <IoRemoveCircle
                   className='sidebar-icon add'
-                  title='clear text area'
+                  title={translations[language]?.titlePrettify}
                   onClick={handleClearCode}
                 />
               </div>
