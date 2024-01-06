@@ -17,11 +17,6 @@
   font-size: 1.2rem;
 }
 
-.arrows {
-  display: flex;
-  animation: colorChange 1s infinite;
-}
-
 .input-wrap {
   display: flex;
   align-items: center;

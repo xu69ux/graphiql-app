@@ -1,12 +1,8 @@
 import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
-import { IconButton } from './IconButton';
+import { IconButton, AnimatedArrows } from '../components';
 import { translations } from '../contexts/translations';
 import { GRAPHQL_ENDPOINTS } from '../constants';
-import {
-  IoChevronForward,
-  IoCloseOutline,
-  IoLinkOutline,
-} from 'react-icons/io5';
+import { IoCloseOutline, IoLinkOutline } from 'react-icons/io5';
 import { GoHistory } from 'react-icons/go';
 import useLanguage from '../hooks/useLanguage';
 
@@ -50,11 +46,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
         <label className='endpoint-label' htmlFor='endpoint'>
           Endpoint
         </label>
-        <div className='arrows'>
-          <IoChevronForward />
-          <IoChevronForward />
-          <IoChevronForward />
-        </div>
+        <AnimatedArrows />
         <div className='input-wrap'>
           <span className='http'>https://</span>
           <input

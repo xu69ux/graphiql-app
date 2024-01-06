@@ -26,3 +26,4 @@ export { UserComponent } from './Header/components/UserComponent';
 export { NoUserComponent } from './Header/components/NoUserComponent';
 export { PrivateRoute } from './PrivateRoute';
 export { Modal } from './ModalWindow';
+export { AnimatedArrows } from './AnimatedArrows';
