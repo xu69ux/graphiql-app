@@ -5,11 +5,10 @@
   background: linear-gradient(90deg, var(--dark), var(--blue), var(--dark));
   background-color: var(--dark);
   color: var(--light);
-  height: 5rem;
+  height: 4rem;
   padding: 1.5rem;
   text-align: center;
   font-size: 0.8rem;
-  position: absolute;
   bottom: 0;
   width: 100%;
   z-index: 10;
@@ -26,7 +25,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
   width: 30%;
 }
 
@@ -54,19 +52,25 @@
 }
 
 .course-link {
+  display: flex;
+  align-items: center;
+  height: 3rem;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .course-logo {
   height: 5rem;
+  object-fit: cover;
 }
 
 .iconDiv {
   width: 1.3rem;
-  margin: 1.25rem 0.25rem;
+  margin: 0 0.25rem;
   padding: 0.25rem;
   border-radius: 0.5rem;
   display: inline-flex;
+  align-items: center;
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
@@ -76,6 +80,8 @@
 }
 
 .iconSVG {
+  display: flex;
+  align-items: center;
   font-size: 1rem;
 }
 
@@ -92,11 +98,13 @@
   opacity: 0.9;
 }
 
-.iconDiv::after {
+.iconDiv:hover::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   content: attr(data-tooltip);
-  margin-left: 0.5rem;
   animation: fadeIn 600ms linear forwards;
-  text-align: center;
 }
 
 @keyframes fadeIn {
@@ -104,7 +112,7 @@
     opacity: 0;
   }
   50% {
-    opacity: 0;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
@@ -163,7 +171,6 @@
     margin-top: 1rem;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
     order: 2;
     font-size: 1rem;
   }
@@ -174,7 +181,6 @@
     margin-bottom: 0.5rem;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
     order: 1;
   }
 

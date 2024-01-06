@@ -2,8 +2,9 @@ import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
 import { IconButton, AnimatedArrows } from '@components/index';
 import { translations } from '@contexts/translations';
 import { GRAPHQL_ENDPOINTS } from '@constants/constants';
-import { IoCloseOutline, IoLinkOutline } from 'react-icons/io5';
+import { IoCloseOutline } from 'react-icons/io5';
 import { GoHistory } from 'react-icons/go';
+import { LiaDiceSolid } from 'react-icons/lia';
 import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Endpoint.css';
@@ -66,7 +67,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
           title={translations[language]?.titleEndpointRandom}
           onClick={handleRandomEndpoint}
         >
-          <IoLinkOutline />
+          <LiaDiceSolid />
         </IconButton>
         <IconButton
           className={`history ${isDisabled ? 'disabled' : ''}`}

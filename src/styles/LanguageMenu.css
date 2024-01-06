@@ -17,7 +17,6 @@
 .lang-menu {
   position: relative;
   display: flex;
-  flex-direction: row;
   color: var(--light);
 }
 
@@ -28,7 +27,8 @@
 .lang-dropdown {
   position: absolute;
   display: flex;
-  flex-direction: row;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -44,6 +44,8 @@
 
 .lang-name {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 1rem;
   margin-right: 0.5rem;
 }

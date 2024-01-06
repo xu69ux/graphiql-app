@@ -5,7 +5,6 @@
   align-items: center;
   background-color: var(--blue);
   height: 100%;
-  min-width: 5rem;
   padding: 1rem;
   z-index: 5;
 }

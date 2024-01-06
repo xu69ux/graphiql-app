@@ -22,9 +22,8 @@ export const Footer = () => {
             className='repo-link'
             href='https://github.com/xu69ux/graphiql-app'
           >
-            {translations[language]?.by} <b>JS do IT,</b>
+            {translations[language]?.by} <b>JS do IT</b>
           </a>
-          <div className='year'>2023</div>
         </div>
       </div>
       <div className='footer-icons'>

@@ -26,7 +26,7 @@
 
 .welcome-auth {
   display: flex;
-  flex-direction: row;
+
   align-items: center;
   margin-top: 1rem;
 }
@@ -125,7 +125,7 @@ span {
 .welcome-auth-signup,
 .welcome-auth-login {
   display: flex;
-  flex-direction: row;
+
   align-items: center;
   justify-content: center;
 }

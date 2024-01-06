@@ -1,6 +1,6 @@
 .back-button {
   display: flex;
-  flex-direction: row;
+
   align-items: center;
   margin: 1rem 1rem 0 auto;
   border: none;
