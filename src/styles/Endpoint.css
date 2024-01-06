@@ -61,6 +61,18 @@
   transition: all 0.2s ease-in-out;
 }
 
+.history {
+  font-size: 1.3rem;
+}
+
+.clean-endpoint {
+  font-size: 1.9rem;
+}
+
+.random-endpoint {
+  margin-right: 0.3rem;
+}
+
 .history:hover,
 .random-endpoint:hover,
 .clean-endpoint:hover {

@@ -2,9 +2,12 @@ import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
 import { IconButton } from './IconButton';
 import { translations } from '../contexts/translations';
 import { GRAPHQL_ENDPOINTS } from '../constants';
-import { IoChevronForward, IoCloseOutline } from 'react-icons/io5';
-import { LiaHistorySolid } from 'react-icons/lia';
-import { LuPenLine } from 'react-icons/lu';
+import {
+  IoChevronForward,
+  IoCloseOutline,
+  IoLinkOutline,
+} from 'react-icons/io5';
+import { GoHistory } from 'react-icons/go';
 import useLanguage from '../hooks/useLanguage';
 
 import '@styles/Endpoint.css';
@@ -71,7 +74,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
           title={translations[language]?.titleEndpointRandom}
           onClick={handleRandomEndpoint}
         >
-          <LuPenLine />
+          <IoLinkOutline />
         </IconButton>
         <IconButton
           className={`history ${isDisabled ? 'disabled' : ''}`}
@@ -79,7 +82,7 @@ export const Endpoint: FC<IEndpointProps> = memo(
           onClick={setFromHistory}
           disabled={isDisabled}
         >
-          <LiaHistorySolid />
+          <GoHistory />
         </IconButton>
         <IconButton
           className='clean-endpoint'
