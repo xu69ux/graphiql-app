@@ -14,7 +14,7 @@ export const KindComponent: FC<KindComponentProps> = ({ kind }) => {
   return (
     <section className='docs-container' data-testid='kind-item'>
       <h2 className='docs-title'>
-        {name}: {kind.kind}
+        {name ? name : 'No kind name'}: {kind.kind}
       </h2>
       <p className='docs-description'>
         {description || NO_DESCRIPTION_MESSAGE}
