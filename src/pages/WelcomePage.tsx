@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AnimatedArrows } from '../components';
-import { translations } from '../contexts/translations';
-import useLanguage from '../hooks/useLanguage';
+import { AnimatedArrows } from '@components/index';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/WelcomePage.css';
 

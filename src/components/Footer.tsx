@@ -1,7 +1,7 @@
-import { translations } from '../contexts/translations';
+import { translations } from '@contexts/translations';
 import { PiGithubLogoFill } from 'react-icons/pi';
-import courseLogo from '../assets/rs_school_js.svg';
-import useLanguage from '../hooks/useLanguage';
+import courseLogo from '@assets/rs_school_js.svg';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Footer.css';
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IoChevronForward } from 'react-icons/io5';
-import { GraphQLField, GraphQLType, GraphQLKind } from 'src/types';
+import { GraphQLField, GraphQLType, GraphQLKind } from '@/types/types';
 
 import '@styles/BackButton.css';
 

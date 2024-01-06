@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { BackButton } from '../components';
+import { BackButton } from '@components/index';
 import { IBackButtonProps } from '../components/Documentation/components/BackButton';
 
 const selectedField = {

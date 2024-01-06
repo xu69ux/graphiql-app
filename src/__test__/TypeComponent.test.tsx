@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { TypeComponent } from '../components';
+import { TypeComponent } from '@components/index';
 
 test('renders the TypeComponent and responds to field click events', () => {
   const mockFieldClickHandler = jest.fn();

@@ -1,7 +1,7 @@
 import { useState, FC } from 'react';
 import { translations } from '../../../contexts/translations';
 import { IoEarthOutline } from 'react-icons/io5';
-import { Fade } from '../..';
+import { Fade } from '@components/index';
 import useLanguage from '../../../hooks/useLanguage';
 
 import '@styles/LanguageMenu.css';

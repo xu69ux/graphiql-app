@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { KindComponent } from '../components';
-import { GraphQLKind } from '../types';
+import { KindComponent } from '@components/index';
+import { GraphQLKind } from '@appTypes/types';
 
 test('renders the KindComponent with a description', () => {
   const mockKind: GraphQLKind = {

@@ -1,15 +1,15 @@
-import { auth, registerWithEmailAndPassword } from '../../utils/firebase';
+import { auth, registerWithEmailAndPassword } from '@utils/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '../../utils/validation/schema';
+import { getSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { translations } from '../../contexts/translations';
-import { CustomButton, PasswordValidIndicator } from '../../components';
-import useMsg from '../../hooks/useMsg';
-import useLanguage from '../../hooks/useLanguage';
-import useShowMessage from '../../hooks/useShowMessage';
+import { translations } from '@contexts/translations';
+import { CustomButton, PasswordValidIndicator } from '@components/index';
+import useMsg from '@hooks/useMsg';
+import useLanguage from '@hooks/useLanguage';
+import useShowMessage from '@hooks/useShowMessage';
 
 import '@styles/Form.css';
 

@@ -4,7 +4,7 @@ import {
   MockLanguageProvider,
   setLanguage,
 } from './test-utils';
-import { LanguageMenu } from '../components';
+import { LanguageMenu } from '@components/index';
 
 describe('LanguageMenu', () => {
   it('changes language when language dropdown is clicked', () => {

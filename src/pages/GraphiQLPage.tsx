@@ -1,23 +1,23 @@
 import { useState, useCallback, useEffect } from 'react';
-import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
-import { graphqlRequest } from '../utils/graphqlApi';
-import { translations } from '../contexts/translations';
+import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
+import { graphqlRequest } from '@utils/graphqlApi';
+import { translations } from '@contexts/translations';
 import {
   IoChevronUpOutline,
   IoCaretForward,
   IoSparklesOutline,
   IoRemoveCircle,
 } from 'react-icons/io5';
-import { prettify } from '../utils/prettifying';
+import { prettify } from '@utils/prettifying';
 import {
   EditorWindow,
   EditorTab,
   Documentation,
   Endpoint,
   Sidebar,
-} from '../components';
-import { GraphQLSchema, IEditorTab } from '../types';
-import useLanguage from '../hooks/useLanguage';
+} from '@components/index';
+import { GraphQLSchema, IEditorTab } from '@appTypes/types';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/GraphiQLPage.css';
 

@@ -1,10 +1,10 @@
 import { FC, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
-import { IconButton, AnimatedArrows } from '../components';
-import { translations } from '../contexts/translations';
-import { GRAPHQL_ENDPOINTS } from '../constants';
+import { IconButton, AnimatedArrows } from '@components/index';
+import { translations } from '@contexts/translations';
+import { GRAPHQL_ENDPOINTS } from '@constants/constants';
 import { IoCloseOutline, IoLinkOutline } from 'react-icons/io5';
 import { GoHistory } from 'react-icons/go';
-import useLanguage from '../hooks/useLanguage';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Endpoint.css';
 

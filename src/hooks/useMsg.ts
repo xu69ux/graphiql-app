@@ -1,4 +1,4 @@
-import { translations } from '../contexts/translations';
+import { translations } from '@contexts/translations';
 import useLanguage from './useLanguage';
 
 const useMsg = () => {

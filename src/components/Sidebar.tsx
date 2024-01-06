@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { translations } from '../contexts/translations';
+import { translations } from '@contexts/translations';
 import { IoFileTrayFullOutline, IoSettingsSharp } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
-import { IconButton, Modal } from '../components';
-import { IEditorTab } from '../types';
-import useLanguage from '../hooks/useLanguage';
+import { IconButton, Modal } from '@components/index';
+import { IEditorTab } from '@appTypes/types';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Sidebar.css';
 

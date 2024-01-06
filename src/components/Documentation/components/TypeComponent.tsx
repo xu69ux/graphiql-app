@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { NO_FIELDS_MESSAGE } from '../../../constants';
-import { GraphQLType, GraphQLField, GraphQLKind } from '../../../types';
+import { NO_FIELDS_MESSAGE } from '@constants/constants';
+import { GraphQLType, GraphQLField, GraphQLKind } from '@appTypes/types';
 
 import '@styles/Documentation.css';
 

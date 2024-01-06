@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from './test-utils';
-import GraphiQLPage from '../pages/GraphiQLPage';
+import GraphiQLPage from '@pages/GraphiQLPage';
 import axios from 'axios';
 
 jest.mock('axios');

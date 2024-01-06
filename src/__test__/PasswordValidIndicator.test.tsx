@@ -1,5 +1,5 @@
 import { render } from './test-utils';
-import { PasswordValidIndicator } from '../components';
+import { PasswordValidIndicator } from '@components/index';
 
 test('PasswordValidIndicator shows correct progress for password validity', () => {
   let { container } = render(<PasswordValidIndicator password='' />);

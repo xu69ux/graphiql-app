@@ -1,5 +1,5 @@
 import { render } from './test-utils';
-import WelcomePage from '../pages/WelcomePage';
+import WelcomePage from '@pages/WelcomePage';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
