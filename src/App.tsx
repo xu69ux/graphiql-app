@@ -1,19 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import { Footer, Header, FallBackUI, Loader, PrivateRoute } from './components';
+import {
+  Footer,
+  Header,
+  FallBackUI,
+  Loader,
+  PrivateRoute,
+} from '@components/index';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
-import { LanguageProvider } from './contexts/LanguageProvider';
-import { ThemeProvider } from './contexts/ThemeProvider';
+import { LanguageProvider } from '@contexts/LanguageProvider';
+import { ThemeProvider } from '@contexts/ThemeProvider';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-const WelcomePage = lazy(() => import('./pages/WelcomePage'));
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const SignupPage = lazy(() => import('./pages/SignupPage'));
-const GraphiQLPage = lazy(() => import('./pages/GraphiQLPage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const WelcomePage = lazy(() => import('@pages/WelcomePage'));
+const LoginPage = lazy(() => import('@pages/LoginPage'));
+const SignupPage = lazy(() => import('@pages/SignupPage'));
+const GraphiQLPage = lazy(() => import('@pages/GraphiQLPage'));
+const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
 
 function App() {
   return (

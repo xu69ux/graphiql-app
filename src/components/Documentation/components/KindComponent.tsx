@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { NO_DESCRIPTION_MESSAGE } from '../../../constants';
-import { GraphQLKind } from '../../../types';
+import { NO_DESCRIPTION_MESSAGE } from '@constants/constants';
+import { GraphQLKind } from '@appTypes/types';
 
 import '@styles/Documentation.css';
 

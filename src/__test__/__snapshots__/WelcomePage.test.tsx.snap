@@ -27,7 +27,7 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
         class="welcome-auth-login"
       >
         <div
-          class="login-icon"
+          class="arrows"
         >
           <div>
             Mock Icon
@@ -57,7 +57,8 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
           signup
         </a>
         <div
-          class="signup-icon"
+          class="arrows"
+          style="transform: rotate(180deg);"
         >
           <div>
             Mock Icon

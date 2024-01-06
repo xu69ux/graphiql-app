@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useContext } from 'react';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeContext } from '@contexts/ThemeContext';
 import { IoCloseOutline } from 'react-icons/io5';
-import { translations } from '../contexts/translations';
-import useLanguage from '../hooks/useLanguage';
-import useShowMessage from '../hooks/useShowMessage';
-import useMsg from '../hooks/useMsg';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
+import useShowMessage from '@hooks/useShowMessage';
+import useMsg from '@hooks/useMsg';
 
 import '@styles/ModalWindow.css';
 

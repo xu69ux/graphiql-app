@@ -1,6 +1,6 @@
 import { render, screen } from './test-utils';
-import { Documentation } from '../components';
-import { GraphQLSchema } from '../types';
+import { Documentation } from '@components/index';
+import { GraphQLSchema } from '@appTypes/types';
 
 const mockSchema: GraphQLSchema = {
   types: [

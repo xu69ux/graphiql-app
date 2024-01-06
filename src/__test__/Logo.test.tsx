@@ -1,5 +1,5 @@
 import { render } from './test-utils';
-import { Logo } from '../components';
+import { Logo } from '@components/index';
 
 test('renders Logo with correct class when isScrolled is true', () => {
   const { container } = render(<Logo isScrolled={true} />);

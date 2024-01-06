@@ -14,6 +14,8 @@
   color: var(--green);
   font-size: 1.5rem;
   margin-bottom: 2rem;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }

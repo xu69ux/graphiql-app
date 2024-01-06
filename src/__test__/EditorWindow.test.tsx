@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { EditorWindow } from '../components';
+import { EditorWindow } from '@components/index';
 
 test('EditorWindow renders correctly and updates data on blur', () => {
   const mockUpdateData = jest.fn();

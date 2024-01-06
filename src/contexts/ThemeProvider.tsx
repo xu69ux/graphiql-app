@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ThemeContext } from './ThemeContext';
 import { translations } from './translations';
-import useLanguage from '../hooks/useLanguage';
+import useLanguage from '@hooks/useLanguage';
 
 export const ThemeProvider = ({ children }) => {
   const { language } = useLanguage();
