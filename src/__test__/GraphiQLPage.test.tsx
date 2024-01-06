@@ -46,7 +46,7 @@ describe('GraphiQLPage page', () => {
   test('adds a new tab when clicking the "Add Tab" button', async () => {
     render(<GraphiQLPage />);
     act(() => {
-      fireEvent.click(screen.getByText('add tab'));
+      fireEvent.click(screen.getByTitle('add tab'));
     });
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
