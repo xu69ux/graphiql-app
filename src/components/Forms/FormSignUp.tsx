@@ -30,7 +30,7 @@ export const FormSignUp = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, isSubmitting, touchedFields, isValid },
     trigger,
   } = useForm({
     resolver: yupResolver(schema),
@@ -83,6 +83,12 @@ export const FormSignUp = () => {
   };
 
   const password = watch('password', '');
+  const showSubmitMessage = () => {
+    if (!isValid) {
+      showMessage(msg.EMPTY_FIELDS_SUBMIT);
+      return;
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,6 +136,7 @@ export const FormSignUp = () => {
           type='submit'
           disabled={isSubmitting}
           title={translations?.[language]?.signupTitle}
+          onClick={showSubmitMessage}
         />
       </div>
     </form>

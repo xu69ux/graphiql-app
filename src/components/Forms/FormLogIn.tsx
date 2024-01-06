@@ -29,7 +29,7 @@ export const FormLogIn = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, isSubmitting, touchedFields, isValid },
     trigger,
   } = useForm({
     resolver: yupResolver(schema),
@@ -78,6 +78,13 @@ export const FormLogIn = () => {
 
   const password = watch('password', '');
 
+  const showSubmitMessage = () => {
+    if (!isValid) {
+      showMessage(msg.EMPTY_FIELDS_SUBMIT);
+      return;
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='login'>
@@ -115,6 +122,7 @@ export const FormLogIn = () => {
           disabled={isSubmitting}
           title={translations?.[language]?.loginTitle}
           data-testid='login-button'
+          onClick={showSubmitMessage}
         />
       </div>
     </form>

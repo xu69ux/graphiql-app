@@ -78,7 +78,7 @@ exports[`WelcomePage renders the WelcomePage component 1`] = `
       <p
         class="default-color"
       >
-        JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox; it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.
+        JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox, it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.
       </p>
       <p
         class="default-color"
