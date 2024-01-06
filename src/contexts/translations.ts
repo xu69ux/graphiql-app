@@ -8,13 +8,18 @@ export const translations = {
     email: 'email',
     emailInvalid: 'Invalid email',
     emailRequired: 'Email is required',
+    emptyFieldsSubmit:
+      'Please, complete the fields, before submiting the form!',
     error: 'error',
     fallback: 'Something went wrong!',
     greeting: 'hello',
+    graphiQlApiError: 'Invalid URL or bad request!',
     localStorage: 'Local Storage',
     localStorageClearSuccessBody: 'Local storage cleared successfully!',
     login: 'login',
     loginTitle: 'Login',
+    loginUserNotFoundBody:
+      'The user does not exist or the email/password is incorrect.',
     logOutSuccesBody: 'Log out successful!',
     logout: 'logout',
     logoutTitle: 'Logout',
@@ -66,7 +71,7 @@ export const translations = {
     username: 'username',
     welcome: 'to use this awesome application, log in with a fake email',
     welcomeDescription1:
-      "JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox; it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.",
+      "JS do IT is excited to present our second collaborative project — GraphiQL Playground, a powerful tool for working with GraphQL queries. GraphiQL is not just a sandbox, it's a full-fledged IDE with extended functionality, including authorization, authentication capabilities, and support for arbitrary open GraphQL endpoints.",
     welcomeDescription2:
       'JS do IT is our creative team gathered in the name of crafting inspiring projects. This marks our second step in collaborative development, and we aspire to make GraphiQL Playground not just a tool but a true piece of art in the world of GraphQL.',
     welcomeDescription3:
@@ -74,7 +79,6 @@ export const translations = {
     welcomeDescription4:
       "Wishing you vibrant ideas, effective teamwork, and the joy of creating something extraordinary! Don't forget about inspiration and creativity in every line of code. Best of luck, JS do IT!",
     yesAccount: 'Have an account? Then, ',
-    emptyFieldsSubmit: 'Please, complete the fields before, submiting the form',
   },
   rus: {
     by: '',
@@ -86,13 +90,18 @@ export const translations = {
     email: 'почта',
     emailInvalid: 'Неверная почта',
     emailRequired: 'Почта обязательна',
+    emptyFieldsSubmit:
+      'Прежде чем подтверждать отправку формы, пожалуйста, заполните поля!',
     error: 'ошибка',
     fallback: 'Что-то пошло не так!',
     greeting: 'привет',
+    graphiQlApiError: 'Неверный URL или ошибка в запросе!',
     localStorage: 'Локальное хранилище',
     localStorageClearSuccessBody: 'Локальное хранилище успешно очищено!',
     login: 'войти',
     loginTitle: 'Войти',
+    loginUserNotFoundBody:
+      'Такого пользователя не существует или неверно указан адрес электронной почты/пароль.',
     logOutSuccesBody: 'Выход из учетной записи успешный!',
     logout: 'выйти',
     logoutTitle: 'Выйти',
@@ -154,8 +163,6 @@ export const translations = {
     welcomeDescription4:
       'Желаем вам ярких идей, эффективной работы в команде и удовольствия от создания чего-то удивительного! Не забывайте о вдохновении и креативности в каждой строчке кода. Удачи, JS do IT!',
     yesAccount: 'Есть аккаунт? Тогда, ',
-    emptyFieldsSubmit:
-      'Прежде чем подтверждать отправку формы, пожалуйста, заполните поля',
   },
   ukr: {
     by: '',
@@ -166,13 +173,18 @@ export const translations = {
     email: 'пошта',
     emailInvalid: 'Невірна пошта',
     emailRequired: 'Пошта обов’язкова',
+    emptyFieldsSubmit:
+      'Перш ніж підтверджувати форму, будь ласка, заповніть поля!',
     error: 'помилка',
     fallback: 'Щось пішло не так!',
     greeting: 'привіт',
+    graphiQlApiError: 'Невірный URL або помилка у запиті!',
     localStorage: 'Локальне сховище',
     localStorageClearSuccessBody: 'Локальне сховище успішно очищено!',
     login: 'увійти',
     loginTitle: 'Увійти',
+    loginUserNotFoundBody:
+      'Такого користувача не існує або email/пароль невірні.',
     logOutSuccesBody: 'Успішний вихід з облікового запису!',
     logout: 'вийти',
     logoutTitle: 'Вийти',
@@ -201,7 +213,7 @@ export const translations = {
     settings: 'Налаштування',
     signup: 'зареєструватися',
     signupTitle: 'Зареєструватися',
-    thanxSlava1: 'Окрема щиря подяка ',
+    thanxSlava1: 'Окрема щира подяка ',
     thanxSlava2:
       ' за цінні поради та неявну мотивацію до багаторазового рефакторингу.',
     ViachaslauShpileuski: 'В’ячеславу Шпилевському',
@@ -215,25 +227,23 @@ export const translations = {
     titleEndpointRandom: 'використати випадковий ендпоінт',
     titleLanguage: 'змінити мову',
     titleRemoveTab: 'видалити вкладку',
-    titleRunQuery: 'запустити запит',
+    titleRunQuery: 'виконати запит',
     tooltipEmail: 'будь ласка, вкажіть будь-яку пошту',
     tooltipEmailLogin: 'введіть пошту, вказану при реєстрації',
-    tooltipPassword: 'повинен бути не менше 8 символів',
+    tooltipPassword: 'повинен містити не менше 8 символів',
     tooltipPasswordLogin: 'введіть пароль, вказаний при реєстрації',
     tooltipUsername: 'будь ласка, вкажіть будь-яке ім’я користувача',
     username: "ім'я користувача",
     welcome:
       'щоб користуватися цим офігенним додатком, увійдіть за допомогою фейкової пошти',
     welcomeDescription1:
-      'JS do IT має велику радість представити вам наш другий спільний проект — GraphiQL Playground, потужний інструмент для роботи з GraphQL-запитами. GraphiQL — це не просто пісочниця; це повноцінне Інтегроване середовище розробки (IDE) з розширеним функціоналом, що включає в себе можливості авторизації, аутентифікації та підтримку довільних відкритих GraphQL-кінцевих точок.',
+      'JS do IT має велику радість представити вам наш другий спільний проект — GraphiQL Playground, потужний інструмент для роботи з GraphQL-запитами. GraphiQL — це не просто пісочниця, це повноцінне Інтегроване середовище розробки (IDE) з розширеним функціоналом, що включає в себе можливості авторизації, аутентифікації та підтримку довільних відкритих GraphQL-endpoints.',
     welcomeDescription2:
-      "JS do IT - це наша творча команда, яка об'єдналася в ім'я створення надихаючих проектів. Це вже наш другий крок у спільній розробці, і ми прагнемо зробити GraphiQL Playground не лише інструментом, але справжнім мистецтвом у світі GraphQL.",
+      "JS do IT - це наша творча команда, яка об'єдналася заради створення проектів, що надихають. Це вже наш другий крок у спільній розробці, і ми прагнемо зробити GraphiQL Playground не лише інструментом, але справжнім мистецтвом у світі GraphQL.",
     welcomeDescription3:
-      'Ми впевнені, що GraphiQL Playground не лише полегшить вашу роботу з GraphQL-запитами, але й стане чудовим прикладом того, що можна досягти, поєднуючи творчий потенціал і технічну майстерність.',
+      'Ми впевнені, що GraphiQL Playground не лише полегшить вашу роботу з GraphQL-запитами, але й стане чудовим прикладом того, чого можна досягти, поєднуючи творчий потенціал і технічну майстерність.',
     welcomeDescription4:
       'Бажаємо вам яскравих ідей, ефективної роботи в команді та задоволення від створення чогось неймовірного! Не забувайте про натхнення та креативність в кожному рядку коду. Удачі, JS do IT!',
     yesAccount: 'Є аккаунт? Тоді, ',
-    emptyFieldsSubmit:
-      'Перш ніж підтверджувати форму, будь ласка, заповніть поля',
   },
 };
