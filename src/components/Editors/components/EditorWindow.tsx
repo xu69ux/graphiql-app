@@ -123,8 +123,6 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     recalculateLines(e.target.value);
   };
 
-  console.log('render');
-
   return (
     <div className='code-container'>
       <pre className='line-numbers' ref={lines} />

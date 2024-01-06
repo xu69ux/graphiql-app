@@ -14,6 +14,8 @@ import {
   PERCENT,
 } from '../../constants';
 
+import '@styles/VarsHeadersEditor.css';
+
 interface VarsHeadersEditorProps {
   headers: string;
   setHeaders: Dispatch<SetStateAction<string>>;

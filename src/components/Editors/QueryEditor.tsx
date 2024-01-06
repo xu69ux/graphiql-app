@@ -6,6 +6,8 @@ import { EditorTab, EditorWindow } from '../../components';
 
 import { IoRemoveCircle, IoSparklesOutline } from 'react-icons/io5';
 
+import '@styles/QueryEditor.css';
+
 interface IQueryEditorProps {
   activeTab: number | null;
   setActiveTab: Dispatch<SetStateAction<number | null>>;
