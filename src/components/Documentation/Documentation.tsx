@@ -96,7 +96,11 @@ export const Documentation: FC<DocumentationProps> = ({
                   >
                     {type.name}:
                   </span>
-                  <span className='kind'>{type.kind}</span>
+                  {type.kind ? (
+                    <span className='kind'>{type.kind}</span>
+                  ) : (
+                    <span className='kind'>No kind</span>
+                  )}
                 </div>
               </li>
             ))}

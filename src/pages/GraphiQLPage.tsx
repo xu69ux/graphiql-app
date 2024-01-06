@@ -55,6 +55,7 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
+      console.log(response);
       setSchema(response.data.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
