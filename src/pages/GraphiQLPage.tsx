@@ -2,16 +2,10 @@ import { useState, useCallback, useEffect, DragEvent, useRef } from 'react';
 import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
 import { graphqlRequest } from '../utils/graphqlApi';
 import { translations } from '../contexts/translations';
+import { IoChevronUpOutline, IoCaretForward } from 'react-icons/io5';
 import {
-  IoChevronUpOutline,
-  IoCaretForward,
-  IoSparklesOutline,
-  IoRemoveCircle,
-} from 'react-icons/io5';
-import { prettify } from '../utils/prettifying';
-import {
+  QueryEditor,
   EditorWindow,
-  EditorTab,
   Documentation,
   Endpoint,
   Sidebar,
@@ -20,13 +14,6 @@ import { GraphQLSchema, IEditorTab } from '../types';
 import useLanguage from '../hooks/useLanguage';
 
 import '@styles/GraphiQLPage.css';
-
-const updateTab = (
-  tabs: IEditorTab[],
-  id: number,
-  newValues: Partial<IEditorTab>,
-): IEditorTab[] =>
-  tabs.map((tab) => (tab.id === id ? { ...tab, ...newValues } : tab));
 
 const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
@@ -58,6 +45,7 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
+      console.log(response.data.data.__schema);
       setSchema(response.data.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
@@ -70,36 +58,6 @@ const GraphiQLPage = () => {
   useEffect(() => {
     fetchShema();
   }, [fetchShema]);
-
-  const updateData = (data: string) => {
-    if (activeTab !== null) {
-      setTabs((prevTabs) => updateTab(prevTabs, activeTab, { code: data }));
-    }
-  };
-
-  const handleNameChange = (id: number, newName: string) => {
-    setTabs((prevTabs) => updateTab(prevTabs, id, { name: newName }));
-  };
-
-  const removeTab = (id: number) => {
-    setTabs((prevTabs) => {
-      let newTabs = prevTabs.filter((tab) => tab.id !== id);
-      if (newTabs.length === 0) {
-        const newTab: IEditorTab = {
-          id: 1,
-          code: '',
-          name: 'untitled 1',
-        };
-        newTabs = [newTab];
-        setActiveTab(newTab.id);
-      } else if (id === activeTab) {
-        const newActiveTab = newTabs[newTabs.length - 1] || null;
-        setActiveTab(newActiveTab ? newActiveTab.id : null);
-      }
-
-      return newTabs;
-    });
-  };
 
   const dragStart = (e: DragEvent) => {
     console.log('start', e.clientY, tabsDragable.current!.offsetHeight);
@@ -159,27 +117,6 @@ const GraphiQLPage = () => {
     );
   };
 
-  const handleFormatCode = () => {
-    const activeTabTemp: IEditorTab = tabs.find(
-      (item) => item.id === activeTab,
-    )!;
-    if (!activeTabTemp.code) {
-      return;
-    }
-    const formattedQuery = prettify(activeTabTemp.code);
-    updateData(formattedQuery);
-  };
-
-  const handleClearCode = () => {
-    const activeTabTemp: IEditorTab = tabs.find(
-      (item) => item.id === activeTab,
-    )!;
-    if (!activeTabTemp.code) {
-      return;
-    }
-    updateData('');
-  };
-
   console.log('render page');
 
   return (
@@ -205,44 +142,12 @@ const GraphiQLPage = () => {
         />
         <div className='container code'>
           <div className='editor'>
-            <div className='tab-names'>
-              {tabs.map((tab) => (
-                <EditorTab
-                  key={tab.id}
-                  id={tab.id}
-                  name={tab.name}
-                  isActive={tab.id === activeTab}
-                  onTabClick={setActiveTab}
-                  onCloseClick={removeTab}
-                  onNameChange={handleNameChange}
-                  totalTabs={tabs.length}
-                />
-              ))}
-            </div>
-            <div className='tab-container'>
-              {tabs.map(
-                (tab) =>
-                  tab.id === activeTab && (
-                    <EditorWindow
-                      key={tab.id}
-                      code={tab.code}
-                      updateData={updateData}
-                    />
-                  ),
-              )}
-              <div className='editor-toolbar'>
-                <IoSparklesOutline
-                  className='sidebar-icon add'
-                  onClick={handleFormatCode}
-                  title='prettify query'
-                />
-                <IoRemoveCircle
-                  className='sidebar-icon add'
-                  title='clear text area'
-                  onClick={handleClearCode}
-                />
-              </div>
-            </div>
+            <QueryEditor
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              tabs={tabs}
+              setTabs={setTabs}
+            />
             <div
               className={`editor-footer ${isFooterOpen ? 'open' : ''}`}
               ref={footer}

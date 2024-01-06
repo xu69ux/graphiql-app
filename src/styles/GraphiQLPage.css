@@ -44,12 +44,12 @@
   width: 100%;
   color: var(--green);
   overflow: hidden;
-  cursor: row-resize;
 }
 
 .editor-footer.open {
   height: 25rem;
   flex: 1 1 0;
+  cursor: row-resize;
 }
 
 .editor-footer__tabs {

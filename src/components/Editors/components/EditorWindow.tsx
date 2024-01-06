@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, KeyboardEvent } from 'react';
-import { prettify } from '../utils/prettifying';
-import { INDENTATION } from '../constants';
+import { prettify } from '../../../utils/prettifying';
+import { INDENTATION } from '../../../constants';
 
 import '@styles/EditorWindow.css';
 
@@ -10,7 +10,7 @@ interface IEditWindowProps {
   updateData?: (data: string) => void;
 }
 
-const keywords = ['query'];
+const keywords = ['query', 'fragment'];
 const braces = ['{', '}'];
 
 export const EditorWindow: FC<IEditWindowProps> = ({
