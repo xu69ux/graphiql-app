@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, DragEvent, useRef } from 'react';
 import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
 import { graphqlRequest } from '@utils/graphqlApi';
 import { translations } from '@contexts/translations';
@@ -33,6 +33,12 @@ const GraphiQLPage = () => {
   const { language } = useLanguage();
   const showMessage = useShowMessage();
   const msg = useMsg();
+
+  const [initialPos, setInitialPos] = useState<number | null>(null);
+  const [initialSize, setInitialSize] = useState<number | null>(null);
+
+  const tabsDragable = useRef<HTMLDivElement>(null);
+  const footer = useRef<HTMLDivElement>(null);
 
   const saveEndpoint = useCallback((endpoint: string) => {
     localStorage.setItem('prevEndpoint', endpoint);
