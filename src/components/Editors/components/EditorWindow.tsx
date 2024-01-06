@@ -10,7 +10,7 @@ interface IEditWindowProps {
   updateData?: (data: string) => void;
 }
 
-const keywords = ['query'];
+const keywords = ['query', 'fragment'];
 const braces = ['{', '}'];
 
 export const EditorWindow: FC<IEditWindowProps> = ({
