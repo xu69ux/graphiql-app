@@ -65,7 +65,8 @@
 }
 
 .theme,
-.local {
+.local,
+.language {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -75,7 +76,8 @@
 }
 
 .theme-btn,
-.local-btn {
+.local-btn,
+.language-btn {
   border: 1px solid var(--extra);
   border-radius: 0.5rem;
   background-color: transparent;
@@ -90,7 +92,8 @@
 }
 
 .theme-btn:hover,
-.local-btn:hover {
+.local-btn:hover,
+.language-btn:hover {
   background-color: var(--extra);
   color: var(--dark);
 }
