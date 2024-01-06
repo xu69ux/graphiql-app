@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor, screen } from './test-utils';
 import { act } from 'react-dom/test-utils';
-import { FormLogIn } from '../components';
-import * as firebase from '../utils/firebase';
+import { FormLogIn } from '@components/index';
+import * as firebase from '@utils/firebase';
 
 describe('FormLogIn component', () => {
   const useAuthState = jest.fn();

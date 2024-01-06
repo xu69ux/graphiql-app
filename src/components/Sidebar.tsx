@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { translations } from '../contexts/translations';
+import { translations } from '@contexts/translations';
 import { IoFileTrayFullOutline, IoSettingsSharp } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
-import { Modal } from '../components';
-import { IEditorTab } from '../types';
-import useLanguage from '../hooks/useLanguage';
+import { IconButton, Modal } from '@components/index';
+import { IEditorTab } from '@appTypes/types';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Sidebar.css';
 
@@ -85,29 +85,43 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className='sidebar' data-testid='sidebar'>
-      <IoFileTrayFullOutline
+      <IconButton
         className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''} ${
           isFetchSuccessful ? '' : 'disabled'
         }`}
         onClick={toggleDocumentation}
         title={translations[language]?.titleDocs}
-      />
-      <LuFilePlus2
+      >
+        <IoFileTrayFullOutline />
+      </IconButton>
+      <IconButton
         className='sidebar-icon add'
         title={translations[language]?.titleAddTab}
         onClick={addTab}
-      />
-      <LuFileMinus2
+      >
+        <LuFilePlus2 />
+      </IconButton>
+      <IconButton
         className={`sidebar-icon remove ${tabs.length === 1 ? 'disabled' : ''}`}
         title={translations[language]?.titleRemoveTab}
         onClick={() => removeTab(activeTab!)}
-      />
-      <LuFileX2
+      >
+        <LuFileMinus2 />
+      </IconButton>
+      <IconButton
         className={`sidebar-icon clear ${tabs.length === 1 ? 'disabled' : ''}`}
         title={translations[language]?.titleDeleteTabs}
         onClick={deleteAllTabs}
-      />
-      <IoSettingsSharp className='sidebar-icon settings' onClick={openModal} />
+      >
+        <LuFileX2 />
+      </IconButton>
+      <IconButton
+        className={`sidebar-icon settings`}
+        title={translations[language]?.titleSettings}
+        onClick={openModal}
+      >
+        <IoSettingsSharp />
+      </IconButton>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );

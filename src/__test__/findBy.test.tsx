@@ -1,5 +1,5 @@
-import { GraphQLSchema } from '../types';
-import { findTypeByName, findFieldByName } from '../utils/findBy';
+import { GraphQLSchema } from '@appTypes/types';
+import { findTypeByName, findFieldByName } from '@utils/findBy';
 
 const mockSchema: GraphQLSchema = {
   types: [

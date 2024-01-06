@@ -1,5 +1,5 @@
 import { render, fireEvent, act } from './test-utils';
-import { FallBackUI } from '../components';
+import { FallBackUI } from '@components/index';
 
 Object.defineProperty(window, 'location', {
   value: {

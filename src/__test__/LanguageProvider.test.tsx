@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LanguageContext } from '../contexts/LanguageContext';
-import { LanguageProvider } from '../contexts/LanguageProvider';
+import { LanguageContext } from '@contexts/LanguageContext';
+import { LanguageProvider } from '@contexts/LanguageProvider';
 
 const TestComponent = () => {
   const { language, setLanguage } = React.useContext(LanguageContext)!;

@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { translations } from '../../contexts/translations';
+import { translations } from '@contexts/translations';
 
 export const getSchema = (language) => {
   return yup.object().shape({

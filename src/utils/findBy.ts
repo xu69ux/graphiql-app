@@ -3,7 +3,7 @@ import {
   GraphQLSchema,
   GraphQLField,
   GraphQLKind,
-} from '../types';
+} from '@appTypes/types';
 
 export const findTypeByName = (
   schema: GraphQLSchema,

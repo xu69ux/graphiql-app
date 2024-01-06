@@ -1,6 +1,6 @@
 import { render, fireEvent, screen, act } from './test-utils';
-import { Search } from '../components';
-import { GraphQLSchema } from '../types';
+import { Search } from '@components/index';
+import { GraphQLSchema } from '@appTypes/types';
 
 const mockSchema: GraphQLSchema = {
   types: [

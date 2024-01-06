@@ -1,6 +1,6 @@
-import { reloadPage } from '../utils/reloadPage';
-import { translations } from '../contexts/translations';
-import useLanguage from '../hooks/useLanguage';
+import { reloadPage } from '@utils/reloadPage';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/FallBackUI.css';
 

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, KeyboardEvent } from 'react';
-import { prettify } from '../utils/prettifying';
-import { INDENTATION } from '../constants';
+import { prettify } from '@utils/prettifying';
+import { INDENTATION } from '@constants/constants';
 
 import '@styles/EditorWindow.css';
 

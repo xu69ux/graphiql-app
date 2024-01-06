@@ -1,5 +1,5 @@
 import { render, screen } from './test-utils';
-import NotFoundPage from '../pages/NotFoundPage';
+import NotFoundPage from '@pages/NotFoundPage';
 
 test('renders not found message', () => {
   render(<NotFoundPage />);

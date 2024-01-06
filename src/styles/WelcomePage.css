@@ -48,21 +48,6 @@ span {
   margin: 0 0.5rem;
 }
 
-@keyframes colorChange {
-  0% {
-    color: var(--light);
-  }
-  33% {
-    color: var(--green);
-  }
-  66% {
-    color: var(--light);
-  }
-  100% {
-    color: var(--light);
-  }
-}
-
 .login-icon,
 .signup-icon {
   height: 100%;

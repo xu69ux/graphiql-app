@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HeaderLink } from '../../../components';
+import { HeaderLink } from '@components/index';
 import { logout } from '../../../utils/firebase';
 import useShowMessage from '../../../hooks/useShowMessage';
 import useMsg from '../../../hooks/useMsg';

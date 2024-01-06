@@ -1,4 +1,4 @@
-import { INDENTATION } from '../constants';
+import { INDENTATION } from '@constants/constants';
 
 const fixStuckedBrackets = (code: string) => {
   return code
