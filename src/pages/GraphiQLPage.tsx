@@ -62,8 +62,9 @@ const GraphiQLPage = () => {
     } catch (error) {
       console.error(error);
       setIsFetchSuccessful(false);
+      showMessage(msg.COMMON_ERROR);
     }
-  }, [endpoint, saveEndpoint]);
+  }, [endpoint, msg.COMMON_ERROR, saveEndpoint, showMessage]);
 
   useEffect(() => {
     fetchShema();
