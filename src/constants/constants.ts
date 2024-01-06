@@ -1,4 +1,4 @@
-export const PERCENT = 100;
+export const PERCENT_100 = 100;
 export const FOOTER_BOTTOM_EDGE = 0.06;
 export const FOOTER_UPPER_EDGE = 5;
 

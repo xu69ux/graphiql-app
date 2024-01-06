@@ -90,8 +90,6 @@ const GraphiQLPage = () => {
     }
   };
 
-  console.log('render page');
-
   return (
     <div className='container'>
       <Sidebar

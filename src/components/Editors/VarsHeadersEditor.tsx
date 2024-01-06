@@ -11,7 +11,7 @@ import { IoChevronUpOutline } from 'react-icons/io5';
 import {
   FOOTER_BOTTOM_EDGE,
   FOOTER_UPPER_EDGE,
-  PERCENT,
+  PERCENT_100,
 } from '@constants/constants';
 
 import '@styles/VarsHeadersEditor.css';
@@ -46,7 +46,7 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
   };
 
   const dragEnd = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT;
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT_100;
     if (
       coordinate > FOOTER_BOTTOM_EDGE &&
       coordinate < FOOTER_UPPER_EDGE &&
@@ -60,7 +60,7 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
   };
 
   const resize = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT;
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT_100;
     if (
       coordinate > FOOTER_BOTTOM_EDGE &&
       coordinate < FOOTER_UPPER_EDGE &&
