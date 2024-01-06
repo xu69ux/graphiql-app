@@ -23,6 +23,9 @@ export const LanguageMenu: FC<ILanguageMenuProps> = ({ isScrolled }) => {
         className={`lang-icon ${isScrolled ? 'scrolled' : ''}`}
         title={translations[language]?.titleLanguage}
       />
+      <Fade show={!isDropdownOpen}>
+        <div className='lang-name'>{language}</div>
+      </Fade>
       <Fade show={isDropdownOpen}>
         <div className='lang-dropdown'>
           <button
