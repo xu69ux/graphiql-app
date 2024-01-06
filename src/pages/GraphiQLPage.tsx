@@ -1,8 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
-import { QUERY_FOR_SHEMA_FETCHING } from '../constants';
-import { graphqlRequest } from '../utils/graphqlApi';
-import { translations } from '../contexts/translations';
-import { IoCaretForward } from 'react-icons/io5';
+import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
+import { graphqlRequest } from '@utils/graphqlApi';
+import { translations } from '@contexts/translations';
+import { GraphQLSchema, IEditorTab } from '@appTypes/types';
+import useLanguage from '@hooks/useLanguage';
+import useShowMessage from '@hooks/useShowMessage';
+import useMsg from '@hooks/useMsg';
+
 import {
   QueryEditor,
   VarsHeadersEditor,
@@ -10,9 +14,9 @@ import {
   Documentation,
   Endpoint,
   Sidebar,
-} from '../components';
-import { GraphQLSchema, IEditorTab } from '../types';
-import useLanguage from '../hooks/useLanguage';
+} from '@components/index';
+
+import { IoCaretForward } from 'react-icons/io5';
 
 import '@styles/GraphiQLPage.css';
 
@@ -27,6 +31,8 @@ const GraphiQLPage = () => {
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
   const { language } = useLanguage();
+  const showMessage = useShowMessage();
+  const msg = useMsg();
 
   const saveEndpoint = useCallback((endpoint: string) => {
     localStorage.setItem('prevEndpoint', endpoint);
@@ -38,15 +44,16 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      console.log(response.data.data.__schema);
-      setSchema(response.data.data.__schema);
+      console.log(response);
+      setSchema(response.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
     } catch (error) {
       console.error(error);
       setIsFetchSuccessful(false);
+      showMessage(msg.COMMON_ERROR);
     }
-  }, [endpoint, saveEndpoint]);
+  }, [endpoint, msg.COMMON_ERROR, saveEndpoint, showMessage]);
 
   useEffect(() => {
     fetchShema();
@@ -67,12 +74,20 @@ const GraphiQLPage = () => {
       res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
     });
 
-    const result = (
-      await graphqlRequest(endpoint, res, headers ? JSON.parse(headers) : {})
-    ).data;
-    setViewer(
-      JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
-    );
+    try {
+      const result = await graphqlRequest(
+        endpoint,
+        res,
+        headers ? JSON.parse(headers) : {},
+      );
+      setViewer(
+        JSON.stringify(result.data)
+          .replaceAll('{', '{\n')
+          .replaceAll('}', '}\n'),
+      );
+    } catch (error) {
+      showMessage(msg.GRAPHIQL_API_ERROR);
+    }
   };
 
   console.log('render page');

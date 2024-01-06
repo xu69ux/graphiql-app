@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { CustomButton } from '../components';
+import { CustomButton } from '@components/index';
 
 test('renders the button and responds to click events', () => {
   const handleClick = jest.fn();

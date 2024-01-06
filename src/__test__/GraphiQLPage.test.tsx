@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from './test-utils';
-import GraphiQLPage from '../pages/GraphiQLPage';
+import GraphiQLPage from '@pages/GraphiQLPage';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -46,7 +46,7 @@ describe('GraphiQLPage page', () => {
   test('adds a new tab when clicking the "Add Tab" button', async () => {
     render(<GraphiQLPage />);
     act(() => {
-      fireEvent.click(screen.getByText('add tab'));
+      fireEvent.click(screen.getByTitle('add tab'));
     });
     await waitFor(() => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();

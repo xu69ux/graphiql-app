@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import { EditorTab } from '../components';
+import { EditorTab } from '@components/index';
 
 test('EditorTab renders correctly and handles events', () => {
   const mockOnTabClick = jest.fn();

@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { getSchema } from '../utils/validation/schema';
+import { getSchema } from '@utils/validation/schema';
 
 describe('Validation Schema', () => {
   const language = 'en';

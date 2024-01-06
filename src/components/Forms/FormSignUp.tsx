@@ -1,15 +1,15 @@
-import { auth, registerWithEmailAndPassword } from '../../utils/firebase';
+import { auth, registerWithEmailAndPassword } from '@utils/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '../../utils/validation/schema';
+import { getSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { translations } from '../../contexts/translations';
-import { CustomButton, PasswordValidIndicator } from '../../components';
-import useMsg from '../../hooks/useMsg';
-import useLanguage from '../../hooks/useLanguage';
-import useShowMessage from '../../hooks/useShowMessage';
+import { translations } from '@contexts/translations';
+import { CustomButton, PasswordValidIndicator } from '@components/index';
+import useMsg from '@hooks/useMsg';
+import useLanguage from '@hooks/useLanguage';
+import useShowMessage from '@hooks/useShowMessage';
 
 import '@styles/Form.css';
 
@@ -30,7 +30,7 @@ export const FormSignUp = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, isSubmitting, touchedFields, isValid },
     trigger,
   } = useForm({
     resolver: yupResolver(schema),
@@ -83,6 +83,12 @@ export const FormSignUp = () => {
   };
 
   const password = watch('password', '');
+  const showSubmitMessage = () => {
+    if (!isValid) {
+      showMessage(msg.EMPTY_FIELDS_SUBMIT);
+      return;
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,6 +136,7 @@ export const FormSignUp = () => {
           type='submit'
           disabled={isSubmitting}
           title={translations?.[language]?.signupTitle}
+          onClick={showSubmitMessage}
         />
       </div>
     </form>

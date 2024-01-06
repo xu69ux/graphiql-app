@@ -1,5 +1,5 @@
 import { render, fireEvent } from './test-utils';
-import { Sidebar } from '../components/Sidebar';
+import { Sidebar } from '@components/index';
 
 test('renders Sidebar without crashing', () => {
   const tabs = [];

@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../utils/firebase';
+import { auth } from '@utils/firebase';
 import {
   LanguageMenu,
   Logo,
   Greeting,
   UserComponent,
   NoUserComponent,
-} from '..';
-import { fetchUserName } from '../../services/api/fetchUserName';
+} from '@components/index';
+import { fetchUserName } from '@services/api/fetchUserName';
 
 import '@styles/Header.css';
 

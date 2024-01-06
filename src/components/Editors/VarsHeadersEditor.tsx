@@ -12,7 +12,7 @@ import {
   FOOTER_BOTTOM_EDGE,
   FOOTER_UPPER_EDGE,
   PERCENT,
-} from '../../constants';
+} from '@constants/constants';
 
 import '@styles/VarsHeadersEditor.css';
 

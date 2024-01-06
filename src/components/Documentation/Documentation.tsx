@@ -5,19 +5,15 @@ import {
   KindComponent,
   Search,
   TypeComponent,
-} from '../../components';
+} from '@components/index';
 import {
   GraphQLSchema,
   GraphQLType,
   GraphQLField,
   GraphQLKind,
-} from '../../types';
-import {
-  findTypeByName,
-  findFieldByName,
-  findKindByName,
-} from '../../utils/findBy';
-import { NO_SCHEMA_MESSAGE } from '../../constants';
+} from '@appTypes/types';
+import { findTypeByName, findFieldByName, findKindByName } from '@utils/findBy';
+import { NO_SCHEMA_MESSAGE } from '@constants/constants';
 
 import '@styles/Documentation.css';
 
@@ -100,7 +96,11 @@ export const Documentation: FC<DocumentationProps> = ({
                   >
                     {type.name}:
                   </span>
-                  <span className='kind'>{type.kind}</span>
+                  {type.kind ? (
+                    <span className='kind'>{type.kind}</span>
+                  ) : (
+                    <span className='kind'>No kind</span>
+                  )}
                 </div>
               </li>
             ))}

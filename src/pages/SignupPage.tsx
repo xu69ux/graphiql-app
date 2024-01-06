@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FormSignUp } from '../components';
-import { translations } from '../contexts/translations';
-import useLanguage from '../hooks/useLanguage';
+import { FormSignUp } from '@components/index';
+import { translations } from '@contexts/translations';
+import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Auth.css';
 

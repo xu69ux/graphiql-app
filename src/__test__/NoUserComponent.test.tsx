@@ -1,5 +1,5 @@
 import { render, screen } from './test-utils';
-import { NoUserComponent } from '../components';
+import { NoUserComponent } from '@components/index';
 
 describe('NoUserComponent', () => {
   it('renders login and signup links', () => {

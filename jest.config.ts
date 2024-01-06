@@ -11,6 +11,16 @@ export default {
     "\\.(css|less|scss|sss|styl)$":  "<rootDir>/src/__test__/__mocks__/styleMock.js",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
       "<rootDir>/src/__test__/__mocks__/fileMock.js",
+      "^@appTypes/(.*)$": "<rootDir>/src/types/$1",
+      "^@assets/(.*)$": "<rootDir>/src/assets/$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@constants/(.*)$": "<rootDir>/src/constants/$1",
+      "^@contexts/(.*)$": "<rootDir>/src/contexts/$1",
+      "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+      "^@pages/(.*)$": "<rootDir>/src/pages/$1",
+      "^@services/(.*)$": "<rootDir>/src/services/$1",
+      "^@styles/(.*)$": "<rootDir>/src/styles/$1",
+      "^@utils/(.*)$": "<rootDir>/src/utils/$1",
   },
   collectCoverage: true,
   collectCoverageFrom: [

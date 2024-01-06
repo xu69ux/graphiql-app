@@ -1,15 +1,15 @@
-import { auth, logInWithEmailAndPassword } from '../../utils/firebase';
+import { auth, logInWithEmailAndPassword } from '@utils/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '../../utils/validation/schema';
+import { getSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { translations } from '../../contexts/translations';
-import { CustomButton, PasswordValidIndicator } from '../../components';
-import useShowMessage from '../../hooks/useShowMessage';
-import useLanguage from '../../hooks/useLanguage';
-import useMsg from '../../hooks/useMsg';
+import { translations } from '@contexts/translations';
+import { CustomButton, PasswordValidIndicator } from '@components/index';
+import useShowMessage from '@hooks/useShowMessage';
+import useLanguage from '@hooks/useLanguage';
+import useMsg from '@hooks/useMsg';
 
 import '@styles/Form.css';
 
@@ -29,7 +29,7 @@ export const FormLogIn = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, isSubmitting, touchedFields, isValid },
     trigger,
   } = useForm({
     resolver: yupResolver(schema),
@@ -78,6 +78,13 @@ export const FormLogIn = () => {
 
   const password = watch('password', '');
 
+  const showSubmitMessage = () => {
+    if (!isValid) {
+      showMessage(msg.EMPTY_FIELDS_SUBMIT);
+      return;
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='login'>
@@ -115,6 +122,7 @@ export const FormLogIn = () => {
           disabled={isSubmitting}
           title={translations?.[language]?.loginTitle}
           data-testid='login-button'
+          onClick={showSubmitMessage}
         />
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { translations } from '../contexts/translations';
+import { translations } from '@contexts/translations';
 import useLanguage from './useLanguage';
 
 const useMsg = () => {
@@ -23,6 +23,14 @@ const useMsg = () => {
     LOCAL_STORAGE_CLEAR_SUCCESS: {
       body: translations?.[language]?.localStorageClearSuccessBody,
       error: false,
+    },
+    EMPTY_FIELDS_SUBMIT: {
+      body: translations?.[language]?.emptyFieldsSubmit,
+      error: true,
+    },
+    GRAPHIQL_API_ERROR: {
+      body: translations?.[language]?.graphiQlApiError,
+      error: true,
     },
   };
   return msg;

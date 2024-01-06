@@ -1,5 +1,5 @@
 import { render, screen } from './test-utils';
-import { Footer } from '../components';
+import { Footer } from '@components/index';
 
 describe('Footer', () => {
   it('renders without crashing', () => {

@@ -1,5 +1,5 @@
 import { FC, SetStateAction, Dispatch } from 'react';
-import { IEditorTab } from '../../types';
+import { IEditorTab } from '../../types/types';
 import { prettify } from '../../utils/prettifying';
 
 import { EditorTab, EditorWindow } from '../../components';
