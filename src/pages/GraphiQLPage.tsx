@@ -102,16 +102,38 @@ const GraphiQLPage = () => {
   };
 
   const dragStart = (e: DragEvent) => {
-    setInitialPos(e.clientY);
+    console.log('start', e.clientY, tabsDragable.current!.offsetHeight);
+    if (e.clientY !== 0) {
+      setInitialPos(e.clientY);
+    }
     setInitialSize(tabsDragable.current!.offsetHeight);
   };
 
-  const resize = (e: DragEvent) => {
-    console.log(initialSize, e.clientY, initialPos);
+  const dragEnd = (e: DragEvent) => {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
+    console.log(coordinate);
+    if (coordinate > 0.05 && coordinate < 5 && isFooterOpen) {
+      footer.current!.style.flex = `${coordinate} 1 0`;
+    } else if (coordinate <= 0.05) {
+      footer.current!.style.flex = `0.05 1 0`;
+      setIsFooterOpen(false);
+    }
+  };
 
-    footer.current!.style.height = `${
-      initialSize! + e.clientY - initialPos!
-    }px`;
+  const resize = (e: DragEvent) => {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
+    console.log(coordinate, -e.clientY, initialPos!, initialSize!);
+    if (coordinate > 0.05 && coordinate < 5 && isFooterOpen) {
+      footer.current!.style.flex = `${coordinate} 1 0`;
+    } else if (coordinate <= 0.05) {
+      footer.current!.style.flex = `0.05 1 0`;
+      setIsFooterOpen(false);
+    }
+  };
+
+  const closeFooter = () => {
+    setIsFooterOpen(!isFooterOpen);
+    footer.current!.style.flex = !isFooterOpen ? `1 1 0` : `0.05 1 0`;
   };
 
   const sendGraphqlRequest = async () => {
@@ -229,9 +251,14 @@ const GraphiQLPage = () => {
                 className='editor-footer__tabs'
                 ref={tabsDragable}
                 onDragStart={dragStart}
+                onDragEnd={dragEnd}
                 onDrag={resize}
                 draggable={isFooterOpen}
-                onClick={(e) => console.log(initialSize, e.clientY, initialPos)}
+                onClick={(e) => {
+                  if (e.clientY !== 0) {
+                    setInitialPos(e.clientY);
+                  }
+                }}
               >
                 <div className='tabs_wrap'>
                   <span
@@ -255,7 +282,7 @@ const GraphiQLPage = () => {
                   className={`editor-footer-icon arrow ${
                     isFooterOpen ? 'open' : ''
                   }`}
-                  onClick={() => setIsFooterOpen(!isFooterOpen)}
+                  onClick={closeFooter}
                 />
               </div>
               {isFooterOpen && (
