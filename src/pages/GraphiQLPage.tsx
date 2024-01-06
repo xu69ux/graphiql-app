@@ -204,11 +204,11 @@ const GraphiQLPage = () => {
                 <IoSparklesOutline
                   className='sidebar-icon add'
                   onClick={handleFormatCode}
-                  title='prettify query'
+                  title={translations[language]?.titleClearTextArea}
                 />
                 <IoRemoveCircle
                   className='sidebar-icon add'
-                  title='clear text area'
+                  title={translations[language]?.titlePrettify}
                   onClick={handleClearCode}
                 />
               </div>
