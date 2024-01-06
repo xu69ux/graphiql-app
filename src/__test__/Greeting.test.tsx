@@ -1,5 +1,5 @@
 import { render, screen } from './test-utils';
-import { Greeting } from '../components';
+import { Greeting } from '@components/index';
 
 test('renders greeting with name when name is provided', () => {
   render(<Greeting name='John' isLoading={false} />);
