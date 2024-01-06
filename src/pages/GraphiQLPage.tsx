@@ -16,12 +16,10 @@ import {
   Endpoint,
   Sidebar,
 } from '@components/index';
-import { IoChevronUpOutline, IoCaretForward } from 'react-icons/io5';
 import { GraphQLSchema, IEditorTab } from '@appTypes/types';
 import useLanguage from '@hooks/useLanguage';
 import useShowMessage from '@hooks/useShowMessage';
 import useMsg from '@hooks/useMsg';
-
 
 import '@styles/GraphiQLPage.css';
 
