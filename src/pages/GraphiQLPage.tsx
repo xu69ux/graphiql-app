@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, DragEvent, useRef } from 'react';
 import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
 import { graphqlRequest } from '@utils/graphqlApi';
 import { translations } from '@contexts/translations';
@@ -34,6 +34,7 @@ const GraphiQLPage = () => {
   const [tabs, setTabs] = useState([{ id: 1, code: '', name: `untitled 1` }]);
   const [activeTab, setActiveTab] = useState<number | null>(1);
   const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [isHeadersOpened, setIsHeadersOpened] = useState(false);
   const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
@@ -44,6 +45,12 @@ const GraphiQLPage = () => {
   const { language } = useLanguage();
   const showMessage = useShowMessage();
   const msg = useMsg();
+
+  const [initialPos, setInitialPos] = useState<number | null>(null);
+  const [initialSize, setInitialSize] = useState<number | null>(null);
+
+  const tabsDragable = useRef<HTMLDivElement>(null);
+  const footer = useRef<HTMLDivElement>(null);
 
   const saveEndpoint = useCallback((endpoint: string) => {
     localStorage.setItem('prevEndpoint', endpoint);
@@ -98,6 +105,41 @@ const GraphiQLPage = () => {
 
       return newTabs;
     });
+  };
+
+  const dragStart = (e: DragEvent) => {
+    console.log('start', e.clientY, tabsDragable.current!.offsetHeight);
+    if (e.clientY !== 0) {
+      setInitialPos(e.clientY);
+    }
+    setInitialSize(tabsDragable.current!.offsetHeight);
+  };
+
+  const dragEnd = (e: DragEvent) => {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
+    console.log(coordinate);
+    if (coordinate > 0.05 && coordinate < 5 && isFooterOpen) {
+      footer.current!.style.flex = `${coordinate} 1 0`;
+    } else if (coordinate <= 0.05) {
+      footer.current!.style.flex = `0.05 1 0`;
+      setIsFooterOpen(false);
+    }
+  };
+
+  const resize = (e: DragEvent) => {
+    const coordinate = (-e.clientY + initialPos! + initialSize!) / 100;
+    console.log(coordinate, -e.clientY, initialPos!, initialSize!);
+    if (coordinate > 0.05 && coordinate < 5 && isFooterOpen) {
+      footer.current!.style.flex = `${coordinate} 1 0`;
+    } else if (coordinate <= 0.05) {
+      footer.current!.style.flex = `0.05 1 0`;
+      setIsFooterOpen(false);
+    }
+  };
+
+  const closeFooter = () => {
+    setIsFooterOpen(!isFooterOpen);
+    footer.current!.style.flex = !isFooterOpen ? `1 1 0` : `0.05 1 0`;
   };
 
   const sendGraphqlRequest = async () => {
@@ -213,31 +255,67 @@ const GraphiQLPage = () => {
                 />
               </div>
             </div>
-            <div className={`editor-footer ${isFooterOpen ? 'open' : ''}`}>
-              <div className='variables'>
-                variables
-                {isFooterOpen && (
-                  <EditorWindow
-                    code={variables}
-                    updateData={(data: string) => setVariables(data)}
-                  />
-                )}
+            <div
+              className={`editor-footer ${isFooterOpen ? 'open' : ''}`}
+              ref={footer}
+            >
+              <div
+                className='editor-footer__tabs'
+                ref={tabsDragable}
+                onDragStart={dragStart}
+                onDragEnd={dragEnd}
+                onDrag={resize}
+                draggable={isFooterOpen}
+                onClick={(e) => {
+                  if (e.clientY !== 0) {
+                    setInitialPos(e.clientY);
+                  }
+                }}
+              >
+                <div className='tabs_wrap'>
+                  <span
+                    className={`editor-footer__tab ${
+                      isFooterOpen && !isHeadersOpened ? 'checked' : ''
+                    }`}
+                    onClick={() => setIsHeadersOpened(false)}
+                  >
+                    Variables
+                  </span>
+                  <span
+                    className={`editor-footer__tab ${
+                      isFooterOpen && isHeadersOpened ? 'checked' : ''
+                    }`}
+                    onClick={() => setIsHeadersOpened(true)}
+                  >
+                    Headers
+                  </span>
+                </div>
+                <IoChevronUpOutline
+                  className={`editor-footer-icon arrow ${
+                    isFooterOpen ? 'open' : ''
+                  }`}
+                  onClick={closeFooter}
+                />
               </div>
-              <div className='headers'>
-                headers
-                {isFooterOpen && (
-                  <EditorWindow
-                    code={headers}
-                    updateData={(data: string) => setHeaders(data)}
-                  />
-                )}
-              </div>
-              <IoChevronUpOutline
-                className={`editor-footer-icon arrow ${
-                  isFooterOpen ? 'open' : ''
-                }`}
-                onClick={() => setIsFooterOpen(!isFooterOpen)}
-              />
+              {isFooterOpen && (
+                <div
+                  className={`editor-footer__editor ${
+                    isHeadersOpened ? 'open' : ''
+                  }`}
+                >
+                  {!isHeadersOpened ? (
+                    <EditorWindow
+                      code={variables}
+                      updateData={(data: string) => setVariables(data)}
+                    />
+                  ) : (
+                    <EditorWindow
+                      code={headers}
+                      updateData={(data: string) => setHeaders(data)}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <button
