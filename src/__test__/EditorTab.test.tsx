@@ -19,7 +19,7 @@ test('EditorTab renders correctly and handles events', () => {
     />,
   );
 
-  const tab = getByTestId('tab');
+  const tab = getByTestId('tab-1');
   act(() => {
     fireEvent.click(tab);
   });
