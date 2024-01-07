@@ -4,6 +4,7 @@ import { IoFileTrayFullOutline, IoSettingsSharp } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IconButton, ModalWindow } from '@components/index';
 import { IEditorTab } from '@appTypes/types';
+import { removeTab } from '@utils/tabUtils';
 import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Sidebar.css';
@@ -63,24 +64,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
     setTabs([newTab]);
   };
 
-  const removeTab = (id: number) => {
-    setTabs((prevTabs) => {
-      let newTabs = prevTabs.filter((tab) => tab.id !== id);
-      if (newTabs.length === 0) {
-        const newTab: IEditorTab = {
-          id: 1,
-          code: '',
-          name: 'untitled 1',
-        };
-        newTabs = [newTab];
-        setActiveTab(newTab.id);
-      } else if (id === activeTab) {
-        const newActiveTab = newTabs[newTabs.length - 1] || null;
-        setActiveTab(newActiveTab ? newActiveTab.id : null);
-      }
-
-      return newTabs;
-    });
+  const handleCloseTab = () => {
+    if (activeTab !== null) {
+      removeTab(activeTab, tabs, activeTab, setTabs, setActiveTab);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -104,7 +93,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <IconButton
         className={`sidebar-icon remove ${tabs.length === 1 ? 'disabled' : ''}`}
         title={translations[language]?.titleRemoveTab}
-        onClick={() => removeTab(activeTab!)}
+        onClick={handleCloseTab}
       >
         <LuFileMinus2 />
       </IconButton>
