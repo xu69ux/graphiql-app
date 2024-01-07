@@ -81,9 +81,7 @@ const GraphiQLPage = () => {
         headers ? JSON.parse(headers) : {},
       );
       setViewer(
-        JSON.stringify(result.data)
-          .replaceAll('{', '{\n')
-          .replaceAll('}', '}\n'),
+        JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
       );
     } catch (error) {
       showMessage(msg.GRAPHIQL_API_ERROR);
