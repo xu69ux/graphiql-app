@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ReactElement } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
 
+/* eslint-disable react-refresh/only-export-components */
 export const setLanguage = jest.fn();
 
 export const MockLanguageProvider = ({

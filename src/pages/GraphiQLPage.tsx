@@ -44,16 +44,15 @@ const GraphiQLPage = () => {
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      console.log(response);
       setSchema(response.data.__schema);
       saveEndpoint(endpoint);
       setIsFetchSuccessful(true);
     } catch (error) {
       console.error(error);
       setIsFetchSuccessful(false);
-      showMessage(msg.COMMON_ERROR);
+      showMessage(msg.SCHEMA_INVALID);
     }
-  }, [endpoint, msg.COMMON_ERROR, saveEndpoint, showMessage]);
+  }, [endpoint, msg.SCHEMA_INVALID, saveEndpoint, showMessage]);
 
   useEffect(() => {
     fetchShema();
@@ -81,9 +80,7 @@ const GraphiQLPage = () => {
         headers ? JSON.parse(headers) : {},
       );
       setViewer(
-        JSON.stringify(result.data)
-          .replaceAll('{', '{\n')
-          .replaceAll('}', '}\n'),
+        JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
       );
     } catch (error) {
       showMessage(msg.GRAPHIQL_API_ERROR);

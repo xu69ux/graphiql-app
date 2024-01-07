@@ -1,9 +1,9 @@
 import * as yup from 'yup';
-import { getSchema } from '@utils/validation/schema';
+import { getSignupSchema } from '@utils/validation/schema';
 
 describe('Validation Schema', () => {
   const language = 'en';
-  const schema = getSchema(language);
+  const schema = getSignupSchema(language);
 
   it('should validate a valid object', async () => {
     const validObject = {

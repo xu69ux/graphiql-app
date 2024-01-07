@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
   }, [language, darkTheme, crazyTheme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
+    setTheme((prevTheme: string) =>
       prevTheme === crazyTheme ? darkTheme : crazyTheme,
     );
   };

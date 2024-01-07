@@ -38,7 +38,7 @@ export const EditorTab: FC<IEditorTabProps> = ({
   };
 
   return (
-    <div className='tab' onClick={onTabSelected} data-testid='tab'>
+    <div className='tab' onClick={onTabSelected} data-testid={`tab-${id}`}>
       <div className={isActive ? 'tab-title active' : 'tab-title'}>
         <input
           className='tab-title-input'
