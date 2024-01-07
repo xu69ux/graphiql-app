@@ -32,27 +32,29 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
     setLanguage(newLanguage);
   };
 
-  return isOpen ? (
-    <div className='modal-overlay'>
-      <div className='modal-window' data-testid='modal-window'>
-        <IconButton
-          className='modal-icon close'
-          title={translations?.[language].titleCloseModal}
-          onClick={onClose}
-        >
-          <IoCloseOutline />
-        </IconButton>
-        <div className='modal-content'>
-          <h3>{translations?.[language].settings}</h3>
-          <ModalWindowSettings
-            theme={theme}
-            language={language}
-            onThemeToggle={toggleTheme}
-            onLanguageToggle={toggleLanguage}
-            onLocalClear={handleLocalClear}
-          />
+  return (
+    isOpen && (
+      <div className='modal-overlay'>
+        <div className='modal-window' data-testid='modal-window'>
+          <IconButton
+            className='modal-icon close'
+            title={translations?.[language].titleCloseModal}
+            onClick={onClose}
+          >
+            <IoCloseOutline />
+          </IconButton>
+          <div className='modal-content'>
+            <h3>{translations?.[language].settings}</h3>
+            <ModalWindowSettings
+              theme={theme}
+              language={language}
+              onThemeToggle={toggleTheme}
+              onLanguageToggle={toggleLanguage}
+              onLocalClear={handleLocalClear}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  ) : null;
+    )
+  );
 };
