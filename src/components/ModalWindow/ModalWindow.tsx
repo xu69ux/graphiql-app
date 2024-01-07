@@ -21,8 +21,6 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  if (!isOpen) return null;
-
   const handleLocalClear = () => {
     localStorage.clear();
     showMessage(msg.LOCAL_STORAGE_CLEAR_SUCCESS);
@@ -34,7 +32,7 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
     setLanguage(newLanguage);
   };
 
-  return (
+  return isOpen ? (
     <div className='modal-overlay'>
       <div className='modal-window' data-testid='modal-window'>
         <IconButton
@@ -56,5 +54,5 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
