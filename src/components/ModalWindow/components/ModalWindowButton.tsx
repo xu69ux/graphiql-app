@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import '@styles/ModalWindowSetting.css';
+import '@styles/ModalWindowButton.css';
 
-interface ModalWindowSettingProps {
+interface ModalWindowButtonProps {
   title: string;
   value: string;
   onClick: () => void;
 }
 
-export const ModalWindowSetting: FC<ModalWindowSettingProps> = ({
+export const ModalWindowButton: FC<ModalWindowButtonProps> = ({
   title,
   value,
   onClick,
