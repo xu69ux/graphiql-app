@@ -1,0 +1,41 @@
+.setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  width: 25rem;
+}
+
+.setting-btn {
+  border: 1px solid var(--extra);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--light);
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  width: 8rem;
+  margin: 0 1rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.setting-btn:hover {
+  background-color: var(--extra);
+  color: var(--blue);
+}
+
+@media screen and (max-width: 450px) {
+  .setting {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .setting-btn {
+    width: 70%;
+    height: 3rem;
+    margin-top: 1rem;
+  }
+}
