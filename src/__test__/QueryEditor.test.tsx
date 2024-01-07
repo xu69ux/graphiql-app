@@ -66,4 +66,41 @@ describe('QueryEditor', () => {
       throw new Error('Input element not found');
     }
   });
+
+  it('handleHighlightedCode formats the code of the active tab', () => {
+    const { getByTestId } = render(
+      <QueryEditor
+        activeTab={1}
+        setActiveTab={jest.fn()}
+        tabs={[{ id: 1, code: 'query {}', name: 'untitled 1' }]}
+        setTabs={jest.fn()}
+      />,
+    );
+
+    const highlightedCode = getByTestId('highlighted-code');
+    const keywordSpan = highlightedCode.querySelector('span.keyword');
+
+    expect(keywordSpan).not.toBeNull();
+    expect(keywordSpan?.textContent).toBe('query');
+  });
+
+  it('clears the code of the active tab when handleClearCode is called', () => {
+    const tabs = [{ id: 1, code: 'query {}', name: 'untitled 1' }];
+    const setTabs = jest.fn((updateFunction) => {
+      const newTabs = updateFunction(tabs);
+      expect(newTabs).toEqual([{ id: 1, code: '', name: 'untitled 1' }]);
+    });
+    const setActiveTab = jest.fn();
+    const { getByTestId } = render(
+      <QueryEditor
+        activeTab={1}
+        setActiveTab={setActiveTab}
+        tabs={tabs}
+        setTabs={setTabs}
+      />,
+    );
+
+    const clearButton = getByTestId('clear-button');
+    fireEvent.click(clearButton);
+  });
 });

@@ -142,8 +142,13 @@ export const EditorWindow: FC<IEditWindowProps> = ({
           }
         }}
         disabled={disabled}
+        data-testid='code-editor'
       />
-      <div className='highlighted-code' ref={highlightedCode} />
+      <div
+        className='highlighted-code'
+        ref={highlightedCode}
+        data-testid='highlighted-code'
+      />
     </div>
   );
 };

@@ -117,6 +117,7 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
             className='sidebar-icon add'
             title='clear text area'
             onClick={handleClearCode}
+            data-testid='clear-button'
           />
         </div>
       </div>
