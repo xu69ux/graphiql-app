@@ -1,12 +1,12 @@
 import { auth, logInWithEmailAndPassword } from '@utils/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '@utils/validation/schema';
+import { getLoginSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { translations } from '@contexts/translations';
-import { CustomButton, PasswordValidIndicator } from '@components/index';
+import { CustomButton } from '@components/index';
 import useShowMessage from '@hooks/useShowMessage';
 import useLanguage from '@hooks/useLanguage';
 import useMsg from '@hooks/useMsg';
@@ -22,7 +22,7 @@ export const FormLogIn = () => {
   const [user, loading] = useAuthState(auth);
   const showMessage = useShowMessage();
   const { language } = useLanguage();
-  const schema = getSchema(language);
+  const schema = getLoginSchema(language);
   const msg = useMsg();
 
   const {
@@ -109,7 +109,6 @@ export const FormLogIn = () => {
             {...register('password')}
           />
         </div>
-        <PasswordValidIndicator password={password} />
         <div className='error'>
           {errors.password &&
             (touchedFields.password || errors.password.type !== 'required') && (
