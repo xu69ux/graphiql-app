@@ -24,31 +24,13 @@ export const BackButton: FC<IBackButtonProps> = ({
   setSelectedKind,
 }) => {
   const handleBackClick = () => {
-    if (selectedKind) {
-      if (!selectedType && !selectedField) {
-        setSelectedType(null);
-        setSelectedField(null);
-        setSelectedKind(null);
-      } else if (selectedType && !selectedField) {
-        setSelectedType(selectedType);
-        setSelectedField(null);
-        setSelectedKind(null);
-      } else if (selectedType && selectedField) {
-        setSelectedType(selectedType);
-        setSelectedField(null);
-        setSelectedKind(null);
-      }
-    } else {
-      if (selectedField) {
-        setSelectedType(selectedType);
-        setSelectedField(null);
-        setSelectedKind(null);
-      } else if (selectedType) {
-        setSelectedType(null);
-        setSelectedField(null);
-        setSelectedKind(null);
-      }
+    if ((selectedKind && selectedType) || selectedField) {
+      setSelectedType(selectedType);
+    } else if (selectedType) {
+      setSelectedType(null);
     }
+    setSelectedField(null);
+    setSelectedKind(null);
   };
 
   return (

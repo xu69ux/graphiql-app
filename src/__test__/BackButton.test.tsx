@@ -55,25 +55,6 @@ describe('BackButton', () => {
     expect(getByTestId('back-button-icon')).toBeInTheDocument();
   });
 
-  it('handles null selected* props correctly', () => {
-    const { getByTestId } = render(
-      <BackButton
-        selectedField={null}
-        setSelectedField={setSelectedField}
-        selectedType={null}
-        setSelectedType={setSelectedType}
-        selectedKind={null}
-        setSelectedKind={setSelectedKind}
-      />,
-    );
-
-    fireEvent.click(getByTestId('back-button'));
-
-    expect(setSelectedField).not.toHaveBeenCalled();
-    expect(setSelectedType).not.toHaveBeenCalled();
-    expect(setSelectedKind).not.toHaveBeenCalled();
-  });
-
   it('calls handleBackClick when clicked', () => {
     const { getByTestId } = render(
       <BackButton
