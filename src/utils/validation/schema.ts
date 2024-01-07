@@ -22,10 +22,6 @@ export const getSignupSchema = (language: string) => {
             errors.push(
               translations[language]?.passwordInvalidCriteriaLowercase,
             );
-          if (!/(?=.*[A-Z])/.test(value))
-            errors.push(
-              translations[language]?.passwordInvalidCriteriaUppercase,
-            );
           if (!/(?=.*[0-9])/.test(value))
             errors.push(translations[language]?.passwordInvalidCriteriaNumber);
           if (!/(?=.*[!@#$%^&*])/.test(value))

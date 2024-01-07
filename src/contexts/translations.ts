@@ -40,7 +40,6 @@ export const translations = {
     passwordInvalidCriteriaLowercase: 'at least one lowercase letter',
     passwordInvalidCriteriaNumber: 'at least one number',
     passwordInvalidCriteriaSpecial: 'at least one special character',
-    passwordInvalidCriteriaUppercase: 'at least one uppercase letter',
     passwordRequired: 'Password is required',
     reloadPage: 'Reload page',
     regAlreadyExistBody: 'An account with this email already exists.',
@@ -127,7 +126,6 @@ export const translations = {
     passwordInvalidCriteriaLowercase: 'хотя бы одну строчную букву',
     passwordInvalidCriteriaNumber: 'хотя бы одну цифру',
     passwordInvalidCriteriaSpecial: 'хотя бы один спецсимвол',
-    passwordInvalidCriteriaUppercase: 'хотя бы одну заглавную букву',
     passwordRequired: 'Пароль обязателен',
     reloadPage: 'Перезагрузить страницу',
     regAlreadyExistBody:
@@ -215,7 +213,6 @@ export const translations = {
     passwordInvalidCriteriaLowercase: 'хоча б одну малу літеру',
     passwordInvalidCriteriaNumber: 'хоча б одну цифру',
     passwordInvalidCriteriaSpecial: 'хоча б один спецсимвол',
-    passwordInvalidCriteriaUppercase: 'хоча б одну велику літеру',
     passwordRequired: 'Пароль обов’язковий',
     reloadPage: 'Перезавантажити сторінку',
     regAlreadyExistBody: 'Обліковий запис з цим email вже існує.',
