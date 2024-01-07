@@ -20,7 +20,7 @@ export { LanguageMenu } from './Header/components/LanguageMenu';
 export { Loader } from './Loader';
 export { Logo } from './Header/components/Logo';
 export { ModalWindow } from './ModalWindow/ModalWindow';
-export { ModalWindowSetting } from './ModalWindow/components/ModalWindowSetting';
+export { ModalWindowButton } from './ModalWindow/components/ModalWindowButton';
 export { ModalWindowSettings } from './ModalWindow/components/ModalWindowSettings';
 export { NoUserComponent } from './Header/components/NoUserComponent';
 export { PasswordValidIndicator } from './PasswordValidIndicator';

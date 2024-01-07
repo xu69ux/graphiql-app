@@ -11,9 +11,7 @@ export const prettify = (code: string) => {
   let indentationLevel = 0;
   let result = '';
   let check = false;
-  result = fixStuckedBrackets(code);
-  const lines = result.split('\n');
-  result = '';
+  const lines = fixStuckedBrackets(code).split('\n');
   lines.forEach((line) => {
     line = line.trim();
     if (line.match(/\S/)) {

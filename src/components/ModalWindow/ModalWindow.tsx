@@ -21,8 +21,6 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  if (!isOpen) return null;
-
   const handleLocalClear = () => {
     localStorage.clear();
     showMessage(msg.LOCAL_STORAGE_CLEAR_SUCCESS);
@@ -35,30 +33,28 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <>
-      {isOpen && (
-        <div className='modal-overlay'>
-          <div className='modal-window' data-testid='modal-window'>
-            <IconButton
-              className='modal-icon close'
-              title={translations?.[language].titleCloseModal}
-              onClick={onClose}
-            >
-              <IoCloseOutline />
-            </IconButton>
-            <div className='modal-content'>
-              <h3>{translations?.[language].settings}</h3>
-              <ModalWindowSettings
-                theme={theme}
-                language={language}
-                onThemeToggle={toggleTheme}
-                onLanguageToggle={toggleLanguage}
-                onLocalClear={handleLocalClear}
-              />
-            </div>
+    isOpen && (
+      <div className='modal-overlay'>
+        <div className='modal-window' data-testid='modal-window'>
+          <IconButton
+            className='modal-icon close'
+            title={translations?.[language].titleCloseModal}
+            onClick={onClose}
+          >
+            <IoCloseOutline />
+          </IconButton>
+          <div className='modal-content'>
+            <h3>{translations?.[language].settings}</h3>
+            <ModalWindowSettings
+              theme={theme}
+              language={language}
+              onThemeToggle={toggleTheme}
+              onLanguageToggle={toggleLanguage}
+              onLocalClear={handleLocalClear}
+            />
           </div>
         </div>
-      )}
-    </>
+      </div>
+    )
   );
 };

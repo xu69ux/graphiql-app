@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ModalWindowSetting } from '@components/index';
+import { ModalWindowButton } from '@components/index';
 import { translations } from '@contexts/translations';
 
 interface ModalWindowSettingsProps {
@@ -18,17 +18,17 @@ export const ModalWindowSettings: FC<ModalWindowSettingsProps> = ({
   onLocalClear,
 }) => (
   <div className='settings'>
-    <ModalWindowSetting
+    <ModalWindowButton
       title={translations?.[language].themeChange}
       value={theme}
       onClick={onThemeToggle}
     />
-    <ModalWindowSetting
+    <ModalWindowButton
       title={translations?.[language].languageChange}
       value={language}
       onClick={onLanguageToggle}
     />
-    <ModalWindowSetting
+    <ModalWindowButton
       title={translations?.[language].localStorage}
       value={translations?.[language].clear}
       onClick={onLocalClear}

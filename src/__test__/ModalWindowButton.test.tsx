@@ -1,12 +1,12 @@
 import { render, fireEvent } from './test-utils';
-import { ModalWindowSetting } from '@components/index';
+import { ModalWindowButton } from '@components/index';
 
-describe('ModalWindowSetting', () => {
+describe('ModalWindowButton', () => {
   it('renders correctly', () => {
     const onClick = jest.fn();
 
     const { getByText } = render(
-      <ModalWindowSetting
+      <ModalWindowButton
         title='Test Title'
         value='Test Value'
         onClick={onClick}
@@ -21,7 +21,7 @@ describe('ModalWindowSetting', () => {
     const onClick = jest.fn();
 
     const { getByText } = render(
-      <ModalWindowSetting
+      <ModalWindowButton
         title='Test Title'
         value='Test Value'
         onClick={onClick}
