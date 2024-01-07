@@ -9,6 +9,6 @@ test('renders greeting with name when name is provided', () => {
 
 test('renders greeting with noName when name is not provided', () => {
   render(<Greeting isLoading={false} name={undefined} />);
-  const greetingElement = screen.getByText('hello, username!');
+  const greetingElement = screen.getByText('hello, guest!');
   expect(greetingElement).toBeInTheDocument();
 });
