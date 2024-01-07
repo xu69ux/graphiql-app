@@ -16,6 +16,8 @@ export const graphqlRequest = async (
       },
     );
 
+    console.log(result);
+
     return result.data;
   } catch (error) {
     throw new Error('GraphQL request failed');

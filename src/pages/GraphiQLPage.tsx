@@ -41,6 +41,8 @@ const GraphiQLPage = () => {
   const fetchShema = useCallback(async (): Promise<void> => {
     if (!endpoint) {
       return;
+    } else {
+      setSchema(null);
     }
     try {
       const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
@@ -79,6 +81,7 @@ const GraphiQLPage = () => {
         res,
         headers ? JSON.parse(headers) : {},
       );
+
       setViewer(
         JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
       );
