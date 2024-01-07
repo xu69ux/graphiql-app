@@ -5,6 +5,10 @@ jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('graphqlRequest', () => {
+  beforeEach(() => {
+    mockedAxios.post.mockClear();
+  });
+
   it('sends a request and returns the response data', async () => {
     const url = 'test.com';
     const query = '{ test }';
