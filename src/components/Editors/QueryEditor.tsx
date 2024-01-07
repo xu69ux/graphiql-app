@@ -111,6 +111,7 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
             className='sidebar-icon add'
             onClick={handleFormatCode}
             title='prettify query'
+            data-testid='prettify-button'
           />
           <IoRemoveCircle
             className='sidebar-icon add'
