@@ -29,7 +29,7 @@ describe('graphqlRequest', () => {
     const query = '{ test }';
     const headers = { 'Content-Type': 'application/json' };
 
-    mockedAxios.post.mockRejectedValueOnce(new Error('Request failed'));
+    mockedAxios.post.mockRejectedValueOnce(new Error('GraphQL request failed'));
 
     await expect(graphqlRequest(url, query, headers)).rejects.toThrow(
       'GraphQL request failed',
