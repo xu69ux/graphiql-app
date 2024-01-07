@@ -1,6 +1,10 @@
 .tab {
-  margin: 1.5rem 0 0.8rem 2rem;
+  margin: 1.5rem 0 0.8rem 0.8rem;
   cursor: pointer;
+}
+
+.tab:first-child {
+  margin: 1.5rem 0 0.8rem 2rem;
 }
 
 .tab:hover {
@@ -63,4 +67,24 @@
 .tab-close.disabled:hover {
   transform: none;
   cursor: default;
+}
+
+@media screen and (max-width: 650px) {
+  .tab-title {
+    padding: 0.1rem 0.3rem;
+  }
+
+  .tab-close {
+    margin-left: 0;
+  }
+
+  .tab-title-input {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .tab-title-input {
+    font-size: 0.7rem;
+  }
 }

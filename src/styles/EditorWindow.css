@@ -68,3 +68,12 @@
   color: var(--green);
   font-weight: bold;
 }
+
+@media screen and (max-width: 850px) {
+  .code-container,
+  .line-numbers,
+  .code,
+  .highlighted-code {
+    font-size: 0.8rem;
+  }
+}

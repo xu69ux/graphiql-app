@@ -17,7 +17,6 @@
 .lang-menu {
   position: relative;
   display: flex;
-  flex-direction: row;
   color: var(--light);
 }
 
@@ -28,7 +27,8 @@
 .lang-dropdown {
   position: absolute;
   display: flex;
-  flex-direction: row;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -44,6 +44,8 @@
 
 .lang-name {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 1rem;
   margin-right: 0.5rem;
 }
@@ -68,7 +70,21 @@
   color: var(--light);
 }
 
+@media screen and (max-width: 850px) {
+  .lang-icon {
+    font-size: 1.3rem;
+  }
+
+  .lang-icon:hover {
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
 @media screen and (max-width: 610px) {
+  .lang-icon {
+    font-size: 1.2rem;
+  }
+
   .lang-icon.scrolled {
     color: var(--light);
   }
@@ -82,12 +98,24 @@
   }
 }
 
-@media screen and (max-width: 400px) {
-  .lang-dropdown {
-    flex-direction: column;
+@media screen and (max-width: 550px) {
+  .lang-icon {
+    font-size: 1rem;
   }
 
-  .lang-menu button {
-    margin: 0 0.3rem 0.3rem 0;
+  .lang-menu button,
+  .lang-name {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .logo {
+    font-size: 0.8rem;
+  }
+
+  .lang-menu button,
+  .lang-name {
+    font-size: 0.6rem;
   }
 }

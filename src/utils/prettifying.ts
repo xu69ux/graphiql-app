@@ -1,6 +1,6 @@
 import { INDENTATION } from '@constants/constants';
 
-const fixStuckedBrackets = (code: string) => {
+const fixStuckedSymbols = (code: string) => {
   return code
     .replaceAll(/(?<=\w){/g, ' {')
     .replaceAll(/}(?=\w)/g, '} ')

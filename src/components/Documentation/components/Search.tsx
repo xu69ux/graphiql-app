@@ -56,8 +56,8 @@ export const Search: FC<SearchProps> = ({ schema, setSearchItem }) => {
     setSearchTerm('');
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
   return (

@@ -56,7 +56,7 @@ const GraphiQLPage = () => {
 
   useEffect(() => {
     fetchShema();
-  }, [fetchShema]);
+  }, [endpoint]);
 
   const sendGraphqlRequest = async () => {
     const activeTabTemp: IEditorTab = tabs.find(
