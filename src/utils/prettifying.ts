@@ -11,12 +11,10 @@ export const prettify = (code: string) => {
   let indentationLevel = 0;
   let result = '';
   let check = false;
-  result = fixStuckedSymbols(code);
-  const lines = result.split('\n');
-  result = '';
+  const lines = fixStuckedBrackets(code).split('\n');
   lines.forEach((line) => {
-    line = line.trim();
-    if (line.match(/\S/)) {
+    const trimmedLine = line.trim();
+    if (trimmedLine.match(/\S/)) {
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
         if (char === '{') {

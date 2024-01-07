@@ -1,7 +1,7 @@
 import { auth, registerWithEmailAndPassword } from '@utils/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getSchema } from '@utils/validation/schema';
+import { getSignupSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -23,7 +23,7 @@ export const FormSignUp = () => {
   const [user, loading] = useAuthState(auth);
   const showMessage = useShowMessage();
   const { language } = useLanguage();
-  const schema = getSchema(language);
+  const schema = getSignupSchema(language);
   const msg = useMsg();
 
   const {

@@ -17,7 +17,7 @@ export const Greeting: FC<IGreetingProps> = ({ name }) => {
       {name ? (
         <p>{`${translations[language]?.greeting}, ${name}!`}</p>
       ) : (
-        <p>{`${translations[language]?.greeting}, ${translations[language]?.noName}!`}</p>
+        <p>{`${translations[language]?.greeting}, ${translations[language]?.guest}!`}</p>
       )}
     </div>
   );

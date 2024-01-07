@@ -1,8 +1,8 @@
 import { FC, SetStateAction, Dispatch } from 'react';
-import { IEditorTab } from '../../types/types';
-import { prettify } from '../../utils/prettifying';
-
-import { EditorTab, EditorWindow } from '../../components';
+import { IEditorTab } from '@appTypes/types';
+import { prettify } from '@utils/prettifying';
+import { removeTab } from '@utils/tabUtils';
+import { EditorTab, EditorWindow } from '@components/index';
 
 import { IoRemoveCircle, IoSparklesOutline } from 'react-icons/io5';
 
@@ -34,26 +34,6 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
     }
   };
 
-  const removeTab = (id: number) => {
-    setTabs((prevTabs) => {
-      let newTabs = prevTabs.filter((tab) => tab.id !== id);
-      if (newTabs.length === 0) {
-        const newTab: IEditorTab = {
-          id: 1,
-          code: '',
-          name: 'untitled 1',
-        };
-        newTabs = [newTab];
-        setActiveTab(newTab.id);
-      } else if (id === activeTab) {
-        const newActiveTab = newTabs[newTabs.length - 1] || null;
-        setActiveTab(newActiveTab ? newActiveTab.id : null);
-      }
-
-      return newTabs;
-    });
-  };
-
   const handleNameChange = (id: number, newName: string) => {
     setTabs((prevTabs) => updateTab(prevTabs, id, { name: newName }));
   };
@@ -79,6 +59,14 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
     updateData('');
   };
 
+  const handleCloseTab = (id: number) => {
+    if (activeTab !== null) {
+      removeTab(id, tabs, activeTab, setTabs, setActiveTab);
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <div className='tab-names'>
@@ -89,7 +77,7 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
             name={tab.name}
             isActive={tab.id === activeTab}
             onTabClick={setActiveTab}
-            onCloseClick={removeTab}
+            onCloseClick={handleCloseTab}
             onNameChange={handleNameChange}
             totalTabs={tabs.length}
           />
@@ -111,11 +99,13 @@ export const QueryEditor: FC<IQueryEditorProps> = ({
             className='sidebar-icon add'
             onClick={handleFormatCode}
             title='prettify query'
+            data-testid='prettify-button'
           />
           <IoRemoveCircle
             className='sidebar-icon add'
             title='clear text area'
             onClick={handleClearCode}
+            data-testid='clear-button'
           />
         </div>
       </div>

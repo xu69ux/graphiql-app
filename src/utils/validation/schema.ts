@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { translations } from '@contexts/translations';
 
-export const getSchema = (language) => {
+export const getSignupSchema = (language: string) => {
   return yup.object().shape({
     username: yup.string().nullable(''),
     email: yup
@@ -22,10 +22,6 @@ export const getSchema = (language) => {
             errors.push(
               translations[language]?.passwordInvalidCriteriaLowercase,
             );
-          if (!/(?=.*[A-Z])/.test(value))
-            errors.push(
-              translations[language]?.passwordInvalidCriteriaUppercase,
-            );
           if (!/(?=.*[0-9])/.test(value))
             errors.push(translations[language]?.passwordInvalidCriteriaNumber);
           if (!/(?=.*[!@#$%^&*])/.test(value))
@@ -43,5 +39,15 @@ export const getSchema = (language) => {
               );
         },
       ),
+  });
+};
+
+export const getLoginSchema = (language: string) => {
+  return yup.object().shape({
+    email: yup
+      .string()
+      .email(translations[language]?.emailInvalid)
+      .required(translations[language]?.emailRequired),
+    password: yup.string().required(translations[language]?.passwordRequired),
   });
 };

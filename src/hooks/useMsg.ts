@@ -32,6 +32,10 @@ const useMsg = () => {
       body: translations?.[language]?.graphiQlApiError,
       error: true,
     },
+    SCHEMA_INVALID: {
+      body: translations?.[language]?.schemaInvalid,
+      error: true,
+    },
   };
   return msg;
 };

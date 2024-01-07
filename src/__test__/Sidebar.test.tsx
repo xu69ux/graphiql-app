@@ -60,3 +60,20 @@ test('toggleDocumentation function works correctly', () => {
   fireEvent.click(getByTitle(/Documentation/i));
   expect(setIsDocumentationOpen).toHaveBeenCalled();
 });
+
+test('settings modal opens correctly', () => {
+  const { getByTitle, getByTestId } = render(
+    <Sidebar
+      tabs={[]}
+      activeTab={null}
+      isDocumentationOpen={false}
+      isFetchSuccessful={true}
+      setTabs={jest.fn()}
+      setActiveTab={jest.fn()}
+      setIsDocumentationOpen={jest.fn()}
+    />,
+  );
+
+  fireEvent.click(getByTitle(/Settings/i));
+  expect(getByTestId('modal-window')).toBeInTheDocument();
+});
