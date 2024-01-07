@@ -13,8 +13,8 @@ export const prettify = (code: string) => {
   let check = false;
   const lines = fixStuckedSymbols(code).split('\n');
   lines.forEach((line) => {
-    const trimmedLine = line.trim();
-    if (trimmedLine.match(/\S/)) {
+    line = line.trim();
+    if (line.match(/\S/)) {
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
         if (char === '{') {
