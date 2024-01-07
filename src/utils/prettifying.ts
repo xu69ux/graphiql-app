@@ -13,8 +13,8 @@ export const prettify = (code: string) => {
   let check = false;
   const lines = fixStuckedBrackets(code).split('\n');
   lines.forEach((line) => {
-    line = line.trim();
-    if (line.match(/\S/)) {
+    const trimmedLine = line.trim();
+    if (trimmedLine.match(/\S/)) {
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
         if (char === '{') {
