@@ -40,21 +40,15 @@
   opacity: 0.5;
 }
 
-.tab-container {
-  display: flex;
-  flex: 1 1 0;
-  overflow-x: auto;
-  width: 100%;
-  border-top: 0.5px solid var(--green);
-}
-
 .run-button {
   position: absolute;
-  top: 5rem;
+  top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 5vw;
-  height: 5vw;
+  width: 4vw;
+  min-width: 2.8rem;
+  height: 4vw;
+  min-height: 2.8rem;
   border: none;
   border-radius: 50%;
   background: var(--dark);
@@ -84,7 +78,51 @@
   position: absolute;
   top: 50%;
   left: 53%;
+  width: 2vw;
+  min-width: 1.375rem;
+  height: 2vw;
+  min-height: 1.375rem;
   transform: translate(-50%, -50%);
-  font-size: 2vw;
   color: var(--green);
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    height: max-content;
+  }
+
+  .container .code {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .editor,
+  .viewer {
+    width: 100%;
+    height: 30rem;
+  }
+
+  .run-button {
+    position: fixed;
+    top: 23rem;
+    left: auto;
+    right: -0.5rem;
+    z-index: 10;
+  }
+
+  .run-button:after {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .run-button {
+    top: 24rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar {
+    padding: 0.6rem;
+  }
 }

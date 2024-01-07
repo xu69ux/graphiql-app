@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, useEffect, useRef, KeyboardEvent } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  useEffect,
+  useRef,
+  KeyboardEvent,
+  FocusEvent,
+} from 'react';
 import { prettify } from '@utils/prettifying';
 import { INDENTATION } from '@constants/constants';
 
@@ -91,24 +98,24 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     return indentationLevel;
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     const start = textarea.current!.selectionStart;
     const end = textarea.current!.selectionEnd;
     const indentationLevel = getIndentationLevel();
-    pressed.add(e.code);
-    if (e.code === 'Enter') {
-      e.preventDefault();
+    pressed.add(event.code);
+    if (event.code === 'Enter') {
+      event.preventDefault();
       insertIntoString(start, end, `\n${INDENTATION.repeat(indentationLevel)}`);
     }
-    if (e.code === 'Tab') {
-      e.preventDefault();
+    if (event.code === 'Tab') {
+      event.preventDefault();
       insertIntoString(start, end, INDENTATION);
     }
     if (
       (pressed.has('ShiftLeft') || pressed.has('ShiftRight')) &&
       pressed.has('BracketLeft')
     ) {
-      e.preventDefault();
+      event.preventDefault();
       const text = `{\n${INDENTATION.repeat(
         indentationLevel + 1,
       )}\n${INDENTATION.repeat(indentationLevel)}}`;
@@ -118,9 +125,19 @@ export const EditorWindow: FC<IEditWindowProps> = ({
     recalculateLines(textarea.current!.value);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    highlightCode(e.target.value);
-    recalculateLines(e.target.value);
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    highlightCode(event.target.value);
+    recalculateLines(event.target.value);
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLTextAreaElement>) => {
+    event.stopPropagation();
+    const formatedCode = prettify(event.target.value);
+    event.target.value = formatedCode;
+    highlightCode(event.target.value);
+    if (updateData && event.target.value !== code) {
+      updateData(formatedCode);
+    }
   };
 
   return (
@@ -132,15 +149,7 @@ export const EditorWindow: FC<IEditWindowProps> = ({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onKeyUp={(e) => pressed.delete(e.code)}
-        onBlur={(e) => {
-          e.stopPropagation();
-          const formatedCode = prettify(e.target.value);
-          e.target.value = formatedCode;
-          highlightCode(e.target.value);
-          if (updateData && e.target.value !== code) {
-            updateData(formatedCode);
-          }
-        }}
+        onBlur={handleBlur}
         disabled={disabled}
       />
       <div className='highlighted-code' ref={highlightedCode} />

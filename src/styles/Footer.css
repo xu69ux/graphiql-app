@@ -14,6 +14,12 @@
   z-index: 10;
 }
 
+.team-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
 .footer-course {
   display: flex;
   justify-content: flex-start;
@@ -23,9 +29,9 @@
 
 .footer-text {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  width: 30%;
+  width: 50%;
 }
 
 .footer-icons {
@@ -102,6 +108,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 0.1rem;
   width: 100%;
   content: attr(data-tooltip);
   animation: fadeIn 600ms linear forwards;
@@ -119,12 +126,7 @@
   }
 }
 
-@media screen and (max-width: 860px) {
-  .footer-text {
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
+@media screen and (max-width: 850px) {
   .made-with {
     margin-right: 0;
   }
@@ -132,63 +134,52 @@
   .year {
     margin-left: 0;
   }
-}
 
-@media screen and (max-width: 550px) {
-  .footer {
-    height: 8rem;
+  .footer-course {
+    width: max-content;
   }
 
   .footer-icons {
-    flex-direction: column;
-  }
-
-  .iconDiv {
-    margin: 0.25rem 0.25rem 0.25rem auto;
+    width: 30%;
   }
 }
 
-@media screen and (max-width: 450px) {
-  .footer {
+@media screen and (max-width: 650px) {
+  .team-wrap {
     flex-direction: column;
-    height: fit-content;
-    padding: 0;
-  }
-
-  .footer-course {
-    width: 100%;
-    height: 3rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    align-items: center;
-    justify-content: center;
-    order: 3;
+    align-items: flex-end;
+    gap: 0.4rem;
+    width: max-content;
   }
 
   .footer-text {
+    justify-content: flex-end;
     width: 100%;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
-    align-items: center;
-    justify-content: center;
-    order: 2;
-    font-size: 1rem;
   }
 
   .footer-icons {
-    width: 10rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    order: 1;
+    gap: 0.6rem;
+    width: 100%;
   }
 
-  .iconSVG {
-    font-size: 1.5rem;
+  .iconDiv,
+  .iconDiv:hover,
+  .iconDiv:focus-visible {
+    margin: 0;
+    padding: 0;
+    gap: 0.1rem;
+    width: max-content;
   }
 
-  .iconDiv {
-    width: 2.1rem;
+  .iconDiv::after,
+  .iconDiv:hover::after {
+    padding-right: 0.1rem;
+    content: attr(data-tooltip);
   }
+}
+
+@media screen and (max-width: 550px) {
+}
+
+@media screen and (max-width: 450px) {
 }

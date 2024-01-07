@@ -6,7 +6,6 @@
   background-color: var(--blue);
   height: 100%;
   padding: 1rem;
-  z-index: 5;
 }
 
 .sidebar-icon {
@@ -36,4 +35,27 @@
   cursor: default;
   transform: none;
   color: var(--green);
+}
+
+@media screen and (max-width: 650px) {
+  .sidebar {
+    padding: 0.8rem;
+    height: 66rem;
+  }
+
+  .sidebar-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .sidebar {
+    height: 67.7rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar {
+    padding: 0.6rem;
+  }
 }

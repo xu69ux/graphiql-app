@@ -2,7 +2,6 @@
   position: sticky;
   top: 0;
   display: flex;
-
   justify-content: space-between;
   align-items: center;
   height: 3rem;
@@ -77,51 +76,20 @@
   color: var(--light);
 }
 
-@media screen and (max-width: 850px) {
-  .header {
-    height: 6rem;
-  }
-  .navigation-right {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-}
-
 @media screen and (max-width: 610px) {
   .header {
-    height: 8rem;
-  }
-
-  .navigation {
-    flex-direction: column;
-  }
-
-  .navigation-left {
-    margin-bottom: 1rem;
-  }
-
-  .navigation-right {
-    align-items: center;
+    height: 2.5rem;
   }
 }
 
 @media screen and (max-width: 550px) {
   .header {
-    height: 10rem;
-  }
-
-  .navigation-right {
-    flex-direction: column;
-    align-items: center;
+    padding: 1rem 1rem;
   }
 }
 
 @media screen and (max-width: 400px) {
   .header {
-    height: 13rem;
-  }
-
-  .navigation-left {
-    margin-bottom: 1.5rem;
+    height: 2rem;
   }
 }

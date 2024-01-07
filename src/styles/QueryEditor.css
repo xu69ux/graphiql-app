@@ -1,3 +1,12 @@
+.tab-container {
+  display: flex;
+  flex: 1 1 0;
+  overflow-x: auto;
+  width: 100%;
+  min-height: 9rem;
+  border-top: 0.5px solid var(--green);
+}
+
 .tab-names {
   display: flex;
   align-items: center;
@@ -27,4 +36,16 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding-right: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .tab-names {
+    max-height: 3rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .tab-names {
+    max-height: 2.5rem;
+  }
 }

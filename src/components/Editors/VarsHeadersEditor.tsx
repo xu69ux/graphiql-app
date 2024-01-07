@@ -6,6 +6,7 @@ import {
   Dispatch,
   SetStateAction,
   FC,
+  MouseEvent,
 } from 'react';
 import { IoChevronUpOutline } from 'react-icons/io5';
 import {
@@ -38,15 +39,16 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
   const tabsDragable = useRef<HTMLDivElement>(null);
   const footer = useRef<HTMLDivElement>(null);
 
-  const dragStart = (e: DragEvent) => {
-    if (e.clientY !== 0) {
-      setInitialPos(e.clientY);
+  const dragStart = (event: DragEvent) => {
+    if (event.clientY !== 0) {
+      setInitialPos(event.clientY);
     }
     setInitialSize(tabsDragable.current!.offsetHeight);
   };
 
-  const dragEnd = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT_100;
+  const dragEnd = (event: DragEvent) => {
+    const coordinate =
+      (-event.clientY + initialPos! + initialSize!) / PERCENT_100;
     if (
       coordinate > FOOTER_BOTTOM_EDGE &&
       coordinate < FOOTER_UPPER_EDGE &&
@@ -59,8 +61,9 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
     }
   };
 
-  const resize = (e: DragEvent) => {
-    const coordinate = (-e.clientY + initialPos! + initialSize!) / PERCENT_100;
+  const resize = (event: DragEvent) => {
+    const coordinate =
+      (-event.clientY + initialPos! + initialSize!) / PERCENT_100;
     if (
       coordinate > FOOTER_BOTTOM_EDGE &&
       coordinate < FOOTER_UPPER_EDGE &&
@@ -73,8 +76,11 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
     }
   };
 
-  const closeFooter = () => {
+  const closeFooter = (event: MouseEvent) => {
     setIsFooterOpen(!isFooterOpen);
+    if (event.clientY !== 0) {
+      setInitialPos(event.clientY);
+    }
     footer.current!.style.flex = !isFooterOpen
       ? `1 1 0`
       : `${FOOTER_BOTTOM_EDGE} 1 0`;
@@ -89,18 +95,17 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
         onDragEnd={dragEnd}
         onDrag={resize}
         draggable={isFooterOpen}
-        onClick={(e) => {
-          if (e.clientY !== 0) {
-            setInitialPos(e.clientY);
-          }
-        }}
+        onClick={closeFooter}
       >
         <div className='tabs_wrap'>
           <span
             className={`editor-footer__tab ${
               isFooterOpen && !isHeadersOpened ? 'checked' : ''
             }`}
-            onClick={() => setIsHeadersOpened(false)}
+            onClick={(event: MouseEvent) => {
+              event.stopPropagation();
+              setIsHeadersOpened(false);
+            }}
           >
             Variables
           </span>
@@ -108,14 +113,16 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
             className={`editor-footer__tab ${
               isFooterOpen && isHeadersOpened ? 'checked' : ''
             }`}
-            onClick={() => setIsHeadersOpened(true)}
+            onClick={(event: MouseEvent) => {
+              event.stopPropagation();
+              setIsHeadersOpened(true);
+            }}
           >
             Headers
           </span>
         </div>
         <IoChevronUpOutline
           className={`editor-footer-icon arrow ${isFooterOpen ? 'open' : ''}`}
-          onClick={closeFooter}
         />
       </div>
       {isFooterOpen && (

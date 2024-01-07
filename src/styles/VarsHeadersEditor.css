@@ -5,6 +5,7 @@
   border-top: 0.5px solid var(--green);
   border-radius: 0%;
   width: 100%;
+  min-height: 2.5rem;
   color: var(--green);
   overflow: hidden;
 }
@@ -12,6 +13,9 @@
 .editor-footer.open {
   height: 25rem;
   flex: 1 1 0;
+}
+
+.editor-footer.open .editor-footer__tabs {
   cursor: row-resize;
 }
 
@@ -20,6 +24,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.5rem 0.5rem 2rem;
+  cursor: pointer;
 }
 
 .editor-footer.open .editor-footer__tabs {
@@ -70,4 +75,10 @@
 .headers:hover,
 .variables:hover {
   color: var(--light);
+}
+
+@media screen and (max-width: 450px) {
+  .tabs_wrap {
+    gap: 1rem;
+  }
 }

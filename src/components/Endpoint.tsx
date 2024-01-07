@@ -62,28 +62,30 @@ export const Endpoint: FC<IEndpointProps> = memo(
             data-testid='endpoint-input'
           />
         </div>
-        <IconButton
-          className='random-endpoint'
-          title={translations[language]?.titleEndpointRandom}
-          onClick={handleRandomEndpoint}
-        >
-          <LiaDiceSolid />
-        </IconButton>
-        <IconButton
-          className={`history ${isDisabled ? 'disabled' : ''}`}
-          title={translations[language]?.titleEndpointHistory}
-          onClick={setFromHistory}
-          disabled={isDisabled}
-        >
-          <GoHistory />
-        </IconButton>
-        <IconButton
-          className='clean-endpoint'
-          title={translations[language]?.titleEndpointClean}
-          onClick={handleCleanEndpoint}
-        >
-          <IoCloseOutline />
-        </IconButton>
+        <div className='endpoint-icons-wrap'>
+          <IconButton
+            className='random-endpoint'
+            title={translations[language]?.titleEndpointRandom}
+            onClick={handleRandomEndpoint}
+          >
+            <LiaDiceSolid />
+          </IconButton>
+          <IconButton
+            className={`history ${isDisabled ? 'disabled' : ''}`}
+            title={translations[language]?.titleEndpointHistory}
+            onClick={setFromHistory}
+            disabled={isDisabled}
+          >
+            <GoHistory />
+          </IconButton>
+          <IconButton
+            className='clean-endpoint'
+            title={translations[language]?.titleEndpointClean}
+            onClick={handleCleanEndpoint}
+          >
+            <IoCloseOutline />
+          </IconButton>
+        </div>
       </div>
     );
   },

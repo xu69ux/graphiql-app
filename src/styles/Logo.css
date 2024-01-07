@@ -27,9 +27,15 @@
   width: 100%;
 }
 
+@media screen and (max-width: 850px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+}
+
 @media screen and (max-width: 610px) {
   .logo {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .logo.scrolled {
@@ -37,8 +43,14 @@
   }
 }
 
+@media screen and (max-width: 550px) {
+  .logo {
+    font-size: 0.8rem;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .logo {
-    font-size: 1.5rem;
+    display: none;
   }
 }

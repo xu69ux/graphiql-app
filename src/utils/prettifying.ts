@@ -1,6 +1,6 @@
 import { INDENTATION } from '@constants/constants';
 
-const fixStuckedBrackets = (code: string) => {
+const fixStuckedSymbols = (code: string) => {
   return code
     .replaceAll(/(?<=\w){/g, ' {')
     .replaceAll(/}(?=\w)/g, '} ')
@@ -11,7 +11,7 @@ export const prettify = (code: string) => {
   let indentationLevel = 0;
   let result = '';
   let check = false;
-  result = fixStuckedBrackets(code);
+  result = fixStuckedSymbols(code);
   const lines = result.split('\n');
   result = '';
   lines.forEach((line) => {
