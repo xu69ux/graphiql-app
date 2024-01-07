@@ -52,4 +52,13 @@ describe('GraphiQLPage page', () => {
       expect(screen.getByDisplayValue('untitled 2')).toBeInTheDocument();
     });
   });
+
+  test('updates endpoint input value when typing', async () => {
+    render(<GraphiQLPage />);
+    const endpointInput = screen.getByTestId('endpoint-input');
+    fireEvent.change(endpointInput, {
+      target: { value: 'https://new-endpoint.com' },
+    });
+    expect(endpointInput).toHaveValue('https://new-endpoint.com');
+  });
 });
