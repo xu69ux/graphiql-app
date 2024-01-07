@@ -36,7 +36,7 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className='modal-overlay'>
-      <div className='modal-window'>
+      <div className='modal-window' data-testid='modal-window'>
         <IconButton
           className='modal-icon close'
           title={translations?.[language].titleCloseModal}
