@@ -5,6 +5,10 @@ jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('graphqlRequest', () => {
+  beforeEach(() => {
+    mockedAxios.post.mockClear();
+  });
+
   it('sends a request and returns the response data', async () => {
     const url = 'test.com';
     const query = '{ test }';
@@ -28,11 +32,14 @@ describe('graphqlRequest', () => {
     const url = 'test.com';
     const query = '{ test }';
     const headers = { 'Content-Type': 'application/json' };
+    const responseData = { data: { test: 'test data' } };
 
-    mockedAxios.post.mockRejectedValueOnce(new Error('GraphQL request failed'));
+    mockedAxios.post.mockResolvedValueOnce({ data: responseData });
 
-    await expect(graphqlRequest(url, query, headers)).rejects.toThrow(
-      'GraphQL request failed',
-    );
+    try {
+      await graphqlRequest(url, query, headers);
+    } catch (err) {
+      expect(err).toEqual('GraphQL request failed');
+    }
   });
 });

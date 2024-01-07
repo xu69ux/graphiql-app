@@ -18,9 +18,6 @@ export const graphqlRequest = async (
 
     return result.data;
   } catch (error) {
-    if (process.env.NODE_ENV !== 'test') {
-      console.error('Unexpected error during GraphQL request:', error);
-    }
     throw new Error('GraphQL request failed');
   }
 };
