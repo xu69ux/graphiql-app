@@ -48,6 +48,7 @@ export const translations = {
     settings: 'Settings',
     signup: 'signup',
     signupTitle: 'Signup',
+    schemaInvalid: 'Sorry, the schema was not loaded',
     thanxSlava1: 'Special heartfelt thanks to ',
     thanxSlava2:
       'for valuable advice and implicit motivation for multiple refactoring.',
@@ -135,6 +136,7 @@ export const translations = {
     settings: 'Настройки',
     signup: 'зарегистрироваться',
     signupTitle: 'Зарегистрироваться',
+    schemaInvalid: 'Ошибка загрузки схемы',
     thanxSlava1: 'Отдельная искренняя благодарность ',
     thanxSlava2:
       ' за ценные советы и неявную мотивацию к многократному рефакторингу.',
@@ -221,6 +223,7 @@ export const translations = {
     settings: 'Налаштування',
     signup: 'зареєструватися',
     signupTitle: 'Зареєструватися',
+    schemaInvalid: 'Вибачте, сталася помилка під час завантаження схеми',
     thanxSlava1: 'Окрема щира подяка ',
     thanxSlava2:
       ' за цінні поради та неявну мотивацію до багаторазового рефакторингу.',
