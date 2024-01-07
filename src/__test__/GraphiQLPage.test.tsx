@@ -56,9 +56,13 @@ describe('GraphiQLPage page', () => {
   test('updates endpoint input value when typing', async () => {
     render(<GraphiQLPage />);
     const endpointInput = screen.getByTestId('endpoint-input');
-    fireEvent.change(endpointInput, {
-      target: { value: 'https://new-endpoint.com' },
+    act(() => {
+      fireEvent.change(endpointInput, {
+        target: { value: 'https://new-endpoint.com' },
+      });
     });
-    expect(endpointInput).toHaveValue('https://new-endpoint.com');
+    await waitFor(() => {
+      expect(endpointInput).toHaveValue('https://new-endpoint.com');
+    });
   });
 });
