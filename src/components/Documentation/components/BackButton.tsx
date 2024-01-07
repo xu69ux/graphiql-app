@@ -57,7 +57,7 @@ export const BackButton: FC<IBackButtonProps> = ({
       onClick={handleBackClick}
       data-testid='back-button'
     >
-      <IoChevronForward className='back-icon' />
+      <IoChevronForward className='back-icon' data-testid='back-button-icon' />
       <IoChevronForward className='back-icon' />
       <IoChevronForward className='back-icon' />
       {selectedField

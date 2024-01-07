@@ -24,6 +24,71 @@ const mockProps: IBackButtonProps = {
 };
 
 describe('BackButton', () => {
+  it('applies the className prop correctly', () => {
+    const { container } = render(
+      <BackButton
+        className='test-class'
+        selectedField={mockProps.selectedField}
+        setSelectedField={mockProps.setSelectedField}
+        selectedType={mockProps.selectedType}
+        setSelectedType={mockProps.setSelectedType}
+        selectedKind={mockProps.selectedKind}
+        setSelectedKind={mockProps.setSelectedKind}
+      />,
+    );
+
+    expect(container.firstChild).toHaveClass('test-class');
+  });
+
+  it('renders the IoChevronForward icon', () => {
+    const { getByTestId } = render(
+      <BackButton
+        selectedField={mockProps.selectedField}
+        setSelectedField={mockProps.setSelectedField}
+        selectedType={mockProps.selectedType}
+        setSelectedType={mockProps.setSelectedType}
+        selectedKind={mockProps.selectedKind}
+        setSelectedKind={mockProps.setSelectedKind}
+      />,
+    );
+
+    expect(getByTestId('back-button-icon')).toBeInTheDocument();
+  });
+
+  it('handles null selected* props correctly', () => {
+    const { getByTestId } = render(
+      <BackButton
+        selectedField={null}
+        setSelectedField={setSelectedField}
+        selectedType={null}
+        setSelectedType={setSelectedType}
+        selectedKind={null}
+        setSelectedKind={setSelectedKind}
+      />,
+    );
+
+    fireEvent.click(getByTestId('back-button'));
+
+    expect(setSelectedField).not.toHaveBeenCalled();
+    expect(setSelectedType).not.toHaveBeenCalled();
+    expect(setSelectedKind).not.toHaveBeenCalled();
+  });
+
+  it('calls handleBackClick when clicked', () => {
+    const { getByTestId } = render(
+      <BackButton
+        selectedField={mockProps.selectedField}
+        setSelectedField={mockProps.setSelectedField}
+        selectedType={mockProps.selectedType}
+        setSelectedType={mockProps.setSelectedType}
+        selectedKind={mockProps.selectedKind}
+        setSelectedKind={mockProps.setSelectedKind}
+      />,
+    );
+
+    fireEvent.click(getByTestId('back-button'));
+  });
+
   it('displays "Back to Fields" when selectedField is not null', () => {
     const { getByTestId } = render(
       <BackButton
