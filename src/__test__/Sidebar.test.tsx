@@ -5,17 +5,16 @@ test('renders Sidebar without crashing', () => {
   const tabs = [];
   const activeTab = null;
   const isDocumentationOpen = false;
-  const isFetchSuccessful = true;
   const setTabs = jest.fn();
   const setActiveTab = jest.fn();
   const setIsDocumentationOpen = jest.fn();
 
   render(
     <Sidebar
+      schema={null}
       tabs={tabs}
       activeTab={activeTab}
       isDocumentationOpen={isDocumentationOpen}
-      isFetchSuccessful={isFetchSuccessful}
       setTabs={setTabs}
       setActiveTab={setActiveTab}
       setIsDocumentationOpen={setIsDocumentationOpen}
@@ -28,10 +27,10 @@ test('addTab function works correctly', () => {
   const setActiveTab = jest.fn();
   const { getByTitle } = render(
     <Sidebar
+      schema={null}
       tabs={[]}
       activeTab={null}
       isDocumentationOpen={false}
-      isFetchSuccessful={true}
       setTabs={setTabs}
       setActiveTab={setActiveTab}
       setIsDocumentationOpen={jest.fn()}
@@ -47,10 +46,10 @@ test('toggleDocumentation function works correctly', () => {
   const setIsDocumentationOpen = jest.fn();
   const { getByTitle } = render(
     <Sidebar
+      schema={null}
       tabs={[]}
       activeTab={null}
       isDocumentationOpen={false}
-      isFetchSuccessful={true}
       setTabs={jest.fn()}
       setActiveTab={jest.fn()}
       setIsDocumentationOpen={setIsDocumentationOpen}
@@ -64,10 +63,10 @@ test('toggleDocumentation function works correctly', () => {
 test('settings modal opens correctly', () => {
   const { getByTitle, getByTestId } = render(
     <Sidebar
+      schema={null}
       tabs={[]}
       activeTab={null}
       isDocumentationOpen={false}
-      isFetchSuccessful={true}
       setTabs={jest.fn()}
       setActiveTab={jest.fn()}
       setIsDocumentationOpen={jest.fn()}

@@ -3,6 +3,7 @@ import axios from 'axios';
 export const graphqlRequest = async (
   url: string,
   query: string,
+  variables: object = {},
   headers: object = {},
 ) => {
   try {
@@ -10,6 +11,7 @@ export const graphqlRequest = async (
       'https://' + url,
       {
         query: query,
+        variables: variables,
       },
       {
         headers: headers,

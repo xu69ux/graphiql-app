@@ -1,5 +1,5 @@
 import { auth, logInWithEmailAndPassword } from '@utils/firebase';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getLoginSchema } from '@utils/validation/schema';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { translations } from '@contexts/translations';
 import { CustomButton } from '@components/index';
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import useShowMessage from '@hooks/useShowMessage';
 import useLanguage from '@hooks/useLanguage';
 import useMsg from '@hooks/useMsg';
@@ -24,6 +25,7 @@ export const FormLogIn = () => {
   const { language } = useLanguage();
   const schema = getLoginSchema(language);
   const msg = useMsg();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -85,6 +87,10 @@ export const FormLogIn = () => {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='login'>
@@ -103,11 +109,18 @@ export const FormLogIn = () => {
         </div>
         <div className='input-wrapper'>
           <input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             value={password}
             placeholder={translations?.[language]?.password}
             {...register('password')}
           />
+          <div className='password-icon'>
+            {showPassword ? (
+              <IoEyeOutline onClick={toggleShowPassword} />
+            ) : (
+              <IoEyeOffOutline onClick={toggleShowPassword} />
+            )}
+          </div>
         </div>
         <div className='error'>
           {errors.password &&

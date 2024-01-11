@@ -80,6 +80,9 @@
   .header {
     height: 2.5rem;
   }
+  .greeting {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 550px) {

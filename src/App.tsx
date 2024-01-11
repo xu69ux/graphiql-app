@@ -9,6 +9,7 @@ import {
 } from '@components/index';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
+import { LocalStorageProvider } from '@contexts/LocalStorageProvider';
 import { LanguageProvider } from '@contexts/LanguageProvider';
 import { ThemeProvider } from '@contexts/ThemeProvider';
 
@@ -25,41 +26,45 @@ function App() {
   return (
     <div className='app'>
       <ErrorBoundary FallbackComponent={FallBackUI}>
-        <LanguageProvider>
-          <ThemeProvider>
-            <Router>
-              <Header />
-              <Suspense fallback={<Loader />}>
-                <Routes>
-                  <Route path='/' element={<WelcomePage />} />
-                  <Route path='/login' element={<LoginPage />} />
-                  <Route path='/signup' element={<SignupPage />} />
-                  <Route key='/private-route' element={<PrivateRoute />}>
-                    <Route
-                      key='/graphiql'
-                      path='/graphiql'
-                      element={<GraphiQLPage />}
-                    />
-                  </Route>
-                  <Route path='*' element={<NotFoundPage />} />
-                </Routes>
-              </Suspense>
-              <Footer />
-              <ToastContainer
-                position='top-center'
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover={false}
-                theme='light'
-              />
-            </Router>
-          </ThemeProvider>
-        </LanguageProvider>
+        <LocalStorageProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <Router>
+                <Header />
+                <div className='app-content'>
+                  <Suspense fallback={<Loader />}>
+                    <Routes>
+                      <Route path='/' element={<WelcomePage />} />
+                      <Route path='/login' element={<LoginPage />} />
+                      <Route path='/signup' element={<SignupPage />} />
+                      <Route key='/private-route' element={<PrivateRoute />}>
+                        <Route
+                          key='/graphiql'
+                          path='/graphiql'
+                          element={<GraphiQLPage />}
+                        />
+                      </Route>
+                      <Route path='*' element={<NotFoundPage />} />
+                    </Routes>
+                  </Suspense>
+                </div>
+                <Footer />
+                <ToastContainer
+                  position='top-center'
+                  autoClose={2000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover={false}
+                  theme='light'
+                />
+              </Router>
+            </ThemeProvider>
+          </LanguageProvider>
+        </LocalStorageProvider>
       </ErrorBoundary>
     </div>
   );

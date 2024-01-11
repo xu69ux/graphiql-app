@@ -9,6 +9,7 @@ import useShowMessage from '@hooks/useShowMessage';
 import useMsg from '@hooks/useMsg';
 
 import '@styles/ModalWindow.css';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 interface IModalWindowProps {
   isOpen: boolean;
@@ -18,11 +19,12 @@ interface IModalWindowProps {
 export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
   const showMessage = useShowMessage();
   const msg = useMsg();
+  const { clear } = useLocalStorage();
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleLocalClear = () => {
-    localStorage.clear();
+    clear();
     showMessage(msg.LOCAL_STORAGE_CLEAR_SUCCESS);
   };
 
@@ -34,8 +36,12 @@ export const ModalWindow: FC<IModalWindowProps> = ({ isOpen, onClose }) => {
 
   return (
     isOpen && (
-      <div className='modal-overlay'>
-        <div className='modal-window' data-testid='modal-window'>
+      <div className='modal-overlay' onClick={onClose}>
+        <div
+          className='modal-window'
+          onClick={(e) => e.stopPropagation()}
+          data-testid='modal-window'
+        >
           <IconButton
             className='modal-icon close'
             title={translations?.[language].titleCloseModal}

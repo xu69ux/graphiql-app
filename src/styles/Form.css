@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 2rem;
 }
 
 .input-wrapper {
@@ -24,7 +23,7 @@ input {
 
 .btn-log,
 .btn-sign {
-  width: 50%;
+  min-width: 12rem;
   height: 2rem;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
@@ -41,7 +40,7 @@ input {
   color: var(--error);
   font-size: 0.8rem;
   height: 1rem;
-  width: 37rem;
+  width: 28rem;
   margin-top: 0.3rem;
   margin-bottom: 0.5rem;
 }
@@ -51,48 +50,40 @@ input {
 }
 
 .password-indicator {
+  width: 10rem;
   height: 0.15rem;
-  width: 60%;
   margin-top: 0.5rem;
+}
+
+.no-account {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.password-icon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  content: '';
+  cursor: pointer;
+  color: var(--blue);
 }
 
 @media screen and (max-width: 600px) {
   .error {
-    width: 100%;
-  }
-
-  .btn-log,
-  .btn-sign {
-    margin-top: 4rem;
+    width: 23rem;
+    margin-bottom: 1.2rem;
   }
 }
 
-@media screen and (max-width: 450px) {
-  input {
-    height: 3rem;
-    font-size: 1.5rem;
-    padding: 0 1.5rem;
-  }
-
-  .btn-log,
-  .btn-sign {
-    height: 3rem;
-    font-size: 1.5rem;
-    margin-top: 3rem;
-  }
-
+@media screen and (max-width: 400px) {
   .error {
-    width: 100%;
-  }
-
-  .password-indicator {
-    width: 95%;
-  }
-
-  .no-account {
-    text-align: center;
     width: 15rem;
-    font-size: 1.2rem;
-    line-height: 2rem;
+    margin-bottom: 2.1rem;
+  }
+  .no-account {
+    width: 70%;
   }
 }

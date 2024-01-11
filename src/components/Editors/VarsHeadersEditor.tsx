@@ -104,6 +104,7 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
             }`}
             onClick={(event: MouseEvent) => {
               event.stopPropagation();
+              setIsFooterOpen(true);
               setIsHeadersOpened(false);
             }}
           >
@@ -115,6 +116,7 @@ export const VarsHeadersEditor: FC<VarsHeadersEditorProps> = ({
             }`}
             onClick={(event: MouseEvent) => {
               event.stopPropagation();
+              setIsFooterOpen(true);
               setIsHeadersOpened(true);
             }}
           >

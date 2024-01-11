@@ -1,11 +1,12 @@
-import { useState, useCallback, useEffect } from 'react';
-import { QUERY_FOR_SHEMA_FETCHING } from '@constants/constants';
+import { useState, useEffect } from 'react';
 import { graphqlRequest } from '@utils/graphqlApi';
 import { translations } from '@contexts/translations';
 import { GraphQLSchema, IEditorTab } from '@appTypes/types';
 import useLanguage from '@hooks/useLanguage';
 import useShowMessage from '@hooks/useShowMessage';
 import useMsg from '@hooks/useMsg';
+import { prettify } from '@utils/prettifying';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 import {
   QueryEditor,
@@ -27,76 +28,58 @@ const GraphiQLPage = () => {
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
   const [viewer, setViewer] = useState('');
-  const [endpoint, setEndpoint] = useState('');
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
-  const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
   const { language } = useLanguage();
   const showMessage = useShowMessage();
+  const { getItem } = useLocalStorage();
   const msg = useMsg();
 
-  const saveEndpoint = useCallback((endpoint: string) => {
-    localStorage.setItem('prevEndpoint', endpoint);
-  }, []);
-
-  const fetchShema = useCallback(async (): Promise<void> => {
-    if (!endpoint) {
-      return;
-    } else {
+  const updateSchema = (
+    schema: GraphQLSchema | null,
+    clear: boolean = false,
+  ) => {
+    if (clear) {
       setSchema(null);
-    }
-    try {
-      const response = await graphqlRequest(endpoint, QUERY_FOR_SHEMA_FETCHING);
-      setSchema(response.data.__schema);
-      saveEndpoint(endpoint);
-      setIsFetchSuccessful(true);
-    } catch (error) {
-      console.error(error);
-      setIsFetchSuccessful(false);
+    } else if (schema) {
+      setSchema(schema);
+    } else {
       showMessage(msg.SCHEMA_INVALID);
     }
-  }, [endpoint, msg.SCHEMA_INVALID, saveEndpoint, showMessage]);
-
-  useEffect(() => {
-    fetchShema();
-  }, [endpoint]);
+  };
 
   const sendGraphqlRequest = async () => {
     const activeTabTemp: IEditorTab = tabs.find(
       (item) => item.id === activeTab,
     )!;
-    if (!activeTabTemp.code) {
+    if (!activeTabTemp.code || !schema) {
       return;
     }
-    let res = activeTabTemp.code;
-    const variablesArray = variables
-      ? Object.entries(JSON.parse(variables))
-      : [];
-    variablesArray?.forEach((item) => {
-      res = activeTabTemp.code.replaceAll(`$${item[0]}`, `${item[1]}`);
-    });
-
     try {
       const result = await graphqlRequest(
-        endpoint,
-        res,
+        getItem('prevEndpoint')!,
+        activeTabTemp.code,
+        variables ? JSON.parse(variables) : {},
         headers ? JSON.parse(headers) : {},
       );
-
-      setViewer(
-        JSON.stringify(result).replaceAll('{', '{\n').replaceAll('}', '}\n'),
-      );
+      setViewer(prettify(JSON.stringify(result)));
     } catch (error) {
       showMessage(msg.GRAPHIQL_API_ERROR);
     }
   };
 
+  useEffect(() => {
+    if (!schema) {
+      setIsDocumentationOpen(false);
+    }
+  }, [schema]);
+
   return (
     <div className='container'>
       <Sidebar
+        schema={schema}
         tabs={tabs}
         activeTab={activeTab}
         isDocumentationOpen={isDocumentationOpen}
-        isFetchSuccessful={isFetchSuccessful}
         setTabs={setTabs}
         setActiveTab={setActiveTab}
         setIsDocumentationOpen={setIsDocumentationOpen}
@@ -106,11 +89,7 @@ const GraphiQLPage = () => {
         schema={schema}
       />
       <div className='container-wrap'>
-        <Endpoint
-          endpointValue={endpoint}
-          setEndpoint={setEndpoint}
-          fetchShema={fetchShema}
-        />
+        <Endpoint updateSchema={updateSchema} />
         <div className='container code'>
           <div className='editor'>
             <QueryEditor

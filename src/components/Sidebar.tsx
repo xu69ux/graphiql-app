@@ -3,27 +3,27 @@ import { translations } from '@contexts/translations';
 import { IoFileTrayFullOutline, IoSettingsSharp } from 'react-icons/io5';
 import { LuFilePlus2, LuFileMinus2, LuFileX2 } from 'react-icons/lu';
 import { IconButton, ModalWindow } from '@components/index';
-import { IEditorTab } from '@appTypes/types';
+import { GraphQLSchema, IEditorTab } from '@appTypes/types';
 import { removeTab } from '@utils/tabUtils';
 import useLanguage from '@hooks/useLanguage';
 
 import '@styles/Sidebar.css';
 
 interface SidebarProps {
+  schema: GraphQLSchema | null;
   tabs: IEditorTab[];
   activeTab: number | null;
   isDocumentationOpen: boolean;
-  isFetchSuccessful: boolean;
   setTabs: React.Dispatch<React.SetStateAction<IEditorTab[]>>;
   setActiveTab: React.Dispatch<React.SetStateAction<number | null>>;
   setIsDocumentationOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
+  schema,
   tabs,
   activeTab,
   isDocumentationOpen,
-  isFetchSuccessful,
   setTabs,
   setActiveTab,
   setIsDocumentationOpen,
@@ -75,9 +75,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className='sidebar' data-testid='sidebar'>
       <IconButton
-        className={`sidebar-icon docs ${isDocumentationOpen ? 'active' : ''} ${
-          isFetchSuccessful ? '' : 'disabled'
-        }`}
+        className={`sidebar-icon docs ${
+          isDocumentationOpen && schema ? 'active' : ''
+        } ${schema ? '' : 'disabled'}`}
         onClick={toggleDocumentation}
         title={translations[language]?.titleDocs}
       >

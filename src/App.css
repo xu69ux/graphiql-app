@@ -4,3 +4,7 @@
   justify-content: space-between;
   min-height: 100vh;
 }
+
+.app-content {
+  flex-grow: 1;
+}
